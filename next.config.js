@@ -1,15 +1,28 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ['images.unsplash.com', 'res.cloudinary.com', 'cdn.sanity.io'],
-    }
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**", // Match all paths under images.unsplash.com
+      },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**", // Match all paths under res.cloudinary.com
+      },
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/images/**", // Match Sanity.io image paths
+      },
+    ],
+  },
+  eslint: {
+    dirs: ['pages', 'utils'], // Only run ESLint on these directories during production builds
+    ignoreDuringBuilds: true, // Allow builds to complete even with ESLint errors
+  },
 };
 
-module.exports = {
-  eslint: {
-    dirs: ['pages', 'utils'], // Only run ESLint on the 'pages' and 'utils' directories during production builds (next build)
-    // Warning: This allows production builds to successfully complete even if
-    // your project has ESLint errors.
-    ignoreDuringBuilds: true,
-  },
-}
+module.exports = nextConfig;
