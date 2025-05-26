@@ -21,6 +21,9 @@ const contactFormSchema = z.object({
 // THIS IS THE CRUCIAL PART FOR APP ROUTER
 // Export a named function for the HTTP method you are using (POST in this case)
 export async function POST(req: Request) { // 'req' is a standard Web Request object
+      const resend = new Resend(process.env.RESEND_API_KEY);
+    console.log("API Key:", process.env.RESEND_API_KEY);
+
     try {
         const body = await req.json(); // Use req.json() to parse the body
 
