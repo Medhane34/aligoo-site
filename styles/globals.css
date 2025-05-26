@@ -1,0 +1,16 @@
+@import './glow.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* global.css 
+html.light {
+  @apply bg-gradient-to-br from-rose-100 via-violet-200 to-indigo-100 animate-gradient; //
+
+}
+
+html.light {
+  @apply bg-gray-100 text-black;
+}
+*/
