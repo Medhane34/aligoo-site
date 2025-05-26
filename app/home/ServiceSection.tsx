@@ -5,7 +5,7 @@ import React from "react"; // Removed useRef, useState, useEffect as they are no
 import { motion } from "framer-motion"; // Keep if you plan to use it for animations elsewhere
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { Avatar } from "@heroui/avatar";
-import Link from "next/link";
+import Link from "next/link"
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 // Removed classNames as pagination dots are gone
 
@@ -14,17 +14,17 @@ const ServiceSection = () => {
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
   const RightArrow = () => (
     <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke="currentColor"
       className="size-6"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={1.5}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
     >
       <path
+        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
         strokeLinecap="round"
         strokeLinejoin="round"
-        d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3"
       />
     </svg>
   );
@@ -66,6 +66,17 @@ const ServiceSection = () => {
               <AccordionItem
                 key="1"
                 aria-label="Brand Development"
+                indicator={
+                  <Link
+                    href="/services/brand-development"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-pink-400 hover:text-pink-300 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <RightArrow />
+                  </Link>
+                }
                 startContent={
                   <Avatar
                     isBordered
@@ -82,9 +93,16 @@ const ServiceSection = () => {
                 title={
                   <span className="hover:underline">Brand Development</span>
                 }
+              >
+                {defaultContent} A detailed explanation of brand development,
+                including market research and identity creation.
+              </AccordionItem>
+              <AccordionItem
+                key="2"
+                aria-label="Digital Marketing"
                 indicator={
                   <Link
-                    href="/services/brand-development"
+                    href="/services/digital-marketing"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -93,13 +111,6 @@ const ServiceSection = () => {
                     <RightArrow />
                   </Link>
                 }
-              >
-                {defaultContent} A detailed explanation of brand development,
-                including market research and identity creation.
-              </AccordionItem>
-              <AccordionItem
-                key="2"
-                aria-label="Digital Marketing"
                 startContent={
                   <Avatar
                     isBordered
@@ -116,9 +127,16 @@ const ServiceSection = () => {
                 title={
                   <span className="hover:underline">Digital Marketing</span>
                 }
+              >
+                {defaultContent} Covering SEO, social media, and content
+                marketing strategies for online visibility.
+              </AccordionItem>
+              <AccordionItem
+                key="3"
+                aria-label="Content Strategy"
                 indicator={
                   <Link
-                    href="/services/digital-marketing"
+                    href="/services/content-strategy"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -127,13 +145,6 @@ const ServiceSection = () => {
                     <RightArrow />
                   </Link>
                 }
-              >
-                {defaultContent} Covering SEO, social media, and content
-                marketing strategies for online visibility.
-              </AccordionItem>
-              <AccordionItem
-                key="3"
-                aria-label="Content Strategy"
                 startContent={
                   <Avatar
                     isBordered
@@ -149,17 +160,6 @@ const ServiceSection = () => {
                 }
                 title={
                   <span className="hover:underline">Content Strategy</span>
-                }
-                indicator={
-                  <Link
-                    href="/services/content-strategy"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-pink-400 hover:text-pink-300 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <RightArrow />
-                  </Link>
                 }
               >
                 {defaultContent} Planning and creation of engaging content
@@ -185,6 +185,17 @@ const ServiceSection = () => {
               <AccordionItem
                 key="4"
                 aria-label="Sustainable Web Design"
+                indicator={
+                  <Link
+                    href="/services/sustainable-web-design"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-pink-400 hover:text-pink-300 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <RightArrow />
+                  </Link>
+                }
                 startContent={
                   <Avatar
                     isBordered
@@ -203,9 +214,16 @@ const ServiceSection = () => {
                     Sustainable Web Design
                   </span>
                 }
+              >
+                {defaultContent} Crafting beautiful and efficient websites with
+                a focus on longevity and eco-friendliness.
+              </AccordionItem>
+              <AccordionItem
+                key="5"
+                aria-label="UX/UI Design"
                 indicator={
                   <Link
-                    href="/services/sustainable-web-design"
+                    href="/services/ux-ui-design"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -214,13 +232,6 @@ const ServiceSection = () => {
                     <RightArrow />
                   </Link>
                 }
-              >
-                {defaultContent} Crafting beautiful and efficient websites with
-                a focus on longevity and eco-friendliness.
-              </AccordionItem>
-              <AccordionItem
-                key="5"
-                aria-label="UX/UI Design"
                 startContent={
                   <Avatar
                     isBordered
@@ -235,9 +246,16 @@ const ServiceSection = () => {
                   </span>
                 }
                 title={<span className="hover:underline">UX/UI Design</span>}
+              >
+                {defaultContent} Creating intuitive and engaging user
+                experiences with visually appealing interfaces.
+              </AccordionItem>
+              <AccordionItem
+                key="6"
+                aria-label="Copywriting"
                 indicator={
                   <Link
-                    href="/services/ux-ui-design"
+                    href="/services/copywriting"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -246,13 +264,6 @@ const ServiceSection = () => {
                     <RightArrow />
                   </Link>
                 }
-              >
-                {defaultContent} Creating intuitive and engaging user
-                experiences with visually appealing interfaces.
-              </AccordionItem>
-              <AccordionItem
-                key="6"
-                aria-label="Copywriting"
                 startContent={
                   <Avatar
                     isBordered
@@ -267,17 +278,6 @@ const ServiceSection = () => {
                   </span>
                 }
                 title={<span className="hover:underline">Copywriting</span>}
-                indicator={
-                  <Link
-                    href="/services/copywriting"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-pink-400 hover:text-pink-300 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <RightArrow />
-                  </Link>
-                }
               >
                 {defaultContent} Crafting persuasive and clear content that
                 resonates with your target audience and drives action.
@@ -302,6 +302,17 @@ const ServiceSection = () => {
               <AccordionItem
                 key="7"
                 aria-label="Sustainable Web Development"
+                indicator={
+                  <Link
+                    href="/services/sustainable-web-development"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-pink-400 hover:text-pink-300 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <RightArrow />
+                  </Link>
+                }
                 startContent={
                   <Avatar
                     isBordered
@@ -320,9 +331,16 @@ const ServiceSection = () => {
                     Sustainable Web Development
                   </span>
                 }
+              >
+                {defaultContent} Building robust and scalable web solutions with
+                modern technologies and best practices.
+              </AccordionItem>
+              <AccordionItem
+                key="8"
+                aria-label="Search Engine Optimisation"
                 indicator={
                   <Link
-                    href="/services/sustainable-web-development"
+                    href="/services/seo"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -331,13 +349,6 @@ const ServiceSection = () => {
                     <RightArrow />
                   </Link>
                 }
-              >
-                {defaultContent} Building robust and scalable web solutions with
-                modern technologies and best practices.
-              </AccordionItem>
-              <AccordionItem
-                key="8"
-                aria-label="Search Engine Optimisation"
                 startContent={
                   <Avatar
                     isBordered
@@ -356,9 +367,16 @@ const ServiceSection = () => {
                     Search Engine Optimisation
                   </span>
                 }
+              >
+                {defaultContent} Implementing strategies to improve your
+                website&apos;s visibility and ranking on search engines.
+              </AccordionItem>
+              <AccordionItem
+                key="9"
+                aria-label="Email Marketing"
                 indicator={
                   <Link
-                    href="/services/seo"
+                    href="/services/email-marketing"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -367,13 +385,6 @@ const ServiceSection = () => {
                     <RightArrow />
                   </Link>
                 }
-              >
-                {defaultContent} Implementing strategies to improve your
-                website&apos;s visibility and ranking on search engines.
-              </AccordionItem>
-              <AccordionItem
-                key="9"
-                aria-label="Email Marketing"
                 startContent={
                   <Avatar
                     isBordered
@@ -388,17 +399,6 @@ const ServiceSection = () => {
                   </span>
                 }
                 title={<span className="hover:underline">Email Marketing</span>}
-                indicator={
-                  <Link
-                    href="/services/email-marketing"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-pink-400 hover:text-pink-300 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <RightArrow />
-                  </Link>
-                }
               >
                 {defaultContent} Designing and executing effective email
                 campaigns to engage your audience and drive conversions.
