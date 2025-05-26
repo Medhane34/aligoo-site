@@ -8,7 +8,6 @@ import { siteConfig } from "@/config/site";
 import { title, subtitle } from "@/components/primitives"; // ✅ Correct
 import { GithubIcon } from "@/components/icons"; // ✅ Correct
 import { Button } from "@heroui/button"; // ✅ Correct
-import { ButtonGroup } from "@heroui/button-group"; // ✅ Correct
 import FadeInImage from "@/components/FadeInImage"; 
 export default function HeroSection() {
   return (

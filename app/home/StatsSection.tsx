@@ -14,29 +14,36 @@ const stats = [
 ];
 
 function Counter({ value, suffix = "", prefix = "", duration = 2 }: any) {
-  const controls = useAnimation();
   const [current, setCurrent] = useState(0);
-  const ref = useRef(null);
+  const ref = useRef<HTMLSpanElement | null>(null);
   const inView = useInView(ref, { once: true });
 
   useEffect(() => {
-    if (inView) {
-      controls.start({ count: value });
-    }
-  }, [controls, inView, value]);
+    if (!inView) return;
+
+    let start = 0;
+    const end = Number(value);
+    if (start === end) return;
+
+    let startTimestamp: number | null = null;
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+      setCurrent(Math.round(progress * (end - start) + start));
+      if (progress < 1) {
+        requestAnimationFrame(step);
+      }
+    };
+
+    requestAnimationFrame(step);
+  }, [inView, value, duration]);
 
   return (
-    <motion.span
-      ref={ref}
-      initial={{ count: 0 }}
-      animate={controls}
-      transition={{ duration }}
-      onUpdate={(latest) => setCurrent(Math.round(latest.count))}
-    >
+    <span ref={ref}>
       {prefix}
       {current}
       {suffix}
-    </motion.span>
+    </span>
   );
 }
 

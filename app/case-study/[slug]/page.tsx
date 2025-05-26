@@ -1,31 +1,35 @@
-import HeroSection from "../HeroSection";
 // Import all necessary fetch functions and types from your queries file
-import { fetchCaseStudyCoreDataBySlug,fetchCaseStudyOverviewBySlug, fetchCaseStudyGoalDataBySlug, fetchCaseStudyStrategyDataBySlug, 
-  fetchCaseStudyImageGalleryDataBySlug, fetchCaseStudyResultsDataBySlug, fetchCaseStudyTestimonialDataBySlug,
-  fetchCaseStudyPaginationDataBySlug
- }
-  from "./CaseStudyData";
-  // Import types for better type safety
-import { CaseStudyOverviewData, CaseStudyGoalData, CaseStudyStrategyData, 
-  CaseStudyImageGalleryData, CaseStudyResultsData, CaseStudyTestimonialData, CaseStudyPaginationData
- } from "./CaseStudyData"; // Adjust the import path as necessary
+import { notFound } from "next/navigation"; // Import notFound for 404 handling
+
+import CaseStudyStrategy from "../CaseStudyStrategy";
+
+// Import types for better type safety
 
 // Import your UI components
-import CaseStudyStrategy from "../CaseStudyStrategy";
 import CaseStudyStrategyContent from "../CaseStudyStrategyContent";
 import CaseStudyImageGallery from "../CaseStudyImageGallery";
 import CaseStudyResults from "../CaseStudyResults";
 import CaseStudyTestimonial from "../CaseStudyTestimonial";
 import CaseStudyPagination from "../CaseStudyPagination";
 import CaseStudyOverview from "../OverviewSection";
+
+// Adjust the import path as necessary
+import {
+  fetchCaseStudyCoreDataBySlug,
+  fetchCaseStudyOverviewBySlug,
+  fetchCaseStudyGoalDataBySlug,
+  fetchCaseStudyStrategyDataBySlug,
+  fetchCaseStudyImageGalleryDataBySlug,
+  fetchCaseStudyResultsDataBySlug,
+  fetchCaseStudyTestimonialDataBySlug,
+  fetchCaseStudyPaginationDataBySlug,
+} from "./CaseStudyData";
 import ScrollProgress from "./ScrollProgress";
 
 // app/case-studies/[slug]/page.tsx
-import { notFound } from 'next/navigation'; // Import notFound for 404 handling
-
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function CaseStudyDetails({ params }: Props) {
@@ -36,28 +40,27 @@ export default async function CaseStudyDetails({ params }: Props) {
     coreData,
     overviewData,
     goalData, // Fetch the strategy data
-    strategyData, 
-    imageGalleryData, 
-    resultsData, 
-    testimonialData, 
-    fetchedPaginationData
+    strategyData,
+    imageGalleryData,
+    resultsData,
+    testimonialData,
+    fetchedPaginationData,
   ] = await Promise.all([
     fetchCaseStudyCoreDataBySlug(slug),
     fetchCaseStudyOverviewBySlug(slug),
     fetchCaseStudyGoalDataBySlug(slug), // Call the strategy data fetcher
-   fetchCaseStudyStrategyDataBySlug(slug),
-   fetchCaseStudyImageGalleryDataBySlug(slug), 
-   fetchCaseStudyResultsDataBySlug(slug), 
-   fetchCaseStudyTestimonialDataBySlug(slug), 
-   fetchCaseStudyPaginationDataBySlug(slug)
+    fetchCaseStudyStrategyDataBySlug(slug),
+    fetchCaseStudyImageGalleryDataBySlug(slug),
+    fetchCaseStudyResultsDataBySlug(slug),
+    fetchCaseStudyTestimonialDataBySlug(slug),
+    fetchCaseStudyPaginationDataBySlug(slug),
   ]);
 
   // If the core data is not found, show a 404 page
   if (!coreData) {
     notFound();
   }
-   // Ensure paginationData is always an object, even if fetch returned null
-
+  // Ensure paginationData is always an object, even if fetch returned null
 
   return (
     <>
@@ -71,21 +74,21 @@ export default async function CaseStudyDetails({ params }: Props) {
       {overviewData && (
         <CaseStudyOverview
           // title is from coreData, description and hero image from overviewData
-          title={coreData.title}
-          overviewDescription={overviewData.overviewDescription}
-          heroImageUrl={overviewData.heroImageUrl}
           heroImageAlt={overviewData.heroImageAlt}
+          heroImageUrl={overviewData.heroImageUrl}
+          overviewDescription={overviewData.overviewDescription}
+          title={coreData.title}
         />
       )}
 
       {/* Strategy Heading Section */}
       {goalData && (
         <CaseStudyStrategy
-          goalTitle={goalData.goalTitle}
           goalBody={goalData.goalBody}
+          goalTitle={goalData.goalTitle}
         />
       )}
-     {/* 3. Strategy Content Section */}
+      {/* 3. Strategy Content Section */}
       {/* Render CaseStudyStrategyContent only if strategyData is available */}
       {strategyData && (
         <CaseStudyStrategyContent
@@ -115,10 +118,12 @@ export default async function CaseStudyDetails({ params }: Props) {
         />
       )}
       {/* Pagination Section */}
-      {/* Pass the guaranteed-to-be-an-object paginationData */}
-      <CaseStudyPagination
-        paginationData={fetchedPaginationData}
-      />
+      {/* Render CaseStudyPagination only if fetchedPaginationData is available */}
+      {fetchedPaginationData && (
+        <CaseStudyPagination 
+          paginationData={fetchedPaginationData}
+        />
+      )}
     </>
   );
 }

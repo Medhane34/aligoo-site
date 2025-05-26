@@ -2,11 +2,11 @@
 "use client";
 import React from 'react';
 import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { CaseStudyResultsData, ResultStatItem } from '@/src/sanity/queries'; // Import the types
+import { CaseStudyResultsData as ImportedResultsData, ResultStatItem } from './[slug]/CaseStudyData'; // Import the types
 
 // Define the props interface for the component
-interface CaseStudyResultsData {
-  resultsData: CaseStudyResultsData;
+interface CaseStudyResultsProps {
+  resultsData: ImportedResultsData;
 }
 
 export default function CaseStudyResults({ resultsData }: CaseStudyResultsProps) {

@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link'; // Import Next.js Link component for client-side navigation
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline"; // Import icons
-import { CaseStudyPaginationData } from '@/src/sanity/queries'; // Import the type for pagination data
+import { CaseStudyPaginationData } from './[slug]/CaseStudyData'; // Import the type for pagination data
 
 // Define the props interface for the component
 interface CaseStudyPaginationProps {

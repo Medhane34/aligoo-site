@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { CaseStudyStrategyData, StrategyBlock } from '@/src/sanity/queries';
+import { CaseStudyStrategyData, StrategyBlock } from './[slug]/CaseStudyData';
 
 // Define the props interface for the component
 interface CaseStudyStrategyContentProps {

@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image'; // Import Next.js Image component
 import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { CaseStudyImageGalleryData, GalleryImageItem } from '@/src/sanity/queries'; // Import the types
+import { CaseStudyImageGalleryData, GalleryImageItem } from './[slug]/CaseStudyData'; // Import the types
 
 // Define the props interface for the component
 interface CaseStudyImageGalleryProps {

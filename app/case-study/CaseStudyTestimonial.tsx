@@ -1,7 +1,7 @@
 // components/case-studies/CaseStudyTestimonial.tsx
 "use client";
 import React from 'react';
-import { CaseStudyTestimonialData } from '@/src/sanity/queries'; // Import the type
+import { CaseStudyTestimonialData } from './[slug]/CaseStudyData'; // Import the type
 
 // Define the props interface for the component
 interface CaseStudyTestimonialProps {

@@ -1,10 +1,13 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 "use client";
 import React, { useState, useRef } from 'react';
 import { SpeakerWaveIcon } from '@heroicons/react/24/outline';
 
-const meaningsection = () => {
-  const [isPronunciationHovered, setIsPronunciationHovered] = useState(false);
-  const pronunciationAudioPath = '/aligoo-pro.mp4';
+const MeaniningSection = () => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const [, setIsPronunciationHovered] = useState(false);
+  const pronunciationAudioPath = "/aligoo-pro.mp4";
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const audioRef = useRef<HTMLAudioElement>(null);
 
   return (
@@ -13,10 +16,21 @@ const meaningsection = () => {
       <div className="container mx-auto text-center">
         <div
           className="relative inline-block cursor-pointer"
+          role="button"
+          tabIndex={0}
+          aria-label="Play pronunciation audio"
           onClick={() => {
             setIsPronunciationHovered(true);
             if (audioRef.current) {
-              audioRef.current.play().catch(error => console.error("Audio playback failed:", error));
+              audioRef.current.play().catch(() => {});
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              setIsPronunciationHovered(true);
+              if (audioRef.current) {
+                audioRef.current.play().catch(() => {});
+              }
             }
           }}
         >
@@ -27,7 +41,9 @@ const meaningsection = () => {
             <SpeakerWaveIcon className="h-4 w-4" />
             <span className="underline">[ah-lee-goo]</span>
           </div>
-          <audio ref={audioRef} src={pronunciationAudioPath} />
+          <audio ref={audioRef} src={pronunciationAudioPath}>
+            <track kind="captions" srcLang="en" label="English captions" />
+          </audio>
         </div>
 
         <div className="mt-8 text-lg md:text-xl text-text-light dark:text-text-dark leading-relaxed">
@@ -45,4 +61,4 @@ const meaningsection = () => {
   );
 };
 
-export default meaningsection;
+export default MeaniningSection;
