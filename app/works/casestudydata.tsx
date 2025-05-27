@@ -5,21 +5,23 @@ import type { SanityDocument } from "next-sanity";
 type CaseStudy = {
   _id: string;
   title: string;
-  stats: string[];
  imageUrl: string;
   service: string;
+  hasImage: boolean;
+  hasService: boolean;
 };
 
 export async function fetchCaseStudies(): Promise<CaseStudy[]> {
   const query = `
     *[_type == "caseStudy"] | order(_createdAt desc)[0...6] {
-      _id,
-      title,
-      stats,
-      "imageUrl": mainImage.asset->url,
-      "service": service->title,
-      "slug": slug.current
-    }
+  _id,
+  title,
+  "imageUrl": mainImage.asset->url,
+  "service": service->title,
+  "slug": slug.current,
+  "hasImage": defined(mainImage),
+  "hasService": defined(service)
+  }
   `;
 
   try {
@@ -27,10 +29,11 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
     return rawData.map((post) => ({
       _id: post._id,
       title: post.title,
-      stats: post.stats,
       imageUrl: post.imageUrl,
       service: post.service, 
-      slug: post.slug // <-- Map the fetched slug to your type
+      slug: post.slug, // <-- Map the fetched slug to your type
+      hasImage: post.hasImage || false,
+      hasService: post.hasService || false,
     }));
   } catch (error) {
     console.error("Error fetching case studies:", error);

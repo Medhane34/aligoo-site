@@ -15,7 +15,6 @@ import Link from "next/link";
 type CaseStudy = {
   _id: string;
   title: string;
-  stats: string[];
   imageUrl: string;
   service: string;
   slug: string; // The URL path for the case study
