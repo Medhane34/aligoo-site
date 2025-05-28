@@ -1,14 +1,14 @@
 // components/WorkSection.tsx
 
 "use client";
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from "react";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { Button } from "@heroui/button";
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { fetchCaseStudies } from './casestudydata';
-import { useEffect } from 'react';
+import { fetchCaseStudies } from "./casestudydata";
+import { useEffect } from "react";
 import Link from "next/link";
 
 // Define the CaseStudy type on the client side for type checking
@@ -23,7 +23,6 @@ interface WorkSectionProps {
   caseStudiesData: CaseStudy[];
 }
 
-
 export default function WorkSection() {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
@@ -33,11 +32,15 @@ export default function WorkSection() {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Derive filter options from the fetched data
-  const filterOptions = ["All Services", ...Array.from(new Set(caseStudies.map(study => study.service)))];
+  const filterOptions = [
+    "All Services",
+    ...Array.from(new Set(caseStudies.map((study) => study.service))),
+  ];
 
-  const filteredCaseStudies = selectedFilter === "All Services"
-    ? caseStudies
-    : caseStudies.filter(study => study.service === selectedFilter);
+  const filteredCaseStudies =
+    selectedFilter === "All Services"
+      ? caseStudies
+      : caseStudies.filter((study) => study.service === selectedFilter);
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -77,7 +80,10 @@ export default function WorkSection() {
   // Close dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsDropdownOpen(false);
       }
     };
@@ -93,38 +99,52 @@ export default function WorkSection() {
 
   if (error) {
     return <p className="text-center py-8 text-red-500">Error: {error}</p>;
-  }  
-  
+  }
 
   return (
-    <section className="px-4 py-12 text-center sm:px-8 bg-background-light dark:bg-background-dark"> {/* Responsive padding */}
+    <section className="px-4 py-12 text-center sm:px-8 bg-background-light dark:bg-background-dark">
+      {" "}
+      {/* Responsive padding */}
       {/* Section Header */}
-      <div className="space-y-2 mb-8">
+      <div className="space-y-1 sm:space-y-2 mb-5 xs:mb-6 sm:mb-8">
         <AccentText>Our Impact</AccentText>
-        <SectionHeading className="text-3xl font-bold tracking-tight">The Transformation Wall</SectionHeading>
+        <SectionHeading className="text-3xl font-bold tracking-tight">
+          The Transformation Wall
+        </SectionHeading>
       </div>
-
       {/* Filter Section (Heading and Filter - always in a row, responsive widths) */}
-      <div className="container mx-auto mb-8 flex flex-row sm:flex-row items-center justify-between gap-4 px-0 sm:px-4"> {/* px-0 for container, use gap on inner elements */}
-        <h3 className="text-xl font-semibold text-gray-900 text-left w-full sm:w-auto">Explore Transformations</h3>
-        <div className="relative text-right w-full sm:w-auto" ref={dropdownRef}>
+      <div className="container mx-auto mb-8 flex flex-row sm:flex-row items-center justify-between gap-4 px-0 sm:px-4">
+        {" "}
+        {/* px-0 for container, use gap on inner elements */}
+        <h3 className="text-xl font-semibold text-gray-900 text-left w-full sm:w-auto">
+          Explore Transformations
+        </h3>
+        <div ref={dropdownRef} className="relative text-right w-full sm:w-auto">
           <Button
-            onClick={toggleDropdown}
-            size="sm"
             className="inline-flex justify-between items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            size="sm"
+            onClick={toggleDropdown}
           >
             {selectedFilter}
-            <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+            <ChevronDownIcon
+              aria-hidden="true"
+              className="-mr-1 ml-2 h-5 w-5"
+            />
           </Button>
           {isDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-full sm:w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10"> {/* w-full on mobile, fixed width on desktop */}
-              <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu-button">
+            <div className="absolute right-0 mt-1 xs:mt-2 w-full xs:w-40 sm:w-40 md:w-52 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-10">
+              <div
+                aria-labelledby="options-menu-button"
+                aria-orientation="vertical"
+                className="py-1"
+                role="menu"
+              >
                 {filterOptions.map((option) => (
                   <button
                     key={option}
-                    onClick={() => handleFilterSelect(option)}
-                    className={`block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 ${selectedFilter === option ? 'font-semibold' : ''}`}
+                    className={`block w-full text-left px-3 xs:px-4 py-1 xs:py-2 text-small text-gray-700 hover:bg-gray-100 hover:text-gray-900 ${selectedFilter === option ? "font-semibold" : ""}`}
                     role="menuitem"
+                    onClick={() => handleFilterSelect(option)}
                   >
                     {option}
                   </button>
@@ -134,30 +154,42 @@ export default function WorkSection() {
           )}
         </div>
       </div>
-
       {/* Case Study Cards Grid */}
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4"> {/* Responsive grid */}
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+        {" "}
+        {/* Responsive grid */}
         {filteredCaseStudies.map((study) => (
-          <Card key={study._id} className="relative overflow-hidden w-full"> {/* Card takes full width of its grid cell */}
-            <Link href={`/case-study/${study.slug}`} className="block h-[280px] w-full relative"> {/* Set a flexible height for the image/card wrapper */}
+          <Card key={study._id} className="relative overflow-hidden w-full">
+            {" "}
+            {/* Card takes full width of its grid cell */}
+            <Link
+              className="block h-[280px] w-full relative"
+              href={`/case-study/${study.slug}`}
+            >
+              {" "}
+              {/* Set a flexible height for the image/card wrapper */}
               <Image
                 removeWrapper
                 alt={study.title}
-                className="z-0 w-full h-full object-cover transition-opacity duration-300"
+                className="z-0 w-full h-full object-cover transition-opacity duration-300 brightness-75 xs:brightness-100"
                 src={study.imageUrl}
               />
-              <div className="absolute top-2 left-2 bg-accent-500 text-white text-tiny font-bold py-1 px-2 rounded-md z-10">{study.service}</div>
-              <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 hover:opacity-100 p-4"> {/* Add padding to overlay */}
-                <h4 className="text-white font-medium text-large mb-2 underline text-center text-lg md:text-xl"> {/* Responsive font sizes */}
+              <div className="absolute top-2 left-2 bg-accent-500 text-white text-tiny font-bold py-1 px-2 rounded-md z-10">
+                {study.service}
+              </div>
+              <div className="absolute inset-0 bg-black/50 flex flex-col justify-center items-center opacity-0 transition-opacity duration-300 hover:opacity-100 p-4">
+                {" "}
+                {/* Add padding to overlay */}
+                <h4 className="text-white font-medium text-large mb-2 underline text-center text-lg md:text-xl">
+                  {" "}
+                  {/* Responsive font sizes */}
                   {study.title}
                 </h4>
-
               </div>
             </Link>
           </Card>
         ))}
       </div>
-
       {/* Optional CTA below the cards */}
       {/* <div className="mt-8 text-center">
         <Button>Want this for your brand? Let's talk.</Button>

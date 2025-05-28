@@ -7,7 +7,6 @@ type BlogPostType = {
   _id: string;
   title: string;
   slug: string; // Add slug to the type
-
 };
 
 async function fetchLatestBlogs(): Promise<BlogPostType[]> {
@@ -17,31 +16,31 @@ async function fetchLatestBlogs(): Promise<BlogPostType[]> {
       title,
       "imageUrl": image.asset->url,
       "slug": slug.current // Fetch the current slug
-
     }
   `;
+
   try {
     const posts = await client.fetch<SanityDocument[]>(query);
+
     return posts.map((post) => ({
       _id: post._id,
       title: post.title,
       imageUrl: post.imageUrl,
       slug: post.slug, // Map the slug
-      
     }));
   } catch (error) {
-    console.error('Error fetching latest blogs from Sanity:', error);
+    console.error("Error fetching latest blogs from Sanity:", error);
+
     return [];
   }
 }
 
 export default async function BlogSection() {
-  
   const blogs = await fetchLatestBlogs();
 
   return (
-    <div className="py-16 bg-gray-100">
-      <div className="container mx-auto px-4">
+    <div className="py-16 bg-background-light dark:bg-background-dark">
+      <div className="container mx-auto px-4 ">
         <BlogSectionClient blogs={blogs} />
       </div>
     </div>

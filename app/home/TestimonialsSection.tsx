@@ -13,7 +13,7 @@ const testimonials = Array.from({ length: 12 }, (_, i) => ({
 export const TestimonialsSection = () => (
   <section className="w-full overflow-hidden py-12">
     <div className="mx-auto max-w-6xl px-4">
-      <h2 className="mb-6 text-3xl font-bold text-white">What our clients say</h2>
+      <h2 className="mb-6 text-heading font-bold text-white">What our clients say</h2>
       <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth scrollbar-hide">
         {testimonials.map((testimonial, i) => (
           <TestimonialCard key={i} {...testimonial} />

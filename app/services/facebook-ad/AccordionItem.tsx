@@ -23,7 +23,7 @@ export default function AccordionItem({ question, answer }: AccordionItemProps) 
         onClick={toggleAccordion}
         aria-expanded={isOpen}
       >
-        <span>{question}</span>
+        <span className="text-sm xs:text-subheading">{question}</span>
         <ChevronDownIcon
           className={`w-6 h-6 text-gray-400 transform transition-transform duration-300 ${
             isOpen ? 'rotate-180' : 'rotate-0'
@@ -37,7 +37,7 @@ export default function AccordionItem({ question, answer }: AccordionItemProps) 
           isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         }`}
       >
-        <div className="overflow-hidden">
+        <div className="overflow-hidden text-body">
           <p className="p-6 pt-0 text-gray-300 leading-relaxed">
             {answer}
           </p>

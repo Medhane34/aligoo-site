@@ -1,6 +1,7 @@
 // components/ContactForm.tsx
 "use client";
 
+import { addToast, ToastProvider, useToast } from "@heroui/toast";
 import { register } from "module";
 import React, { useState } from "react";
 import { Button } from "@heroui/button";
@@ -99,6 +100,8 @@ const ContactForm = () => {
     },
   });
 
+  // Use the useToast hook to trigger toasts
+
   const [submissionStatus, setSubmissionStatus] = useState<
     "idle" | "success" | "error"
   >("idle");
@@ -152,73 +155,87 @@ const ContactForm = () => {
   }, [currentServiceEnquiryValue]);
 
   const onSubmit = async (data: ContactFormInputs) => {
-        setSubmissionStatus("idle");
-        setErrorMessage("");
-        try {
-            const response = await fetch("/api/contact", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-            });
+    setSubmissionStatus("idle");
+    setErrorMessage("");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-            let errorData = null;
+      let errorData = null;
 
-            try {
-            const responseBody = await response.text();
+      try {
+        const responseBody = await response.text();
 
-            errorData = responseBody ? JSON.parse(responseBody) : null;
-            } catch (jsonError) {
-            console.error("Failed to parse response as JSON:", jsonError);
-            setErrorMessage("Server returned an invalid response.");
-            setSubmissionStatus("error");
+        errorData = responseBody ? JSON.parse(responseBody) : null;
+      } catch (jsonError) {
+        console.error("Failed to parse response as JSON:", jsonError);
+        setErrorMessage("Server returned an invalid response.");
+        setSubmissionStatus("error");
 
-            return;
-            }
+        return;
+      }
 
-            if (response.ok) {
-            setSubmissionStatus("success");
-            reset({
-                fullName: "",
-                countryCode: "+251",
-                phoneNumber: "",
-                companyName: "",
-                serviceEnquiry: "",
-                message: "",
-                preferredCommunication: "telegram",
-            });
-            } else {
-            setErrorMessage(
-                errorData?.message || "Something went wrong. Please try again."
-            );
-            setSubmissionStatus("error");
-            }
-        } catch (error) {
-            console.error("Submission error:", error);
-            setErrorMessage("Network error. Please check your connection and try again.");
-            setSubmissionStatus("error");
-        }
-        };
+      if (response.ok) {
+        setSubmissionStatus("success");
+        reset({
+          fullName: "",
+          countryCode: "+251",
+          phoneNumber: "",
+          companyName: "",
+          serviceEnquiry: "",
+          message: "",
+          preferredCommunication: "telegram",
+        });
+
+        addToast({
+          title: "Hey 👋",
+          description: "Message sent successfully",
+          color: "success",
+        });
+      } else {
+        setErrorMessage(
+          errorData?.message || "Something went wrong. Please try again.",
+        );
+        setSubmissionStatus("error");
+      }
+    } catch (error) {
+      addToast({
+        title: "Hey 👋",
+        description:
+          "Network error. Please check your connection and try again.",
+        color: "danger",
+      });
+      setErrorMessage("");
+      setSubmissionStatus("error");
+    }
+  };
 
   return (
-    <section className="py-16 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-      <div className="container mx-auto px-4">
-        <div className="mb-12 text-center">
-          <h2 className="text-4xl font-bold mb-4">Contact Us</h2>
+    <section className="py-8 sm:py-12 md:py-16 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+      <div className="container mx-auto px-4 sm:px-6 md:px-4">
+        <div className="mb-8 sm:mb-10 md:mb-12 text-center">
+          <h2 className="text-heading font-bold mb-4">Contact Us</h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             Have questions or want to start a project? Reach out to us. We’re
             here to help!
           </p>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8 lg:gap-16">
+        <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 md:flex-row lg:gap-16">
           {/* Left Section: Get in Touch with Us (Form) */}
-          <div className="md:w-1/2 p-8 bg-white dark:bg-gray-800 rounded-lg shadow-md">
-            <h3 className="text-2xl font-semibold mb-6">
+          <div className="w-full p-4 sm:p-6 md:p-8 md:w-1/2 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+            <h3 className="text-subheading font-semibold mb-4 sm:mb-5 md:mb-6">
               Get in Touch with Us
             </h3>
-            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <form
+              className="space-y-3 sm:space-y-4 md:space-y-5 lg:space-y-6"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               {/* FULL NAME */}
               <div>
                 <Input
@@ -236,7 +253,7 @@ const ContactForm = () => {
               <div className="relative flex items-center w-full">
                 <Select
                   aria-label="Country Code" // For accessibility
-                  className="w-24 md:w-32 z-10 mr-1"
+                  className="w-16 xs:w-20 sm:w-24 md:w-32 z-10 mr-0.5 xs:mr-1"
                   color={errors.countryCode ? "danger" : "primary"}
                   errorMessage={errors.countryCode?.message}
                   items={countriesData} // Pass the array of country objects
@@ -315,7 +332,7 @@ const ContactForm = () => {
               </div>
 
               {/* Company Name & Service Enquiry */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-2 xs:gap-3 sm:gap-4 md:gap-4 md:grid-cols-2">
                 <Input
                   {...register("companyName")}
                   isClearable
@@ -417,13 +434,13 @@ const ContactForm = () => {
           </div>
 
           {/* Right Section: Contact Details and Social Media */}
-          <div className="md:w-1/2 p-8 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md md:bg-transparent md:shadow-none">
-            <h3 className="text-2xl font-semibold mb-6">Contact Details</h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
+          <div className="w-full sm:p-6 md:p-8 md:w-1/2 p-8 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md md:bg-transparent md:shadow-none">
+            <h3 className="text-heading font-semibold mb-6">Contact Details</h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-8 text-body">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit taras
               tellus neul sarame tamat lae macorper del dierio denta low luco.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 xs:gap-3 sm:gap-4 mt-3 xs:mt-4 sm:mt-5 md:mt-6">
               {/* Address */}
               <div className="flex items-center gap-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
                 <span className="p-2 bg-gray-200 dark:bg-gray-600 rounded-full">

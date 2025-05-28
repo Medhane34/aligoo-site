@@ -54,6 +54,60 @@ const config = {
         },
       },
     },
+    screens: {
+        'xs': '480px',
+        'sm': '640px',
+        'md': '768px',
+        'lg': '1024px',
+        'xl': '1280px',
+      },
+      // Define custom responsive text sizes
+      fontSize: {
+        // Heading (e.g., h1, h2)
+        'heading': [
+          '1.5rem', // xs: 24px
+          {
+            lineHeight: '2rem',
+            '@screen sm': { fontSize: '1.875rem' }, // sm: 30px
+            '@screen md': { fontSize: '2.25rem' },  // md: 36px
+            '@screen lg': { fontSize: '2.5rem' },   // lg: 40px
+            '@screen xl': { fontSize: '3rem' },     // xl: 48px
+          },
+        ],
+        // Subheading (e.g., h3, h4)
+        'subheading': [
+          '1.25rem', // xs: 20px
+          {
+            lineHeight: '1.75rem',
+            '@screen sm': { fontSize: '1.5rem' },   // sm: 24px
+            '@screen md': { fontSize: '1.75rem' },  // md: 28px
+            '@screen lg': { fontSize: '2rem' },     // lg: 32px
+            '@screen xl': { fontSize: '2.25rem' },  // xl: 36px
+          },
+        ],
+        // Body text (e.g., paragraphs)
+        'body': [
+          '0.875rem', // xs: 14px
+          {
+            lineHeight: '1.25rem',
+            '@screen sm': { fontSize: '1rem' },     // sm: 16px
+            '@screen md': { fontSize: '1.125rem' }, // md: 18px
+            '@screen lg': { fontSize: '1.125rem' }, // lg: 18px
+            '@screen xl': { fontSize: '1.25rem' },  // xl: 20px
+          },
+        ],
+        // Small text (e.g., captions, notes)
+        'small': [
+          '0.75rem', // xs: 12px
+          {
+            lineHeight: '1rem',
+            '@screen sm': { fontSize: '0.875rem' }, // sm: 14px
+            '@screen md': { fontSize: '0.875rem' }, // md: 14px
+            '@screen lg': { fontSize: '1rem' },     // lg: 16px
+            '@screen xl': { fontSize: '1rem' },     // xl: 16px
+          },
+        ],
+      },
     },
   },
   animation: {

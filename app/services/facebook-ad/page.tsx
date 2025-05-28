@@ -3,6 +3,7 @@ import WhyFacebookAdsWork from "./WhyFacebookAdsWork";
 import AdPhilosophy from "./OurPhilosophy";
 import WhoThisIsFor from "./WhoThisIsFor";
 import FaqSection from "./FaqSection";
+import CTABottomSection from "./CallToAction";
 export default async function IndexPage() {
   return (
 
@@ -11,6 +12,7 @@ export default async function IndexPage() {
     <AdPhilosophy/>
     <WhoThisIsFor/>
     <FaqSection />
+    <CTABottomSection/>
     </>
   );
 }

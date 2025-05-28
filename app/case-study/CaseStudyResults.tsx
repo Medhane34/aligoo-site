@@ -19,14 +19,6 @@ export default function CaseStudyResults({ resultsData }: CaseStudyResultsProps)
     resultsStat3,
   } = resultsData;
 
-  // Debugging: Log the data received by the component
-  console.log("CaseStudyResults received resultsData:", resultsData);
-  console.log("Results Heading:", resultsHeading);
-  console.log("Results Body:", resultsBody);
-  console.log("Results Stat 1:", resultsStat1);
-  console.log("Results Stat 2:", resultsStat2);
-  console.log("Results Stat 3:", resultsStat3);
-
   // Helper function to render a single stat block
   const renderStatBlock = (stat: ResultStatItem | undefined, index: number) => {
     // Return null if the stat item is undefined or missing essential data
@@ -41,16 +33,14 @@ export default function CaseStudyResults({ resultsData }: CaseStudyResultsProps)
 
     return (
       <div className="text-left">
-        <h4 className={`text-5xl lg:text-6xl font-bold ${currentColor}`}>
+        <h4 className={`text-heading font-bold ${currentColor}`}>
           {stat.value}
         </h4>
-        <h5 className="text-xl md:text-2xl font-semibold text-gray-900 mt-2">
+        <h5 className="text-subheading md:text-2xl font-semibold text-white-900 mt-2">
           {stat.label}
         </h5>
         {stat.description && ( // Only render description if it exists
-          <p className="text-base text-gray-600 mt-1">
-            {stat.description}
-          </p>
+          <p className="text-small text-gray-600 mt-1">{stat.description}</p>
         )}
       </div>
     );
@@ -63,7 +53,7 @@ export default function CaseStudyResults({ resultsData }: CaseStudyResultsProps)
   }
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-blue-50 to-indigo-50">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-backround-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
       <div className="max-w-screen-xl mx-auto">
         {/* Two-Column Grid for Results */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
@@ -71,16 +61,16 @@ export default function CaseStudyResults({ resultsData }: CaseStudyResultsProps)
           {/* Left Column: Main Narrative */}
           <div>
             <AccentText className="text-left md:text-left">The Outcome</AccentText> {/* Hardcoded as per schema */}
-            <SectionHeading className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 mt-2 text-left md:text-left">
+            <SectionHeading className="text-heading md:text-4xl font-bold tracking-tight mt-2 text-left md:text-left">
               {resultsHeading}
             </SectionHeading>
-            <p className="text-lg md:text-xl text-gray-700 mt-6 leading-relaxed text-left md:text-left">
+            <p className="text-body md:text-xl mt-6 leading-relaxed text-left md:text-left">
               {resultsBody}
             </p>
           </div>
 
           {/* Right Column: Vertically Listed Stats */}
-          <div className="space-y-10 mt-8 md:mt-0">
+          <div className="space-y-10 xs:space-y-12 mt-8 md:mt-0">
             {renderStatBlock(resultsStat1, 0)}
             {renderStatBlock(resultsStat2, 1)}
             {renderStatBlock(resultsStat3, 2)}

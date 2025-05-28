@@ -22,7 +22,13 @@ export default function CaseStudyGoals({
   const defaultAccentText = "Our Goal"; // This text is hardcoded in the component if not passed.
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 text-center bg-gray-50"> {/* Added a light background for distinction */}
+    <section
+      className="py-16 px-4 sm:px-6 lg:px-8 text-center bg-background-light dark:bg-background-dark 
+    text-text-primary-light dark:text-text-primary-dark   
+     "
+    >
+      {" "}
+      {/* Added a light background for distinction */}
       <div className="max-w-3xl mx-auto">
         {/* Accent Text (using a default if no prop is passed) */}
         <AccentText className="text-center">
@@ -30,14 +36,12 @@ export default function CaseStudyGoals({
         </AccentText>
 
         {/* Heading */}
-        <SectionHeading className="text-3xl md:text-4xl font-bold text-gray-900 mt-2">
+        <SectionHeading className="text-heading md:text-4xl font-bold tracking-tight">
           {goalTitle}
         </SectionHeading>
 
         {/* Body Text */}
-        <p className="text-lg md:text-xl text-gray-700 mt-6 leading-relaxed">
-          {goalBody}
-        </p>
+        <p className="text-body mt-6 leading-relaxed">{goalBody}</p>
       </div>
     </section>
   );

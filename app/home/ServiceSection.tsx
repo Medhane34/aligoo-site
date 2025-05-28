@@ -2,10 +2,12 @@
 "use client"; // This component needs to be client-side for interactivity (useState, useEffect, useRef)
 
 import React from "react"; // Removed useRef, useState, useEffect as they are no longer needed
-import { motion } from "framer-motion"; // Keep if you plan to use it for animations elsewhere
+// Keep if you plan to use it for animations elsewhere
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { Avatar } from "@heroui/avatar";
-import Link from "next/link"
+import Link from "next/link";
+import { motion } from "framer-motion";
+
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 // Removed classNames as pagination dots are gone
 
@@ -31,33 +33,79 @@ const ServiceSection = () => {
 
   // Removed carouselRef, activeIndex, setActiveIndex, numItems state and effect
   // Removed scrollToSlide and useEffect for scroll handling
+  const headingVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
+  const columnContainerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
+
+  const columnVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.6, ease: "easeInOut" },
+    },
+  };
+
+  const accordionVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
 
   return (
-    <div className="py-16">
+    <div className="py-16 overflow-hiddden">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
-        <div className="text-center mb-12">
-          <AccentText>Our Services</AccentText>
-          <SectionHeading>How We Work</SectionHeading>
-        </div>
-        {/* Carousel Container - Now just a standard grid for all screen sizes */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 // Changed to grid-cols-1 on mobile, md:grid-cols-3 on desktop
-                               // Removed overflow-x-scroll, overflow-x-hidden, scroll-smooth, snap-x, snap-mandatory, scrollbar-hidden
-                               // Removed -mx-4, md:mx-0
-                               pb-4                                     // Keep padding bottom for aesthetic spacing
-                               mb-12                                    // Bottom margin for spacing below columns
-                    "
+        <motion.div
+          className="text-center mb-12 space-y-2 xs:space-y-4"
+          initial="hidden"
+          variants={headingVariants}
+          viewport={{ once: true }}
+          whileInView="visible"
         >
-          {/* Strategy Column with Accordions */}
-          <div
-            className="
-                                // Removed flex-none, w-full, md:w-auto, md:flex-1, p-4, md:p-0, scroll-snap-align-start
-                                text-white outline-2 outline-offset-2 outline-blue-500 // Your existing outline
-                               "
+          <motion.div variants={headingVariants}>
+            <AccentText>Our Services</AccentText>
+          </motion.div>
+          <motion.div variants={headingVariants}>
+            <SectionHeading className="text-heading">
+              How We Work
+            </SectionHeading>
+          </motion.div>
+        </motion.div>
+        {/* Carousel Container - Now just a standard grid for all screen sizes */}
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-4 mb-12 gap-4 xs:gap-5 sm:gap-6 md:gap-7 lg:gap-8 px-4 xs:px-5 sm:px-6 md:px-8"
+          initial="hidden"
+          variants={columnContainerVariants}
+          viewport={{ once: true }}
+          whileInView="visible"
+        >
+          {/* Strategy Column */}
+          <motion.div
+            className="w-full md:w-auto md:flex-1 p-4 md:p-0 outline-none text-white"
+            variants={columnVariants}
           >
-            <h2 className="text-2xl font-semibold mb-4">Strategy</h2>
-            <p className="text-gray-400 mb-6">
+            <h2 className="text-2xl font-semibold mb-4 text-heading">
+              Strategy
+            </h2>
+            <p className="text-gray-400 mb-6 text-body">
               We get to know your organisation and industry inside out, putting
               ourselves in your shoes so we can give you smart recommendations
               with a solid reason behind them.
@@ -68,10 +116,10 @@ const ServiceSection = () => {
                 aria-label="Brand Development"
                 indicator={
                   <Link
+                    className="text-pink-400 hover:text-pink-300 transition-colors text-subheading"
                     href="/services/brand-development"
-                    target="_blank"
                     rel="noopener noreferrer"
-                    className="text-pink-400 hover:text-pink-300 transition-colors"
+                    target="_blank"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <RightArrow />
@@ -94,18 +142,20 @@ const ServiceSection = () => {
                   <span className="hover:underline">Brand Development</span>
                 }
               >
-                {defaultContent} A detailed explanation of brand development,
-                including market research and identity creation.
+                <motion.div variants={accordionVariants}>
+                  {defaultContent} A detailed explanation of brand development,
+                  including market research and identity creation.
+                </motion.div>
               </AccordionItem>
               <AccordionItem
                 key="2"
                 aria-label="Digital Marketing"
                 indicator={
                   <Link
-                    href="/services/digital-marketing"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
+                    href="/services/digital-marketing"
+                    rel="noopener noreferrer"
+                    target="_blank"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <RightArrow />
@@ -128,18 +178,20 @@ const ServiceSection = () => {
                   <span className="hover:underline">Digital Marketing</span>
                 }
               >
-                {defaultContent} Covering SEO, social media, and content
-                marketing strategies for online visibility.
+                <motion.div variants={accordionVariants}>
+                  {defaultContent} Covering SEO, social media, and content
+                  marketing strategies for online visibility.
+                </motion.div>
               </AccordionItem>
               <AccordionItem
                 key="3"
                 aria-label="Content Strategy"
                 indicator={
                   <Link
-                    href="/services/content-strategy"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
+                    href="/services/content-strategy"
+                    rel="noopener noreferrer"
+                    target="_blank"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <RightArrow />
@@ -162,21 +214,21 @@ const ServiceSection = () => {
                   <span className="hover:underline">Content Strategy</span>
                 }
               >
-                {defaultContent} Planning and creation of engaging content
-                tailored to your audience.
+                <motion.div variants={accordionVariants}>
+                  {defaultContent} Planning and creation of engaging content
+                  tailored to your audience.
+                </motion.div>
               </AccordionItem>
             </Accordion>
-          </div>
+          </motion.div>
 
-          {/* Design Column with Accordions */}
-          <div
-            className="
-                                // Removed flex-none, w-full, md:w-auto, md:flex-1, p-4, md:p-0, scroll-snap-align-start
-                                text-white
-                               "
+          {/* Design Column */}
+          <motion.div
+            className="w-full md:w-auto md:flex-1 p-4 md:p-0 text-white"
+            variants={columnVariants}
           >
-            <h2 className="text-2xl font-semibold mb-4">Design</h2>
-            <p className="text-gray-400 mb-6">
+            <h2 className="text-2xl font-semibold mb-4 text-heading">Design</h2>
+            <p className="text-gray-400 mb-6 text-body">
               Great design should look great, work seamlessly, and communicate
               clearly. Every element of your brand should feel connected, with
               thoughtful, lasting choices.
@@ -187,10 +239,10 @@ const ServiceSection = () => {
                 aria-label="Sustainable Web Design"
                 indicator={
                   <Link
-                    href="/services/sustainable-web-design"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
+                    href="/services/sustainable-web-design"
+                    rel="noopener noreferrer"
+                    target="_blank"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <RightArrow />
@@ -215,18 +267,20 @@ const ServiceSection = () => {
                   </span>
                 }
               >
-                {defaultContent} Crafting beautiful and efficient websites with
-                a focus on longevity and eco-friendliness.
+                <motion.div variants={accordionVariants}>
+                  {defaultContent} Crafting beautiful and efficient websites
+                  with a focus on longevity and eco-friendliness.
+                </motion.div>
               </AccordionItem>
               <AccordionItem
                 key="5"
                 aria-label="UX/UI Design"
                 indicator={
                   <Link
-                    href="/services/ux-ui-design"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
+                    href="/services/ux-ui-design"
+                    rel="noopener noreferrer"
+                    target="_blank"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <RightArrow />
@@ -247,18 +301,20 @@ const ServiceSection = () => {
                 }
                 title={<span className="hover:underline">UX/UI Design</span>}
               >
-                {defaultContent} Creating intuitive and engaging user
-                experiences with visually appealing interfaces.
+                <motion.div variants={accordionVariants}>
+                  {defaultContent} Creating intuitive and engaging user
+                  experiences with visually appealing interfaces.
+                </motion.div>
               </AccordionItem>
               <AccordionItem
                 key="6"
                 aria-label="Copywriting"
                 indicator={
                   <Link
-                    href="/services/copywriting"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
+                    href="/services/copywriting"
+                    rel="noopener noreferrer"
+                    target="_blank"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <RightArrow />
@@ -279,21 +335,23 @@ const ServiceSection = () => {
                 }
                 title={<span className="hover:underline">Copywriting</span>}
               >
-                {defaultContent} Crafting persuasive and clear content that
-                resonates with your target audience and drives action.
+                <motion.div variants={accordionVariants}>
+                  {defaultContent} Crafting persuasive and clear content that
+                  resonates with your target audience and drives action.
+                </motion.div>
               </AccordionItem>
             </Accordion>
-          </div>
+          </motion.div>
 
-          {/* Execution Column with Accordions */}
-          <div
-            className="
-                                // Removed flex-none, w-full, md:w-auto, md:flex-1, p-4, md:p-0, scroll-snap-align-start
-                                text-white
-                               "
+          {/* Execution Column */}
+          <motion.div
+            className="w-full md:w-auto md:flex-1 p-4 md:p-0 text-white"
+            variants={columnVariants}
           >
-            <h2 className="text-2xl font-semibold mb-4">Execution</h2>
-            <p className="text-gray-400 mb-6">
+            <h2 className="text-2xl font-semibold mb-4 text-heading">
+              Execution
+            </h2>
+            <p className="text-gray-400 mb-6 text-body">
               A great website needs great design—just like a brand or strategy
               needs smart, sustainable, and SEO-focused execution to create a
               lasting impact and drive real results.
@@ -304,10 +362,10 @@ const ServiceSection = () => {
                 aria-label="Sustainable Web Development"
                 indicator={
                   <Link
-                    href="/services/sustainable-web-development"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
+                    href="/services/sustainable-web-development"
+                    rel="noopener noreferrer"
+                    target="_blank"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <RightArrow />
@@ -332,18 +390,20 @@ const ServiceSection = () => {
                   </span>
                 }
               >
-                {defaultContent} Building robust and scalable web solutions with
-                modern technologies and best practices.
+                <motion.div variants={accordionVariants}>
+                  {defaultContent} Building robust and scalable web solutions
+                  with modern technologies and best practices.
+                </motion.div>
               </AccordionItem>
               <AccordionItem
                 key="8"
                 aria-label="Search Engine Optimisation"
                 indicator={
                   <Link
-                    href="/services/seo"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
+                    href="/services/seo"
+                    rel="noopener noreferrer"
+                    target="_blank"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <RightArrow />
@@ -368,18 +428,20 @@ const ServiceSection = () => {
                   </span>
                 }
               >
-                {defaultContent} Implementing strategies to improve your
-                website&apos;s visibility and ranking on search engines.
+                <motion.div variants={accordionVariants}>
+                  {defaultContent} Implementing strategies to improve your
+                  website&apos;s visibility and ranking on search engines.
+                </motion.div>
               </AccordionItem>
               <AccordionItem
                 key="9"
                 aria-label="Email Marketing"
                 indicator={
                   <Link
-                    href="/services/email-marketing"
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="text-pink-400 hover:text-pink-300 transition-colors"
+                    href="/services/email-marketing"
+                    rel="noopener noreferrer"
+                    target="_blank"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <RightArrow />
@@ -400,12 +462,14 @@ const ServiceSection = () => {
                 }
                 title={<span className="hover:underline">Email Marketing</span>}
               >
-                {defaultContent} Designing and executing effective email
-                campaigns to engage your audience and drive conversions.
+                <motion.div variants={accordionVariants}>
+                  {defaultContent} Designing and executing effective email
+                  campaigns to engage your audience and drive conversions.
+                </motion.div>
               </AccordionItem>
             </Accordion>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Pagination Dots (Removed) */}
         {/* <div className="flex justify-center mt-8 md:hidden">

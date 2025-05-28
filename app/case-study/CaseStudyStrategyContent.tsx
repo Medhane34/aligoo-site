@@ -1,16 +1,20 @@
 // components/case-studies/CaseStudyStrategyContent.tsx
 "use client";
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
+
+import { CaseStudyStrategyData, StrategyBlock } from "./[slug]/CaseStudyData";
+
 import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { CaseStudyStrategyData, StrategyBlock } from './[slug]/CaseStudyData';
 
 // Define the props interface for the component
 interface CaseStudyStrategyContentProps {
   strategyData: CaseStudyStrategyData;
 }
 
-export default function CaseStudyStrategyContent({ strategyData }: CaseStudyStrategyContentProps) {
+export default function CaseStudyStrategyContent({
+  strategyData,
+}: CaseStudyStrategyContentProps) {
   // Destructure the data for easier access
   const {
     strategyIntroHeading,
@@ -23,7 +27,10 @@ export default function CaseStudyStrategyContent({ strategyData }: CaseStudyStra
   const defaultStrategyAccentText = "Our Approach"; // Or dynamically fetch if you add a field for it
 
   // Helper function to render a single strategy block
-  const renderStrategyBlock = (block: StrategyBlock | undefined, isImageLeft: boolean) => {
+  const renderStrategyBlock = (
+    block: StrategyBlock | undefined,
+    isImageLeft: boolean,
+  ) => {
     // Ensure block and its crucial properties exist before attempting to render
     if (!block || !block.heading || !block.imageUrl) {
       // If heading or imageUrl is missing, this block won't render
@@ -32,13 +39,9 @@ export default function CaseStudyStrategyContent({ strategyData }: CaseStudyStra
 
     const textContent = (
       <div>
-        <h3 className="text-2xl font-semibold text-gray-900 mb-3">
-          {block.heading}
-        </h3>
+        <h3 className="font-semibold text-subheading mb-3">{block.heading}</h3>
         {block.body && ( // Only render paragraph if body has content (not null/undefined/empty string)
-            <p className="text-lg text-gray-700 leading-relaxed">
-              {block.body}
-            </p>
+          <p className="text-body leading-relaxed">{block.body}</p>
         )}
       </div>
     );
@@ -46,27 +49,33 @@ export default function CaseStudyStrategyContent({ strategyData }: CaseStudyStra
     const imageContent = (
       <div>
         {block.imageUrl && ( // Only render Image component if imageUrl is present
-            <Image
-              src={block.imageUrl}
-              alt={block.imageAlt || `Image for ${block.heading}`} // Fallback alt text
-              width={600} // Keep actual width/height for Next.js Image optimization
-              height={400} // Adjust these values based on your typical image dimensions
-              className="w-full h-auto object-cover rounded-lg shadow-lg"
-              priority={false} // Only use priority for above-the-fold images
-              sizes="(max-width: 768px) 100vw, 50vw" // Add sizes for better optimization
-            />
+          <Image
+            src={block.imageUrl}
+            alt={block.imageAlt || `Image for ${block.heading}`} // Fallback alt text
+            width={600} // Keep actual width/height for Next.js Image optimization
+            height={400} // Adjust these values based on your typical image dimensions
+            className="w-full h-auto object-cover rounded-lg shadow-lg"
+            priority={false} // Only use priority for above-the-fold images
+            sizes="(max-width: 768px) 100vw, 50vw" // Add sizes for better optimization
+          />
         )}
       </div>
     );
 
     return (
-      <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 ${isImageLeft ? 'md:grid-flow-col' : ''}`}>
+      <div
+        className={`grid grid-cols-1 xs:grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center mb-16 ${isImageLeft ? "md:grid-flow-col" : ""}`}
+      >
         {isImageLeft ? (
           <>
-            <div className="order-last md:order-first"> {/* Image on left on desktop, last on mobile */}
+            <div className="order-last md:order-first">
+              {" "}
+              {/* Image on left on desktop, last on mobile */}
               {imageContent}
             </div>
-            <div className="order-first md:order-last"> {/* Text on right on desktop, first on mobile */}
+            <div className="order-first md:order-last text-body">
+              {" "}
+              {/* Text on right on desktop, first on mobile */}
               {textContent}
             </div>
           </>
@@ -81,16 +90,17 @@ export default function CaseStudyStrategyContent({ strategyData }: CaseStudyStra
   };
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gray-50">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark">
       <div className="max-w-screen-xl mx-auto">
         {/* Section Header (Strategy Introduction) */}
-        <div className="space-y-2 mb-12 text-center">
+        <div className="lg:space-y-2 xs:space-y-8 sm:space-y-10 md:space-y-12 
+      mb-12 text-center ">
           <AccentText>{defaultStrategyAccentText}</AccentText>
-          <SectionHeading className="text-3xl font-bold tracking-tight">
+          <SectionHeading className="text-heading font-bold tracking-tight">
             {strategyIntroHeading}
           </SectionHeading>
           {strategyIntroBody && ( // Only render if strategyIntroBody has content
-            <p className="max-w-3xl mx-auto text-lg text-gray-700 mt-4">
+            <p className="max-w-3xl mx-auto text-heading mt-4">
               {strategyIntroBody}
             </p>
           )}

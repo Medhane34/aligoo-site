@@ -10,19 +10,22 @@ type BlogPostType = {
 };
 
 const BlogPost = ({ post }: { post: BlogPostType }) => (
-  <div className="w-64 md:w-96 rounded-lg shadow-md overflow-hidden flex flex-col  flex-shrink-0">
+  <div className="w-64 md:w-96 rounded-lg shadow-md overflow-hidden flex flex-col  flex-shrink-0 
+
+bg-background-light dark:bg-background-dark">
     {post.imageUrl && (
       <Image
+      isZoomed
         src={post.imageUrl}
         alt={post.title}
-        className="object-cover w-full"
+        className="object-cover w-full shadow-md"
         width={384}
         height={200}
       />
     )}
     <div className="p-4">
         <Link href={`/blog/${post.slug}`}>
-      <h3 className="text-xl font-semibold text-gray-900">{post.title}</h3>
+      <h3 className="lg:text-heading text-brand-primary font-semibold">{post.title}</h3>
     </Link>
     </div>
   </div>
@@ -44,20 +47,20 @@ export default function BlogSectionClient({ blogs }: { blogs: BlogPostType[] }) 
   };
 
   return (
-    <div>
-      <div className="flex justify-between items-center mb-8">
+    <div className="">
+      <div className="flex justify-between items-center mb-8 ">
         <h2 className="text-2xl font-bold">Our Latest Blogs</h2>
         <div className="flex space-x-2">
-          <button onClick={scrollLeft} className="bg-white border rounded-md p-2 text-gray-600 hover:bg-gray-200">
+          <button onClick={scrollLeft} className="bg-brand-primary border rounded-md p-2 text-gray-600 hover:bg-gray-200">
             &lt;
           </button>
-          <button onClick={scrollRight} className="bg-gray-900 text-white border rounded-md p-2 hover:bg-gray-700">
+          <button onClick={scrollRight} className="bg-brand-primary text-white border rounded-md p-2 hover:bg-gray-700">
             &gt;
           </button>
         </div>
       </div>
       <div className="overflow-x-auto pb-4 max-w-[1600px] scrollbar-hide" ref={scrollRef}>
-        <div className="flex flex-row gap-4">
+        <div className="flex flex-row gap-4 ">
           {blogs.map((post) => (
             <BlogPost key={post._id} post={post} />
           ))}

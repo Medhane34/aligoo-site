@@ -1,9 +1,14 @@
 // components/case-studies/CaseStudyOverview.tsx
 
 "use client";
-import React from 'react';
+import React from "react";
 import { Image } from "@heroui/image";
-import { AccentText, SectionHeading, Paragraph } from "@/components/ui/typography"; // Ensure Paragraph is imported
+
+import {
+  AccentText,
+  SectionHeading,
+  Paragraph,
+} from "@/components/ui/typography"; // Ensure Paragraph is imported
 
 // Define the props type: overviewDescription is now a string
 interface CaseStudyOverviewProps {
@@ -19,27 +24,27 @@ export default function CaseStudyOverview({
   heroImageUrl,
   heroImageAlt,
 }: CaseStudyOverviewProps) {
-
-
-
   // Split the description into multiple paragraphs based on double newlines
   // This helps break up the text if the editor used newlines in Sanity.
-  const paragraphs = overviewDescription.split('\n\n').filter(p => p.trim() !== '');
+  const paragraphs = overviewDescription
+    .split("\n\n")
+    .filter((p) => p.trim() !== "");
 
   return (
-    <section className="relative z-10 py-24 bg-white">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
+    <section className="relative z-10 py-24 bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
+      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center
+      gap-4 xs:gap-5 sm:gap-6 md:gap-7 lg:gap-8 px-4 xs:px-5 sm:px-6 md:px-8
+      ">
         {/* Left Column: Text Content */}
-        <div className="w-full md:w-1/2 space-y-6">
-          <AccentText>Case Study</AccentText>
-          <SectionHeading>
+        <div className="w-full md:w-1/2 xl:space-y-1 lg:space-y-2 xs:space-y-8 sm:space-y-10 md:space-y-12
+        xs:p-4 sm:p-6 md:p-8 lg:p-10">
+          <AccentText className="xs:mb-[0]">Case Study</AccentText>
+          <SectionHeading className="text-heading font-bold tracking-tight">
             {title} {/* Dynamic Heading */}
           </SectionHeading>
           {/* Render each paragraph */}
           {paragraphs.map((p, index) => (
-            <Paragraph key={index}>
-              {p}
-            </Paragraph>
+            <Paragraph key={index} className="text-body lg:text-body">{p}</Paragraph>
           ))}
         </div>
         {/* Right Column: Image */}
@@ -48,11 +53,11 @@ export default function CaseStudyOverview({
             <div className="rounded-2xl overflow-hidden shadow-xl">
               <Image
                 isBlurred
-                src={heroImageUrl} // Dynamic Image URL
                 alt={heroImageAlt || title} // Dynamic Image Alt Text, fallback to title
-                width={800} // Adjust as needed
-                height={600} // Adjust as needed
                 className="object-cover w-full h-full"
+                height={600} // Adjust as needed
+                src={heroImageUrl} // Dynamic Image URL
+                width={800} // Adjust as needed
               />
             </div>
           )}

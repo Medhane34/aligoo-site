@@ -10,9 +10,11 @@ import ServiceSection from "./home/ServiceSection";
 import BlogSectionClient from "./home/BlogSectionClient";
 import BlogSection from "./home/blogSection";
 import WhyUsSection from "./home/WhyUsSection";
+import CTABottomSection from "@/components/CTA";
+
 export default function Home() {
-  return ( 
-      <>
+  return (
+    <>
       <HeroSection />
       <AboutUsSection />
       <StatsSection />
@@ -22,7 +24,10 @@ export default function Home() {
       <WhyUsSection />
       <TestimonialsSection />
       <BlogSection />
+      <CTABottomSection
+        heading="Let’s Build Something Amazing!"
+        subheading="Start your next project with our expert team today."
+      />
     </>
-    
   );
 }

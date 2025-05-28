@@ -28,11 +28,6 @@ export default function CaseStudyImageGallery({ imageGalleryData }: CaseStudyIma
     galleryImage3,
   ].filter(Boolean); // Filters out any undefined or null values
 
-  // Debugging: Log the data received by the component
-  console.log("CaseStudyImageGallery received imageGalleryData:", imageGalleryData);
-  console.log("Gallery Heading:", galleryHeading);
-  console.log("Gallery Description:", galleryDescription);
-  console.log("Processed Gallery Images for rendering:", galleryImages);
 
 
   // Don't render the section if no gallery data or no images are available
@@ -42,16 +37,18 @@ export default function CaseStudyImageGallery({ imageGalleryData }: CaseStudyIma
   }
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
-      <div className="max-w-screen-xl mx-auto">
+    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
+      <div className=" mx-auto">
         {/* Section Header */}
-        <div className="space-y-2 mb-12 text-center">
+        <div className="lg:space-y-2 xs:space-y-6 sm:space-y-10 md:space-y-12 
+        
+        mb-12 text-center">
           <AccentText>Visual Story</AccentText> {/* This could also be dynamic if added to Sanity */}
-          <SectionHeading className="text-3xl font-bold tracking-tight">
+          <SectionHeading className="text-heading xs:text-heading font-bold tracking-tight">
             {galleryHeading}
           </SectionHeading>
           {galleryDescription && ( // Only render if description exists
-            <p className="max-w-3xl mx-auto text-lg text-gray-700 mt-4">
+            <p className="max-w-3xl mx-auto text-subheading xs:text-sub-heading mt-4">
               {galleryDescription}
             </p>
           )}
