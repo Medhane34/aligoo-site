@@ -8,11 +8,13 @@ import { motion } from "framer-motion";
 interface CTABottomSectionProps {
   heading: string;
   subheading: string;
+  firstbuttontext: string
 }
 
 const CTABottomSection: React.FC<CTABottomSectionProps> = ({
   heading,
   subheading,
+  firstbuttontext
 }) => {
   const sectionVariants = {
     hidden: { opacity: 0 },
@@ -83,7 +85,7 @@ const CTABottomSection: React.FC<CTABottomSectionProps> = ({
           >
             <motion.div variants={buttonVariants}>
               <Button className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker shadow-lg transition-all duration-300">
-                Free trial
+                {firstbuttontext}
               </Button>
             </motion.div>
             <motion.div variants={buttonVariants}>

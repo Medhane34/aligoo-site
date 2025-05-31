@@ -1,5 +1,4 @@
 // src/sanity/queries.ts (Your existing file)
-
 import { client } from "@/src/sanity/client";
 import type { SanityDocument } from "next-sanity";
 

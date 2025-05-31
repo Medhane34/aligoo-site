@@ -19,11 +19,12 @@ type CaseStudy = {
   service: string;
   slug: string; // The URL path for the case study
 };
+
 interface WorkSectionProps {
-  caseStudiesData: CaseStudy[];
+  casestudyPosts: CaseStudy[];
 }
 
-export default function WorkSection() {
+export default function WorkSection({ casestudyPosts }: WorkSectionProps) {
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);

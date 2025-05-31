@@ -14,3 +14,25 @@ html.light {
   @apply bg-gray-100 text-black;
 }
 */
+
+/* styles/globals.css */
+html,
+body {
+  max-width: 100%;
+  overflow-x: visible; /* Allows intentional scrolling in child elements */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure sections don't overflow unintentionally */
+section {
+  max-width: 100%;
+}
+
+/* Fix for containers that might use 100vw */
+.container,
+.max-w-full {
+  max-width: 100%;
+}

@@ -3,10 +3,19 @@ import {button, heroui} from "@heroui/theme"
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
+ // Scan files in the app directory
     './app/**/*.{js,ts,jsx,tsx,mdx}',
-    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}"
-  ],
+    // Scan files in the components directory
+    './components/**/*.{js,ts,jsx,tsx,mdx}',
+    // Scan files in the lib directory
+    './lib/**/*.{js,ts,jsx,tsx,mdx}',
+    // Scan files in the sanity directory
+    './sanity/**/*.{js,ts,jsx,tsx,mdx}',
+    // Scan files in the wrappers directory
+    './wrappers/**/*.{js,ts,jsx,tsx,mdx}',
+    // Scan files in the @heroui/theme package
+    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
+   ],
   theme: {
     extend: {
       fontFamily: {

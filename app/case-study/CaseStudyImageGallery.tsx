@@ -40,7 +40,8 @@ export default function CaseStudyImageGallery({ imageGalleryData }: CaseStudyIma
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
       <div className=" mx-auto">
         {/* Section Header */}
-        <div className="lg:space-y-2 xs:space-y-6 sm:space-y-10 md:space-y-12 
+        <div
+          className="lg:space-y-2 xs:space-y-6 sm:space-y-10 md:space-y-12 
         
         mb-12 text-center">
           <AccentText>Visual Story</AccentText> {/* This could also be dynamic if added to Sanity */}

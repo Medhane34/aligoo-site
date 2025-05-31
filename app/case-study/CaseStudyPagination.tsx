@@ -20,8 +20,8 @@ export default function CaseStudyPagination({ paginationData }: CaseStudyPaginat
 
         {/* Previous Case Study Link/Disabled State */}
         {previousCaseStudy ? (
-          <Link href={`/case-study/${previousCaseStudy.slug}`} className="group flex items-center gap-2 text-left">
-            <ChevronLeftIcon className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors" aria-hidden="true" />
+          <Link className="group flex items-center gap-2 text-left" href={`/case-study/${previousCaseStudy.slug}`}>
+            <ChevronLeftIcon aria-hidden="true" className="h-5 w-5 text-gray-400 group-hover:text-blue-600 transition-colors" />
             <div>
               <p className="text-sm text-gray-500 group-hover:text-gray-700 transition-colors">Previous Case Study</p>
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
@@ -33,7 +33,10 @@ export default function CaseStudyPagination({ paginationData }: CaseStudyPaginat
           // Render a disabled-like div if there's no previous case study
           <div className="w-auto opacity-50 cursor-not-allowed">
             <div className="flex items-center gap-2 text-left">
-              <ChevronLeftIcon className="h-5 w-5 text-gray-300" aria-hidden="true" />
+              <ChevronLeftIcon
+                aria-hidden="true"
+                className="h-5 w-5 text-gray-300"
+              />
               <div>
                 <p className="text-sm text-gray-400">Previous Case Study</p>
                 <h3 className="text-base sm:text-lg font-semibold text-gray-500">
@@ -46,14 +49,14 @@ export default function CaseStudyPagination({ paginationData }: CaseStudyPaginat
 
         {/* Next Case Study Link/Disabled State */}
         {nextCaseStudy ? (
-          <Link href={`/case-study/${nextCaseStudy.slug}`} className="group flex items-center gap-2 text-right ml-auto">
+          <Link className="group flex items-center gap-2 text-right ml-auto" href={`/case-study/${nextCaseStudy.slug}`}>
             <div>
               <p className="text-sm group-hover:text-gray-300 transition-colors">Next Case Study</p>
               <h3 className="text-base sm:text-lg font-semibold text-gray-900 group-hover:text-blue-700 transition-colors">
                 {nextCaseStudy.title}
               </h3>
             </div>
-            <ChevronRightIcon className="h-5 w-5 text-blue-400 group-hover:text-blue-600 transition-colors" aria-hidden="true" />
+            <ChevronRightIcon aria-hidden="true" className="h-5 w-5 text-blue-400 group-hover:text-blue-600 transition-colors" />
           </Link>
         ) : (
           // Render a disabled-like div if there's no next case study
@@ -65,7 +68,7 @@ export default function CaseStudyPagination({ paginationData }: CaseStudyPaginat
                   No next
                 </h3>
               </div>
-              <ChevronRightIcon className="h-5 w-5 text-gray-100" aria-hidden="true" />
+              <ChevronRightIcon aria-hidden="true" className="h-5 w-5 text-gray-100" />
             </div>
           </div>
         )}

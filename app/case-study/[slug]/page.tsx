@@ -12,7 +12,7 @@ import CaseStudyResults from "../CaseStudyResults";
 import CaseStudyTestimonial from "../CaseStudyTestimonial";
 import CaseStudyPagination from "../CaseStudyPagination";
 import CaseStudyOverview from "../OverviewSection";
-
+import HeroSection from "@/app/home/HeroSection";
 // Adjust the import path as necessary
 import {
   fetchCaseStudyCoreDataBySlug,
@@ -69,6 +69,7 @@ export default async function CaseStudyDetails({ params }: Props) {
           component that takes specific props (like an image from coreData), pass them.
           For now, I'm commenting it out as it's often integrated into the main overview component. */}
       {/* <HeroSection /> */}
+      
 
       {/* Overview Section */}
       {overviewData && (

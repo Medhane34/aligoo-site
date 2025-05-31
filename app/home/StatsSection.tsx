@@ -58,7 +58,7 @@ function Counter({ value, suffix = "", prefix = "", duration = 2 }: any) {
 
 export default function StatsSection() {
   return (
-    <section className="w-full py-16 gap-4 xs:gap-3 sm:gap-6 md:gap-7 lg:gap-8 px-4 xs:px-5 sm:px-6 md:px-8 text-text-primary-light dark:text-text-dark bg-background-primary-light dark:bg-background-dark">
+    <section className="max-w-full overflow-x-hidden py-16 gap-4 xs:gap-3 sm:gap-6 md:gap-7 lg:gap-8 px-4 xs:px-5 sm:px-6 md:px-8 text-text-primary-light dark:text-text-dark bg-background-primary-light dark:bg-background-dark">
       <div className="container mx-auto grid grid-cols-1 gap-12 px-6 text-center xs: grid-cols-2 sm:grid-cols-2 md:grid-cols-4 sm:w-1/2 md:w-4/5 lg:w-3/4 xl:w-2/3">
         {stats.map((stat, i) => (
           <div key={i} className="flex items-center justify-center">

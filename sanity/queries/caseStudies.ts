@@ -1,0 +1,52 @@
+// sanity/queries/caseStudies.ts
+// GROQ queries for case studies
+
+// Fetch up to 6 case studies, sorted by creation date
+export const caseStudiesQuery = `
+  *[_type == "caseStudy"] | order(_createdAt desc)[0...6] {
+    _id,
+    title,
+    "imageUrl": mainImage.asset->url,
+    "service": service->title,
+    "slug": slug.current,
+    "hasImage": defined(mainImage),
+    "hasService": defined(service)
+  }
+`;
+
+// Fetch a single featured case study
+export const featuredCaseStudyQuery = `
+  *[_type == "caseStudy" && tag == "Featured"][0] {
+    _id,
+    title,
+    "imageUrl": mainImage.asset->url,
+    "service": service->title,
+    "slug": slug.current,
+    "hasImage": defined(mainImage),
+    "hasService": defined(service)
+  }
+`;
+
+export const fbCaseStudyQuery = `
+*[_type == "caseStudy" && service->title == "Facebook-Ad"]
+{
+  _id,
+  title,
+  "imageUrl": mainImage.asset->url,
+  "service": service->title, // Keep this for projecting the service title
+  "slug": slug.current
+}[0...3]
+`;
+
+export const HomeCaseStudyQuery = `
+  *[_type == "caseStudy"] | order(_createdAt desc)[0...5] {
+    _id,
+    title,
+    "imageUrl": mainImage.asset->url,
+    "service": service->title,
+    "slug": slug.current,
+    "hasImage": defined(mainImage),
+    "hasService": defined(service)
+  }
+
+`;

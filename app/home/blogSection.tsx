@@ -39,7 +39,7 @@ export default async function BlogSection() {
   const blogs = await fetchLatestBlogs();
 
   return (
-    <div className="py-16 bg-background-light dark:bg-background-dark">
+    <div className="max-w-full overflow-x-hidden py-16 bg-background-light dark:bg-background-dark">
       <div className="container mx-auto px-4 ">
         <BlogSectionClient blogs={blogs} />
       </div>
