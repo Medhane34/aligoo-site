@@ -8,24 +8,24 @@ import { AccentText } from "@/components/ui/typography";
 import { SectionHeading } from "@/components/ui/typography";
 const processStepsData = [
   {
-    heading: "Get Started",
+    heading: "👉 Get Started",
     description:
-      "Begin your journey to digital excellence by filling out our contact form. Provide us with as much information as possible about your project needs and business goals.",
+      "Fill out our contact form — tell us about your biz, your goals, your challenges, your wildest dreams (ok, maybe not all of them... yet). The more you share, the better we show up for you.",
   },
   {
-    heading: "Schedule a Call",
+    heading: "📅 Book a Call",
     description:
-      "Once we receive your inquiry, our team will review the details and contact you to schedule a consultation call. This allows us to better understand your vision and discuss potential strategies tailored to your objectives.",
+      "Once we get your info, we’ll reach out to lock in a discovery call. This is where we listen hard, ask the right questions, and map out your best next move. Strategy mode: activated. 🚀",
   },
   {
-    heading: "Receive Your Proposal",
+    heading: "📑 Get Your Proposal",
     description:
-      "After our discussion, we'll craft a detailed proposal outlining how we can help you achieve your digital marketing goals. Our proposal will include customized strategies, expected outcomes, and clear steps on how we'll move forward together.",
+      "No copy-paste offers here. You’ll get a tailored game plan packed with smart strategies, clear deliverables, transparent pricing, and realistic timelines. No fluff. No surprises.",
   },
   {
-    heading: "Partnership Begins",
+    heading: "🏗️ Let’s Build Together",
     description:
-      "With your approval, we'll kick off your project, leveraging our expertise to boost your brand's digital presence and drive meaningful results.",
+      "When you say go, we get moving. Expect regular updates, smooth communication, and work that actually delivers results — not just pretty reports.",
   },
 ];
 
@@ -76,15 +76,15 @@ const ProcessSection = () => {
   return (
     <motion.div
       ref={sectionRef}
-      className="py-16 "
+      className="py-16 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark"
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1, transition: { duration: 1 } } : {}}
     >
-      <div className="container mx-auto px-4 text-center">
+      <div className="container mx-auto px-4 text-center ">
         <div className="space-y-2 mb-8">
-                <AccentText>How It works </AccentText>
-                <SectionHeading className="text-3xl font-bold tracking-tight"> Unlock Astonishing Results with Just 4 Simple Steps!
-</SectionHeading>
+                <SectionHeading className="text-3xl font-bold tracking-tight uppercase"> Our Process </SectionHeading>
+                <AccentText className="normal-case">How We Go From “Let’s Talk” to “Let’s Launch” </AccentText>
+              
               </div>
 
         <div className="flex justify-around mb-8 relative">
@@ -121,7 +121,7 @@ const ProcessSection = () => {
               initial="initial"
               animate={activeStep >= index ? "animate" : "initialInactive"}
             >
-              <h3 className="text-xl font-semibold text-white mb-2">{step.heading}</h3>
+              <h3 className="text-xl font-semibold mb-2 text-brand-primary-light dark:text-text-dark">{step.heading}</h3>
               <motion.p className="text-white-600 text-sm">{step.description}</motion.p>
             </motion.div>
           ))}

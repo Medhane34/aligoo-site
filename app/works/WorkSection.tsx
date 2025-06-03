@@ -2,14 +2,17 @@
 
 "use client";
 import React, { useState, useRef } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import { Card } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { Button } from "@heroui/button";
-import { AccentText, SectionHeading } from "@/components/ui/typography";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { fetchCaseStudies } from "./casestudydata";
 import { useEffect } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+import { fetchCaseStudies } from "./casestudydata";
+
+import { AccentText, SectionHeading } from "@/components/ui/typography";
 
 // Define the CaseStudy type on the client side for type checking
 type CaseStudy = {
@@ -57,6 +60,7 @@ export default function WorkSection({ casestudyPosts }: WorkSectionProps) {
     async function loadCaseStudies() {
       try {
         const data = await fetchCaseStudies();
+
         console.log("Fetched Case Studies:", data);
         const normalizedData: CaseStudy[] = data.map((item: any) => ({
           _id: item._id,
@@ -66,6 +70,7 @@ export default function WorkSection({ casestudyPosts }: WorkSectionProps) {
           service: item.service,
           slug: item.slug ?? "",
         }));
+
         setCaseStudies(normalizedData);
         setLoading(false);
       } catch (err: any) {
@@ -88,7 +93,9 @@ export default function WorkSection({ casestudyPosts }: WorkSectionProps) {
         setIsDropdownOpen(false);
       }
     };
+
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -101,28 +108,45 @@ export default function WorkSection({ casestudyPosts }: WorkSectionProps) {
   if (error) {
     return <p className="text-center py-8 text-red-500">Error: {error}</p>;
   }
+  const textVariants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.7, ease: "easeInOut" },
+    },
+  };
 
   return (
     <section className="px-4 py-12 text-center sm:px-8 bg-background-light dark:bg-background-dark">
       {" "}
       {/* Responsive padding */}
       {/* Section Header */}
-      <div className="space-y-1 sm:space-y-2 mb-5 xs:mb-6 sm:mb-8">
-        <AccentText>Our Impact</AccentText>
-        <SectionHeading className="text-3xl font-bold tracking-tight">
-          The Transformation Wall
-        </SectionHeading>
-      </div>
+      <motion.div
+        className="space-y-1 sm:space-y-2 mb-5 xs:mb-6 sm:mb-8"
+        initial="hidden"
+        viewport={{ once: true }}
+        whileInView="visible"
+      >
+        <motion.div variants={textVariants}>
+          <SectionHeading className="text-heading font-bold tracking-tight uppercase">
+            BEFORE VS AFTER
+          </SectionHeading>
+        </motion.div>
+        <motion.div variants={textVariants}>
+            <AccentText className="normal-case">From “Meh” to Memorable — Our Makeover Magic</AccentText>
+        </motion.div>
+      </motion.div>
       {/* Filter Section (Heading and Filter - always in a row, responsive widths) */}
       <div className="container mx-auto mb-8 flex flex-row sm:flex-row items-center justify-between gap-4 px-0 sm:px-4">
         {" "}
         {/* px-0 for container, use gap on inner elements */}
-        <h3 className="text-xl font-semibold text-gray-900 text-left w-full sm:w-auto">
+        <h3 className="text-subheading font-semibold text-text-light dark:text-text-dark text-left w-full sm:w-auto">
           Explore Transformations
         </h3>
         <div ref={dropdownRef} className="relative text-right w-full sm:w-auto">
           <Button
-            className="inline-flex justify-between items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            className="inline-flex justify-between items-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-brand-primary text-sm font-medium text-text-light dark:text-text-dark hover:bg-brand-primary focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             size="sm"
             onClick={toggleDropdown}
           >

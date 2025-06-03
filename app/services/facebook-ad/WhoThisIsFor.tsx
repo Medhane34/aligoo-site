@@ -2,6 +2,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import React, { useRef } from "react";
 
+import { AccentText, SectionHeading } from "@/components/ui/typography";
+
 const WhoThisIsFor = () => {
   const paragraphRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -56,12 +58,39 @@ const WhoThisIsFor = () => {
     </>
   );
 
+  const textVariants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.7, ease: "easeInOut" },
+    },
+  };
+
   return (
-    <div className="py-16 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
-      <div className="container mx-auto px-4 text-center mb-8">
-        <h2 className="text-heading font-bold text-text-light dark:text-dark-dark">Are We a Match?</h2>
+    <div className="py-16 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark ">
+      <motion.div
+        className="container mx-auto px-4 text-center mb-8"
+        initial="hidden"
+        viewport={{ once: true }}
+        whileInView="visible"
+      >
+        <motion.div variants={textVariants}>
+          <SectionHeading className="text-heading uppercase">
+            Who This Is For{" "}
+          </SectionHeading>
+        </motion.div>
         {/* ... intro paragraph ... */}
-      </div>
+        <motion.div
+          className="text-heading pb-2 xs:pb-1 sm:pb-4"
+          variants={textVariants}
+        >
+          <AccentText className="normal-case">
+            {" "}
+            This Isn’t for Everyone — And That’s the Point
+          </AccentText>
+        </motion.div>
+      </motion.div>
       <div className="container mx-auto px-4 text-center">
         <p ref={paragraphRef} className="text-body justify-center">
           {combinedText}

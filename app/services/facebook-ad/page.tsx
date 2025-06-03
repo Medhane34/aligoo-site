@@ -10,20 +10,20 @@ export default async function IndexPage() {
   return (
     <>
       <HeroSection 
-      headlineText1="Build"
-        headlineText2="incredible"
-        headlineText3="apps with zero config."
-        subheading="Our platform empowers developers to launch and scale their ideas faster than ever before. Focus on code, we handle the rest."
-        primaryButtonText="Start Building"
+      headlineText1="Turn Clicks"
+        headlineText2="Into Customers"
+        headlineText3="With Facebook Ads That Actually Convert"
+        subheading="Tired of wasting money on ads that get likes but no leads? We build high-performing Facebook ad campaigns that attract the right audience, generate real demand, and grow your business — without the guesswork."
+        primaryButtonText="👉 Book Strategy Call"
         primaryButtonUrl="/dashboard"
-        secondaryButtonText="View Docs"
+        secondaryButtonText="👀 See Past Results"
         secondaryButtonUrl="/docs"
-        badgeText="New v3.0 Released!" // Optional badge text
+        badgeText="Facebook Ad!" // Optional badge text
       />
       <WhyFacebookAdsWork />
       <AdPhilosophy />
       <WhoThisIsFor />
-      <FeaturedFbCaseStudiesWrappers/>
+      <FeaturedFbCaseStudiesWrappers />
       <FaqSection />
       <CTABottomSection />
     </>

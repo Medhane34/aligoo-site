@@ -1,4 +1,11 @@
+'use client'
+import { motion } from "framer-motion";
 import { TestimonialCard } from "@/components/ui/TestimonialCard";
+import {
+  AccentText,
+  SectionHeading,
+  Paragraph,
+} from "@/components/ui/typography";
 
 // Define a customized array of 6 testimonials with unique data
 const testimonials = [
@@ -57,13 +64,34 @@ const testimonials = [
     avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
   },
 ];
+const textVariants = {
+  hidden: { opacity: 0, x: 20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 1.7, ease: "easeInOut" },
+  },
+};
 
 export const TestimonialsSection = () => (
-  <section className="w-full overflow-hidden py-12">
-    <div className="mx-auto max-w-6xl px-4">
-      <h2 className="mb-6 text-heading font-bold text-white">
-        What our clients say
-      </h2>
+  <section className="w-full overflow-hidden py-12 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
+    <motion.div className="mx-auto max-w-6xl px-4">
+      <motion.div 
+      initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        variants={textVariants}
+      >
+        <SectionHeading className="text-heading uppercase">
+          Client Love{" "}
+        </SectionHeading>
+      </motion.div>
+      <motion.div
+        variants={textVariants}
+        className="text-heading pb-2 xs:pb-3 sm:pb-4"
+      >
+        <AccentText className="normal-case"> Feedback That Fuels Us</AccentText>
+      </motion.div>
       <div className="relative max-w-full">
         <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth scrollbar-hide">
           {testimonials.map((testimonial, i) => (
@@ -73,7 +101,7 @@ export const TestimonialsSection = () => (
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   </section>
 );
 

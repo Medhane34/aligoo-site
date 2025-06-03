@@ -70,23 +70,23 @@ const ServiceSection = () => {
   };
 
   return (
-    <div className="py-16 overflow-hiddden">
+    <div className="py-16 overflow-hiddden text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
       <div className="container mx-auto px-4">
         {/* Section Heading */}
         <motion.div
-          className="text-center mb-12 space-y-2 xs:space-y-4"
+          className="text-center mb-12 space-y-2 xs:space-y-4 "
           initial="hidden"
           variants={headingVariants}
           viewport={{ once: true }}
           whileInView="visible"
         >
           <motion.div variants={headingVariants}>
-            <AccentText>Our Services</AccentText>
+        <SectionHeading className="text-heading uppercase">
+              What We Do 
+            </SectionHeading>
           </motion.div>
           <motion.div variants={headingVariants}>
-            <SectionHeading className="text-heading">
-              How We Work
-            </SectionHeading>
+            <AccentText className="normal-case text-heading">Smart Strategy. Clean Design. Powerful Execution.</AccentText>
           </motion.div>
         </motion.div>
         {/* Carousel Container - Now just a standard grid for all screen sizes */}
@@ -102,18 +102,17 @@ const ServiceSection = () => {
             className="w-full md:w-auto md:flex-1 p-4 md:p-0 outline-none text-white"
             variants={columnVariants}
           >
-            <h2 className="text-2xl font-semibold mb-4 text-heading">
+            <h2 className="text-2xl font-semibold mb-4 text-heading text-text-light dark:text-text-dark">
               Strategy
             </h2>
-            <p className="text-gray-400 mb-6 text-body">
-              We get to know your organisation and industry inside out, putting
-              ourselves in your shoes so we can give you smart recommendations
-              with a solid reason behind them.
+            <p className="text-gray-400 mb-6 text-body text-text-light dark:text-text-dark">
+              We dive deep into your brand, audience, and market — so every move
+              we make is backed by insight, not guesswork.
             </p>
             <Accordion showDivider={false}>
               <AccordionItem
                 key="1"
-                aria-label="Brand Development"
+                aria-label="Digital Marketing Strategy"
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors text-subheading"
@@ -134,17 +133,19 @@ const ServiceSection = () => {
                   />
                 }
                 subtitle={
-                  <span className="text-gray-400 text-sm">
+                  <span className="text-gray-400 text-sm ">
                     press to read more
                   </span>
                 }
                 title={
-                  <span className="hover:underline">Brand Development</span>
+                  <span className="hover:underline text-text-light dark:text-text-dark">
+                    Digital Marketing Strategy
+                  </span>
                 }
               >
-                <motion.div variants={accordionVariants}>
-                  {defaultContent} A detailed explanation of brand development,
-                  including market research and identity creation.
+                <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
+                  Make the right moves, in the right channels, at the right
+                  time.{" "}
                 </motion.div>
               </AccordionItem>
               <AccordionItem
@@ -169,23 +170,18 @@ const ServiceSection = () => {
                     src="/icons/strategy-marketing.svg"
                   />
                 }
-                subtitle={
-                  <span className="text-gray-400 text-sm">
-                    press to read more
-                  </span>
-                }
+                subtitle={<span className="text-gray-400 text-sm"></span>}
                 title={
-                  <span className="hover:underline">Digital Marketing</span>
+                  <span className="hover:underline text-text-light dark:text-text-dark">Content Strategy</span>
                 }
               >
-                <motion.div variants={accordionVariants}>
-                  {defaultContent} Covering SEO, social media, and content
-                  marketing strategies for online visibility.
+                <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
+                  Build a brand story people actually care about.
                 </motion.div>
               </AccordionItem>
               <AccordionItem
                 key="3"
-                aria-label="Content Strategy"
+                aria-label="Funnel Mapping"
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -202,21 +198,14 @@ const ServiceSection = () => {
                     isBordered
                     color="warning"
                     radius="lg"
-                    src="/icons/strategy-content.svg"
+                    src="/icons/arrow-turn-down-right.svg"
                   />
                 }
-                subtitle={
-                  <span className="text-gray-400 text-sm">
-                    press to read more
-                  </span>
-                }
-                title={
-                  <span className="hover:underline">Content Strategy</span>
-                }
+                subtitle={<span className="text-gray-400 text-sm"></span>}
+                title={<span className="hover:underline text-text-light dark:text-text-dark">Funnel Mapping</span>}
               >
-                <motion.div variants={accordionVariants}>
-                  {defaultContent} Planning and creation of engaging content
-                  tailored to your audience.
+                <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
+                  Design journeys that convert strangers into superfans.{" "}
                 </motion.div>
               </AccordionItem>
             </Accordion>
@@ -227,16 +216,15 @@ const ServiceSection = () => {
             className="w-full md:w-auto md:flex-1 p-4 md:p-0 text-white"
             variants={columnVariants}
           >
-            <h2 className="text-2xl font-semibold mb-4 text-heading">Design</h2>
-            <p className="text-gray-400 mb-6 text-body">
-              Great design should look great, work seamlessly, and communicate
-              clearly. Every element of your brand should feel connected, with
-              thoughtful, lasting choices.
+            <h2 className="text-2xl font-semibold mb-4 text-heading text-text-light dark:text-text-dark">Design</h2>
+            <p className="text-gray-400 mb-6 text-body text-text-light dark:text-text-dark">
+              We don’t just make things look good — we design with purpose,
+              personality, and performance in mind.
             </p>
             <Accordion showDivider={false}>
               <AccordionItem
                 key="4"
-                aria-label="Sustainable Web Design"
+                aria-label="Website Design"
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -257,24 +245,21 @@ const ServiceSection = () => {
                   />
                 }
                 subtitle={
-                  <span className="text-gray-400 text-sm">
+                  <span className="text-gray-400 text-sm text-text-light dark:text-text-dark">
                     press to read more
                   </span>
                 }
-                title={
-                  <span className="hover:underline">
-                    Sustainable Web Design
-                  </span>
-                }
+                title={<span className="hover:underline text-text-light dark:text-text-dark">Web Design</span>}
               >
-                <motion.div variants={accordionVariants}>
-                  {defaultContent} Crafting beautiful and efficient websites
-                  with a focus on longevity and eco-friendliness.
+                <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
+                  Beautiful, blazing-fast websites that work hard for your
+                  brand.
                 </motion.div>
-              </AccordionItem>
+              </AccordionItem> 
+              {/* Graphic Design Service */}
               <AccordionItem
                 key="5"
-                aria-label="UX/UI Design"
+                aria-label="Graphic Design "
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -296,19 +281,18 @@ const ServiceSection = () => {
                 }
                 subtitle={
                   <span className="text-gray-400 text-sm">
-                    press to read more
                   </span>
                 }
-                title={<span className="hover:underline">UX/UI Design</span>}
+                title={<span className="hover:underline text-text-light dark:text-text-dark">Graphic Design</span>}
               >
-                <motion.div variants={accordionVariants}>
-                  {defaultContent} Creating intuitive and engaging user
-                  experiences with visually appealing interfaces.
+                <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
+                  Scroll-stopping visuals that turn interest into clicks.
                 </motion.div>
               </AccordionItem>
+              {/* Brand Identity Design Service */}
               <AccordionItem
                 key="6"
-                aria-label="Copywriting"
+                aria-label="Brand Identity Design"
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -330,15 +314,12 @@ const ServiceSection = () => {
                 }
                 subtitle={
                   <span className="text-gray-400 text-sm">
-                    press to read more
                   </span>
                 }
-                title={<span className="hover:underline">Copywriting</span>}
+                title={<span className="hover:underline text-text-light dark:text-text-dark">Brand Identity Design</span>}
               >
-                <motion.div variants={accordionVariants}>
-                  {defaultContent} Crafting persuasive and clear content that
-                  resonates with your target audience and drives action.
-                </motion.div>
+                <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
+                  Brand Identity Design</motion.div>
               </AccordionItem>
             </Accordion>
           </motion.div>
@@ -348,22 +329,22 @@ const ServiceSection = () => {
             className="w-full md:w-auto md:flex-1 p-4 md:p-0 text-white"
             variants={columnVariants}
           >
-            <h2 className="text-2xl font-semibold mb-4 text-heading">
+            <h2 className="text-2xl font-semibold mb-4 text-heading text-text-light dark:text-text-dark">
               Execution
             </h2>
-            <p className="text-gray-400 mb-6 text-body">
-              A great website needs great design—just like a brand or strategy
-              needs smart, sustainable, and SEO-focused execution to create a
-              lasting impact and drive real results.
+            <p className="text-gray-400 mb-6 text-body text-text-light dark:text-text-dark">
+              This is where the magic happens. From ads to analytics, we bring
+              your strategy to life — and keep optimizing for results.
             </p>
             <Accordion showDivider={false}>
+
               <AccordionItem
                 key="7"
-                aria-label="Sustainable Web Development"
+                aria-label="Facebook & Instagram Ads"
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
-                    href="/services/sustainable-web-development"
+                    href="/services/facebook-ad"
                     rel="noopener noreferrer"
                     target="_blank"
                     onClick={(e) => e.stopPropagation()}
@@ -376,28 +357,26 @@ const ServiceSection = () => {
                     isBordered
                     color="primary"
                     radius="lg"
-                    src="/icons/execution-development.svg"
+                    src="/services/facebook-ad.svg"
                   />
                 }
                 subtitle={
                   <span className="text-gray-400 text-sm">
-                    press to read more
+                  press to read more 
                   </span>
                 }
                 title={
-                  <span className="hover:underline">
-                    Sustainable Web Development
+                  <span className="hover:underline text-text-light dark:text-text-dark">
+                    Facebook & Instagram Ads
                   </span>
                 }
               >
                 <motion.div variants={accordionVariants}>
-                  {defaultContent} Building robust and scalable web solutions
-                  with modern technologies and best practices.
-                </motion.div>
+                  Ride the wave of culture and reach Gen Z like never before. </motion.div>
               </AccordionItem>
               <AccordionItem
                 key="8"
-                aria-label="Search Engine Optimisation"
+                aria-label="TikTok Ads"
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
@@ -419,26 +398,20 @@ const ServiceSection = () => {
                 }
                 subtitle={
                   <span className="text-gray-400 text-sm">
-                    press to read more
+
                   </span>
                 }
-                title={
-                  <span className="hover:underline">
-                    Search Engine Optimisation
-                  </span>
-                }
+                title={<span className="hover:underline text-text-light dark:text-text-dark">TikTok Ads </span>}
               >
-                <motion.div variants={accordionVariants}>
-                  {defaultContent} Implementing strategies to improve your
-                  website&apos;s visibility and ranking on search engines.
-                </motion.div>
+                <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
+                  Ride the wave of culture and reach Gen Z like never before.</motion.div>
               </AccordionItem>
               <AccordionItem
                 key="9"
                 aria-label="Email Marketing"
                 indicator={
                   <Link
-                    className="text-pink-400 hover:text-pink-300 transition-colors"
+                    className=" hover:text-pink-300 transition-colors"
                     href="/services/email-marketing"
                     rel="noopener noreferrer"
                     target="_blank"
@@ -452,18 +425,14 @@ const ServiceSection = () => {
                     isBordered
                     color="warning"
                     radius="lg"
-                    src="/icons/execution-email.svg"
+                    src="http://www.w3.org/2000/svg"
                   />
                 }
-                subtitle={
-                  <span className="text-gray-400 text-sm">
-                    press to read more
-                  </span>
-                }
-                title={<span className="hover:underline">Email Marketing</span>}
+                subtitle={<span className="text-gray-400 text-sm text-text-light dark:text-text-dark"></span>}
+                title={<span className="hover:underline text-text-light dark:text-text-dark">Email Marketing</span>}
               >
-                <motion.div variants={accordionVariants}>
-                  {defaultContent} Designing and executing effective email
+                <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
+                 Designing and executing effective email
                   campaigns to engage your audience and drive conversions.
                 </motion.div>
               </AccordionItem>

@@ -62,7 +62,7 @@ export async function fetchFacebookadCasestudy(): Promise<CaseStudy[]> {
   try {
     // Fetch the data as an array of SanityDocument
     const fbposts = await client.fetch<SanityDocument[]>(fbCaseStudyQuery);
-    console.log("fetchFacebookadCasestudy raw data:", fbposts);
+    
 
     // Check if the result is an array and has data
     if (!Array.isArray(fbposts) || fbposts.length === 0) {

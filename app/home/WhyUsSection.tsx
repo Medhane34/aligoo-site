@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image"; // Import Next.js Image component
 import { motion } from "framer-motion";
+import { AccentText, SectionHeading } from "@/components/ui/typography";
 
 const headingVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -108,7 +109,7 @@ export default function WhyUsSection() {
         "No corporate ego. No confusing lingo. We partner like real people — collaborative, clear, responsive. We’ll treat your project like it’s our own.",
       gradient: "from-yellow-500 to-orange-700",
       span: "md:col-span-2 lg:col-span-2", // This card spans 2 columns on medium and large screens
-      backgroundImage: "/rocket-launcher.png", // Example path, update with your actual image paths in public/images
+      backgroundImage: "", // Example path, update with your actual image paths in public/images
       imageStyle: {
         // <-- NEW: Specific style for this image
         objectFit: "contain",
@@ -142,18 +143,23 @@ export default function WhyUsSection() {
           viewport={{ once: true }}
           whileInView="visible"
         >
-          <motion.h2
-            className="text-4xl sm:text-5xl font-extrabold tracking-tight text-white mb-4"
+          <motion.div
+            className="text-4xl sm:text-5xl font-extrabold tracking-tight text-text-light dark:text-text-dark mb-4"
             variants={headingVariants}
           >
-            What Makes Aligoo Different?
-          </motion.h2>
-          <motion.p
+            <SectionHeading className="text-heading uppercase">
+              Why Us{" "}
+            </SectionHeading>
+          </motion.div>
+          <motion.div
             className="text-lg sm:text-xl text-gray-300"
             variants={headingVariants}
           >
-            This isn’t your average digital agency. Here’s why.
-          </motion.p>
+            <AccentText className="normal-case">
+              {" "}
+              This isn’t your average digital agency. Here’s why.{" "}
+            </AccentText>
+          </motion.div>
         </motion.div>
 
         {/* Reasons Grid */}

@@ -11,13 +11,14 @@ export default function AboutPage() {
   return (
     <>
       <HeroSection
-        headlineText1="Build"
-        headlineText2="incredible"
-        headlineText3="apps with zero config."
-        subheading="Our platform empowers developers to launch and scale their ideas faster than ever before. Focus on code, we handle the rest."
-        primaryButtonText="Start Building"
+        headlineText1="We Build Brands "
+        headlineText2="that actually "
+        headlineText3="moves people."
+        subheading="We’re not just another agency. We’re your unfair advantage.
+Rooted in Addis Ababa, built for bold moves — we combine data, design, and digital firepower to grow brands that stand out and scale fast."
+        primaryButtonText="👉 Meet the Team"
         primaryButtonUrl="/dashboard"
-        secondaryButtonText="View Docs"
+        secondaryButtonText="📈 See Our Work"
         secondaryButtonUrl="/docs"
         badgeText="New v3.0 Released!" // Optional badge text
       />

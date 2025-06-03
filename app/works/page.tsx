@@ -8,15 +8,15 @@ export default function work() {
   return (
     <>
       <HeroSection 
-      headlineText1="Build"
-        headlineText2="incredible"
-        headlineText3="apps with zero config."
-        subheading="Our platform empowers developers to launch and scale their ideas faster than ever before. Focus on code, we handle the rest."
-        primaryButtonText="Start Building"
+      headlineText1="Bold Ideas,  "
+        headlineText2="Real Impact"
+        headlineText3="— Built From the Ground Up "
+        subheading="A spotlight on a project that pushed boundaries, delivered big results, and shows what happens when trust meets vision. Dive into the thinking, the process, and the wins."
+        primaryButtonText="🚀 Browse Projects"
         primaryButtonUrl="/dashboard"
-        secondaryButtonText="View Docs"
+        secondaryButtonText="📊 Contact Us"
         secondaryButtonUrl="/docs"
-        badgeText="New v3.0 Released!" // Optional badge text
+        badgeText="Our Work!" // Optional badge text
       />
       <FetchCaseStudiesWrapper />
       <WorkSectionWrapper />
