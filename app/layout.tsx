@@ -9,14 +9,7 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
-import Footer from "@/components/Footer"; // Corrected import path
-
-import { VisualEditing } from "next-sanity";
-import { draftMode } from "next/headers";
-import { DisableDraftMode } from "@/components/DisableDraftMode";
-
-import { SanityLive } from "@/src/sanity/live";
-
+import Footer  from '@/components/Footer'; // Corrected import path
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -53,6 +46,10 @@ export default async function RootLayout({
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <main className="pt-16 flex-grow">
+              <ClientOnly>
+              <CustomCursor/>
+              </ClientOnly>
+             
               {children}
               <SanityLive />
               {(await draftMode()).isEnabled && (

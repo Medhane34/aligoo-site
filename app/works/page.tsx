@@ -17,7 +17,7 @@ We build smart websites, run killer ad campaigns, and craft content that actuall
         primaryButtonUrl="/dashboard"
         secondaryButtonText="📊 Explore Our Services"
         secondaryButtonUrl="/docs"
-        badgeText="New v3.0 Released!" // Optional badge text
+        badgeText="Our Work!" // Optional badge text
       />
       <FetchCaseStudiesWrapper />
       <WorkSectionWrapper />

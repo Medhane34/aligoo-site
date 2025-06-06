@@ -15,8 +15,7 @@ const BlogPost = ({ post }: { post: BlogPostType }) => (
   <div
     className="w-64 md:w-96 rounded-lg shadow-md overflow-hidden flex flex-col  flex-shrink-0 
 
-bg-background-light dark:bg-background-dark"
-  >
+bg-background-light dark:bg-background-dark">
     {post.imageUrl && (
       <Image
         isZoomed
@@ -66,16 +65,6 @@ export default function BlogSectionClient({
 
   return (
     <div className="">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={textVariants}
-      >
-        <SectionHeading className="text-heading uppercase">
-          Client Love{" "}
-        </SectionHeading>
-      </motion.div>
       <div className="flex justify-between items-center mb-8 ">
         <motion.div
           className="text-heading pb-2 xs:pb-3 sm:pb-4"
