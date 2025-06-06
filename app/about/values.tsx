@@ -8,6 +8,13 @@ import {
   UserGroupIcon,
 } from "@heroicons/react/24/outline"; // Example icons from Heroicons
 import { motion } from "framer-motion";
+
+import {
+  AccentText,
+  SectionHeading,
+  Paragraph,
+} from "@/components/ui/typography";
+
 const headingContainerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -45,11 +52,11 @@ const cardVariants = {
   },
 };
 
-const values = () => {
+const Values = () => {
   return (
     <div className="py-16 bg-background-light dark:bg-background-dark">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* First Row */}
           <motion.div
             className="row-span-1"
@@ -58,30 +65,24 @@ const values = () => {
             viewport={{ once: true }}
             whileInView="visible"
           >
-            <motion.h2
-              className="text-heading font-bold text-text-light dark:text-text-dark mb-4"
+            <motion.div
+              className="font-bold text-text-light dark:text-text-dark mb-4"
               variants={headingItemVariants}
             >
-              High-impact services
-            </motion.h2>
-            <motion.p
+              <SectionHeading className="text-heading">WHAT WE STAND FOR</SectionHeading>
+              
+            </motion.div>
+            <motion.div
               className="text-gray-600 text-body mb-6"
               variants={headingItemVariants}
             >
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-              sit amet eros vel ipsum elementum.
-            </motion.p>
+              <AccentText className="normal-case">Our Work Is Rooted in Purpose, Not Hype</AccentText>
+            </motion.div>
             <motion.button
-              className="nline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white
-
- bg-gradient-to-r from-brand-primary-light to-brand-primary-dark // <-- NEW: Gradient using custom colors
-
- hover:from-brand-primary-dark hover:to-brand-primary-darker // <-- NEW: Hover state using custom colors
-
- shadow-lg transition-all duration-300"
+              className="w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full"
               variants={headingItemVariants}
             >
-              Get in touch
+              🤳 Get in touch
             </motion.button>
           </motion.div>
 
@@ -94,12 +95,13 @@ const values = () => {
             whileInView="visible"
           >
             <div>
-              <CpuChipIcon className="h-8 w-8 text-blue-500 mb-2" />
+
               <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                Project management
+                💡 Clarity Over Clutter
               </h3>
               <p className="text-gray-600 text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                We say what we mean — no fluff, no jargon. Our communication
+                stays simple, honest, and clear at every step.
               </p>
             </div>
           </motion.div>
@@ -113,12 +115,13 @@ const values = () => {
             whileInView="visible"
           >
             <div>
-              <LightBulbIcon className="h-8 w-8 text-orange-500 mb-2" />
+
               <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                Process development
+                🎯 Strategy First, Always
               </h3>
               <p className="text-gray-600 text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Before we design, we dig deep. Smart strategy leads the way so
+                your brand gets real, lasting results.
               </p>
             </div>
           </motion.div>
@@ -132,12 +135,14 @@ const values = () => {
             whileInView="visible"
           >
             <div>
-              <Cog6ToothIcon className="h-8 w-8 text-purple-500 mb-2" />
+
               <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                Operations & delegations
+                🤝 People Before Pixels
               </h3>
               <p className="text-gray-600 text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                We’re not just in the business of marketing — we’re in the
+                business of people. Empathy drives our process, and your goals
+                guide our decisions.
               </p>
             </div>
           </motion.div>
@@ -151,12 +156,13 @@ const values = () => {
             whileInView="visible"
           >
             <div>
-              <UserGroupIcon className="h-8 w-8 text-white-500 mb-2" />
+
               <h3 className="font-semibold text-lg text-white-900 mb-2">
-                Human resources
+                ✨ Details Make the Magic
               </h3>
               <p className="text-white-600 text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                We obsess over the small things that others overlook. From
+                pixels to punctuation, excellence lives in the details.
               </p>
             </div>
           </motion.div>
@@ -170,12 +176,13 @@ const values = () => {
             whileInView="visible"
           >
             <div>
-              <CheckCircleIcon className="h-8 w-8 text-green-500 mb-2" />
+              
               <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                Quality assurance
+                🚀 Progress, Not Perfection
               </h3>
               <p className="text-gray-600 text-sm">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                We move fast, learn faster, and optimize everything. Growth is
+                our compass — and momentum is the mission.
               </p>
             </div>
           </motion.div>
@@ -185,4 +192,4 @@ const values = () => {
   );
 };
 
-export default values;
+export default Values;

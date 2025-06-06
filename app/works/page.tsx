@@ -8,13 +8,14 @@ export default function work() {
   return (
     <>
       <HeroSection 
-      headlineText1="Build"
-        headlineText2="incredible"
-        headlineText3="apps with zero config."
-        subheading="Our platform empowers developers to launch and scale their ideas faster than ever before. Focus on code, we handle the rest."
-        primaryButtonText="Start Building"
+      headlineText1="Digital marketing that "
+        headlineText2="delivers"
+        headlineText3="clarity, clicks, and conversions."
+        subheading="Aligoo is a full-service digital marketing agency based in Addis Ababa.
+We build smart websites, run killer ad campaigns, and craft content that actually gets people to act."
+        primaryButtonText="🚀 Start Your Project"
         primaryButtonUrl="/dashboard"
-        secondaryButtonText="View Docs"
+        secondaryButtonText="📊 Explore Our Services"
         secondaryButtonUrl="/docs"
         badgeText="New v3.0 Released!" // Optional badge text
       />

@@ -7,21 +7,21 @@ import { motion } from "framer-motion";
 const OurWayPoints = [
   {
     number: "01",
-    heading: "Add your first product",
+    heading: "Revenue-focused, meaningful KPIs",
     description:
-      "Effortlessly list your initial offerings with intuitive tools and guided setup.",
+      "This isn’t guesswork. It’s craftsmanship.Rooted in data. Driven by obsession. Delivered with heart.",
   },
   {
     number: "02",
-    heading: "Customize your store",
+    heading: "Custom-built, brand-first strategies",
     description:
-      "Tailor your online presence to reflect your brand's unique style and identity.",
+      "So we get close. We ask weird questions. We test what actually works. And then? We bring it to life with bold design and conversion-first strategy",
   },
   {
     number: "03",
-    heading: "Set up payments",
+    heading: "Radical clarity & human communication",
     description:
-      "Integrate secure and diverse payment options to ensure smooth transactions.",
+      "Radical clarity & human communication",
   },
   // Add more points as needed for "Our Way"
 ];
@@ -171,7 +171,9 @@ const AligooMarketingFix = () => {
                   <p className="mt-4 font-semibold text-subheading">
                     Jessica Wise
                     <br />
-                    <span className="text-small opacity-75">CEO, Hell Babes</span>
+                    <span className="text-small opacity-75">
+                      CEO, Hell Babes
+                    </span>
                   </p>
                 </motion.div>
               </motion.div>
@@ -185,15 +187,14 @@ const AligooMarketingFix = () => {
                   className="text-4xl font-bold text-text-light dark:text-text-dark text-heading"
                   variants={problemRightVariants}
                 >
-                  Aligoo has your back
+                  The Real Talk: What’s Broken
                 </motion.h2>
                 <motion.p
                   className="text-gray-600 dark:text-gray-400 text-body"
                   variants={problemRightVariants}
                 >
-                  Whether you need help dialing in your offer, ramping up
-                  performance creatives, or scaling ad spend efficiently—our
-                  team is built to deliver outcomes.
+                  Most businesses don’t need another strategy doc. Or a pretty
+                  logo. They need results — and people who actually care.
                 </motion.p>
                 <motion.div
                   className="space-y-4"
@@ -201,27 +202,27 @@ const AligooMarketingFix = () => {
                 >
                   <motion.div variants={problemRightVariants}>
                     <h3 className="text-2xl font-semibold text-brand-primary">
-                      $3M+
+                      📉 Big promises, small follow-through
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Revenue driven for clients
-                    </p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
                   </motion.div>
                   <motion.div variants={problemRightVariants}>
                     <h3 className="text-2xl font-semibold text-brand-primary">
-                      200%+
+                      🥱 Copy-paste strategies
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      Average return on ad spend
-                    </p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
                   </motion.div>
                   <motion.div variants={problemRightVariants}>
                     <h3 className="text-2xl font-semibold text-brand-primary">
-                      0% B.S.
+                      💸 Agencies more obsessed with awards than impact
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      We care about results, not vanity
-                    </p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
+                  </motion.div>
+                  <motion.div variants={problemRightVariants}>
+                    <h3 className="text-2xl font-semibold text-brand-primary">
+                     ⛔️ 0% B.S.
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
                   </motion.div>
                 </motion.div>
               </motion.div>

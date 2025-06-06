@@ -1,8 +1,11 @@
-'use client'
+"use client";
 // components/sections/FaqSection.tsx
 import React from "react";
-import AccordionItem from "./AccordionItem";
 import { motion } from "framer-motion";
+
+import AccordionItem from "./AccordionItem";
+
+import { SectionHeading, AccentText } from "@/components/ui/typography";
 
 const leftColumnVariants = {
   hidden: { opacity: 0 },
@@ -45,31 +48,25 @@ const faqItemVariants = {
 export default function FaqSection() {
   const faqs = [
     {
-      question: "What is Analytics & Reporting?",
+      question: "❓ How soon can I expect results?",
       answer:
-        "Analytics and reporting in digital marketing involve the collection, measurement, analysis, and interpretation of data from various digital sources, such as websites, social media, and online advertisements. This process helps businesses understand how users interact with their digital content. The insights gained from this analysis are compiled into reports, providing businesses with valuable information on the performance of their marketing campaigns, website functionality, user engagement, and overall return on investment (ROI). These reports guide strategic decisions, helping optimize marketing efforts and improve business outcomes.",
+        "💬 It depends on your offer, audience, and budget — but most campaigns see traction within 1–2 weeks. That said, we usually run tests for 2–4 weeks before scaling to ensure we're making smart decisions based on real data.",
     },
     {
       question:
-        "What is the importance of analytics and reporting in digital marketing?",
+        "❓ Will you handle everything or do I need to prepare anything?",
       answer:
-        "Analytics and reporting are crucial for several reasons: they provide actionable insights into campaign performance, identify areas for improvement, optimize resource allocation, help understand customer behavior, and ultimately drive better business outcomes and ROI. Without them, marketing efforts are largely based on guesswork.",
+        "💬 We handle the strategy, targeting, ad creation, and performance tracking. All we need from you is a strong offer, some input on your ideal customer, and access to your page/ad account. We make the rest easy.",
     },
     {
-      question: "What types of analytics services do you offer?",
+      question: "❓ Do you also create the visuals and copy?",
       answer:
-        "We offer a comprehensive suite of analytics services, including website analytics setup and monitoring (Google Analytics 4), SEO performance tracking, social media insights, campaign performance analysis, custom dashboard creation, and in-depth reporting tailored to your business objectives. We also provide competitive analysis and market research.",
+        "💬 Yes — we craft ad copy, design creatives, and even edit short-form video ads if needed. Everything is tested for performance, not just pretty looks.",
     },
     {
-      question: "How often will we receive reports?",
+      question: "❓ What if the ads don’t work?",
       answer:
-        "Our reporting frequency is customizable to best suit your needs. We typically provide weekly, bi-weekly, or monthly performance reports, complete with actionable insights and recommendations. For critical campaigns or initial launch phases, daily insights can also be arranged.",
-    },
-    {
-      question:
-        "What is the process for setting up analytics for a new client?",
-      answer:
-        "Our process begins with a detailed discovery call to understand your business goals and existing data infrastructure. We then proceed with technical setup and configuration of tracking tools (e.g., GA4 implementation), data validation, dashboard creation, and an initial reporting and strategy session to ensure you're fully empowered with your data from day one.",
+        "💬 No agency can guarantee sales — but we guarantee action. If a campaign isn’t converting, we’ll dig in, pivot, and test new angles. Our focus is on continuous improvement, not cookie-cutter solutions.",
     },
   ];
 
@@ -80,55 +77,52 @@ export default function FaqSection() {
         <motion.div
           className="lg:pr-8"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
           variants={leftColumnVariants}
+          viewport={{ once: true }}
+          whileInView="visible"
         >
-          <motion.p
-            className="text-sm font-semibold uppercase tracking-wider text-purple-400 mb-2"
+          <motion.div
+            className="text-sm font-semibold uppercase tracking-wider mb-2"
             variants={leftItemVariants}
           >
-            Common Questions
-          </motion.p>
-          <motion.h2
+            <SectionHeading className="text-heading uppercase">
+              ❓You’ve Got Questions{" "}
+            </SectionHeading>
+          </motion.div>
+          <motion.div
             className="text-heading sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6"
             variants={leftItemVariants}
           >
-            Analytics & Reporting FAQs: <br /> Understanding the Essentials
-          </motion.h2>
+            <AccentText className="normal-case">
+              {" "}
+              Let’s Clear Things Up
+            </AccentText>
+          </motion.div>
           <motion.p
-            className="text-body sm:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+            className="xl:text-body sm:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
             variants={leftItemVariants}
           >
-            Unlock the power of data with our Analytics & Insights services.
-            This FAQ section provides insights into how we transform raw data
-            into actionable intelligence, helping you understand customer
-            behavior, optimize marketing strategies, and drive business growth.
-            Learn how our expertise in data analysis and customized reporting
-            can empower your decision-making processes.
+            No fluff, no vague answers. Just honest responses to the most common questions we get about Facebook Ads and working with us.
           </motion.p>
           <motion.button
-            className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker shadow-lg transition-all duration-300"
+            className="w-[263px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full"
             variants={leftItemVariants}
           >
-            GET STARTED WITH ANALYTICS
+            👉 GOT MORE QUESTIONS ASK 
           </motion.button>
         </motion.div>
 
         {/* Right Column - FAQ Accordions */}
         <motion.div
-          className="space-y-4"
+          className="space-y-4 "
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
           variants={rightColumnVariants}
+          viewport={{ once: true }}
+          whileInView="visible"
         >
           {faqs.map((faq, index) => (
             <motion.div key={index} variants={faqItemVariants}>
-              <AccordionItem
-                question={faq.question}
-                answer={faq.answer}
-              />
+              <AccordionItem answer={faq.answer} question={faq.question} />
             </motion.div>
           ))}
         </motion.div>

@@ -2,10 +2,13 @@ import { PortableText, type SanityDocument } from "next-sanity";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { client } from "@/src/sanity/client";
-import {ScrollShadow} from "@heroui/scroll-shadow";
+import { ScrollShadow } from "@heroui/scroll-shadow";
 import Link from "next/link";
-import {Image} from "@heroui/image";
+import { Image } from "@heroui/image";
 
+import { defineQuery } from "next-sanity";
+import { draftMode } from "next/headers";
+import { sanityFetch } from "@/src/sanity/live";
 
 const POST_QUERY = `*[_type == "post" && slug.current == $slug][0]`;
 
@@ -22,10 +25,19 @@ export default async function PostPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const post = await client.fetch<SanityDocument>(POST_QUERY, await params, options);
+  const post = await client.fetch<SanityDocument>(
+    POST_QUERY,
+    await params,
+    options,
+  );
   const postImageUrl = post.image
     ? urlFor(post.image)?.width(550).height(310).url()
     : null;
+
+  const { data } = await sanityFetch({
+    query: POST_QUERY,
+    params,
+  });
 
   return (
     <main className="container mx-auto min-h-screen max-w-3xl p-8 flex flex-col gap-4">
@@ -46,7 +58,7 @@ export default async function PostPage({
       <div className="prose">
         <p>Published: {new Date(post.publishedAt).toLocaleDateString()}</p>
         <ScrollShadow hideScrollBar className="w-[900px] h-[900px]" size={100}>
-        {Array.isArray(post.body) && <PortableText value={post.body} />}
+          {Array.isArray(post.body) && <PortableText value={post.body} />}
         </ScrollShadow>
       </div>
     </main>

@@ -77,7 +77,7 @@ export default function FeaturedFbWorkSection({ fbcasestudyPosts }: FetchFbCaseP
   return (
     <section
       ref={sectionRef}
-      className="px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12 text-center bg-background-light dark:bg-background-dark"
+      className="px-4 py-8 sm:px-6 sm:py-10 md:px-8 md:py-12 text-center bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark"
     >
       <motion.div
         animate={isInView ? "visible" : "hidden"}
@@ -86,11 +86,11 @@ export default function FeaturedFbWorkSection({ fbcasestudyPosts }: FetchFbCaseP
         variants={headerVariants}
       >
         <motion.div variants={headerChildVariants}>
-          <SectionHeading className="text-heading">Our Work</SectionHeading>
+          <SectionHeading className="text-heading uppercase">Real Campaigns. Real Wins.</SectionHeading>
         </motion.div>
         <motion.div variants={headerChildVariants}>
-          <AccentText className="text-subheading">
-            Featured Facebook Case Studies
+          <AccentText className="text-subheading normal-case">
+            See How We’ve Turned Scrolls Into Sales
           </AccentText>
         </motion.div>
       </motion.div>
@@ -110,10 +110,10 @@ export default function FeaturedFbWorkSection({ fbcasestudyPosts }: FetchFbCaseP
           >
             <Card className="h-full outline-2 outline-offset-2 outline-blue-500">
               <CardHeader className="absolute z-10 top-1 flex-col !items-start">
-                <p className="text-tiny text-white/60 uppercase font-bold">
+                <p className="text-small text-white/60 uppercase font-bold bg-brand-primary rounded-full p-1">
                   {post.service || "Service"}
                 </p>
-                <h4 className="text-white font-medium text-large">
+                <h4 className="text-white font-medium text-large text-left text-heading">
                   {post.title}
                 </h4>
               </CardHeader>

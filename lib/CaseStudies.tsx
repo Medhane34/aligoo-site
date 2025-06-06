@@ -5,7 +5,9 @@ import {
   caseStudiesQuery,
   fbCaseStudyQuery,
   featuredCaseStudyQuery,
-  HomeCaseStudyQuery
+  getTotalCaseStudiesCountQuery,
+  HomeCaseStudyQuery,
+  
 } from "@/sanity/queries/caseStudies";
 
 type CaseStudy = {
@@ -18,9 +20,13 @@ type CaseStudy = {
   slug: string;
 };
 
-export async function fetchCaseStudies(): Promise<CaseStudy[]> {
+export async function fetchCaseStudies(
+  limit: number,
+  offset: number
+): Promise<CaseStudy[]> {
   try {
-    const rawData = await client.fetch<SanityDocument[]>(caseStudiesQuery);
+    const query = caseStudiesQuery(offset, offset + limit); // Calculate start and end based on limit and offset
+    const rawData = await client.fetch<SanityDocument[]>(query);
 
     return rawData.map((post) => ({
       _id: post._id,
@@ -30,10 +36,22 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
       slug: post.slug,
       hasImage: post.hasImage || false,
       hasService: post.hasService || false,
+      stats: post.stats || null, // Ensure stats is handled if it's part of your schema
     }));
   } catch (error) {
-    console.error("Error fetching case studies:", error);
+    console.error("Error fetching paginated case studies:", error);
     return [];
+  }
+}
+
+// New function to fetch the total count
+export async function fetchTotalCaseStudiesCount(): Promise<number> {
+  try {
+    const count = await client.fetch<number>(getTotalCaseStudiesCountQuery);
+    return count;
+  } catch (error) {
+    console.error("Error fetching total case studies count:", error);
+    return 0; // Return 0 if there's an error
   }
 }
 
@@ -62,7 +80,7 @@ export async function fetchFacebookadCasestudy(): Promise<CaseStudy[]> {
   try {
     // Fetch the data as an array of SanityDocument
     const fbposts = await client.fetch<SanityDocument[]>(fbCaseStudyQuery);
-    console.log("fetchFacebookadCasestudy raw data:", fbposts);
+    
 
     // Check if the result is an array and has data
     if (!Array.isArray(fbposts) || fbposts.length === 0) {
@@ -88,7 +106,7 @@ export async function fetchFacebookadCasestudy(): Promise<CaseStudy[]> {
 
 export async function fetchHomeCaseStudies(): Promise<CaseStudy[]> {
   try {
-    const homeworks = await client.fetch<SanityDocument[]>(caseStudiesQuery);
+    const homeworks = await client.fetch<SanityDocument[]>(HomeCaseStudyQuery);
 
     return homeworks.map((post) => ({
       _id: post._id,

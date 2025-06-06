@@ -63,6 +63,10 @@ const config = {
         },
       },
     },
+    dropShadow: {
+  brand: '0 4px 8px rgba(255, 89, 94, 0.4)', // subtle glow with brand color
+  'brand-hover': '0 6px 12px rgba(255, 89, 94, 0.5)', // stronger on hover
+},
     screens: {
         'xs': '480px',
         'sm': '640px',

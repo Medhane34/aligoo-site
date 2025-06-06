@@ -2,8 +2,8 @@
 // GROQ queries for case studies
 
 // Fetch up to 6 case studies, sorted by creation date
-export const caseStudiesQuery = `
-  *[_type == "caseStudy"] | order(_createdAt desc)[0...6] {
+export const caseStudiesQuery = (start: number, end: number) => `
+  *[_type == "caseStudy"] | order(_createdAt desc)[${start}...${end}] {
     _id,
     title,
     "imageUrl": mainImage.asset->url,
@@ -12,6 +12,12 @@ export const caseStudiesQuery = `
     "hasImage": defined(mainImage),
     "hasService": defined(service)
   }
+`;
+
+// Additionally, we need a query to get the total count of case studies
+// This is crucial for calculating the total number of pages in the frontend.
+export const getTotalCaseStudiesCountQuery = `
+  count(*[_type == "caseStudy"])
 `;
 
 // Fetch a single featured case study

@@ -76,7 +76,7 @@ const WhyFacebookAdsWork = () => {
       >
         {/* First Column */}
         <motion.div className="md:w-2/5 text body" variants={textVariants}>
-          <p>
+          <p className="text-body">
             Many believe Facebook Ads are outdated. We disagree. When executed
             strategically, they remain a powerful tool for reaching your
             audience and driving real results.

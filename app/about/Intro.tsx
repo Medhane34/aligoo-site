@@ -90,9 +90,8 @@ const Intro = () => {
             className="text-heading font-bold leading-tight"
             variants={headingVariants}
           >
-            Empowering Growth <br />
-            Through Thoughtful <br />
-            Design & Development
+            Empowering Brands with Design, <br />
+            Data & a Dash of Rebellion <br />
           </motion.h2>
         </motion.div>
 
@@ -102,11 +101,12 @@ const Intro = () => {
           variants={rightColumnContainerVariants}
         >
           <motion.p className="text-lg mb-6" variants={rightColumnVariants}>
-            At Agnikii Digital, we craft{" "}
-            <span className="font-semibold text-pink-500">sustainable</span>{" "}
-            websites that spark innovation and create lasting impact. Trusted by
-            industry leaders and visionaries, we transform ideas into
-            extraordinary digital experiences.
+            At Aligoo, we don’t just build websites or run ads - we build{" "}
+            <span className="font-semibold text-brand-primary">momentum</span>{" "}
+            We fuse thoughtful strategy with scroll-stopping design to craft
+            digital experiences that move people — and move the needle. From
+            startups to industry leaders, brands trust us to turn ambitious
+            ideas into measurable outcomes.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-12"
@@ -114,41 +114,39 @@ const Intro = () => {
           >
             <div>
               <h3 className="font-semibold text-sm uppercase tracking-wider mb-1 text-gray-900 dark:text-gray-100">
-                Founded
+                📍 Founded
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Your Founding Year
+                Since 2020, born and built in Addis Ababa.
               </p>
             </div>
             <div>
               <h3 className="font-semibold text-sm uppercase tracking-wider mb-1 text-gray-900 dark:text-gray-100">
-                Industry
+                🧭 Focus
               </h3>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Your Industry Focus
+                Digital Growth for service businesses & challenger brands.
               </p>
             </div>
             <div className="relative">
-              <div className="absolute -top-3 left-0 text-pink-500 text-4xl">
-                +
-              </div>
+              <div className="absolute -top-3 left-0 text-pink-500 text-4xl"></div>
               <div className="ml-6">
                 <h3 className="font-semibold text-sm uppercase tracking-wider mb-1 text-gray-900 dark:text-gray-100">
-                  Campaigns <br />
-                  Launched
+                  🚀 Campaigns Launched
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  Your Campaigns Count
+                  150+ ads, funnels, and websites that actually convert.
                 </p>
               </div>
             </div>
           </motion.div>
           <motion.div className="mt-6" variants={rightColumnVariants}>
             <h3 className="font-semibold text-sm uppercase tracking-wider mb-1 text-gray-900 dark:text-gray-100">
-              Recognitions
+              💡 Moments We&apos;re Proud Of
             </h3>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              Your Notable Recognitions
+              Featured by local startups, celebrated by happy clients, and known
+              for turning chaos into clarity.{" "}
             </p>
           </motion.div>
         </motion.div>
@@ -173,7 +171,7 @@ const Intro = () => {
           <div
             aria-hidden="true"
             className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-400/30 to-purple-600/30 opacity-10 z-0" // Lowered opacity to 0.1, adjusted gradient with /30 for transparency, z-0 to stay below video
-           />
+          />
         </div>
       </motion.div>
     </div>
