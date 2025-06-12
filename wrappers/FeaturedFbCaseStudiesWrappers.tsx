@@ -1,33 +1,19 @@
-// wrappers/FeaturedFbCaseStudiesWrappers.tsx
+// wrappers/FeaturedPostsWrapper.tsx
 import { fetchFacebookadCasestudy } from "@/lib/CaseStudies";
-import FeaturedFbWorkSection from "@/app/services/facebook-ad/FeaturedPosts";
+import FeaturedPostsSection from "@/components/service-sections/FeaturedPosts";
 
-type CaseStudy = {
-  _id: string;
-  title: string;
-  imageUrl: string;
-  service: string;
-  hasImage: boolean;
-  hasService: boolean;
-  slug: string;
-};
+export default async function FeaturedFbPostsWrapper() {
+  const posts = await fetchFacebookadCasestudy();
 
-type FetchFbCaseProps = {
-  fbcasestudyPosts: CaseStudy[];
-};
-
-export default async function FeaturedFbCaseStudiesWrappers() {
-  // Log the raw result of the fetch
-  const fetchResult = await fetchFacebookadCasestudy();
-
-  // Assign to fbcasestudyPosts and log immediately
-  const fbcasestudyPosts = fetchResult;
-
-  // Log the type and length checks explicitly
-
-  if (!Array.isArray(fbcasestudyPosts) || fbcasestudyPosts.length === 0) {
-    return <div>No case study available.</div>;
+  if (!Array.isArray(posts) || posts.length === 0) {
+    return <div>No featured posts available.</div>;
   }
 
-  return <FeaturedFbWorkSection fbcasestudyPosts={fbcasestudyPosts} />;
+  return (
+    <FeaturedPostsSection
+      posts={posts}
+      heading="Real Campaigns. Real Wins."
+      subheading="See How We’ve Turned Scrolls Into Sales"
+    />
+  );
 }

@@ -12,7 +12,7 @@ import CaseStudyResults from "../CaseStudyResults";
 import CaseStudyTestimonial from "../CaseStudyTestimonial";
 import CaseStudyPagination from "../CaseStudyPagination";
 import CaseStudyOverview from "../OverviewSection";
-import HeroSection from "@/app/home/HeroSection";
+import HeroSection from "../HeroSection";
 // Adjust the import path as necessary
 import {
   fetchCaseStudyCoreDataBySlug,
@@ -64,12 +64,21 @@ export default async function CaseStudyDetails({ params }: Props) {
 
   return (
     <>
+      <HeroSection
+        headlineText1= {coreData.title}
+        headlineText2=" "
+        headlineText3 =" "
+        excerpt={coreData.excerpt}
+        primaryButtonText="hello"
+        primaryButtonUrl="hello"
+        secondaryButtonText= "Learn More"
+        secondaryButtonUrl="url"
+      />
       <ScrollProgress />
       {/* HeroSection: If this is part of OverviewSection, remove it. If it's a standalone
           component that takes specific props (like an image from coreData), pass them.
           For now, I'm commenting it out as it's often integrated into the main overview component. */}
       {/* <HeroSection /> */}
-      
 
       {/* Overview Section */}
       {overviewData && (
@@ -78,7 +87,7 @@ export default async function CaseStudyDetails({ params }: Props) {
           heroImageAlt={overviewData.heroImageAlt}
           heroImageUrl={overviewData.heroImageUrl}
           overviewDescription={overviewData.overviewDescription}
-          title={coreData.title}
+          overviewTitle={overviewData.overviewTitle}
         />
       )}
 
@@ -116,14 +125,12 @@ export default async function CaseStudyDetails({ params }: Props) {
       {testimonialData && (
         <CaseStudyTestimonial
           testimonialData={testimonialData} // <-- NEW: Pass the fetched testimonialData here
-        />
+          rating={testimonialData.rating}        />
       )}
       {/* Pagination Section */}
       {/* Render CaseStudyPagination only if fetchedPaginationData is available */}
       {fetchedPaginationData && (
-        <CaseStudyPagination 
-          paginationData={fetchedPaginationData}
-        />
+        <CaseStudyPagination paginationData={fetchedPaginationData} />
       )}
     </>
   );

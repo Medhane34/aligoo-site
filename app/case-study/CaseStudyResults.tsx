@@ -60,10 +60,10 @@ export default function CaseStudyResults({ resultsData }: CaseStudyResultsProps)
 
           {/* Left Column: Main Narrative */}
           <div>
-            <AccentText className="text-left md:text-left">The Outcome</AccentText> {/* Hardcoded as per schema */}
-            <SectionHeading className="text-heading md:text-4xl font-bold tracking-tight mt-2 text-left md:text-left">
+            <SectionHeading className="text-heading md:text-4xl font-bold tracking-tight mt-2 text-left md:text-left uppercase">
               {resultsHeading}
             </SectionHeading>
+            <AccentText className="text-left md:text-left normal-case">The Outcome</AccentText> {/* Hardcoded as per schema */}
             <p className="text-body md:text-xl mt-6 leading-relaxed text-left md:text-left">
               {resultsBody}
             </p>

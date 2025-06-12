@@ -31,14 +31,14 @@ export default function CaseStudyGoals({
       {/* Added a light background for distinction */}
       <div className="max-w-3xl mx-auto">
         {/* Accent Text (using a default if no prop is passed) */}
-        <AccentText className="text-center">
-          {defaultAccentText} {/* Using the default text here */}
-        </AccentText>
 
         {/* Heading */}
-        <SectionHeading className="text-heading md:text-4xl font-bold tracking-tight">
+        <SectionHeading className="text-heading md:text-4xl font-bold tracking-tight uppercase">
           {goalTitle}
         </SectionHeading>
+        <AccentText className="text-center normal-case">
+          {defaultAccentText} {/* Using the default text here */}
+        </AccentText>
 
         {/* Body Text */}
         <p className="text-body mt-6 leading-relaxed">{goalBody}</p>

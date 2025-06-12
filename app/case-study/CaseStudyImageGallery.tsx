@@ -42,12 +42,12 @@ export default function CaseStudyImageGallery({ imageGalleryData }: CaseStudyIma
         {/* Section Header */}
         <div
           className="lg:space-y-2 xs:space-y-6 sm:space-y-10 md:space-y-12 
-        
         mb-12 text-center">
-          <AccentText>Visual Story</AccentText> {/* This could also be dynamic if added to Sanity */}
-          <SectionHeading className="text-heading xs:text-heading font-bold tracking-tight">
+          <SectionHeading className="text-heading font-bold tracking-tight uppercase">
             {galleryHeading}
           </SectionHeading>
+          <AccentText className="normal-case">Visual Story</AccentText>{" "}
+          {/* This could also be dynamic if added to Sanity */}
           {galleryDescription && ( // Only render if description exists
             <p className="max-w-3xl mx-auto text-subheading xs:text-sub-heading mt-4">
               {galleryDescription}

@@ -7,9 +7,10 @@ import StatsSection from "./home/StatsSection";
 import WorkSection from "./home/WorkSection";
 import ProcessSection from "./home/ProcessSection";
 import ServiceSection from "./home/ServiceSection";
-import BlogSectionClient from "./home/BlogSectionClient";
+
 import BlogSection from "./home/blogSection";
 import WhyUsSection from "./home/WhyUsSection";
+
 import CTABottomSection from "@/components/CTA";
 import HomeCaseStudyWrapper from "@/wrappers/HomeCaseStudyWrapper";
 

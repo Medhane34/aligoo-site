@@ -7,18 +7,12 @@ import {
   featuredCaseStudyQuery,
   getTotalCaseStudiesCountQuery,
   HomeCaseStudyQuery,
+  wbCaseStudyQuery
   
 } from "@/sanity/queries/caseStudies";
 
-type CaseStudy = {
-  _id: string;
-  title: string;
-  imageUrl: string;
-  service: string;
-  hasImage: boolean;
-  hasService: boolean;
-  slug: string;
-};
+import { CaseStudy } from "@/types/CaseStudyTypes";
+
 
 export async function fetchCaseStudies(
   limit: number,
@@ -40,6 +34,7 @@ export async function fetchCaseStudies(
     }));
   } catch (error) {
     console.error("Error fetching paginated case studies:", error);
+
     return [];
   }
 }
@@ -48,13 +43,16 @@ export async function fetchCaseStudies(
 export async function fetchTotalCaseStudiesCount(): Promise<number> {
   try {
     const count = await client.fetch<number>(getTotalCaseStudiesCountQuery);
+
     return count;
   } catch (error) {
     console.error("Error fetching total case studies count:", error);
+
     return 0; // Return 0 if there's an error
   }
 }
 
+//fetchesFeatured Case Study 
 export async function fetchFeaturedCaseStudy(): Promise<CaseStudy | null> {
   try {
     const post = await client.fetch<SanityDocument>(featuredCaseStudyQuery);
@@ -72,10 +70,11 @@ export async function fetchFeaturedCaseStudy(): Promise<CaseStudy | null> {
     };
   } catch (error) {
     console.error("Error fetching featured case study:", error);
+
     return null;
   }
 }
-
+//fetches fb caseStudy 
 export async function fetchFacebookadCasestudy(): Promise<CaseStudy[]> {
   try {
     // Fetch the data as an array of SanityDocument
@@ -85,6 +84,7 @@ export async function fetchFacebookadCasestudy(): Promise<CaseStudy[]> {
     // Check if the result is an array and has data
     if (!Array.isArray(fbposts) || fbposts.length === 0) {
       console.warn("No Facebook ad case studies found.");
+
       return [];
     }
 
@@ -93,16 +93,20 @@ export async function fetchFacebookadCasestudy(): Promise<CaseStudy[]> {
       _id: post._id,
       title: post.title,
       imageUrl: post.imageUrl,
-      service: post.service,
+      industry: post.industry,
       slug: post.slug,
+      service: post.service, 
       hasImage: post.hasImage || false,
       hasService: post.hasService || false,
     }));
   } catch (error) {
     console.error("Error fetching Facebook ad case studies:", error);
+
     return [];
   }
 }
+
+
 
 export async function fetchHomeCaseStudies(): Promise<CaseStudy[]> {
   try {
@@ -119,6 +123,37 @@ export async function fetchHomeCaseStudies(): Promise<CaseStudy[]> {
     }));
   } catch (error) {
     console.error("Error fetching case studies:", error);
+
+    return [];
+  }
+}
+
+export async function fetchWebdesignCaseStudy():Promise<CaseStudy[]> {
+ try {
+   // Fetch the data as an array of SanityDocument
+    const wbposts = await client.fetch<SanityDocument[]>(wbCaseStudyQuery);
+    
+    // Check if the result is an array and has data
+    if (!Array.isArray(wbposts) || wbposts.length === 0) {
+      console.warn("No Web Design case studies found.");
+
+      return [];
+    }
+
+  // Map the array of posts to CaseStudy objects
+    return wbposts.map((post) => ({
+      _id: post._id,
+      title: post.title,
+      imageUrl: post.imageUrl,
+      industry: post.industry,
+      slug: post.slug,
+      service: post.service, 
+      hasImage: post.hasImage || false,
+      hasService: post.hasService || false,
+    }));
+  } catch (error) {
+    console.error("Error fetching Facebook ad case studies:", error);
+
     return [];
   }
 }

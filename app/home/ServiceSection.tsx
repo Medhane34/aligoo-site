@@ -129,7 +129,7 @@ const ServiceSection = () => {
                     isBordered
                     color="primary"
                     radius="lg"
-                    src="/icons/strategy-brand.svg"
+                    src="/icons/Digital-Marketing-Icon.png"
                   />
                 }
                 subtitle={
@@ -167,7 +167,7 @@ const ServiceSection = () => {
                     isBordered
                     color="success"
                     radius="lg"
-                    src="/icons/strategy-marketing.svg"
+                    src="/icons/content-marketing-icon.png"
                   />
                 }
                 subtitle={<span className="text-gray-400 text-sm"></span>}
@@ -198,7 +198,7 @@ const ServiceSection = () => {
                     isBordered
                     color="warning"
                     radius="lg"
-                    src="/icons/arrow-turn-down-right.svg"
+                    src="/icons/funnel-mapping-icon.png"
                   />
                 }
                 subtitle={<span className="text-gray-400 text-sm"></span>}
@@ -228,7 +228,7 @@ const ServiceSection = () => {
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
-                    href="/services/sustainable-web-design"
+                    href="/services/web-design"
                     rel="noopener noreferrer"
                     target="_blank"
                     onClick={(e) => e.stopPropagation()}
@@ -241,7 +241,7 @@ const ServiceSection = () => {
                     isBordered
                     color="primary"
                     radius="lg"
-                    src="/icons/design-web.svg"
+                    src="/icons/web-design-icon.jpg"
                   />
                 }
                 subtitle={
@@ -276,7 +276,7 @@ const ServiceSection = () => {
                     isBordered
                     color="success"
                     radius="lg"
-                    src="/icons/design-uxui.svg"
+                    src="/icons/graphic-design-icon.avif"
                   />
                 }
                 subtitle={
@@ -357,7 +357,7 @@ const ServiceSection = () => {
                     isBordered
                     color="primary"
                     radius="lg"
-                    src="/services/facebook-ad.svg"
+                    src="/icons/Facebook-Ad-icon.png"
                   />
                 }
                 subtitle={
@@ -380,7 +380,7 @@ const ServiceSection = () => {
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
-                    href="/services/seo"
+                    href="/services/tiktok-ad"
                     rel="noopener noreferrer"
                     target="_blank"
                     onClick={(e) => e.stopPropagation()}
@@ -393,12 +393,11 @@ const ServiceSection = () => {
                     isBordered
                     color="success"
                     radius="lg"
-                    src="/icons/execution-seo.svg"
+                    src="/icons/tiktokicon.png"
                   />
                 }
                 subtitle={
                   <span className="text-gray-400 text-sm">
-
                   </span>
                 }
                 title={<span className="hover:underline text-text-light dark:text-text-dark">TikTok Ads </span>}
@@ -408,11 +407,11 @@ const ServiceSection = () => {
               </AccordionItem>
               <AccordionItem
                 key="9"
-                aria-label="Email Marketing"
+                aria-label="SEO"
                 indicator={
                   <Link
                     className=" hover:text-pink-300 transition-colors"
-                    href="/services/email-marketing"
+                    href="/services/seo"
                     rel="noopener noreferrer"
                     target="_blank"
                     onClick={(e) => e.stopPropagation()}
@@ -425,15 +424,15 @@ const ServiceSection = () => {
                     isBordered
                     color="warning"
                     radius="lg"
-                    src="http://www.w3.org/2000/svg"
+                    src="icons/seo-icon.avif"
                   />
                 }
-                subtitle={<span className="text-gray-400 text-sm text-text-light dark:text-text-dark"></span>}
-                title={<span className="hover:underline text-text-light dark:text-text-dark">Email Marketing</span>}
+          
+                title={<span className="hover:underline text-text-light dark:text-text-dark">SEO</span>}
               >
                 <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
-                 Designing and executing effective email
-                  campaigns to engage your audience and drive conversions.
+                 Designing and executing effective SEO
+                  campaigns to rank your site on first page  and drive conversions.
                 </motion.div>
               </AccordionItem>
             </Accordion>

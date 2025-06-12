@@ -33,11 +33,25 @@ export const featuredCaseStudyQuery = `
   }
 `;
 
+// query to fetch fb casestudy for the service page. 
 export const fbCaseStudyQuery = `
 *[_type == "caseStudy" && service->title == "Facebook-Ad"]
 {
   _id,
   title,
+  industry,
+  "imageUrl": mainImage.asset->url,
+  "service": service->title, // Keep this for projecting the service title
+  "slug": slug.current
+}[0...3]
+`;
+
+export const wbCaseStudyQuery = `
+*[_type == "caseStudy" && service->title match "Web-Design"]
+{
+  _id,
+  title,
+  industry,
   "imageUrl": mainImage.asset->url,
   "service": service->title, // Keep this for projecting the service title
   "slug": slug.current

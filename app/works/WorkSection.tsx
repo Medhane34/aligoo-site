@@ -1,16 +1,37 @@
 // components/WorkSection.tsx
 
 "use client";
-import React, { useState, useRef } from "react";
-import { Card, CardHeader, CardBody, CardFooter } from "@heroui/card";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useMemo,
+  useCallback,
+} from "react";
+import { Card } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { Button } from "@heroui/button";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { fetchCaseStudies } from "./casestudydata";
-import { useEffect } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
-// Define the CaseStudy type on the client side for type checking
+import { Spinner } from "@heroui/spinner";
+
+// IMPORTANT: Import the updated fetch functions from the correct path
+import {
+  fetchCaseStudies,
+  fetchTotalCaseStudiesCount,
+} from "@/lib/CaseStudies";
+
+import { AccentText, SectionHeading } from "@/components/ui/typography";
+// Import the HeroUI Pagination component
+import {
+  Pagination,
+  PaginationItem,
+  PaginationCursor,
+} from "@heroui/pagination"; // Assuming this is the correct import path for HeroUI
+
+// Define the CaseStudy type (ensure it matches your backend definition)
 type CaseStudy = {
   _id: string;
   title: string;
@@ -61,10 +82,16 @@ export default function WorkSection({
 
   // Effect to fetch new data when currentPage changes
   useEffect(() => {
-    async function loadCaseStudies() {
+    // This effect runs when currentPage or postsPerPage changes.
+    // It should *not* depend on initialCaseStudies.
+    // The initial data is already set in the useState hook.
+
+    const loadPaginatedCaseStudies = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const data = await fetchCaseStudies();
-        console.log("Fetched Case Studies:", data);
+        const offset = (currentPage - 1) * postsPerPage;
+        const data = await fetchCaseStudies(postsPerPage, offset);
         const normalizedData: CaseStudy[] = data.map((item: any) => ({
           _id: item._id,
           title: item.title,
@@ -73,7 +100,6 @@ export default function WorkSection({
           service: item.service,
           slug: item.slug ?? "",
         }));
-
         setCaseStudies(normalizedData);
       } catch (err: any) {
         console.error("Error fetching paginated case studies:", err);
@@ -110,7 +136,6 @@ export default function WorkSection({
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -136,20 +161,39 @@ export default function WorkSection({
     return <p className="text-center py-8 text-red-500">Error: {error}</p>;
   }
 
+  const textVariants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.7, ease: "easeInOut" },
+    },
+  };
+
   return (
     <section className="px-4 py-12 text-center sm:px-8 bg-background-light dark:bg-background-dark">
       {/* Section Header */}
-      <div className="space-y-1 sm:space-y-2 mb-5 xs:mb-6 sm:mb-8">
-        <AccentText>Our Impact</AccentText>
-        <SectionHeading className="text-3xl font-bold tracking-tight">
-          The Transformation Wall
-        </SectionHeading>
-      </div>
-      {/* Filter Section (Heading and Filter - always in a row, responsive widths) */}
+      <motion.div
+        className="space-y-1 sm:space-y-2 mb-5 xs:mb-6 sm:mb-8"
+        initial="hidden"
+        viewport={{ once: true }}
+        whileInView="visible"
+      >
+        <motion.div variants={textVariants}>
+          <SectionHeading className="text-heading font-bold tracking-tight uppercase">
+            BEFORE VS AFTER
+          </SectionHeading>
+        </motion.div>
+        <motion.div variants={textVariants}>
+          <AccentText className="normal-case">
+            From “Meh” to Memorable — Our Makeover Magic
+          </AccentText>
+        </motion.div>
+      </motion.div>
+
+      {/* Filter Section */}
       <div className="container mx-auto mb-8 flex flex-row sm:flex-row items-center justify-between gap-4 px-0 sm:px-4">
-        {" "}
-        {/* px-0 for container, use gap on inner elements */}
-        <h3 className="text-xl font-semibold text-gray-900 text-left w-full sm:w-auto">
+        <h3 className="text-subheading font-semibold text-text-light dark:text-text-dark text-left w-full sm:w-auto">
           Explore Transformations
         </h3>
         <div ref={dropdownRef} className="relative text-right w-full sm:w-auto">

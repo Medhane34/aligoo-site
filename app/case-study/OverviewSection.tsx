@@ -12,14 +12,14 @@ import {
 
 // Define the props type: overviewDescription is now a string
 interface CaseStudyOverviewProps {
-  title: string;
+  overviewTitle: string;
   overviewDescription: string; // Now a plain string due to GROQ modification
   heroImageUrl?: string;
   heroImageAlt?: string;
 }
 
 export default function CaseStudyOverview({
-  title,
+  overviewTitle,
   overviewDescription,
   heroImageUrl,
   heroImageAlt,
@@ -43,10 +43,11 @@ export default function CaseStudyOverview({
         
         "
         >
-          <AccentText className="xs:mb-[0]">Case Study</AccentText>
-          <SectionHeading className="text-heading font-bold tracking-tight">
-            {title} {/* Dynamic Heading */}
+        
+          <SectionHeading className="text-heading font-bold tracking-tight uppercase">
+            {overviewTitle} {/* Dynamic Heading */}
           </SectionHeading>
+          <AccentText className="xs:mb-[0] normal-case pb-2">Overview</AccentText>
           {/* Render each paragraph */}
           {paragraphs.map((p, index) => (
             <Paragraph key={index} className="text-body lg:text-body">{p}</Paragraph>
@@ -58,7 +59,7 @@ export default function CaseStudyOverview({
             <div className="rounded-2xl overflow-hidden shadow-xl">
               <Image
                 isBlurred
-                alt={heroImageAlt || title} // Dynamic Image Alt Text, fallback to title
+                alt={heroImageAlt || overviewTitle} // Dynamic Image Alt Text, fallback to title
                 className="object-cover w-full h-full"
                 height={600} // Adjust as needed
                 src={heroImageUrl} // Dynamic Image URL

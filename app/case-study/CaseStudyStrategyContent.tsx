@@ -95,10 +95,11 @@ export default function CaseStudyStrategyContent({
         {/* Section Header (Strategy Introduction) */}
         <div className="lg:space-y-2 xs:space-y-8 sm:space-y-10 md:space-y-12 
       mb-12 text-center ">
-          <AccentText>{defaultStrategyAccentText}</AccentText>
-          <SectionHeading className="text-heading font-bold tracking-tight">
+          
+          <SectionHeading className="text-heading font-bold tracking-tight uppercase">
             {strategyIntroHeading}
           </SectionHeading>
+          <AccentText className="normal-case">{defaultStrategyAccentText}</AccentText>
           {strategyIntroBody && ( // Only render if strategyIntroBody has content
             <p className="max-w-3xl mx-auto text-heading mt-4">
               {strategyIntroBody}

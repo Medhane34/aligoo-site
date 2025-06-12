@@ -371,7 +371,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                       className="
                         h-full
                         flex flex-col justify-end
-                        text-white
+                        text-white 
                       "
                     >
                       <p className="text-base font-semibold mb-2">

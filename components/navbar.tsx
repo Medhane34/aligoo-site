@@ -100,8 +100,14 @@ export const Navbar = () => {
               <DropdownItem key="Facebook Ad" href="/services/facebook-ad">
                 Facebook Ad
               </DropdownItem>
-              <DropdownItem key="Web Design" href="/about">
+              <DropdownItem key="Web Design" href="/services/web-design">
                 Web Design
+              </DropdownItem>
+              <DropdownItem key="TikTok Ads" href="/services/tiktok-ad">
+               TikTok Ads 
+              </DropdownItem>
+              <DropdownItem key="SEO" href="/services/seo">
+               SEO
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
