@@ -1,7 +1,11 @@
+import { Metadata } from "next";
 // Import all necessary fetch functions and types from your queries file
 import { notFound } from "next/navigation"; // Import notFound for 404 handling
 
 import CaseStudyStrategy from "../CaseStudyStrategy";
+
+import { client } from "@/src/sanity/client";
+
 
 // Import types for better type safety
 
@@ -31,6 +35,67 @@ import ScrollProgress from "./ScrollProgress";
 interface Props {
   params: Promise<{ slug: string }>;
 }
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const caseStudy: CaseStudy | null = await client.fetch(
+    `*[_type == "caseStudy" && slug.current == $slug][0]{
+      title,
+      description,
+      slug,
+      mainImage{asset->{url}}
+    }`,
+    { slug: params.slug }
+  );
+
+  if (!caseStudy) return notFound();
+
+  return {
+    title: `${caseStudy.title} | Aligoo Digital Agency Case Study`,
+    description:
+      caseStudy.description ||
+      "Read this case study from Aligoo Digital Agency.",
+    keywords: [
+      "case study",
+      "digital marketing",
+      "Aligoo",
+      "Ethiopia",
+      "Addis Ababa",
+      ...(caseStudy.title ? caseStudy.title.split(" ") : []),
+    ],
+    alternates: {
+      canonical: `https://aligoo-digital.agency/case-study/${params.slug}`,
+    },
+    openGraph: {
+      title: caseStudy.title,
+      description: caseStudy.description,
+      url: `https://aligoo-digital.agency/case-study/${params.slug}`,
+      type: "article",
+      images: caseStudy.mainImage?.asset?.url
+        ? [
+            {
+              url: caseStudy.mainImage.asset.url,
+              width: 1200,
+              height: 630,
+              alt: caseStudy.title,
+            },
+          ]
+        : [],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: caseStudy.title,
+      description: caseStudy.description,
+      images: caseStudy.mainImage?.asset?.url
+        ? [caseStudy.mainImage.asset.url]
+        : [],
+    },
+  };
+}
+
 
 export default async function CaseStudyDetails({ params }: Props) {
   const { slug } = await params;

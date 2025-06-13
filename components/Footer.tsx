@@ -1,318 +1,167 @@
+// components/Footer.tsx
+"use client";
 import React from "react";
-import { Button, ButtonGroup } from "@heroui/button";
+import { Button } from "@heroui/button";
+import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 
-const Footer = () => {
-  const cn = (...args: any[]) => {
-    return args.filter(Boolean).join(" ");
-  };
+
+const services = [
+  "Search Engine Optimization (SEO)",
+  "Pay-Per-Click Advertising (PPC)",
+  "Social Media Marketing",
+  "Content Marketing",
+  "Email Marketing",
+  "Web Design & Development",
+  "Conversion Rate Optimization (CRO)",
+  "Analytics & Reporting",
+];
+
+const contacts = [
+  {
+    label: "Email",
+    value: "info@aligoodigitalagency.com",
+    href: "mailto:info@aligoodigitalagency.com",
+  },
+  {
+    label: "Phone",
+    value: "(888) 234-5100",
+    href: "tel:(888) 234-5100",
+  },
+  {
+    label: "Address",
+    value: "1535 West Loop S. Ste 450, Houston, TX, 77027",
+    href: undefined,
+  },
+];
+
+const socialLinks = [
+  {
+    icon: <Facebook className="w-5 h-5" />,
+    href: "https://www.facebook.com",
+    label: "Facebook",
+  },
+  {
+    icon: <Instagram className="w-5 h-5" />,
+    href: "https://www.instagram.com",
+    label: "Instagram",
+  },
+  {
+    icon: <Twitter className="w-5 h-5" />,
+    href: "https://twitter.com",
+    label: "Twitter",
+  },
+  {
+    icon: <Youtube className="w-5 h-5" />,
+    href: "https://www.youtube.com",
+    label: "YouTube",
+  },
+  {
+    icon: <Linkedin className="w-5 h-5" />,
+    href: "https://www.linkedin.com",
+    label: "LinkedIn",
+  },
+];
+
+const Footer: React.FC = () => {
   return (
-    <footer
-      className={cn(
-        "bg-gray-950 text-gray-400 py-12 md:py-16",
-        "border-t border-gray-800",
-      )}
-    >
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12 lg:gap-20">
-          {/* Company Info Section */}
-          <div className="space-y-6">
-            <h1
-              className={cn(
-                "text-2xl font-bold text-white",
-                "bg-gradient-to-r from-purple-500 to-blue-500 inline-block",
-                "bg-clip-text text-transparent",
-              )}
-            >
-              ALIGOO DIGITAL AGENCY
-            </h1>
-            <p className="text-sm">
-              Transforming Ideas into Digital Excellence. Elevate your online
-              presence with our innovative solutions and strategic digital
-              services.
-            </p>
-            <div className="space-y-2">
-              <div className="flex items-start gap-2">
-                <a
-                  href="mailto:info@aligoodigitalagency.com"
-                  className="hover:text-blue-400 transition-colors"
-                >
-                  info@aligoodigitalagency.com
-                </a>
-              </div>
-              <div className="flex items-start gap-2">
-                <a
-                  href="tel:(888) 234-5100"
-                  className="hover:text-blue-400 transition-colors"
-                >
-                  (888) 234-5100
-                </a>
-              </div>
-              <div className="flex items-start gap-2">
-                <span className="text-sm">
-                  1535 West Loop S. Ste 450, Houston, TX, 77027
+    <footer className="bg-background-dark text-gray-400 pt-12 pb-8 px-4 border-t border-gray-800">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
+        {/* Brand/About */}
+        <div className="space-y-6">
+          <h1 className="text-2xl font-bold text-white">
+            ALIGOO DIGITAL AGENCY
+          </h1>
+          <p className="text-sm">
+            Based in Addis Ababa, we help forward-thinking brands break through the noise with clarity, creativity, and measurable results. Elevate your online presence with our innovative digital solutions.
+          </p>
+        </div>
+
+        {/* Services */}
+        <div>
+          <h3 className="text-lg font-semibold text-white mb-4">Services</h3>
+          <ul className="space-y-2">
+            {services.map((service) => (
+              <li key={service}>
+                <span className="text-sm hover:text-red-400 transition-colors cursor-pointer">
+                  {service}
                 </span>
-              </div>
-            </div>
-            <div className="flex gap-4">
-              <a
-                href="https://www.facebook.com"
-                className="hover:text-blue-400 transition-colors"
-                aria-label="Facebook"
-              />
-              <a
-                href="https://www.instagram.com"
-                className="hover:text-blue-400 transition-colors"
-                aria-label="Instagram"
-              />
-              <a
-                href="https://twitter.com"
-                className="hover:text-blue-400 transition-colors"
-                aria-label="Twitter"
-              />
-              <a
-                href="https://www.youtube.com"
-                className="hover:text-blue-400 transition-colors"
-                aria-label="YouTube"
-              />
-              <a
-                href="https://www.linkedin.com"
-                className="hover:text-blue-400 transition-colors"
-                aria-label="LinkedIn"
-              />
-            </div>
-          </div>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-          {/* Services Section */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">Services</h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Search Engine Optimization (SEO)
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Pay-Per-Click Advertising (PPC)
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Social Media Marketing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Content Marketing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Email Marketing
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Web Design & Development
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Conversion Rate Optimization (CRO)
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Analytics & Reporting
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Industries Section */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-white">Industries</h3>
-            <ul className="space-y-2">
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  B2B
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Manufacturers
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Fintech
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Law
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Real Estate
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Construction
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://example.com/"
-                  className="hover:text-blue-400 transition-colors text-sm"
-                >
-                  Technology
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources and Locations Section */}
-          <div className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <h3 className="text-lg font-semibold text-white">Resources</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <a
-                      href="https://example.com/"
-                      className="hover:text-blue-400 transition-colors text-sm"
-                    >
-                      Blog
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://example.com/"
-                      className="hover:text-blue-400 transition-colors text-sm"
-                    >
-                      eBooks & Whitepapers
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://example.com/"
-                      className="hover:text-blue-400 transition-colors text-sm"
-                    >
-                      Case Studies
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://example.com/"
-                      className="hover:text-blue-400 transition-colors text-sm"
-                    >
-                      FAQs
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://example.com/"
-                      className="hover:text-blue-400 transition-colors text-sm"
-                    >
-                      Audit
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://example.com/"
-                      className="hover:text-blue-400 transition-colors text-sm"
-                    >
-                      Contact Us
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-white">Locations</h3>
-                <ul className="space-y-2">
-                  <li>
-                    <a
-                      href="https://example.com/"
-                      className="hover:text-blue-400 transition-colors text-sm"
-                    >
-                      Houston
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div className="mt-8">
-              <Button
-                variant="light"
-                className="text-blue-400 border-blue-500/30 hover:bg-blue-500/20 hover:text-blue-300"
+        {/* Contact */}
+        <div>
+          <h3 className="text-lg font-semibold text-white mb-4">Contact</h3>
+          <ul className="space-y-2 mb-6">
+            {contacts.map((c) =>
+              c.href ? (
+                <li key={c.label}>
+                  <a
+                    href={c.href}
+                    className="text-sm hover:text-red-400 transition-colors"
+                  >
+                    {c.value}
+                  </a>
+                </li>
+              ) : (
+                <li key={c.label}>
+                  <span className="text-sm">{c.value}</span>
+                </li>
+              )
+            )}
+          </ul>
+          <div className="flex gap-4">
+            {socialLinks.map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                aria-label={s.label}
+                className="hover:text-red-400 transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                READ OUR REVIEWS AT DESIGNRUSH.COM
-              </Button>
-            </div>
+                {s.icon}
+              </a>
+            ))}
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-gray-800 text-center text-sm">
-          Copyright © {new Date().getFullYear()} Aligoo Digital Agency. All
-          rights reserved.
-          <div className="mt-4 flex justify-center gap-6">
-            <a
-              href="https://example.com/"
-              className="hover:text-blue-400 transition-colors"
-            >
-              Terms of Service
-            </a>
-            <a
-              href="https://example.com/"
-              className="hover:text-blue-400 transition-colors"
-            >
-              Privacy Policy
-            </a>
-          </div>
+
+        {/* CTA: Join Telegram */}
+        <div className="flex flex-col items-start text-left">
+          <h3 className="text-lg font-semibold text-white mb-4">
+            Stay Updated
+          </h3>
+          <p className="text-sm mb-4">
+            Get the latest marketing tips and agency news. Join our Telegram bot!
+          </p>
+          <Button
+            as="a"
+            href="https://t.me/yourtelegrambot" // Replace with your actual Telegram bot link
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-red-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-red-600 transition"
+          >
+            Join our Telegram Bot
+          </Button>
+        </div>
+      </div>
+      {/* Bottom Bar */}
+      <div className="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
+        Copyright © {new Date().getFullYear()} Aligoo Digital Agency. All rights reserved.
+        <div className="mt-4 flex flex-wrap justify-center gap-6">
+          <a
+            href="/terms"
+            className="hover:text-red-400 transition-colors"
+          >
+            Terms of Service
+          </a>
+          <a
+            href="/privacy"
+            className="hover:text-red-400 transition-colors"
+          >
+            Privacy Policy
+          </a>
         </div>
       </div>
     </footer>

@@ -110,13 +110,14 @@ const ServiceSection = () => {
               we make is backed by insight, not guesswork.
             </p>
             <Accordion showDivider={false}>
+              
               <AccordionItem
                 key="1"
                 aria-label="Digital Marketing Strategy"
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors text-subheading"
-                    href="/services/brand-development"
+                    href="/services/digital-marketing"
                     rel="noopener noreferrer"
                     target="_blank"
                     onClick={(e) => e.stopPropagation()}
@@ -148,13 +149,15 @@ const ServiceSection = () => {
                   time.{" "}
                 </motion.div>
               </AccordionItem>
+
+
               <AccordionItem
                 key="2"
-                aria-label="Digital Marketing"
+                aria-label="Content Marketing"
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
-                    href="/services/digital-marketing"
+                    href="/services/content-marketing"
                     rel="noopener noreferrer"
                     target="_blank"
                     onClick={(e) => e.stopPropagation()}
@@ -185,7 +188,7 @@ const ServiceSection = () => {
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
-                    href="/services/content-strategy"
+                    href="/services/funnel-mapping"
                     rel="noopener noreferrer"
                     target="_blank"
                     onClick={(e) => e.stopPropagation()}
@@ -263,7 +266,7 @@ const ServiceSection = () => {
                 indicator={
                   <Link
                     className="text-pink-400 hover:text-pink-300 transition-colors"
-                    href="/services/ux-ui-design"
+                    href="/services/graphic-design"
                     rel="noopener noreferrer"
                     target="_blank"
                     onClick={(e) => e.stopPropagation()}

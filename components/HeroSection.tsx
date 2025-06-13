@@ -114,7 +114,7 @@ export default function HeroSection({
               <Button
                 className="h-8 xs:px-3 xs:py-1 sm:h-9 sm:px-[14px] sm:py-1.5 md:px-[18px] md:py-2 overflow-hidden border-1 text-small font-normal leading-5 text-text-light dark:text-text-dark"
                 endContent={
-                  <span className="pointer-events-none flex h-[22px] w-[22px] items-center justify-center rounded-full" />
+                  <span>😎</span>
                 }
                 radius="full"
                 variant="bordered"
@@ -168,9 +168,7 @@ export default function HeroSection({
               <Link href={secondaryButtonUrl} passHref>
                 <Button
                   className="h-10 w-[163px] border-2 dark:border-white border-brand-primary-light px-[16px] py-[10px] text-text-light dark:text-text-dark font-medium leading-5"
-                  endContent={
-                    <span className="pointer-events-none flex h-[22px] w-[22px] items-center justify-center rounded-full bg-default-100" />
-                  }
+                
                   radius="full"
                   variant="bordered"
                 >

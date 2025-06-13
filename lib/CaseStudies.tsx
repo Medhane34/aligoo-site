@@ -115,6 +115,8 @@ export async function fetchHomeCaseStudies(): Promise<CaseStudy[]> {
     return homeworks.map((post) => ({
       _id: post._id,
       title: post.title,
+      goalsSummary: post.goalsSummary, 
+      challengeSummary: post.challengeSummary, 
       imageUrl: post.imageUrl,
       service: post.service,
       slug: post.slug,
@@ -125,6 +127,8 @@ export async function fetchHomeCaseStudies(): Promise<CaseStudy[]> {
     console.error("Error fetching case studies:", error);
 
     return [];
+
+    ;
   }
 }
 

@@ -209,12 +209,12 @@ export default function WhyUsSection() {
                   whileInView="visible"
                 >
                   <Image
+                    fill
                     alt={`${reason.title} background`}
                     className={`
               ${reason.imageStyle?.opacity ? `opacity-${reason.imageStyle.opacity * 100}` : "opacity-20"}
               ${reason.id === 6 ? "translate-x-[20%] translate-y-[20%]" : ""}
             `}
-                    layout="fill"
                     objectFit={reason.imageStyle?.objectFit || "contain"}
                     objectPosition={
                       reason.imageStyle?.objectPosition || "bottom right"

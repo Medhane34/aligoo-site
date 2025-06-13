@@ -1,6 +1,8 @@
 export interface CaseStudy {
   _id: string;
   title: string;
+  goalsSummary: string;
+  challengeSummary: string;
   imageUrl: string;
   service: string;
   hasImage: boolean;

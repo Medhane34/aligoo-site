@@ -36,3 +36,12 @@ section {
 .max-w-full {
   max-width: 100%;
 }
+
+html, body {
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+

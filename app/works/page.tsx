@@ -4,6 +4,27 @@ import CTABottomSection from "@/components/CTA";
 import FetchCaseStudiesWrapper from "@/wrappers/FeaturedCaseStudyWrapper";
 import WorkSectionWrapper from "@/wrappers/WorkSectionWrapper";
 import HeroSection from "@/components/HeroSection";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Our Work | Aligoo Digital Agency Projects & Case Studies",
+  description:
+    "Explore real projects and case studies from Aligoo Digital Agency. See how we help brands grow with smart strategy, clean design, and powerful execution in Addis Ababa and beyond.",
+  keywords: [
+    "case studies",
+    "project portfolio",
+    "digital marketing results",
+    "web design examples",
+    "Aligoo projects",
+    "Addis Ababa",
+    "Ethiopia",
+    "marketing success stories",
+  ],
+  alternates: {
+    canonical: "https://aligoo-digital.agency/works",
+  },
+};
+
 export default function work() {
   return (
     <>

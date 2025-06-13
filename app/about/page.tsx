@@ -7,6 +7,26 @@ import MeetThePeople from "./team";
 
 import CTABottomSection from "@/components/CTA";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About Us | Aligoo Digital Agency",
+  description:
+    "Meet Aligoo: your growth-obsessed digital marketing partners in Addis Ababa. Discover our mission, team, and how we help brands break through the noise with clarity and creativity.",
+  keywords: [
+    "about Aligoo",
+    "digital marketing team",
+    "Addis Ababa agency",
+    "growth partners",
+    "marketing experts",
+    "Ethiopia",
+    "Aligoo Digital Agency",
+  ],
+  alternates: {
+    canonical: "https://aligoo-digital.agency/about",
+  },
+};
+
 export default function AboutPage() {
   return (
     <>

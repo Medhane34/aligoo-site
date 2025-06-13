@@ -62,6 +62,8 @@ export const HomeCaseStudyQuery = `
   *[_type == "caseStudy"] | order(_createdAt desc)[0...5] {
     _id,
     title,
+   goalsSummary,
+challengeSummary,
     "imageUrl": mainImage.asset->url,
     "service": service->title,
     "slug": slug.current,

@@ -47,6 +47,8 @@ const additionalCardVariants = {
 type CaseStudy = {
   _id: string;
   title: string;
+  goalsSummary: string;
+  challengeSummary: string;
   imageUrl: string;
   service: string;
   hasImage: boolean;
@@ -70,6 +72,8 @@ const placeholderCaseStudy: CaseStudy = {
   slug: "#",
   challenge: "Stay tuned for exciting new case studies!",
   outcome: "More amazing results are on the way!",
+  goalsSummary: "",
+  challengeSummary: ""
 };
 
 const fallbackCategory = "Case Study Category";
@@ -159,7 +163,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     <p className="text-small text-white uppercase font-bold bg-brand-primary rounded-full p-1">
                       {study.service || fallbackCategory}
                     </p>
-                    <h4 className="text-white font-medium text-large">
+                    <h4 className="text-white font-medium text-large text-left text-base/2">
                       {study.title}
                     </h4>
                   </CardHeader>
@@ -243,13 +247,13 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                         The Challenge:
                       </p>
                       <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-                        {study.challenge || fallbackChallenge}
+                        {study.challengeSummary || fallbackChallenge}
                       </p>
                       <p className="text-base font-semibold mb-2">
                         The Outcome:
                       </p>
                       <p className="text-sm text-gray-300 leading-relaxed">
-                        {study.outcome || fallbackOutcome}
+                        {study.goalsSummary || fallbackOutcome}
                       </p>
                     </div>
                   </div>
@@ -278,7 +282,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                 <Card
                   className="
                     relative h-[300px] w-full rounded-lg overflow-hidden cursor-pointer group
-                    hover:shadow-xl hover:shadow-purple-500/20
+                    hover:shadow-xl hover:shadow-red-500/20
                     transition-shadow duration-300
                   "
                 >
@@ -292,7 +296,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     }
                   />
                   <CardHeader className="absolute z-10 top-1 flex-col !items-start opacity-100 transition-opacity duration-300 group-hover:opacity-0">
-                    <p className="text-tiny text-white uppercase font-bold">
+                    <p className="text-tiny text-white uppercase font-bold bg-brand-primary rounded-full p-1">
                       {study.service || fallbackCategory}
                     </p>
                     <h4 className="text-white font-medium text-large">
@@ -300,11 +304,11 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     </h4>
                   </CardHeader>
                   {/* ... (gradient borders and hover content - keep as is) ... */}
-                  <div
+                   <div
                     className="
                       absolute top-0 left-0 
                       w-0 h-[3px]
-                      bg-gradient-to-r from-blue-500 to-purple-500
+                      bg-gradient-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:w-1/2
                       group-hover:opacity-100
@@ -317,7 +321,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 left-0 rounded-lg
                       w-[3px] h-0
-                      bg-gradient-to-b from-blue-500 to-purple-500
+                      bg-gradient-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:h-1/2
                       group-hover:opacity-100
@@ -330,7 +334,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 right-0 
                       w-0 h-[3px]
-                      bg-gradient-to-l from-blue-500 to-purple-500
+                      bg-gradient-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:w-1/2
                       group-hover:opacity-100
@@ -343,7 +347,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 right-0 
                       w-[3px] h-0
-                      bg-gradient-to-b from-purple-500 to-blue-500
+                      bg-gradient-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:h-1/2
                       group-hover:opacity-100
@@ -378,13 +382,13 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                         The Challenge:
                       </p>
                       <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-                        {study.challenge || fallbackChallenge}
+                        {study.challengeSummary || fallbackChallenge}
                       </p>
                       <p className="text-base font-semibold mb-2">
                         The Outcome:
                       </p>
                       <p className="text-sm text-gray-300 leading-relaxed">
-                        {study.outcome || fallbackOutcome}
+                        {study.goalsSummary || fallbackOutcome}
                       </p>
                     </div>
                   </div>

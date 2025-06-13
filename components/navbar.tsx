@@ -1,4 +1,6 @@
+// components/Navbar.tsx
 "use client";
+import React, { useState } from "react";
 import {
   Navbar as HeroUINavbar,
   NavbarContent,
@@ -9,63 +11,65 @@ import {
   NavbarMenuItem,
 } from "@heroui/navbar";
 import { Button } from "@heroui/button";
-import { Kbd } from "@heroui/kbd";
 import { Link } from "@heroui/link";
-import { Input } from "@heroui/input";
-import { link as linkStyles } from "@heroui/theme";
 import NextLink from "next/link";
-import clsx from "clsx";
-import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "@/components/theme-switch";
-import {Dropdown, DropdownMenu, DropdownTrigger, DropdownItem } from "@heroui/dropdown";
-import { Logo, SearchIcon } from "./icons";
+import { Dropdown, DropdownMenu, DropdownTrigger, DropdownItem } from "@heroui/dropdown";
+import { Logo } from "./icons";
 import { Accordion, AccordionItem } from "@heroui/accordion";
 
-
-// components/Navbar.tsx
-
+const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    {...props}
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    className="inline-block ml-1 w-4 h-4"
+    aria-hidden="true"
+  >
+    <path
+      fillRule="evenodd"
+      d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.25 3.846a.75.75 0 01-1.02 0l-4.25-3.846a.75.75 0 01.02-1.06z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
 
 export const Navbar = () => {
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      endContent={
-        <Kbd className="hidden lg:inline-block" keys={["command"]}>
-          K
-        </Kbd>
-      }
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
+  const [menuOpen, setMenuOpen] = useState(false);
+  const handleMenuClose = () => setMenuOpen(false);
 
   return (
     <div className="relative">
-      <div className="glow-background z-3"></div>
-      <HeroUINavbar maxWidth="xl" position="sticky" className="bg-white/0">
-
-        {/* Mobile Navbar Content (Visible on small screens) */}
-        <NavbarContent className="sm:hidden" justify="start">
-          <NavbarMenuToggle /> {/* Hamburger icon */}
-          <NavbarBrand as="li" className="gap-3 max-w-fit">
-            <NextLink className="flex justify-start items-center gap-1" href="/">
-              <Logo />
-              <p className="font-bold text-inherit">Aligoo</p>
-            </NextLink>
-          </NavbarBrand>
+      <HeroUINavbar
+        maxWidth="xl"
+        className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background-light dark:bg-background-dark shadow"
+        isMenuOpen={menuOpen}
+        onMenuOpenChange={setMenuOpen}
+        style={{ WebkitBackdropFilter: "blur(12px)", backdropFilter: "blur(12px)" }}
+      >
+        {/* Mobile Navbar Content */}
+        <NavbarContent className="sm:hidden relative w-full flex items-center justify-between px-2">
+          <div className="flex-1 flex items-center">
+            <NavbarMenuToggle
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMenuOpen((open) => !open)}
+            />
+          </div>
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center">
+            <NavbarBrand as="li" className="gap-3 max-w-fit">
+              <NextLink className="flex items-center gap-1" href="/">
+                <Logo />
+                <p className="font-bold text-inherit">Aligoo</p>
+              </NextLink>
+            </NavbarBrand>
+          </div>
+          <div className="flex-1 flex justify-end">
+            <ThemeSwitch />
+          </div>
         </NavbarContent>
 
-
         {/* Desktop Navbar Content */}
-        <NavbarContent className="hidden sm:flex" justify="start"> {/* Aligned to start for logo */}
+        <NavbarContent className="hidden sm:flex" justify="start">
           <NavbarBrand as="li" className="gap-3 max-w-fit">
             <NextLink className="flex items-center gap-1" href="/">
               <Logo />
@@ -74,29 +78,29 @@ export const Navbar = () => {
           </NavbarBrand>
         </NavbarContent>
 
-        <NavbarContent className="hidden sm:flex gap-4 text-text-light" justify="center"> {/* Aligned to center for menu items */}
+        <NavbarContent className="hidden sm:flex gap-4 text-red-500 dark:text-text-dark" justify="center">
           <NavbarItem>
             <Link
               href="/"
-              color="foreground"
-              className="data-[active=true]:text-primary data-[active=true]:font-medium"
+
+              className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
             >
               Home
             </Link>
           </NavbarItem>
           <Dropdown>
-            <NavbarItem> {/* No longer need 'hidden sm:flex' here as it's in the parent NavbarContent */}
+            <NavbarItem>
               <DropdownTrigger>
                 <Button
                   disableRipple
-                  className="p-0 bg-transparent data-[hover=true]:bg-transparent text-foreground"
+                  className="p-0 bg-transparent data-[hover=true]:bg-transparent text-red-500 text-base font-medium flex items-center"
                   variant="light"
                 >
-                  Services
+                  Services <ChevronDownIcon />
                 </Button>
               </DropdownTrigger>
             </NavbarItem>
-            <DropdownMenu aria-label="Service Actions">
+            <DropdownMenu aria-label="Service Actions" >
               <DropdownItem key="Facebook Ad" href="/services/facebook-ad">
                 Facebook Ad
               </DropdownItem>
@@ -104,18 +108,30 @@ export const Navbar = () => {
                 Web Design
               </DropdownItem>
               <DropdownItem key="TikTok Ads" href="/services/tiktok-ad">
-               TikTok Ads 
+                TikTok Ads
+              </DropdownItem>
+              <DropdownItem key="Digital Marketing Strategy" href="/services/digital-marketing">
+                Digital Marketing Strategy 
               </DropdownItem>
               <DropdownItem key="SEO" href="/services/seo">
-               SEO
+                SEO
+              </DropdownItem>
+              <DropdownItem key="Content Marketing" href="/services/content-marketing">
+                Content Marketing  
+              </DropdownItem>
+              <DropdownItem key="Funnel Mapping" href="/services/funnel-mapping">
+                Funnel Mapping 
+              </DropdownItem>
+              <DropdownItem key="Graphic Design" href="/services/graphic-design">
+                Graphic Design  
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
           <NavbarItem>
             <Link
               href="/works"
-              color="foreground"
-              className="data-[active=true]:text-primary data-[active=true]:font-medium"
+               
+              className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
             >
               Our work
             </Link>
@@ -123,64 +139,120 @@ export const Navbar = () => {
           <NavbarItem>
             <Link
               href="/about"
-              color="foreground"
-              className="data-[active=true]:text-primary data-[active=true]:font-medium"
+               
+              className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
             >
               About Us
             </Link>
           </NavbarItem>
           <NavbarItem>
             <Link
-              href="/contact" 
-              color="foreground"
-              className="data-[active=true]:text-primary data-[active=true]:font-medium"
+              href="/contact"
+               
+              className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
             >
               Contact Us
             </Link>
           </NavbarItem>
         </NavbarContent>
 
-        <NavbarContent justify="end"> {/* Aligned to end for ThemeSwitch */}
+        <NavbarContent justify="end" className="hidden sm:flex">
           <ThemeSwitch />
         </NavbarContent>
 
-
-
+        {/* Mobile Menu */}
         <NavbarMenu>
-             {/* Search input {searchInput} */}
-          <div className="mx-4 mt-2 flex flex-col gap-2"> {/* This div applies mx-4 */}
-            <NavbarMenuItem className="p-0"> {/* Remove default padding from NavbarMenuItem */}
-              <Link href="/" className="w-full text-xl font-medium text-red-400 text-left py-2">Home</Link> {/* Apply w-full, text-left, and explicit vertical padding */}
+          <div className="mx-4 mt-2 flex flex-col gap-2">
+            <NavbarMenuItem className="p-0">
+              <Link
+                href="/"
+                className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                onClick={handleMenuClose}
+              >
+                Home
+              </Link>
             </NavbarMenuItem>
-            <Accordion className="w-full" variant="light">
+            <Accordion
+              className="w-full"
+              variant="light"
+            >
               <AccordionItem
                 aria-label="Services"
                 title={
-                    <span className="text-xl font-medium text-red-400">Services</span>
+                  <span className="flex items-center text-xl font-medium text-red-500 dark:text-text-dark text-left w-full">
+                    Services <ChevronDownIcon className="ml-1" />
+                  </span>
                 }
                 classNames={{
-                  trigger: "py-2 px-0", // Adjust padding for the trigger to match links
-                  title: "text-left", // Ensure the title text itself is left-aligned
-                  content: "pl-0 pr-0", // Ensure no extra padding on content wrapper
+                  trigger: "py-2 px-0 w-full text-left",
+                  title: "text-left w-full block",
+                  content: "pl-0 pr-0",
                 }}
               >
-                {/* Ensure sub-links also have consistent styling */}
-                <NavbarMenuItem className="p-0"> {/* Remove default padding from NavbarMenuItem */}
-                  <Link href="/services/facebook-ad" className="w-full text-xl font-medium text-red-400 text-left pl-4 py-2">Facebook Ad</Link> {/* Add explicit left padding for sub-items */}
+                <NavbarMenuItem className="p-0">
+                  <Link
+                    href="/services/facebook-ad"
+                    className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    onClick={handleMenuClose}
+                  >
+                    Facebook Ad
+                  </Link>
                 </NavbarMenuItem>
-                <NavbarMenuItem className="p-0"> {/* Remove default padding from NavbarMenuItem */}
-                  <Link href="/about" className="w-full text-xl font-medium text-red-400 text-left pl-4 py-2">Web Design</Link> {/* Add explicit left padding for sub-items */}
+                <NavbarMenuItem className="p-0">
+                  <Link
+                    href="/services/web-design"
+                    className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    onClick={handleMenuClose}
+                  >
+                    Web Design
+                  </Link>
+                </NavbarMenuItem>
+                <NavbarMenuItem className="p-0">
+                  <Link
+                    href="/services/tiktok-ad"
+                    className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    onClick={handleMenuClose}
+                  >
+                    TikTok Ads
+                  </Link>
+                </NavbarMenuItem>
+                <NavbarMenuItem className="p-0">
+                  <Link
+                    href="/services/seo"
+                    className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    onClick={handleMenuClose}
+                  >
+                    SEO
+                  </Link>
                 </NavbarMenuItem>
               </AccordionItem>
             </Accordion>
-            <NavbarMenuItem className="p-0"> {/* Remove default padding from NavbarMenuItem */}
-              <Link href="/works" className="w-full text-xl font-medium text-red-400 text-left py-2">Our Work</Link>
+            <NavbarMenuItem className="p-0">
+              <Link
+                href="/works"
+                className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                onClick={handleMenuClose}
+              >
+                Our Work
+              </Link>
             </NavbarMenuItem>
-            <NavbarMenuItem className="p-0"> {/* Remove default padding from NavbarMenuItem */}
-              <Link href="/about" className="w-full text-xl font-medium text-red-400 text-left py-2">About Us</Link>
+            <NavbarMenuItem className="p-0">
+              <Link
+                href="/about"
+                className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                onClick={handleMenuClose}
+              >
+                About Us
+              </Link>
             </NavbarMenuItem>
-            <NavbarMenuItem className="p-0"> {/* Remove default padding from NavbarMenuItem */}
-              <Link href="/contact" className="w-full text-xl font-medium text-red-400 text-left py-2">Contact Us</Link>
+            <NavbarMenuItem className="p-0">
+              <Link
+                href="/contact"
+                className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                onClick={handleMenuClose}
+              >
+                Contact Us
+              </Link>
             </NavbarMenuItem>
           </div>
         </NavbarMenu>
@@ -188,3 +260,5 @@ export const Navbar = () => {
     </div>
   );
 };
+
+export default Navbar;

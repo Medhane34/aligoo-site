@@ -6,7 +6,7 @@ export function AccentText({ children, className = "" }: React.PropsWithChildren
         return classes.filter(Boolean).join(" ");
     }
   return (
-    <h1 className={cn("uppercase text-sm tracking-widest font-semibold bg-gradient-to-r from-rose-500 to-red-500 text-transparent bg-clip-text", className)}>
+    <h1 className={cn("normal-case text-subheading tracking-widest font-semibold bg-gradient-to-r from-rose-500 to-red-500 text-transparent bg-clip-text", className)}>
       {children}
     </h1>
   );
@@ -17,7 +17,7 @@ export function SectionHeading({ children, className = "" }: React.PropsWithChil
         return classes.filter(Boolean).join(" ");
     }
   return (
-    <h1 className={cn("text-heading md:text-4xl font-bold text-text-light dark:text-text-dark leading-tight", className)}>
+    <h1 className={cn("text-heading md:text-4xl font-bold text-text-light dark:text-text-dark leading-tight uppercase", className)}>
       {children}
     </h1>
   );

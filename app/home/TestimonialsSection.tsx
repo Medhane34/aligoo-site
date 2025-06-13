@@ -74,7 +74,7 @@ const textVariants = {
 };
 
 export const TestimonialsSection = () => (
-  <section className="w-full overflow-hidden py-12 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
+  <section className="w-full overflow-x-hidden py-12 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
     <motion.div className="mx-auto max-w-6xl px-4">
       <motion.div 
       initial="hidden"
