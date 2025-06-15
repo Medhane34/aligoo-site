@@ -107,9 +107,9 @@ export default async function IndexPage() {
         headlineText2="Path."
         headlineText3="Maximize the Conversions."
         primaryButtonText="📥 Get You're Funnel Mapped"
-        primaryButtonUrl="/dashboard"
+        primaryButtonUrl="/strategy-session"
         secondaryButtonText="📄 See Our Process"
-        secondaryButtonUrl="/docs"
+        secondaryButtonUrl="/contact"
         subheading="Your marketing funnel is only as strong as the strategy behind it. We help you visually map, optimize, and build every step of your buyer journey—so more visitors turn into leads, and more leads turn into customers.
 "
       />
@@ -180,7 +180,7 @@ export default async function IndexPage() {
 />
 </Container>
  <Container>
-      <CTABottomSection firstbuttontext={"👉 Book a Free Funnel Strategy Call"} 
+      <CTABottomSection firstbuttontext={"👉 Book Funnel Strategy Call"} 
       heading={"Ready to Turn Clicks Into Clients?"} 
       subheading={"Your funnel isn’t just a path—it’s your profit engine. Whether you’re stuck with scattered tools or just getting started, we’ll help you make sense of the chaos and create a clear, high-converting system."} />
   </Container>

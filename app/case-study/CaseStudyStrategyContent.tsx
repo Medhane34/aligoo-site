@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 
-import { CaseStudyStrategyData, StrategyBlock } from "./[slug]/CaseStudyData";
+import { CaseStudyStrategyData, StrategyBlock } from "@/types/CaseStudyTypes";
 
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 

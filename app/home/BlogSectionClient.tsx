@@ -1,40 +1,52 @@
-// BlogSectionClient.tsx
 "use client";
 import React, { useRef } from "react";
 import { Image } from "@heroui/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { AccentText } from "@/components/ui/typography";
+import { AccentText, SectionHeading } from "@/components/ui/typography";
 
 type BlogPostType = {
   imageUrl: string;
   _id: string;
   title: string;
+  excerpt: string;
   slug: string;
+  publishedAt?: string;
 };
 
 const BlogPost = ({ post }: { post: BlogPostType }) => (
-  <div
-    className="w-64 md:w-96 rounded-lg shadow-md overflow-hidden flex flex-col flex-shrink-0 bg-background-light dark:bg-background-dark"
+  <Link
+    href={`/blog/${post.slug}`}
+    className="group w-80 sm:w-96 flex-shrink-0 rounded-lg shadow-md overflow-hidden flex flex-col bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 snap-start"
+    tabIndex={0}
   >
     {post.imageUrl && (
       <Image
         isZoomed
         src={post.imageUrl}
         alt={post.title}
-        className="object-cover w-full shadow-md"
+        className="object-cover w-full h-48"
         width={384}
         height={200}
       />
     )}
-    <div className="p-4">
-      <Link href={`/blog/${post.slug}`}>
-        <h3 className="lg:text-heading text-brand-primary font-semibold">
-          {post.title}
-        </h3>
-      </Link>
+    <div className="p-4 flex flex-col flex-1">
+      <h3 className="xl:text-heading lg:text-heading md:text-heading text-brand-primary font-semibold group-hover:underline">
+        {post.title}
+      </h3>
+      {post.publishedAt && (
+        <span className="text-xs text-gray-400 mb-2">
+          {new Date(post.publishedAt).toLocaleDateString()}
+        </span>
+      )}
+      <p className="text-body text-gray-600 dark:text-gray-400 mt-1 mb-2 line-clamp-3">
+        {post.excerpt}
+      </p>
+      <span className="mt-auto text-sm text-red-500 font-medium group-hover:underline">
+        Read More &rarr;
+      </span>
     </div>
-  </div>
+  </Link>
 );
 
 export default function BlogSectionClient({
@@ -67,12 +79,13 @@ export default function BlogSectionClient({
 
   return (
     <section className="w-full py-12 bg-background-light dark:bg-background-dark">
-      <div className="max-w-5xl mx-auto px-4"> {/* Boxed container */}
+      <div className="max-w-5xl mx-auto px-4">
         <div className="flex justify-between items-center mb-8">
           <motion.div
             className="text-heading pb-2 xs:pb-3 sm:pb-4"
             variants={textVariants}
           >
+            <SectionHeading>BLOGS</SectionHeading>
             <AccentText className="normal-case">
               Ideas, Insights & Marketing Rants
             </AccentText>
@@ -80,12 +93,14 @@ export default function BlogSectionClient({
           <div className="flex space-x-2">
             <button
               onClick={scrollLeft}
+              aria-label="Scroll left"
               className="bg-brand-primary border rounded-md p-2 text-gray-600 hover:bg-gray-200"
             >
               &lt;
             </button>
             <button
               onClick={scrollRight}
+              aria-label="Scroll right"
               className="bg-brand-primary text-white border rounded-md p-2 hover:bg-gray-700"
             >
               &gt;
@@ -93,10 +108,10 @@ export default function BlogSectionClient({
           </div>
         </div>
         <div
-          className="overflow-x-auto pb-4 scrollbar-hide"
+          className="overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
           ref={scrollRef}
         >
-          <div className="flex flex-row gap-4 transition-transform duration-200 ">
+          <div className="flex flex-row gap-4 transition-transform duration-200">
             {blogs.map((post) => (
               <BlogPost key={post._id} post={post} />
             ))}

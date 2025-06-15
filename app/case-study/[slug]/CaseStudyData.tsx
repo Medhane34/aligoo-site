@@ -29,6 +29,7 @@ export async function fetchCaseStudyCoreDataBySlug(
       title,
       "slug": slug.current,
       publishedAt,
+      industry, 
       excerpt,
       service->{name},
       "mainImage": mainImage.asset->url,
@@ -45,6 +46,7 @@ export async function fetchCaseStudyCoreDataBySlug(
       title: data.title,
       slug: data.slug,
       publishedAt: data.publishedAt,
+      industry: data.industry, 
       excerpt: data.excerpt,
       service: data.service,
       mainImage: data.mainImage,
@@ -64,7 +66,7 @@ export async function fetchCaseStudyOverviewBySlug(
   const query = `
     *[_type == "caseStudy" && slug.current == $slug][0]{
       overviewTitle,
-      "overviewDescription": pt::text(overviewDescription), // <-- IMPORTANT CHANGE HERE
+      overviewDescription, // <-- Now a plain string
       "heroImageUrl": heroImageUrl.asset->url,
       "heroImageAlt": heroImageUrl.alt,
     }

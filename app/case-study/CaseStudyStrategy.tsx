@@ -2,7 +2,7 @@
 "use client";
 import React from 'react';
 import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { CaseStudyGoalData } from './[slug]/CaseStudyData'; // Import the type
+import { CaseStudyGoalData } from "@/types/CaseStudyTypes"; // Import the type
 
 // This interface now directly matches the data fetched by fetchCaseStudyGoalDataBySlug
 interface CaseStudyGoalsProps {

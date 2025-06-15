@@ -4,7 +4,9 @@ import { Card, CardHeader } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
+
 import { AccentText, SectionHeading } from "@/components/ui/typography";
+import { MyButton } from "@/components/custom/extendVariants";
 
 // Animation variants remain unchanged (good)
 const headerVariants = {
@@ -73,7 +75,7 @@ const placeholderCaseStudy: CaseStudy = {
   challenge: "Stay tuned for exciting new case studies!",
   outcome: "More amazing results are on the way!",
   goalsSummary: "",
-  challengeSummary: ""
+  challengeSummary: "",
 };
 
 const fallbackCategory = "Case Study Category";
@@ -122,15 +124,11 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
           </motion.div>
 
           {/* Button */}
-          <motion.button
-            className="px-8 py-3 border border-transparent text-white font-medium rounded-full
-              bg-gradient-to-r from-brand-primary-light to-brand-primary-dark
-              hover:from-brand-primary-dark hover:to-brand-primary-darker
-              shadow-lg transition-all duration-300 whitespace-nowrap" /* Added whitespace-nowrap to prevent button text wrapping */
-            variants={headerVariants}
-          >
-            MORE CASE STUDIES 🏗️
-          </motion.button>
+          <motion.div variants={headerVariants}>
+            <Link passHref href="/works">
+              <MyButton>🏗️ More of our works </MyButton>
+            </Link>
+          </motion.div>
         </motion.div>
         {/* Cards Grid - Now simplified and inside the common container */}
         <div className="grid grid-cols-12 gap-4 lg:gap-6">
@@ -304,7 +302,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     </h4>
                   </CardHeader>
                   {/* ... (gradient borders and hover content - keep as is) ... */}
-                   <div
+                  <div
                     className="
                       absolute top-0 left-0 
                       w-0 h-[3px]

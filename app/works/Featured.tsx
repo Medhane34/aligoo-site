@@ -2,65 +2,22 @@
 "use client";
 import { Image } from "@heroui/image";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 import {
   AccentText,
   SectionHeading,
   Paragraph,
 } from "@/components/ui/typography";
-
+import { FetchCaseStudiesProps } from "@/types/CaseStudyTypes";
 // Define the type for the prop (same as CaseStudy type in CaseStudy.tsx)
-type CaseStudy = {
-  _id: string;
-  title: string;
-  imageUrl: string;
-  service: string;
-  hasImage: boolean;
-  hasService: boolean;
-  slug: string;
-};
-
-// Define the props for the component
-type FetchCaseStudiesProps = {
-  featured: CaseStudy;
-};
-
-const imageVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: "easeInOut" },
-  },
-};
-
-const textContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.7,
-    },
-  },
-};
-
-const textVariants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.7, ease: "easeInOut" },
-  },
-};
-
-const ButtonVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.7, ease: "easeInOut" },
-  },
-};
+import {
+  ButtonVariants,
+  imageVariants,
+  textContainerVariants,
+  textVariants,
+} from "@/lib/motions"; //import from motion variants
+import { MyButton } from "@/components/custom/extendVariants";
 
 export default function FetchCaseStudies({ featured }: FetchCaseStudiesProps) {
   return (
@@ -103,32 +60,26 @@ export default function FetchCaseStudies({ featured }: FetchCaseStudiesProps) {
             </SectionHeading>
           </motion.div>
           <motion.div className="pb-2 xs:pb-3 sm:pb-4" variants={textVariants}>
-            <AccentText className="lowercase">
-              OUR RECENT FEATURED PROJECT
-            </AccentText>
+            <AccentText>Our Recent Featured Project</AccentText>
           </motion.div>
           <motion.div variants={textVariants}>
-            <p className="text-body">
-              At Buzz Digital Agency, we blend data-driven strategy with
-              creative excellence. Our diverse team brings decades of experience
-              in transforming B2B brands and building digital ecosystems that
-              perform.
-            </p>
-            <br />
+            {featured.excerpt ? (
+              <Paragraph className="text-body lg:text-body">
+                {featured.excerpt}
+              </Paragraph>
+            ) : (
+              <Paragraph className="text-body lg:text-body">
+                No excerpt available.
+              </Paragraph>
+            )}
           </motion.div>
-          <motion.div variants={textVariants}>
-            <p className="text-body">
-              From messaging clarity to bold visuals and technical SEO, we
-              provide everything you need to stand out in a crowded market. We
-              believe in relationships, not just deliverables.
-            </p>
-          </motion.div>
-          <motion.div 
-          variants={ButtonVariants}
-          className="pt-6">
-            <button className="w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full">
-              📖 Read Case Study  
-            </button>
+
+          <motion.div className="pt-6" variants={ButtonVariants}>
+            <Link href={`/case-studies/${featured.slug}`}>
+              <MyButton className="w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full">
+                📖 Read Case Study
+              </MyButton>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

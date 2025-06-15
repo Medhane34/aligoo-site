@@ -7,6 +7,7 @@ import FaqSection from "@/components/service-sections/FaqSection";
 import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
 import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
 import OurProcess from "@/components/service-sections/ourprocess";
+import Container from "@/components/ui/Container";
 const fbWhyContent = {
   heading: "Why SEO Still Reigns in the(Digital world if you know to",
   highlight: "use them)",
@@ -54,19 +55,23 @@ export default async function IndexPage() {
         headlineText2="Visibility"
         headlineText3=" Visibility That Drives Clicks, Leads & Sales"
         primaryButtonText="📞 Book a Strategy Call"
-        primaryButtonUrl="/dashboard"
+        primaryButtonUrl="/strategy-session"
         secondaryButtonText="🔍 Get a Free SEO Audit"
-        secondaryButtonUrl="/docs"
+        secondaryButtonUrl="#our-process-seo"
         subheading="We help you rank higher, get discovered faster, and convert more. Whether you're a local business or a growing brand, our SEO strategies are built to attract traffic that turns into paying customers — not just visitors."
       />
+      <Container>
       <WhyServiceWorks {...fbWhyContent} />
       <OurProcess
+        id="our-process-seo"
         heading="The Evergreen Growth Framework 🌱"
         subheading="We don’t chase traffic. We build it organically, methodically, and strategically — so it keeps compounding over time. Here’s how:"
-        imageSrc="/web-service-aligoo-process.jpg" // Path to your image in the public folder
-        imageAlt="Beautiful building with balconies"
+        imageSrc="/page-content-images/ourprocess-seo.png" // Path to your image in the public folder
+        imageAlt="“Marketers nurturing an organic growth ecosystem with SEO audit, optimized content, and authority-building strategies for long-term traffic.”"
         steps={processSteps}
       />
+  </Container>
+      <Container>
       <WhoThisIsForSection
       heading="Who This Is For"
       highlightedPhrases={[
@@ -81,6 +86,8 @@ export default async function IndexPage() {
       introText="We don’t just build pretty websites-"
       subheading="we build strategic ones that drive results."
     />
+</Container>
+    <Container>
 
       <FaqSection
   ctaText="📩 Need Custom Advice?"
@@ -112,7 +119,11 @@ export default async function IndexPage() {
   subheading="We’ve helped dozens of brands run profitable campaigns. Here are answers to the most common questions people ask before they sign up."
 />
 
+</Container>
+  
+    <Container>
       <CTABottomSection firstbuttontext={"📲 Book a Free Strategy Call"} heading={"Ready to get started?"} subheading={"Book a free strategy session with our team. "} />
+   </Container>
     </>
   );
 }

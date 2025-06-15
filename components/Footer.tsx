@@ -4,32 +4,34 @@ import React from "react";
 import { Button } from "@heroui/button";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 
-
 const services = [
-  "Search Engine Optimization (SEO)",
-  "Pay-Per-Click Advertising (PPC)",
-  "Social Media Marketing",
-  "Content Marketing",
-  "Email Marketing",
-  "Web Design & Development",
-  "Conversion Rate Optimization (CRO)",
-  "Analytics & Reporting",
+  { label: "Facebook & Instagram Ads", href: "/services/facebook-ad" },
+  { label: "Web Design & Development", href: "/services/web-design" },
+  {
+    label: "Digital Marketing (all-in-one)",
+    href: "/services/digital-marketing",
+  },
+  { label: "Content Marketing", href: "/services/content-marketing" },
+  { label: "Search Engine Optimization (SEO)", href: "/services/seo" },
+  { label: "TikTok Ads", href: "/services/tiktok-ad" },
+  { label: "Graphic Design", href: "/services/graphic-design" },
+  { label: "Funnel Mapping", href: "/services/funnel-mapping" },
 ];
 
 const contacts = [
   {
     label: "Email",
-    value: "info@aligoodigitalagency.com",
-    href: "mailto:info@aligoodigitalagency.com",
+    value: "info@aligoo-digital.agency",
+    href: "mailto:info@aligoo-digital.agency",
   },
   {
     label: "Phone",
-    value: "(888) 234-5100",
-    href: "tel:(888) 234-5100",
+    value: "(+251)910 58 47 12",
+    href: "(+251)910 58 47 12",
   },
   {
     label: "Address",
-    value: "1535 West Loop S. Ste 450, Houston, TX, 77027",
+    value: "Addis Ababa, Ethiopia",
     href: undefined,
   },
 ];
@@ -37,7 +39,7 @@ const contacts = [
 const socialLinks = [
   {
     icon: <Facebook className="w-5 h-5" />,
-    href: "https://www.facebook.com",
+    href: "https://www.facebook.com/aligoodigitalagency/",
     label: "Facebook",
   },
   {
@@ -57,7 +59,7 @@ const socialLinks = [
   },
   {
     icon: <Linkedin className="w-5 h-5" />,
-    href: "https://www.linkedin.com",
+    href: "https://et.linkedin.com/company/aligoo",
     label: "LinkedIn",
   },
 ];
@@ -72,7 +74,9 @@ const Footer: React.FC = () => {
             ALIGOO DIGITAL AGENCY
           </h1>
           <p className="text-sm">
-            Based in Addis Ababa, we help forward-thinking brands break through the noise with clarity, creativity, and measurable results. Elevate your online presence with our innovative digital solutions.
+            Based in Addis Ababa, we help forward-thinking brands break through
+            the noise with clarity, creativity, and measurable results. Elevate
+            your online presence with our innovative digital solutions.
           </p>
         </div>
 
@@ -81,10 +85,13 @@ const Footer: React.FC = () => {
           <h3 className="text-lg font-semibold text-white mb-4">Services</h3>
           <ul className="space-y-2">
             {services.map((service) => (
-              <li key={service}>
-                <span className="text-sm hover:text-red-400 transition-colors cursor-pointer">
-                  {service}
-                </span>
+              <li key={service.label}>
+                <a
+                  href={service.href}
+                  className="text-sm hover:text-red-400 transition-colors cursor-pointer"
+                >
+                  {service.label}
+                </a>
               </li>
             ))}
           </ul>
@@ -108,7 +115,7 @@ const Footer: React.FC = () => {
                 <li key={c.label}>
                   <span className="text-sm">{c.value}</span>
                 </li>
-              )
+              ),
             )}
           </ul>
           <div className="flex gap-4">
@@ -133,11 +140,12 @@ const Footer: React.FC = () => {
             Stay Updated
           </h3>
           <p className="text-sm mb-4">
-            Get the latest marketing tips and agency news. Join our Telegram bot!
+            Get the latest marketing tips and agency news. Join our Telegram
+            bot!
           </p>
           <Button
             as="a"
-            href="https://t.me/yourtelegrambot" // Replace with your actual Telegram bot link
+            href="https://t.me/aligoo_leads_bot?start=start" // Replace with your actual Telegram bot link
             target="_blank"
             rel="noopener noreferrer"
             className="bg-red-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-red-600 transition"
@@ -148,18 +156,13 @@ const Footer: React.FC = () => {
       </div>
       {/* Bottom Bar */}
       <div className="mt-12 pt-8 border-t border-gray-800 text-center text-sm text-gray-500">
-        Copyright © {new Date().getFullYear()} Aligoo Digital Agency. All rights reserved.
+        Copyright © {new Date().getFullYear()} Aligoo Digital Agency. All
+        rights reserved.
         <div className="mt-4 flex flex-wrap justify-center gap-6">
-          <a
-            href="/terms"
-            className="hover:text-red-400 transition-colors"
-          >
+          <a href="/terms" className="hover:text-red-400 transition-colors">
             Terms of Service
           </a>
-          <a
-            href="/privacy"
-            className="hover:text-red-400 transition-colors"
-          >
+          <a href="/privacy" className="hover:text-red-400 transition-colors">
             Privacy Policy
           </a>
         </div>

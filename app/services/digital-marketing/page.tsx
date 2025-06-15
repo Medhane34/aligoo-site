@@ -57,9 +57,9 @@ export default async function IndexPage() {
         headlineText2="That Drives Growth"
         headlineText3="— Not Just Likes"
         primaryButtonText="📞 Book Your Strategy Call"
-        primaryButtonUrl="/dashboard"
-        secondaryButtonText="📄 See How We Build Strategy"
-        secondaryButtonUrl="/docs"
+        primaryButtonUrl="/strategy-session"
+        secondaryButtonText="👀How We Build Strategy"
+        secondaryButtonUrl="#our-process-digital"
         subheading="Without a clear roadmap, your marketing is just noise. We help businesses cut through the clutter with tailored digital strategies built to attract, convert, and scale. Stop guessing. Start growing.
 
 "
@@ -68,11 +68,12 @@ export default async function IndexPage() {
       <WhyServiceWorks {...webWhyContent} />
       </Container>
       <OurProcess
+      id="our-process-digital"
         heading="🧩 Our Process — The MAP Framework"
         subheading="Marketing. Alignment. Precision.
 We don’t throw spaghetti at the wall. We build strategies that stick and scale."
-        imageSrc="/web-service-aligoo-process.jpg" // Path to your image in the public folder
-        imageAlt="Beautiful building with balconies"
+        imageSrc="/page-content-images/ourprocess-digital.png" // Path to your image in the public folder
+        imageAlt="“Marketing team analyzing a strategic roadmap with audience personas, market research data, and a prioritized digital marketing action plan.”"
         steps={processSteps}
       />
       <Container>

@@ -157,7 +157,7 @@ const AligooMarketingFix = () => {
                   alt="Merchant testimonial"
                   className="rounded-xl shadow-2xl object-cover z-0"
                   height={500}
-                  src="https://heroui.com/images/hero-card-complete.jpeg"
+                  src="/page-content-images/david-2.jpeg"
                   width={500}
                 />
                 <motion.div
@@ -165,14 +165,13 @@ const AligooMarketingFix = () => {
                   variants={problemLeftVariants}
                 >
                   <p className="text-lg italic">
-                    “Aligoo gave us the clarity and execution power we needed to
-                    scale fast.”
+                    &quot;The consumer isn’t a moron, she is your wife.”
                   </p>
                   <p className="mt-4 font-semibold text-subheading">
-                    Jessica Wise
+David Ogilvy
                     <br />
                     <span className="text-small opacity-75">
-                      CEO, Hell Babes
+                      Founder, Oglivy | Our Inspiration 
                     </span>
                   </p>
                 </motion.div>
@@ -297,11 +296,11 @@ const AligooMarketingFix = () => {
             </motion.div>
           )}
           {/* CTA Button - placed outside the tab content grid */}
-          <div className="mt-12 text-center">
+          {/* <div className="mt-12 text-center">
             <Button className="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium px-8 py-4 rounded-full shadow-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
               Take your shot
             </Button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

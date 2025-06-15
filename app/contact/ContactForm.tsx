@@ -11,6 +11,14 @@ import { useForm, useWatch } from "react-hook-form"; // Import useWatch
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import classNames from "classnames"; // Not used in the provided snippet, but keeping for completeness
+import { AccentText, SectionHeading } from "@/components/ui/typography";
+
+// At the top of your file
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
 
 // Country data with flags, codes, and unique keys for SelectItems
 const countriesData = [
@@ -154,6 +162,18 @@ const ContactForm = () => {
     return foundItem ? foundItem.key : undefined;
   }, [currentServiceEnquiryValue]);
 
+  function fireGAEvent() {
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "contact_form_submit", {
+        event_category: "lead",
+        event_label: "Contact Form",
+      });
+    } else {
+      setTimeout(fireGAEvent, 500);
+    }
+  }
+
+  //action after submit
   const onSubmit = async (data: ContactFormInputs) => {
     setSubmissionStatus("idle");
     setErrorMessage("");
@@ -197,6 +217,8 @@ const ContactForm = () => {
           description: "Message sent successfully",
           color: "success",
         });
+        // Fire GA4 event for contact form submit
+        fireGAEvent();
       } else {
         setErrorMessage(
           errorData?.message || "Something went wrong. Please try again.",
@@ -219,11 +241,11 @@ const ContactForm = () => {
     <section className="py-8 sm:py-12 md:py-16 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
       <div className="container mx-auto px-4 sm:px-6 md:px-4">
         <div className="mb-8 sm:mb-10 md:mb-12 text-center">
-          <h2 className="text-heading font-bold mb-4">Contact Us</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <SectionHeading>Contact Us</SectionHeading>
+          <AccentText>
             Have questions or want to start a project? Reach out to us. We’re
             here to help!
-          </p>
+          </AccentText>
         </div>
 
         <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 md:flex-row lg:gap-16">
@@ -437,9 +459,8 @@ const ContactForm = () => {
           <div className="w-full sm:p-6 md:p-8 md:w-1/2 p-8 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md md:bg-transparent md:shadow-none">
             <h3 className="text-heading font-semibold mb-6">Contact Details</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-8 text-body">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit taras
-              tellus neul sarame tamat lae macorper del dierio denta low luco.
-            </p>
+              if you wish to reach out to us directly, you can use the contact details below or connect with us on social media.
+              </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 xs:gap-3 sm:gap-4 mt-3 xs:mt-4 sm:mt-5 md:mt-6">
               {/* Address */}
               <div className="flex items-center gap-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
@@ -467,7 +488,7 @@ const ContactForm = () => {
                 <div>
                   <p className="font-semibold">Address</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Jl. Raya Kuta No. 121
+                    Addis Ababa, Ethiopia 
                   </p>
                 </div>
               </div>
@@ -492,7 +513,7 @@ const ContactForm = () => {
                 <div>
                   <p className="font-semibold">Mobile</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    (+021) 789 345
+                    (+251) 910 58 47 12
                   </p>
                 </div>
               </div>
@@ -552,7 +573,7 @@ const ContactForm = () => {
                 <div>
                   <p className="font-semibold">Email</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    admin@support.com
+                    info@aligoo-digital.agency
                   </p>
                 </div>
               </div>
@@ -567,7 +588,7 @@ const ContactForm = () => {
                 <a
                   aria-label="Facebook"
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-500 transition-colors"
-                  href="https://example.com/"
+                  href="https://www.facebook.com/aligoodigitalagency"
                 >
                   <svg
                     fill="currentColor"
@@ -599,7 +620,7 @@ const ContactForm = () => {
                 <a
                   aria-label="LinkedIn"
                   className="text-gray-600 dark:text-gray-400 hover:text-blue-700 transition-colors"
-                  href="https://example.com/"
+                  href="https://et.linkedin.com/company/aligoo"
                 >
                   <svg
                     fill="currentColor"

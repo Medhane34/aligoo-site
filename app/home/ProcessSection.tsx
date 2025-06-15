@@ -43,7 +43,12 @@ const descriptionVariants = {
 
 const dividerVariants = {
   initial: { width: 0, opacity: 0, backgroundColor: "transparent" },
-  animate: { width: "100%", opacity: 1, backgroundColor: "hsl(var(--tw-colors-blue-500))", transition: { duration: 0.6, delay: 0.5 } },
+  animate: {
+    width: "100%",
+    opacity: 1,
+    backgroundColor: "hsl(var(--tw-colors-blue-500))",
+    transition: { duration: 0.6, delay: 0.5 },
+  },
 };
 
 const ProcessSection = () => {
@@ -64,7 +69,11 @@ const ProcessSection = () => {
   }, [isInView]);
 
   useEffect(() => {
-    if (isInView && activeStep < processStepsData.length - 1 && activeStep >= 0) {
+    if (
+      isInView &&
+      activeStep < processStepsData.length - 1 &&
+      activeStep >= 0
+    ) {
       const timer = setTimeout(() => {
         setActiveStep((prev) => prev + 1);
       }, 2000);
@@ -82,23 +91,33 @@ const ProcessSection = () => {
     >
       <div className="container mx-auto px-4 text-center ">
         <div className="space-y-2 mb-8">
-                <SectionHeading className="text-3xl font-bold tracking-tight uppercase"> Our Process </SectionHeading>
-                <AccentText className="normal-case">How We Go From “Let’s Talk” to “Let’s Launch” </AccentText>
-              
-              </div>
+          <SectionHeading className="text-3xl font-bold tracking-tight uppercase">
+            {" "}
+            Our Process{" "}
+          </SectionHeading>
+          <AccentText className="normal-case">
+            How We Go From “Let’s Talk” to “Let’s Launch”{" "}
+          </AccentText>
+        </div>
 
         <div className="flex justify-around mb-8 relative">
           {Array.from({ length: processStepsData.length }).map((_, index) => (
             <React.Fragment key={index}>
               <motion.div
                 className={`relative w-12 h-12 rounded-full border-2 ${
-                  activeStep >= index ? "border-blue-500 text-blue-500" : "border-gray-300 text-gray-600"
+                  activeStep >= index
+                    ? "border-blue-500 text-blue-500"
+                    : "border-gray-300 text-gray-600"
                 } flex items-center justify-center font-semibold`}
                 variants={stepVariants}
                 initial="initial"
                 animate={activeStep >= index ? "animate" : "initial"}
               >
-                {activeStep > index ? <CheckIcon className="w-6 h-6" /> : index + 1}
+                {activeStep > index ? (
+                  <CheckIcon className="w-6 h-6" />
+                ) : (
+                  index + 1
+                )}
               </motion.div>
               {index < processStepsData.length - 1 && (
                 <motion.div // Corrected line: only one motion.div
@@ -106,7 +125,10 @@ const ProcessSection = () => {
                   variants={dividerVariants}
                   initial="initial"
                   animate={activeStep > index ? "animate" : "initial"}
-                  style={{ width: activeStep > index ? "calc(calc(100% / 4) - 2rem)" : 0 }}
+                  style={{
+                    width:
+                      activeStep > index ? "calc(calc(100% / 4) - 2rem)" : 0,
+                  }}
                 />
               )}
             </React.Fragment>
@@ -121,8 +143,12 @@ const ProcessSection = () => {
               initial="initial"
               animate={activeStep >= index ? "animate" : "initialInactive"}
             >
-              <h3 className="text-xl font-semibold mb-2 text-brand-primary-light dark:text-text-dark">{step.heading}</h3>
-              <motion.p className="text-white-600 text-sm">{step.description}</motion.p>
+              <h3 className="text-xl font-semibold mb-2 text-brand-primary-light dark:text-text-dark">
+                {step.heading}
+              </h3>
+              <motion.p className="text-white-600 text-sm">
+                {step.description}
+              </motion.p>
             </motion.div>
           ))}
         </div>

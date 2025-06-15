@@ -8,9 +8,11 @@ import {CaseStudyTestimonialData} from "@/types/CaseStudyTypes"
 // Define the props interface for the component
 interface CaseStudyTestimonialProps {
   testimonialData: CaseStudyTestimonialData;
+    rating: number; // <-- Add this line
 }
 export default function CaseStudyTestimonial({
   testimonialData,
+  rating,
 }: CaseStudyTestimonialProps) {
   // Step 1: Check if the entire testimonial object exists
   if (!testimonialData) {
@@ -25,7 +27,6 @@ export default function CaseStudyTestimonial({
     testimonialQuote,
     testimonialAuthorName,
     testimonialAuthorPosition,
-    rating = 0, // Default to 0 if rating is not provided
   } = testimonialData;
 
   // Step 3: Check if essential data is missing (even if the object exists)

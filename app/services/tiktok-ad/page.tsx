@@ -8,6 +8,8 @@ import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
 import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
 import OurProcess from "@/components/service-sections/ourprocess";
 import AreWeMatch from "./AreWeMatch";
+
+import Container from "@/components/ui/Container";
 const fbWhyContent = {
   heading: "Why TikTok Ad Works(if you know to",
   highlight: "use them)",
@@ -55,19 +57,26 @@ export default async function IndexPage() {
         headlineText2="Into Sales"
         headlineText3=" with High-Converting TikTok Ads"
         primaryButtonText="🔴 Book a Strategy Call"
-        primaryButtonUrl="/dashboard"
-        secondaryButtonText="👀 See Past Workds"
-        secondaryButtonUrl="/docs"
+        primaryButtonUrl="/strategy-session"
+        secondaryButtonText="👀 See Our Process"
+        secondaryButtonUrl="#our-process-tiktok"
         subheading="Tired of throwing money at ads that don’t move the needle? We create thumb-stopping TikTok ads that blend into the feed, spark attention, and convert like crazy."
       />
+      <Container>
       <WhyServiceWorks {...fbWhyContent} />
+     </Container>
+
+      <Container>
       <OurProcess
+        id="our-process-tiktok"
         heading="Our Process — The V.I.B.E Framework"
         subheading="TikTok isn’t just another ad platform — it’s a culture. We don’t just run ads, we help you V.I.B.E. with your audience."
-        imageSrc="/web-service-aligoo-process.jpg" // Path to your image in the public folder
-        imageAlt="Beautiful building with balconies"
+        imageSrc="/page-content-images/tik-tok-ourprocess.png" // Path to your image in the public folder
+        imageAlt="Illustration of the V.I.B.E TikTok ad framework showcasing steps from visual hooks to performance analysis"
         steps={processSteps}
       />
+     </Container>
+      <Container>
       <WhoThisIsForSection
       heading="Who This Is For"
       highlightedPhrases={[
@@ -82,8 +91,12 @@ export default async function IndexPage() {
       introText="We don’t just build pretty websites-"
       subheading="we build strategic ones that drive results."
     />
-    <AreWeMatch/>
 
+    </Container>
+    <Container>
+    <AreWeMatch/>
+   </Container>
+   <Container>
       <FaqSection
   ctaText="📩 Need Custom Advice?"
   eyebrow="❓ FAQs about Our TikTok Ad Service"
@@ -114,7 +127,11 @@ export default async function IndexPage() {
   subheading="We’ve helped dozens of brands run profitable campaigns. Here are answers to the most common questions people ask before they sign up."
 />
 
+</Container>
+<Container>
+
       <CTABottomSection firstbuttontext={"📲 Book a Free Strategy Call"} heading={"Ready to get started?"} subheading={"Book a free strategy session with our team. "} />
+    </Container>
     </>
   );
 }

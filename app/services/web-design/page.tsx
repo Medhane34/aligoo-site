@@ -7,6 +7,7 @@ import FaqSection from "@/components/service-sections/FaqSection";
 import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
 import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
 import OurProcess from "@/components/service-sections/ourprocess";
+import Container from "@/components/ui/Container";
 
 const webWhyContent = {
   heading: "Why Web Design Still Works(When Done",
@@ -55,21 +56,27 @@ export default async function IndexPage() {
         headlineText2="for businesses"
         headlineText3="That Want to Grow Faster"
         primaryButtonText="👉 Get a Free Homepage Audit"
-        primaryButtonUrl="/dashboard"
-        secondaryButtonText="👀 See Past Workds"
-        secondaryButtonUrl="/docs"
+        primaryButtonUrl="/strategy-session"
+        secondaryButtonText="👀 See the process "
+        secondaryButtonUrl="#our-proecess-web"
         subheading="We design conversion-focused websites that don’t just look stunning—but are built to attract, engage, and convert your ideal customers. Whether you're just starting out or ready to level up, we’ll craft a digital experience that works as hard as you do.
 
 "
       />
+      <Container>
       <WhyServiceWorks {...webWhyContent} />
+</Container>
+      <Container>
       <OurProcess
+        id="our-proecess-web"
         heading="Let's See How it Works"
         subheading="Lorem ipsum dolor sit amet, consectetur adipiscing elit"
         imageSrc="/web-service-aligoo-process.jpg" // Path to your image in the public folder
         imageAlt="Beautiful building with balconies"
         steps={processSteps}
       />
+</Container>
+      <Container>
       <WhoThisIsForSection
       heading="Who This Is For"
       highlightedPhrases={[
@@ -84,8 +91,13 @@ export default async function IndexPage() {
       introText="We don’t just build pretty websites-"
       subheading="we build strategic ones that drive results."
     />
+</Container>
+    <Container>
 
-     <FeaturedWebDesignPostsWrapper/>
+     <FeaturedWebDesignPostsWrapper
+     />
+</Container>
+     <Container>
       <FaqSection
   ctaText="📩 Need Custom Advice?"
   eyebrow="❓ FAQs about Our Web Design Service"
@@ -115,8 +127,11 @@ export default async function IndexPage() {
   heading="Still Wondering If It Works?"
   subheading="We’ve helped dozens of brands run profitable campaigns. Here are answers to the most common questions people ask before they sign up."
 />
+</Container>
+<Container>
 
       <CTABottomSection firstbuttontext={"📲 Book a Free Strategy Call"} heading={"Ready to get started?"} subheading={"Book a free strategy session with our team. "} />
+      </Container>
     </>
   );
 }

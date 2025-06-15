@@ -4,69 +4,12 @@
 import { Button } from "@heroui/button";
 import { motion } from "framer-motion";
 import Link from "next/link"; // Import Link for internal navigation
-
+import { ButtonVariants } from "@/lib/motions/buttonVariants"; // Import your button variants
 // Assuming `title` is a utility function from your primitives that applies common styles
-import { title } from "@/components/primitives"; 
+import { title } from "@/components/primitives";
 
 // --- Framer Motion Variants (Keep as is, they are fine) ---
-const sectionVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const badgeVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeInOut" },
-  },
-};
-
-const headingVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeInOut" },
-  },
-};
-
-const subheadingVariants = {
-  hidden: { opacity: 0, y: 15 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeInOut" },
-  },
-};
-
-const buttonContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const buttonVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeInOut" },
-  },
-};
-// --- End Framer Motion Variants ---
-
-
+import { MyButton, MyOutlineButton } from "./custom/extendVariants";
 // Define the props interface for better type safety (if using TypeScript)
 // For JavaScript, this acts as good documentation.
 interface HeroSectionProps {
@@ -81,6 +24,63 @@ interface HeroSectionProps {
   badgeText?: string; // Optional badge text
 }
 
+const headerVariants= {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 2.2,
+    },
+  },
+};
+const buttonContainerVariants= {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const subheadingVariants= {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  },
+};
+
+const headingVariants= {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeInOut" },
+  },
+};
+
+const badgeVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  },
+};
+
+const sectionVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+
 // Update the component to accept props
 export default function HeroSection({
   headlineText1 = "Make", // Default values for headline parts
@@ -92,7 +92,8 @@ export default function HeroSection({
   secondaryButtonText,
   secondaryButtonUrl,
   badgeText, // Optional badge text prop
-}: HeroSectionProps) { // Add the props to the function signature
+}: HeroSectionProps) {
+  // Add the props to the function signature
   return (
     <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark mt-[-60px] xs:p-4 sm:mt-[-80px] sm:p-6 md:mt-[-105px] md:p-9">
       {/* Background Pattern */}
@@ -113,9 +114,7 @@ export default function HeroSection({
             <motion.div variants={badgeVariants}>
               <Button
                 className="h-8 xs:px-3 xs:py-1 sm:h-9 sm:px-[14px] sm:py-1.5 md:px-[18px] md:py-2 overflow-hidden border-1 text-small font-normal leading-5 text-text-light dark:text-text-dark"
-                endContent={
-                  <span>😎</span>
-                }
+                endContent={<span>😎</span>}
                 radius="full"
                 variant="bordered"
               >
@@ -132,11 +131,11 @@ export default function HeroSection({
             <div className="relative">
               <div className="inline-block max-w-[90%] xs:max-w-md sm:max-w-lg md:max-w-xl text-center text-text-light dark:text-text-dark justify-center relative z-10">
                 <span className={title()}>{headlineText1} </span>
-                <span className={title({ color: "violet" })}>{headlineText2} </span>
-                <br />
-                <span className={title()}>
-                  {headlineText3}
+                <span className={title({ color: "violet" })}>
+                  {headlineText2}{" "}
                 </span>
+                <br />
+                <span className={title()}>{headlineText3}</span>
               </div>
             </div>
           </motion.div>
@@ -154,26 +153,18 @@ export default function HeroSection({
             className="flex flex-row items-center justify-center gap-6 sm:flex-row"
             variants={buttonContainerVariants}
           >
-            <motion.div variants={buttonVariants}>
-              <Link href={primaryButtonUrl} passHref>
-                <Button
-                  className="w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker"
-                  radius="full"
-                >
+            <motion.div variants={ButtonVariants}>
+              <Link passHref href={primaryButtonUrl}>
+                <MyButton>
                   {primaryButtonText} {/* Use primaryButtonText prop */}
-                </Button>
+                </MyButton>
               </Link>
             </motion.div>
-            <motion.div variants={buttonVariants}>
-              <Link href={secondaryButtonUrl} passHref>
-                <Button
-                  className="h-10 w-[163px] border-2 dark:border-white border-brand-primary-light px-[16px] py-[10px] text-text-light dark:text-text-dark font-medium leading-5"
-                
-                  radius="full"
-                  variant="bordered"
-                >
+            <motion.div variants={ButtonVariants}>
+              <Link passHref href={secondaryButtonUrl}>
+                <MyOutlineButton>
                   {secondaryButtonText} {/* Use secondaryButtonText prop */}
-                </Button>
+                </MyOutlineButton>
               </Link>
             </motion.div>
           </motion.div>

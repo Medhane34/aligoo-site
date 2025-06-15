@@ -25,6 +25,10 @@ type FeaturedPostsSectionProps = {
 const placeholderCaseStudy: CaseStudy = {
   _id: "placeholder",
   title: "Coming Soon",
+  goalsSummary: "",
+  challengeSummary: "",
+  industry: "",
+  excerpt:"",
   imageUrl: "https://heroui.com/images/card-example-4.jpeg",
   service: "Explore More",
   hasImage: true,

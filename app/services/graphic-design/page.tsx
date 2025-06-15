@@ -109,9 +109,9 @@ export default async function IndexPage() {
         headlineText2="That Speak"
         headlineText3="Louder Than Words"
         primaryButtonText="📥 Let's Design Powerful"
-        primaryButtonUrl="/dashboard"
+        primaryButtonUrl="/strategy-session"
         secondaryButtonText="📄 See Our Process"
-        secondaryButtonUrl="/docs"
+        secondaryButtonUrl="#our-process-graphic"
         subheading="From scroll-stopping social media posts to brand-defining visuals — we create designs that don’t just look good, they perform.
 "
       />
@@ -123,12 +123,15 @@ export default async function IndexPage() {
       />
 
       </Container>
+      <div className="div" id="our-process-graphic">
+
+      
       <ProcessSection
         heading="✨ The VIBE Method"
         subheading="A 4-step breakdown with a catchy name and personality"
         steps={steps}
       />
-
+  </div>
       <Container>
         
       <WhoThisIsForSection
@@ -182,7 +185,7 @@ export default async function IndexPage() {
 />
 </Container>
  <Container>
-      <CTABottomSection firstbuttontext={"👉 Book a Free Funnel Strategy Call"} 
+      <CTABottomSection firstbuttontext={"👉 Book a Consultation"} 
       heading={"Ready to Turn Clicks Into Clients?"} 
       subheading={"Your funnel isn’t just a path—it’s your profit engine. Whether you’re stuck with scattered tools or just getting started, we’ll help you make sense of the chaos and create a clear, high-converting system."} />
   </Container>

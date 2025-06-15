@@ -6,6 +6,7 @@ export const caseStudiesQuery = (start: number, end: number) => `
   *[_type == "caseStudy"] | order(_createdAt desc)[${start}...${end}] {
     _id,
     title,
+    excerpt,
     "imageUrl": mainImage.asset->url,
     "service": service->title,
     "slug": slug.current,
@@ -25,6 +26,7 @@ export const featuredCaseStudyQuery = `
   *[_type == "caseStudy" && tag == "Featured"][0] {
     _id,
     title,
+    excerpt, 
     "imageUrl": mainImage.asset->url,
     "service": service->title,
     "slug": slug.current,

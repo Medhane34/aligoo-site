@@ -10,57 +10,57 @@ import {
 // Define a customized array of 6 testimonials with unique data
 const testimonials = [
   {
-    name: "Sarah Johnson",
-    date: "April 10, 2025",
+    name: "Yordanos G/silassie",
+    date: "june 15, 2024",
     rating: 5,
-    title: "Transformed Our Ad Campaigns!",
+    title: "increased my ROI!",
     content:
-      "The team optimized our Facebook ad strategy, and we saw a 50% increase in conversions within a month. Highly recommend!",
-    avatarUrl: "https://i.pravatar.cc/150?img=1",
-  },
-  {
-    name: "Michael Carter",
-    date: "January 20, 2024",
-    rating: 4,
-    title: "Boosted Our Online Presence!",
-    content:
-      "Their SEO strategies increased our website traffic by 40%. The results were impressive, though it took a bit longer than expected.",
+      "Aligo Marketing solution was the perfect partner for to help me grow my online business and I was very impressed with their service. They created a custom ads plan that suited my budget and goals, and helped me reach more customers across different platforms. They also provided me with detailed reports and insights on how to optimize my campaigns and increase my ROI. Aligo Marketing solution is a professional and reliable advertising company that I would highly recommend to anyone looking for online advertising solutions.",
     avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
   },
   {
-    name: "Emily Davis",
+    name: "Abeselom Banjaw",
+    date: "January 20, 2024",
+    rating: 5,
+    title: "Boosted Our Online Presence!",
+    content:
+      "Aligo Marketing solution was the best solution and partner for to help me grow my architectural business and I was very impressed with their service. Their custom ad plan, tailored to my budget and objectives, helped me connect with a wider audience across Ethiopia. I saw a significant increase in brand awareness and customer engagement, ultimately leading to a generating quality leads and 3x Return on my investement, I am very flattered to have them boost my company /abrehot designs/and I thank them with all my heart. Thanks aligoo",
+    avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
+  },
+  {
+    name: "Zelalem Sima",
     date: "March 5, 2025",
     rating: 5,
     title: "Exceptional Service!",
     content:
-      "Working with them on our digital marketing was a game-changer. Our brand visibility skyrocketed, and we gained so many new clients!",
+      "The web Developing company Aligoo and its founding partner Daniel has been very compassionate and timely in delivering their development. I also like to thank Daniel for his relentless effort of making time for this project and his unwavering commitment to his work. I had a pleasure working with them !!!",
     avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
   },
   {
-    name: "David Lee",
+    name: "Tenbit Ermiyas",
     date: "November 15, 2024",
     rating: 5,
-    title: "Amazing Results with Facebook Ads!",
+    title: "Amazing Results with Web Design!",
     content:
-      "Their expertise in Facebook ads helped us reach our target audience effectively. We saw a 60% ROI increase in just two months!",
+      "Overall very pleased with Daniel and his friendliness with Me. He did everything I asked in a timely matter. I will definitely be recommending him to other companies. Thanks for such good work.",
     avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
   },
   {
-    name: "Olivia Brown",
+    name: "ruta kesete",
     date: "February 12, 2025",
-    rating: 4,
+    rating: 5,
     title: "Great Collaboration!",
     content:
-      "The team was professional and delivered a solid social media strategy. We’re thrilled with the engagement growth on our platforms.",
+      "Aligo Digital Betam new mamesegnew, tiru page nachu yserachulgn amesegnalew.",
     avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
   },
   {
-    name: "James Wilson",
+    name: "Ephrem Hirut Export",
     date: "December 1, 2024",
-    rating: 3,
+    rating: 4,
     title: "Good, But Room for Improvement",
     content:
-      "The campaign results were decent, but communication could have been better. Still, our online sales did improve by 20%.",
+      "Well experienced web designer",
     avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
   },
 ];

@@ -2,7 +2,7 @@
 "use client";
 import React from 'react';
 import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { CaseStudyResultsData as ImportedResultsData, ResultStatItem } from './[slug]/CaseStudyData'; // Import the types
+import { CaseStudyResultsData as ImportedResultsData, ResultStatItem } from "@/types/CaseStudyTypes"; // Import the types
 
 // Define the props interface for the component
 interface CaseStudyResultsProps {

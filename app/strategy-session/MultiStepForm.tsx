@@ -5,7 +5,14 @@ import React, { useState } from "react";
 import { usePageLeave } from "react-use";
 
 import { Progress } from "@heroui/progress"; // HeroUI Progress component
-import { VisuallyHidden } from "@radix-ui/react-visually-hidden"; // Optional, for hiding the title
+/* import { VisuallyHidden } from "@radix-ui/react-visually-hidden"; // Optional, for hiding the title */
+
+// At the top of your file
+declare global {
+  interface Window {
+    gtag?: (...args: any[]) => void;
+  }
+}
 
 type FormData = {
   name: string;
@@ -225,6 +232,21 @@ export default function MultiStepForm() {
     } catch (err) {
       console.error("Network error sending to Telegram", err);
     }
+
+    function fireGAEvent() {
+      if (typeof window !== "undefined" && typeof window.gtag === "function") {
+        window.gtag("event", "strategy_session_submit", {
+          event_category: "lead",
+          event_label: "Strategy Session",
+        });
+      } else {
+        // Try again in 500ms (up to a few times)
+        setTimeout(fireGAEvent, 500);
+      }
+    }
+
+    // In your handleSubmit, after successful submit:
+    fireGAEvent();
 
     // Optionally: show a thank you message, reset form, etc.
     console.log("Form submitted:", data);

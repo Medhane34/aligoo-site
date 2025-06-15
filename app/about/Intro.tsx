@@ -152,7 +152,7 @@ const Intro = () => {
         </motion.div>
       </motion.div>
       {/* Row 2: Masked Video - Now within a container and responsive */}
-      <motion.div
+     {/*  <motion.div
         className="container mx-auto mt-16 flex justify-center px-4 sm:px-0"
         initial="hidden"
         variants={videoVariants}
@@ -173,7 +173,7 @@ const Intro = () => {
             className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-400/30 to-purple-600/30 opacity-10 z-0" // Lowered opacity to 0.1, adjusted gradient with /30 for transparency, z-0 to stay below video
           />
         </div>
-      </motion.div>
+      </motion.div> */}
     </div>
   );
 };

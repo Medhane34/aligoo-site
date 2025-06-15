@@ -17,6 +17,8 @@ import { DisableDraftMode } from "@/components/DisableDraftMode";
 
 import { SanityLive } from "@/src/sanity/live";
 
+import Script from "next/script";
+
 export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
@@ -37,7 +39,22 @@ export default async function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en" className="root">
-      <head />
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RRB6DKZPQ9"
+          strategy="afterInteractive"
+        />
+        <Script id="gtag-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RRB6DKZPQ9');
+          `}
+        </Script>
+      </head>
+
       <body
         className={clsx(
           "min-h-screen bg-background font-sans antialiased m-0",

@@ -57,9 +57,9 @@ export default async function IndexPage() {
         headlineText2="Into"
         headlineText3="Customers"
         primaryButtonText="📥 Build Content Strategy"
-        primaryButtonUrl="/dashboard"
+        primaryButtonUrl="/strategy-session"
         secondaryButtonText="📄 See Our Process"
-        secondaryButtonUrl="/docs"
+        secondaryButtonUrl="#our-process-content"
         subheading="We don’t just write blogs—we build content engines. With the right strategy, your content doesn’t just inform—it attracts, nurtures, and converts your ideal clients 24/7.
 
 "
@@ -68,10 +68,10 @@ export default async function IndexPage() {
       <WhyServiceWorks {...webWhyContent} />
       </Container>
       <OurProcess
-        heading="Our Process – The CORE Framework 🧩
-"
+        id="our-process-content"
+        heading="Our Process – The CORE Framework 🧩"
         subheading="Content without strategy is just noise. Our proven CORE Framework ensures every piece of content works toward a clear, measurable goal."
-        imageSrc="/web-service-aligoo-process.jpg" // Path to your image in the public folder
+        imageSrc="/page-content-images/seoservice-process.png" // Path to your image in the public folder
         imageAlt="Beautiful building with balconies"
         steps={processSteps}
       />

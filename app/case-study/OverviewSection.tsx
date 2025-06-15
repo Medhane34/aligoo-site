@@ -26,10 +26,10 @@ export default function CaseStudyOverview({
 }: CaseStudyOverviewProps) {
   // Split the description into multiple paragraphs based on double newlines
   // This helps break up the text if the editor used newlines in Sanity.
-  const paragraphs = overviewDescription
+ /*  const paragraphs = overviewDescription
     .split("\n\n")
     .filter((p) => p.trim() !== "");
-
+ */
   return (
     <section className="relative z-10 py-24 bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center
@@ -49,9 +49,10 @@ export default function CaseStudyOverview({
           </SectionHeading>
           <AccentText className="xs:mb-[0] normal-case pb-2">Overview</AccentText>
           {/* Render each paragraph */}
-          {paragraphs.map((p, index) => (
+          {/* {paragraphs.map((p, index) => (
             <Paragraph key={index} className="text-body lg:text-body">{p}</Paragraph>
-          ))}
+          ))} */}
+          <p>{overviewDescription}</p>
         </div>
         {/* Right Column: Image */}
         <div className="w-full md:w-1/2">

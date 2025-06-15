@@ -17,14 +17,31 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
- 
 const components: PortableTextComponents = {
   types: {
-    image: ({ value }) => {
-      const imageUrl = value?.asset?._ref
-        ? urlFor(value).width(900).height(500).fit("max").auto("format").url()
-        : value?.asset?.url || "";
-      return imageUrl ? (
+    /*  image: ({ value }) => {
+      if (!value?.asset) return null;
+
+      // Type assertion to silence TS error
+      const asset = value.asset as { _ref?: string; url?: string };
+
+      let imageUrl: string | undefined = undefined;
+
+      if (asset._ref) {
+        imageUrl =
+          urlFor(value as any)
+            .width(900)
+            .height(500)
+            .fit("max")
+            .auto("format")
+            .url() ?? undefined;
+      } else if (asset.url) {
+        imageUrl = asset.url;
+      }
+
+      if (!imageUrl) return null;
+
+      return (
         <div className="my-8 rounded-xl overflow-hidden">
           <Image
             alt={value.alt || "Blog post image"}
@@ -36,11 +53,37 @@ const components: PortableTextComponents = {
             width={900}
           />
           {value.caption && (
-            <figcaption className="text-sm text-gray-500 text-center mt-2">{value.caption}</figcaption>
+            <figcaption className="text-sm text-gray-500 text-center mt-2">
+              {value.caption}
+            </figcaption>
           )}
         </div>
-      ) : null;
+      );
+    }, */
+    image: ({ value }) => {
+      // Only render if value.asset?.url exists
+      const imageUrl = value?.asset?.url;
+      if (!imageUrl) return null;
+
+      return (
+        <div className="my-8 rounded-xl overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={value.alt || "Blog post image"}
+            className="rounded-xl object-cover w-full"
+            height={500}
+            width={900}
+            style={{ maxWidth: "100%", height: "auto" }}
+          />
+          {value.caption && (
+            <figcaption className="text-sm text-gray-500 text-center mt-2">
+              {value.caption}
+            </figcaption>
+          )}
+        </div>
+      );
     },
+
     tip: ({ value }) => (
       <aside className="rounded bg-yellow-100 border-l-4 border-yellow-500 p-4 my-4">
         <strong className="block text-yellow-800">{value.title}</strong>
@@ -53,53 +96,50 @@ const components: PortableTextComponents = {
       </pre>
     ),
   },
- list: {
+  list: {
     bullet: ({ children }) => (
-      <ul className="ml-5 my-2 text-body space-y-2">
-        {/* children are already <li> elements */}
-        {React.Children.map(children, (child) =>
-          // Clone each <li> to inject the icon or emoji
-          React.isValidElement(child)
-            ? React.cloneElement(child, {
-                className: (child.props.className ?? "") + " flex items-start gap-2",
-                children: (
-                  <>
-                    {/* Use HeroUI CheckIcon or emoji */}
-                    {/* <CheckIcon className="w-5 h-5 text-green-500 mt-1" /> */}
-                    <span className="text-lg mt-0.5">✅</span>
-                    <span>{child.props.children}</span>
-                  </>
-                ),
-              })
-            : child
-        )}
-      </ul>
+      <ul className="ml-5 my-2 text-body space-y-2">{children}</ul>
     ),
+
     number: ({ children }) => (
-      <ol className="list-decimal list-inside ml-5 my-2 text-body">{children}</ol>
+      <ol className="list-decimal list-inside ml-5 my-2 text-body">
+        {children}
+      </ol>
     ),
   },
+
   block: {
     h1: ({ children, value }) => (
-
-      <h1 
-       className="text-heading text-3xl font-bold my-6"
-      id={getHeadingId(value)}>{children}</h1>
+      <h1
+        className="text-heading text-3xl font-bold my-6"
+        id={getHeadingId(value)}
+      >
+        {children}
+      </h1>
     ),
     h2: ({ children, value }) => (
-      <h2 
-      className="text-heading text-2xl font-semibold my-5"
-      id={getHeadingId(value)}>{children}</h2>
+      <h2
+        className="text-heading text-2xl font-semibold my-5"
+        id={getHeadingId(value)}
+      >
+        {children}
+      </h2>
     ),
     h3: ({ children, value }) => (
-      <h3 
-      className="text-heading text-xl font-semibold my-4"
-      id={getHeadingId(value)}>{children}</h3>
+      <h3
+        className="text-heading text-xl font-semibold my-4"
+        id={getHeadingId(value)}
+      >
+        {children}
+      </h3>
     ),
     h4: ({ children, value }) => (
-      <h4 
-      className="text-heading text-lg font-semibold my-3"
-      id={getHeadingId(value)}>{children}</h4>
+      <h4
+        className="text-heading text-lg font-semibold my-3"
+        id={getHeadingId(value)}
+      >
+        {children}
+      </h4>
     ),
     blockquote: ({ children }) => (
       <blockquote className="border-l-4 border-indigo-500 pl-4 italic my-4 text-gray-600 dark:text-gray-300">
@@ -111,13 +151,9 @@ const components: PortableTextComponents = {
     ),
   },
   marks: {
-    strong: ({ children }) => (
-      <strong className="font-bold">{children}</strong>
-    ),
+    strong: ({ children }) => <strong className="font-bold">{children}</strong>,
     em: ({ children }) => <em className="italic">{children}</em>,
-    underline: ({ children }) => (
-      <span className="underline">{children}</span>
-    ),
+    underline: ({ children }) => <span className="underline">{children}</span>,
     link: ({ value, children }) => (
       <a
         className="text-blue-600 hover:underline dark:text-blue-400"
@@ -135,7 +171,9 @@ type PortableTextRendererProps = {
   value: any;
 };
 
-const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({ value }) => {
+const PortableTextRenderer: React.FC<PortableTextRendererProps> = ({
+  value,
+}) => {
   return <PortableText components={components} value={value} />;
 };
 

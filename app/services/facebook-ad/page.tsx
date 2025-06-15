@@ -11,7 +11,7 @@ import FaqSection from "@/components/service-sections/FaqSection";
 import FeaturedFbPostsWrapper from "@/wrappers/FeaturedFbCaseStudiesWrappers";
 import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
 import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
-
+import Container from "@/components/ui/Container";
 const facebookWhyContent = {
   heading: "Why Facebook Ads Still Work (If You Do Them",
   highlight: "Right)",
@@ -36,14 +36,20 @@ export default async function IndexPage() {
         headlineText2="Into Customers"
         headlineText3="With Facebook Ads That Actually Convert"
         primaryButtonText="👉 Book Strategy Call"
-        primaryButtonUrl="/dashboard"
+        primaryButtonUrl="/strategy-session"
         secondaryButtonText="👀 See Past Results"
-        secondaryButtonUrl="/docs"
+        secondaryButtonUrl="#who-this-for-fb"
         subheading="Tired of wasting money on ads that get likes but no leads? We build high-performing Facebook ad campaigns that attract the right audience, generate real demand, and grow your business — without the guesswork."
       />
+      <Container>
       <WhyServiceWorks {...facebookWhyContent} />
+  </Container>
+      <Container>
       <AdPhilosophy />
+  </Container>
+      <Container>
       <WhoThisIsForSection
+      id="who-this-for-fb"
       heading="Who This Is For"
       highlightedPhrases={[
         "are serious about growth",
@@ -57,7 +63,11 @@ export default async function IndexPage() {
       introText="This service is ideal for SaaS founders who"
       subheading="This Isn’t for Everyone — And That’s the Point"
     />
+</Container>
+    <Container>
            <FeaturedFbPostsWrapper />
+</Container>
+           <Container>
 
       <FaqSection
   ctaText="📩 Need Custom Advice?"
@@ -82,8 +92,11 @@ export default async function IndexPage() {
   heading="Still Wondering If It Works?"
   subheading="We’ve helped dozens of brands run profitable campaigns. Here are answers to the most common questions people ask before they sign up."
 />
+</Container>
+<Container>
 
       <CTABottomSection firstbuttontext={"📲 Book a Free Strategy Call"} heading={"Ready to get started?"} subheading={"Book a free strategy session with our team. "} />
+    </Container>
     </>
   );
 }

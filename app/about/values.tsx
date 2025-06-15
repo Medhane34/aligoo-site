@@ -14,6 +14,8 @@ import {
   SectionHeading,
   Paragraph,
 } from "@/components/ui/typography";
+import Link from "next/link";
+import { MyButton } from "@/components/custom/extendVariants";
 
 const headingContainerVariants = {
   hidden: { opacity: 0 },
@@ -69,21 +71,28 @@ const Values = () => {
               className="font-bold text-text-light dark:text-text-dark mb-4"
               variants={headingItemVariants}
             >
-              <SectionHeading className="text-heading">WHAT WE STAND FOR</SectionHeading>
-              
+              <SectionHeading className="text-heading">
+                WHAT WE STAND FOR
+              </SectionHeading>
             </motion.div>
             <motion.div
               className="text-gray-600 text-body mb-6"
               variants={headingItemVariants}
             >
-              <AccentText className="normal-case">Our Work Is Rooted in Purpose, Not Hype</AccentText>
+              <AccentText className="normal-case">
+                Our Work Is Rooted in Purpose, Not Hype
+              </AccentText>
             </motion.div>
-            <motion.button
-              className="w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full"
+            <motion.div
+              
               variants={headingItemVariants}
             >
-              🤳 Get in touch
-            </motion.button>
+              <Link href="/strategy-session">
+                <MyButton >
+                  🤳 Get in touch
+                </MyButton>
+              </Link>
+            </motion.div>
           </motion.div>
 
           {/* First Row - Card 1 */}
@@ -95,7 +104,6 @@ const Values = () => {
             whileInView="visible"
           >
             <div>
-
               <h3 className="font-semibold text-lg text-gray-900 mb-2">
                 💡 Clarity Over Clutter
               </h3>
@@ -115,7 +123,6 @@ const Values = () => {
             whileInView="visible"
           >
             <div>
-
               <h3 className="font-semibold text-lg text-gray-900 mb-2">
                 🎯 Strategy First, Always
               </h3>
@@ -135,7 +142,6 @@ const Values = () => {
             whileInView="visible"
           >
             <div>
-
               <h3 className="font-semibold text-lg text-gray-900 mb-2">
                 🤝 People Before Pixels
               </h3>
@@ -156,7 +162,6 @@ const Values = () => {
             whileInView="visible"
           >
             <div>
-
               <h3 className="font-semibold text-lg text-white-900 mb-2">
                 ✨ Details Make the Magic
               </h3>
@@ -176,7 +181,6 @@ const Values = () => {
             whileInView="visible"
           >
             <div>
-              
               <h3 className="font-semibold text-lg text-gray-900 mb-2">
                 🚀 Progress, Not Perfection
               </h3>

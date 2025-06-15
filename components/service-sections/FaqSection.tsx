@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 
 import AccordionItem from "./AccordionItem";
 import { SectionHeading, AccentText } from "@/components/ui/typography";
+import Link from "next/link";
 
 interface FaqItem {
   question: string;
@@ -17,6 +18,7 @@ interface FaqSectionProps {
   heading: string;
   subheading: string;
   ctaText?: string;
+  ctaHref?: string; // <-- Add this line
   faqs: FaqItem[];
 }
 
@@ -100,14 +102,17 @@ export default function FaqSection({
           >
             {subheading}
           </motion.p>
-
           {ctaText && (
-            <motion.button
-              className="w-[263px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full"
-              variants={leftItemVariants}
-            >
-              {ctaText}
-            </motion.button>
+            <motion.div variants={leftItemVariants}>
+              <Link href="/strategy-session" passHref>
+                <button
+                  className="w-[263px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full"
+                  type="button"
+                >
+                  {ctaText}
+                </button>
+              </Link>
+            </motion.div>
           )}
         </motion.div>
 

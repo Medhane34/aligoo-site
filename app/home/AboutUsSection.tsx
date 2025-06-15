@@ -10,6 +10,8 @@ import {
   ButtonVariants,
   imageVariants,
 } from "@/lib/motions";
+import Link from "next/link";
+import { MyButton } from "@/components/custom/extendVariants";
 
 export default function AboutUsSection() {
   return (
@@ -29,7 +31,7 @@ export default function AboutUsSection() {
               alt="Team collaboration"
               className="object-cover w-full h-full"
               height={500}
-              src="https://heroui.com/images/hero-card-complete.jpeg"
+              src="/page-content-images/about-us-section.png"
               width={600}
             />
           </div>
@@ -86,9 +88,9 @@ export default function AboutUsSection() {
             </p>
           </motion.div>
           <motion.div className="pt-6" variants={ButtonVariants}>
-            <button className="cursor-hover-target w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full data-cursor-hover">
-              👉 Read More About Us
-            </button>
+            <Link href="/about-us" >
+              <MyButton>👉 Read More About Us</MyButton>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

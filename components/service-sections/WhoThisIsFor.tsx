@@ -4,6 +4,7 @@ import React from "react";
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 
 interface WhoThisIsForSectionProps {
+  id?:string;
   heading: string;
   subheading?: string;
   highlightedPhrases: string[];
@@ -16,6 +17,7 @@ const highlightColors = [
 ];
 
 const WhoThisIsForSection: React.FC<WhoThisIsForSectionProps> = ({
+  id,
   heading,
   subheading,
   highlightedPhrases,
@@ -23,7 +25,7 @@ const WhoThisIsForSection: React.FC<WhoThisIsForSectionProps> = ({
   outroText,
 }) => {
   return (
-    <div className="py-24 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+    <div id={id} className="py-24 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
       <motion.div
         className="container mx-auto px-4 text-center mb-8"
         initial="hidden"

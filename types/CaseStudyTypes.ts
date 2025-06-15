@@ -3,11 +3,13 @@ export interface CaseStudy {
   title: string;
   goalsSummary: string;
   challengeSummary: string;
+  industry: string;
   imageUrl: string;
   service: string;
   hasImage: boolean;
   hasService: boolean;
   slug: string;
+  excerpt: string;
 }
 
 export interface CaseStudyCoreData {
@@ -101,4 +103,17 @@ export interface PaginationCaseStudy {
 export interface CaseStudyPaginationData {
   previousCaseStudy?: PaginationCaseStudy; // Optional if there's no previous
   nextCaseStudy?: PaginationCaseStudy; // Optional if there's no next
+};
+
+// Component prop types
+export type FetchCaseStudiesProps = {
+  featured: CaseStudy;
+};
+
+export type CaseStudyOverviewProps = {
+  overviewData: CaseStudyOverviewData;
+};
+
+export type CaseStudyTestimonialProps = {
+  testimonialData: CaseStudyTestimonialData;
 };
