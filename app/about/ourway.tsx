@@ -250,7 +250,7 @@ David Ogilvy
                     alt="E-commerce Dashboard"
                     className="rounded-xl shadow-2xl object-cover"
                     height={300}
-                    src="https://heroui.com/images/hero-card-complete.jpeg"
+                    src="/page-content-images/about-us-ourway-1.png"
                     width={300}
                   />
                 </motion.div>
@@ -262,7 +262,7 @@ David Ogilvy
                     alt="Cashier Interaction"
                     className="rounded-xl shadow-xl object-cover"
                     height={300}
-                    src="https://heroui.com/images/card-example-4.jpeg"
+                    src="/page-content-images/about-us-ourway-2.png"
                     width={300}
                   />
                 </motion.div>

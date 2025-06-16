@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://aligoo-digital.agency
+
+# Sitemaps
+Sitemap: https://aligoo-digital.agency/sitemap.xml

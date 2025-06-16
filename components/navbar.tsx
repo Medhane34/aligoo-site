@@ -58,7 +58,6 @@ export const Navbar = () => {
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center">
             <NavbarBrand as="li" className="gap-3 max-w-fit">
               <NextLink className="flex items-center gap-1" href="/">
-                <Logo />
                 <p className="font-bold text-inherit">Aligoo</p>
               </NextLink>
             </NavbarBrand>
@@ -72,7 +71,7 @@ export const Navbar = () => {
         <NavbarContent className="hidden sm:flex" justify="start">
           <NavbarBrand as="li" className="gap-3 max-w-fit">
             <NextLink className="flex items-center gap-1" href="/">
-              <Logo />
+
               <p className="font-bold text-inherit">Aligoo</p>
             </NextLink>
           </NavbarBrand>

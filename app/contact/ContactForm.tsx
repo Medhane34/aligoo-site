@@ -56,6 +56,12 @@ const serviceEnquiryOptions = [
   // and Zod validation to ensure the user makes a choice.
   { key: "facebook_ad", label: "Facebook Ad" },
   { key: "web_design", label: "Web Design" },
+  { key: "TikTok Ad", label: "Tiktok Ad" },
+  { key: "SEO", label: "Search Engine Optimization" },
+  { key: "digital-strategy", label: "Digital Marketing (all-in-one)" },
+  { key: "Graphic-Design", label: "Graphic Design" },
+  { key: "Funnel-Mapping", label: "Funnel Mapping" },
+  { key: "Content-marketing", label: "Content-marketing" },
   { key: "others", label: "Others" },
 ];
 
@@ -63,6 +69,8 @@ const serviceEnquiryOptions = [
 const communicationOptions = [
   { key: "whatsapp", label: "WhatsApp" },
   { key: "telegram", label: "Telegram" },
+  { key: "email", label: "Email" },
+  { key: "phone", label: "Direct Phone Call" },
 ];
 
 // Define the schema for validation
@@ -213,8 +221,8 @@ const ContactForm = () => {
         });
 
         addToast({
-          title: "Hey 👋",
-          description: "Message sent successfully",
+          title: "✅ Form Received — We're On It!",
+          description: "Sit tight — one of our team members will reach out within 5–10 minutes.We’re already brewing ideas and can’t wait to chat about how we can grow your business.",
           color: "success",
         });
         // Fire GA4 event for contact form submit
@@ -227,9 +235,9 @@ const ContactForm = () => {
       }
     } catch (error) {
       addToast({
-        title: "Hey 👋",
+        title: "❌ Oops! Something Went Wrong.",
         description:
-          "Network error. Please check your connection and try again.",
+          "Looks like the form didn’t go through — but don’t worry, we’re on it. Please try again in a moment, or email us directly at info@aligoo-digital.agency and we’ll get back to you ASAP.",
         color: "danger",
       });
       setErrorMessage("");
@@ -395,7 +403,7 @@ const ContactForm = () => {
               </div>
               {/* Preferred Communication Method */}
               <div>
-                <Select
+                {/* <Select
                   aria-label="Preferred Communication"
                   color={errors.preferredCommunication ? "danger" : "primary"}
                   errorMessage={errors.preferredCommunication?.message}
@@ -424,7 +432,7 @@ const ContactForm = () => {
                       {option.label}
                     </SelectItem>
                   )}
-                </Select>
+                </Select> */}
               </div>
               {/* Message */}
               <Textarea
@@ -445,9 +453,7 @@ const ContactForm = () => {
               </Button>
 
               {submissionStatus === "success" && (
-                <p className="text-green-500 text-center mt-4">
-                  Message sent successfully!
-                </p>
+                <p className="text-green-500 text-center mt-4"></p>
               )}
               {submissionStatus === "error" && (
                 <p className="text-red-500 text-center mt-4">{errorMessage}</p>

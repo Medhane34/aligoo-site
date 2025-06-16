@@ -16,7 +16,7 @@ const testimonials = [
     title: "increased my ROI!",
     content:
       "Aligo Marketing solution was the perfect partner for to help me grow my online business and I was very impressed with their service. They created a custom ads plan that suited my budget and goals, and helped me reach more customers across different platforms. They also provided me with detailed reports and insights on how to optimize my campaigns and increase my ROI. Aligo Marketing solution is a professional and reliable advertising company that I would highly recommend to anyone looking for online advertising solutions.",
-    avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
+    avatarUrl: "/icons/google-icon.png",
   },
   {
     name: "Abeselom Banjaw",
@@ -25,7 +25,7 @@ const testimonials = [
     title: "Boosted Our Online Presence!",
     content:
       "Aligo Marketing solution was the best solution and partner for to help me grow my architectural business and I was very impressed with their service. Their custom ad plan, tailored to my budget and objectives, helped me connect with a wider audience across Ethiopia. I saw a significant increase in brand awareness and customer engagement, ultimately leading to a generating quality leads and 3x Return on my investement, I am very flattered to have them boost my company /abrehot designs/and I thank them with all my heart. Thanks aligoo",
-    avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
+    avatarUrl: "/icons/google-icon.png",
   },
   {
     name: "Zelalem Sima",
@@ -34,7 +34,7 @@ const testimonials = [
     title: "Exceptional Service!",
     content:
       "The web Developing company Aligoo and its founding partner Daniel has been very compassionate and timely in delivering their development. I also like to thank Daniel for his relentless effort of making time for this project and his unwavering commitment to his work. I had a pleasure working with them !!!",
-    avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
+    avatarUrl: "/icons/google-icon.png",
   },
   {
     name: "Tenbit Ermiyas",
@@ -43,7 +43,7 @@ const testimonials = [
     title: "Amazing Results with Web Design!",
     content:
       "Overall very pleased with Daniel and his friendliness with Me. He did everything I asked in a timely matter. I will definitely be recommending him to other companies. Thanks for such good work.",
-    avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
+    avatarUrl: "/icons/google-icon.png",
   },
   {
     name: "ruta kesete",
@@ -52,7 +52,7 @@ const testimonials = [
     title: "Great Collaboration!",
     content:
       "Aligo Digital Betam new mamesegnew, tiru page nachu yserachulgn amesegnalew.",
-    avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
+   avatarUrl: "/icons/google-icon.png",
   },
   {
     name: "Ephrem Hirut Export",
@@ -61,7 +61,7 @@ const testimonials = [
     title: "Good, But Room for Improvement",
     content:
       "Well experienced web designer",
-    avatarUrl: "https://heroui.com/images/card-example-4.jpeg",
+    avatarUrl: "/icons/google-icon.png",
   },
 ];
 const textVariants = {
@@ -95,7 +95,7 @@ export const TestimonialsSection = () => (
       <div className="relative max-w-full">
         <div className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth scrollbar-hide">
           {testimonials.map((testimonial, i) => (
-            <div key={i} className="flex-none w-80">
+            <div key={i} className="flex-none ">
               <TestimonialCard {...testimonial} />
             </div>
           ))}

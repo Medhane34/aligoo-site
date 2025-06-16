@@ -77,7 +77,7 @@ export default function Home() {
 
         <Container>
           <CTABottomSection
-            firstbuttontext="Contact Us"
+            firstbuttontext="📩 Book a 20m Consultation"
             heading="Let’s Build Something Amazing!"
             subheading="Start your next project with our expert team today."
           />

@@ -60,7 +60,7 @@ Rooted in Addis Ababa, built for bold moves — we combine data, design, and dig
       <MeetThePeople />
       <Container>
         <CTABottomSection
-          firstbuttontext="Let's catch up 😎"
+          firstbuttontext="😎 Let's catch up "
           heading="Let’s Build Something Amazing!"
           subheading="Start your next project with our expert team today."
         />

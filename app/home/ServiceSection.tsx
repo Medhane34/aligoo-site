@@ -293,7 +293,7 @@ const ServiceSection = () => {
                 </motion.div>
               </AccordionItem>
               {/* Brand Identity Design Service */}
-              <AccordionItem
+              {/* <AccordionItem
                 key="6"
                 aria-label="Brand Identity Design"
                 indicator={
@@ -323,7 +323,7 @@ const ServiceSection = () => {
               >
                 <motion.div variants={accordionVariants} className="text-text-light dark:text-text-dark">
                   Brand Identity Design</motion.div>
-              </AccordionItem>
+              </AccordionItem> */}
             </Accordion>
           </motion.div>
 

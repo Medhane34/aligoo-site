@@ -100,9 +100,9 @@ const CTABottomSection: React.FC<CTABottomSectionProps> = ({
             <motion.div variants={buttonVariants} className="flex-1 min-w-0">
               {" "}
               {/* Use flex-1 to distribute width, min-w-0 to allow shrinking */}
-              <Link href="/contact" passHref>
+              <Link href="https://app.reclaim.ai/m/daniel-aregawi/digital-marketing" passHref>
                 <Button className="text-brand-primary-light dark:text-brand-primary-dark rounded-full px-8 py-3 hover:text-brand-primary-dark dark:hover:text-white transition-colors duration-300 border border-brand-primary-light dark:border-brand-primary-dark hover:border-brand-primary-dark dark:hover:border-white w-full bg-transparent">
-                  Book On Calander
+                  📅 Book On Calander
                 </Button>
               </Link>
             </motion.div>
