@@ -42,7 +42,7 @@ export default function Home() {
           headlineText1="Digital marketing that "
           headlineText2="delivers"
           headlineText3="clarity, clicks, and conversions."
-          primaryButtonText="🚀 Book a Free 20m Fire Consultation"
+          primaryButtonText="🚀 Book a Consultation"
           primaryButtonUrl="/strategy-session"
           secondaryButtonText="📊 Explore Our Services"
           secondaryButtonUrl="#service-section"
@@ -77,7 +77,7 @@ export default function Home() {
 
         <Container>
           <CTABottomSection
-            firstbuttontext="📩 Book a 20m Consultation"
+            firstbuttontext="📩 Book a Consultation"
             heading="Let’s Build Something Amazing!"
             subheading="Start your next project with our expert team today."
           />

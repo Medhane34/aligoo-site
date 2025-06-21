@@ -9,6 +9,9 @@ import { client } from "@/src/sanity/client";
 // If you want to use a HeroUI icon, import it here. Example:
 import { CheckIcon } from "@heroicons/react/24/solid";
 
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+
 import { getHeadingId } from "@/lib/utilties/generateToc";
 
 const { projectId, dataset } = client.config();
@@ -20,7 +23,7 @@ const urlFor = (source: SanityImageSource) =>
 const components: PortableTextComponents = {
   types: {
     /*  image: ({ value }) => {
-      if (!value?.asset) return null;
+      if (!value?.asset) return null
 
       // Type assertion to silence TS error
       const asset = value.asset as { _ref?: string; url?: string };
@@ -60,6 +63,48 @@ const components: PortableTextComponents = {
         </div>
       );
     }, */
+    markdownTable: ({ value }) => {
+      if (!value?.markdown) return null;
+
+      return (
+        <div className="overflow-x-auto my-6">
+          <div className="prose prose-sm md:prose-lg max-w-none">
+            <ReactMarkdown
+              components={{
+                table: ({ node, ...props }) => (
+                  <table className="min-w-full border border-gray-300 rounded-lg bg-white dark:bg-gray-900">
+                    {props.children}
+                  </table>
+                ),
+                thead: ({ node, ...props }) => (
+                  <thead className="bg-gray-100 dark:bg-gray-800">
+                    {props.children}
+                  </thead>
+                ),
+                th: ({ node, ...props }) => (
+                  <th className="border border-gray-300 px-4 py-2 font-semibold text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800">
+                    {props.children}
+                  </th>
+                ),
+                tr: ({ node, ...props }) => (
+                  <tr className="even:bg-gray-50 dark:even:bg-gray-800">
+                    {props.children}
+                  </tr>
+                ),
+                td: ({ node, ...props }) => (
+                  <td className="border border-gray-300 px-4 py-2 text-gray-700 dark:text-gray-200">
+                    {props.children}
+                  </td>
+                ),
+              }}
+              remarkPlugins={[remarkGfm]}
+            >
+              {value.markdown}
+            </ReactMarkdown>
+          </div>
+        </div>
+      );
+    },
     image: ({ value }) => {
       // Only render if value.asset?.url exists
       const imageUrl = value?.asset?.url;

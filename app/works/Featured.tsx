@@ -75,7 +75,7 @@ export default function FetchCaseStudies({ featured }: FetchCaseStudiesProps) {
           </motion.div>
 
           <motion.div className="pt-6" variants={ButtonVariants}>
-            <Link href={`/case-studies/${featured.slug}`}>
+            <Link href={`/case-study/${featured.slug}`}>
               <MyButton className="w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full">
                 📖 Read Case Study
               </MyButton>

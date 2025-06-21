@@ -21,6 +21,7 @@ import {
   fetchCaseStudyPaginationDataBySlug,
 } from "./CaseStudyData";
 import ScrollProgress from "./ScrollProgress";
+import Container from "@/components/ui/Container";
 
 // --- CHANGED: Await params in generateMetadata ---
 export async function generateMetadata({
@@ -37,7 +38,7 @@ export async function generateMetadata({
       slug,
       mainImage{asset->{url}}
     }`,
-    { slug }
+    { slug },
   );
 
   if (!caseStudy) return notFound();
@@ -125,43 +126,53 @@ export default async function CaseStudyDetails({ params }: Props) {
         headlineText2=" "
         headlineText3=" "
         excerpt={coreData.excerpt}
-        primaryButtonText="hello"
-        primaryButtonUrl="hello"
-        secondaryButtonText="Learn More"
-        secondaryButtonUrl="url"
+        primaryButtonText="📖 Read Case Study"
+        primaryButtonUrl="#case-study-details"
+        secondaryButtonText="✅ Talk about your project"
+        secondaryButtonUrl="/strategy-session"
       />
       <ScrollProgress />
 
-      {overviewData && (
-        <CaseStudyOverview
-          heroImageAlt={overviewData.heroImageAlt}
-          heroImageUrl={overviewData.heroImageUrl}
-          overviewDescription={overviewData.overviewDescription}
-          overviewTitle={overviewData.overviewTitle}
-        />
-      )}
+      <Container className="">
+        <div className="div" id="case-study-details">
+          {overviewData && (
+            <CaseStudyOverview
+              heroImageAlt={overviewData.heroImageAlt}
+              heroImageUrl={overviewData.heroImageUrl}
+              overviewDescription={overviewData.overviewDescription}
+              overviewTitle={overviewData.overviewTitle}
+            />
+          )}
+        </div>
+      </Container>
+      <Container>
+        {goalData && (
+          <CaseStudyStrategy
+            goalBody={goalData.goalBody}
+            goalTitle={goalData.goalTitle}
+          />
+        )}
+      </Container>
+      <Container>
+        {strategyData && (
+          <CaseStudyStrategyContent strategyData={strategyData} />
+        )}
+      </Container>
+      <Container>
+        {imageGalleryData && (
+          <CaseStudyImageGallery imageGalleryData={imageGalleryData} />
+        )}
+      </Container>
+      <Container>
+        {resultsData && <CaseStudyResults resultsData={resultsData} />}
+        {testimonialData && (
+          <CaseStudyTestimonial
+            testimonialData={testimonialData}
+            rating={testimonialData.rating}
+          />
+        )}
+      </Container>
 
-      {goalData && (
-        <CaseStudyStrategy
-          goalBody={goalData.goalBody}
-          goalTitle={goalData.goalTitle}
-        />
-      )}
-      {strategyData && (
-        <CaseStudyStrategyContent strategyData={strategyData} />
-      )}
-      {imageGalleryData && (
-        <CaseStudyImageGallery imageGalleryData={imageGalleryData} />
-      )}
-      {resultsData && (
-        <CaseStudyResults resultsData={resultsData} />
-      )}
-      {testimonialData && (
-        <CaseStudyTestimonial
-          testimonialData={testimonialData}
-          rating={testimonialData.rating}
-        />
-      )}
       {fetchedPaginationData && (
         <CaseStudyPagination paginationData={fetchedPaginationData} />
       )}
