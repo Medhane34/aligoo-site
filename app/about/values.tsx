@@ -1,49 +1,26 @@
+// components/about/ValuesSection.tsx
 "use client";
 import React from "react";
-import {
-  CheckCircleIcon,
-  Cog6ToothIcon,
-  CpuChipIcon,
-  LightBulbIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/outline"; // Example icons from Heroicons
 import { motion } from "framer-motion";
-
-import {
-  AccentText,
-  SectionHeading,
-  Paragraph,
-} from "@/components/ui/typography";
 import Link from "next/link";
+import { SectionHeading, AccentText } from "@/components/ui/typography";
 import { MyButton } from "@/components/custom/extendVariants";
 
-const headingContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
+export interface ValueCard {
+  emoji: string;
+  title: string;
+  description: string;
+  bgColor: string;
+  textColor?: string;
+}
 
-const headingItemVariants = {
-  hidden: { opacity: 0, x: -20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.5, ease: "easeInOut" },
-  },
-};
-const cardContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
+export interface ValuesSectionProps {
+  sectionHeading: string;
+  accentText: string;
+  buttonText: string;
+  buttonUrl: string;
+  values: ValueCard[];
+}
 
 const cardVariants = {
   hidden: { opacity: 0, scale: 0.95 },
@@ -54,146 +31,148 @@ const cardVariants = {
   },
 };
 
-const Values = () => {
+export default function ValuesSection({
+  sectionHeading,
+  accentText,
+  buttonText,
+  buttonUrl,
+  values,
+}: ValuesSectionProps) {
+  // Ensure we have at least 5 cards for the layout
+  const [card1, card2, card3, card4, card5] = values;
+
   return (
-    <div className="py-16 bg-background-light dark:bg-background-dark">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* First Row */}
-          <motion.div
-            className="row-span-1"
-            initial="hidden"
-            variants={headingContainerVariants}
-            viewport={{ once: true }}
-            whileInView="visible"
-          >
-            <motion.div
-              className="font-bold text-text-light dark:text-text-dark mb-4"
-              variants={headingItemVariants}
-            >
-              <SectionHeading className="text-heading">
-                WHAT WE STAND FOR
-              </SectionHeading>
-            </motion.div>
-            <motion.div
-              className="text-gray-600 text-body mb-6"
-              variants={headingItemVariants}
-            >
-              <AccentText className="normal-case">
-                Our Work Is Rooted in Purpose, Not Hype
-              </AccentText>
-            </motion.div>
-            <motion.div
-              
-              variants={headingItemVariants}
-            >
-              <Link href="/strategy-session">
-                <MyButton >
-                  🤳 Get in touch
-                </MyButton>
+<section className="sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
+  <div className="max-w-6xl mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-3 grid-rows-2 gap-6">
+          {/* Row 1, Col 1: Heading, subheading, button */}
+          <div className="row-span-1 col-span-1 flex flex-col justify-between bg-transparent">
+            <SectionHeading className="text-heading mb-2">
+              {sectionHeading}
+            </SectionHeading>
+            <AccentText className="normal-case mb-4">{accentText}</AccentText>
+            <div className="mt-4">
+              <Link href={buttonUrl}>
+                <MyButton>{buttonText}</MyButton>
               </Link>
+            </div>
+          </div>
+          {/* Row 1, Col 2: Card 1 */}
+          {card1 && (
+            <motion.div
+              className={`
+                row-span-1 col-span-1
+                ${card1.bgColor} ${card1.textColor || "text-gray-900"}
+                rounded-lg shadow-md p-6 flex flex-col justify-between
+               
+                transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl
+              `}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={cardVariants}
+            >
+              <div>
+                <h3 className="font-semibold text-lg mb-2">
+                  {card1.emoji} {card1.title}
+                </h3>
+                <p className="text-sm">{card1.description}</p>
+              </div>
             </motion.div>
-          </motion.div>
-
-          {/* First Row - Card 1 */}
-          <motion.div
-            className="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between"
-            initial="hidden"
-            variants={cardVariants}
-            viewport={{ once: true }}
-            whileInView="visible"
-          >
-            <div>
-              <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                💡 Clarity Over Clutter
-              </h3>
-              <p className="text-gray-600 text-sm">
-                We say what we mean — no fluff, no jargon. Our communication
-                stays simple, honest, and clear at every step.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* First Row - Card 2 */}
-          <motion.div
-            className="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between"
-            initial="hidden"
-            variants={cardVariants}
-            viewport={{ once: true }}
-            whileInView="visible"
-          >
-            <div>
-              <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                🎯 Strategy First, Always
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Before we design, we dig deep. Smart strategy leads the way so
-                your brand gets real, lasting results.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Second Row - Card 3 */}
-          <motion.div
-            className="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between"
-            initial="hidden"
-            variants={cardVariants}
-            viewport={{ once: true }}
-            whileInView="visible"
-          >
-            <div>
-              <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                🤝 People Before Pixels
-              </h3>
-              <p className="text-gray-600 text-sm">
-                We’re not just in the business of marketing — we’re in the
-                business of people. Empathy drives our process, and your goals
-                guide our decisions.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Second Row - Card 4 */}
-          <motion.div
-            className="bg-brand-primary rounded-lg shadow-md p-6 flex flex-col justify-between"
-            initial="hidden"
-            variants={cardVariants}
-            viewport={{ once: true }}
-            whileInView="visible"
-          >
-            <div>
-              <h3 className="font-semibold text-lg text-white-900 mb-2">
-                ✨ Details Make the Magic
-              </h3>
-              <p className="text-white-600 text-sm">
-                We obsess over the small things that others overlook. From
-                pixels to punctuation, excellence lives in the details.
-              </p>
-            </div>
-          </motion.div>
-
-          {/* Second Row - Card 5 */}
-          <motion.div
-            className="bg-white rounded-lg shadow-md p-6 flex flex-col justify-between"
-            initial="hidden"
-            variants={cardVariants}
-            viewport={{ once: true }}
-            whileInView="visible"
-          >
-            <div>
-              <h3 className="font-semibold text-lg text-gray-900 mb-2">
-                🚀 Progress, Not Perfection
-              </h3>
-              <p className="text-gray-600 text-sm">
-                We move fast, learn faster, and optimize everything. Growth is
-                our compass — and momentum is the mission.
-              </p>
-            </div>
-          </motion.div>
+          )}
+          {/* Row 1, Col 3: Card 2 */}
+          {card2 && (
+            <motion.div
+              className={`
+                row-span-1 col-span-1
+                ${card2.bgColor} ${card2.textColor || "text-gray-900"}
+                rounded-lg shadow-md p-6 flex flex-col justify-between
+               
+                transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl
+              `}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={cardVariants}
+            >
+              <div>
+                <h3 className="font-semibold text-lg mb-2">
+                  {card2.emoji} {card2.title}
+                </h3>
+                <p className="text-sm">{card2.description}</p>
+              </div>
+            </motion.div>
+          )}
+          {/* Row 2, Col 1: Card 3 */}
+          {card3 && (
+            <motion.div
+              className={`
+                row-span-1 col-span-1
+                ${card3.bgColor} ${card3.textColor || "text-gray-900"}
+                rounded-lg shadow-md p-6 flex flex-col justify-between
+               
+                transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl
+              `}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={cardVariants}
+            >
+              <div>
+                <h3 className="font-semibold text-lg mb-2">
+                  {card3.emoji} {card3.title}
+                </h3>
+                <p className="text-sm">{card3.description}</p>
+              </div>
+            </motion.div>
+          )}
+          {/* Row 2, Col 2: Card 4 */}
+          {card4 && (
+            <motion.div
+              className={`
+                row-span-1 col-span-1
+                ${card4.bgColor} ${card4.textColor || "text-gray-900"}
+                rounded-lg shadow-md p-6 flex flex-col justify-between
+               
+                transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl
+              `}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={cardVariants}
+            >
+              <div>
+                <h3 className="font-semibold text-lg mb-2">
+                  {card4.emoji} {card4.title}
+                </h3>
+                <p className="text-sm">{card4.description}</p>
+              </div>
+            </motion.div>
+          )}
+          {/* Row 2, Col 3: Card 5 */}
+          {card5 && (
+            <motion.div
+              className={`
+                row-span-1 col-span-1
+                ${card5.bgColor} ${card5.textColor || "text-gray-900"}
+                rounded-lg shadow-md p-6 flex flex-col justify-between
+                transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl
+              `}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={cardVariants}
+            >
+              <div>
+                <h3 className="font-semibold text-lg mb-2">
+                  {card5.emoji} {card5.title}
+                </h3>
+                <p className="text-sm">{card5.description}</p>
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
-    </div>
+    </section>
   );
-};
-
-export default Values;
+}

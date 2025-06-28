@@ -12,6 +12,18 @@ import HeroSection from "@/components/HeroSection";
 import CTABottomSection from "@/components/CTA";
 import HomeCaseStudyWrapper from "@/wrappers/HomeCaseStudyWrapper";
 import Container from "@/components/ui/Container";
+
+import HeroSectionWrapper from "@/wrappers/homepage/HeroSectionWrapper";
+import AboutUsSectionWrapper from "@/wrappers/homepage/AboutUsSectionWrapper";
+import StatsSectionWrapper from "@/wrappers/homepage/StatsSectionWrapper";
+import ServiceSectionWrapper from "@/wrappers/homepage/ServiceSectionWrapper";
+import ProcessSectionWrapper from "@/wrappers/homepage/ProcessSectionWrapper";
+import WhyServiceWorksSection from "@/components/service-sections/WhyServiceWorksSection";
+import WhyUsSectionWrapper from "@/wrappers/homepage/WhyUsSectionWrapper";
+import CTABottomSectionWrapper from "@/wrappers/homepage/CTABottomSectionWrapper";
+
+
+
 export const metadata: Metadata = {
   title: "Aligoo Digital Agency | Digital Marketing in Addis Ababa",
   description:
@@ -34,39 +46,30 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+
+
   return (
     <>
       <section className="bg-background-light dark:bg-background-dark">
-        <HeroSection
-          badgeText="Welcome to Our V2 Site!" // Optional badge text
-          headlineText1="Digital marketing that "
-          headlineText2="delivers"
-          headlineText3="clarity, clicks, and conversions."
-          primaryButtonText="🚀 Book a Consultation"
-          primaryButtonUrl="/strategy-session"
-          secondaryButtonText="📊 Explore Our Services"
-          secondaryButtonUrl="#service-section"
-          subheading="Aligoo is a full-service digital marketing agency based in Addis Ababa.
-      We build smart websites, run killer ad campaigns, and craft content that actually gets people to act."
-        />
+        <HeroSectionWrapper />
         <Container>
-          <AboutUsSection />
+        <AboutUsSectionWrapper/>
         </Container>
-        <StatsSection />
+    <StatsSectionWrapper/>
         <Container>
           <div className="div" id="service-section">
-          <ServiceSection />
+         <ServiceSectionWrapper/>
           </div>
         </Container>
         <Container>
           <HomeCaseStudyWrapper />
         </Container>
         <Container>
-          <ProcessSection />
+      <ProcessSectionWrapper/>
         </Container>
 
         <Container>
-          <WhyUsSection />
+    <WhyUsSectionWrapper/>
         </Container>
         <Container>
           <TestimonialsSection />
@@ -76,11 +79,7 @@ export default function Home() {
         </Container>
 
         <Container>
-          <CTABottomSection
-            firstbuttontext="📩 Book a Consultation"
-            heading="Let’s Build Something Amazing!"
-            subheading="Start your next project with our expert team today."
-          />
+          <CTABottomSectionWrapper/>
         </Container>
       </section>
     </>

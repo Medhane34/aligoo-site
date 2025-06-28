@@ -19,6 +19,8 @@ import { SanityLive } from "@/src/sanity/live";
 
 import Script from "next/script";
 
+import { LanguageProvider } from "@/components/LanguageContext";
+
 export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
@@ -62,12 +64,15 @@ export default async function RootLayout({
         )}
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+          
           <div className="relative flex flex-col h-screen">
             <Navbar />
+            <LanguageProvider> 
             <main className="pt-16 flex-grow">
               {children}
               <SpeedInsights />
             </main>
+            </LanguageProvider>
             <Footer />
           </div>
         </Providers>

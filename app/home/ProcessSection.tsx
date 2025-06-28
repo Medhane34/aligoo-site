@@ -1,33 +1,19 @@
 "use client";
-
-import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { CheckIcon } from "@heroicons/react/24/solid";
+import { useRef, useState, useEffect } from "react";
+import { SectionHeading, AccentText } from "@/components/ui/typography";
+import React from "react";
 
-import { AccentText } from "@/components/ui/typography";
-import { SectionHeading } from "@/components/ui/typography";
-const processStepsData = [
-  {
-    heading: "👉 Get Started",
-    description:
-      "Fill out our contact form — tell us about your biz, your goals, your challenges, your wildest dreams (ok, maybe not all of them... yet). The more you share, the better we show up for you.",
-  },
-  {
-    heading: "📅 Book a Call",
-    description:
-      "Once we get your info, we’ll reach out to lock in a discovery call. This is where we listen hard, ask the right questions, and map out your best next move. Strategy mode: activated. 🚀",
-  },
-  {
-    heading: "📑 Get Your Proposal",
-    description:
-      "No copy-paste offers here. You’ll get a tailored game plan packed with smart strategies, clear deliverables, transparent pricing, and realistic timelines. No fluff. No surprises.",
-  },
-  {
-    heading: "🏗️ Let’s Build Together",
-    description:
-      "When you say go, we get moving. Expect regular updates, smooth communication, and work that actually delivers results — not just pretty reports.",
-  },
-];
+export interface ProcessStep {
+  icon: string;
+  heading: string;
+  description: string;
+}
+export interface ProcessSectionProps {
+  sectionHeading: string;
+  accentText: string;
+  steps: ProcessStep[];
+}
 
 const stepVariants = {
   initial: { opacity: 0, scale: 0.8 },
@@ -41,17 +27,11 @@ const descriptionVariants = {
   initialInactive: { opacity: 0.5, y: 20 },
 };
 
-const dividerVariants = {
-  initial: { width: 0, opacity: 0, backgroundColor: "transparent" },
-  animate: {
-    width: "100%",
-    opacity: 1,
-    backgroundColor: "hsl(var(--tw-colors-blue-500))",
-    transition: { duration: 0.6, delay: 0.5 },
-  },
-};
-
-const ProcessSection = () => {
+export default function ProcessSection({
+  sectionHeading,
+  accentText,
+  steps,
+}: ProcessSectionProps) {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
   const [activeStep, setActiveStep] = useState(-1);
@@ -61,7 +41,6 @@ const ProcessSection = () => {
       const timer = setTimeout(() => {
         setActiveStep(0);
       }, 500);
-
       return () => clearTimeout(timer);
     } else {
       setActiveStep(-1);
@@ -71,16 +50,15 @@ const ProcessSection = () => {
   useEffect(() => {
     if (
       isInView &&
-      activeStep < processStepsData.length - 1 &&
+      activeStep < steps.length - 1 &&
       activeStep >= 0
     ) {
       const timer = setTimeout(() => {
         setActiveStep((prev) => prev + 1);
       }, 2000);
-
       return () => clearTimeout(timer);
     }
-  }, [isInView, activeStep, processStepsData.length]);
+  }, [isInView, activeStep, steps.length]);
 
   return (
     <motion.div
@@ -92,50 +70,39 @@ const ProcessSection = () => {
       <div className="container mx-auto px-4 text-center ">
         <div className="space-y-2 mb-8">
           <SectionHeading className="text-3xl font-bold tracking-tight uppercase">
-            {" "}
-            Our Process{" "}
+            {sectionHeading}
           </SectionHeading>
           <AccentText className="normal-case">
-            How We Go From “Let’s Talk” to “Let’s Launch”{" "}
+            {accentText}
           </AccentText>
         </div>
-
         <div className="flex justify-around mb-8 relative">
-          {Array.from({ length: processStepsData.length }).map((_, index) => (
+          {Array.from({ length: steps.length }).map((_, index) => (
             <React.Fragment key={index}>
               <motion.div
                 className={`relative w-12 h-12 rounded-full border-2 ${
                   activeStep >= index
                     ? "border-blue-500 text-blue-500"
                     : "border-gray-300 text-gray-600"
-                } flex items-center justify-center font-semibold`}
+                } flex items-center justify-center font-semibold bg-background-light dark:bg-background-dark`}
                 variants={stepVariants}
                 initial="initial"
                 animate={activeStep >= index ? "animate" : "initial"}
               >
-                {activeStep > index ? (
-                  <CheckIcon className="w-6 h-6" />
+                {steps[index].icon ? (
+                  <span className="text-2xl">{steps[index].icon}</span>
                 ) : (
                   index + 1
                 )}
               </motion.div>
-              {index < processStepsData.length - 1 && (
-                <motion.div // Corrected line: only one motion.div
-                  className="absolute top-1/2 left-[calc(100%+1rem)] -translate-y-1/2 h-0.5 bg-gray-300"
-                  variants={dividerVariants}
-                  initial="initial"
-                  animate={activeStep > index ? "animate" : "initial"}
-                  style={{
-                    width:
-                      activeStep > index ? "calc(calc(100% / 4) - 2rem)" : 0,
-                  }}
-                />
+              {index < steps.length - 1 && (
+                <div className="w-8 h-0.5 bg-gray-300 absolute top-1/2 left-full -translate-y-1/2" />
               )}
             </React.Fragment>
           ))}
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-8 md:gap-y-12 px-4">
-          {processStepsData.map((step, index) => (
+          {steps.map((step, index) => (
             <motion.div
               key={index}
               className="text-center"
@@ -155,6 +122,4 @@ const ProcessSection = () => {
       </div>
     </motion.div>
   );
-};
-
-export default ProcessSection;
+}

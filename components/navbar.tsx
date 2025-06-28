@@ -18,6 +18,8 @@ import { Dropdown, DropdownMenu, DropdownTrigger, DropdownItem } from "@heroui/d
 import { Logo } from "./icons";
 import { Accordion, AccordionItem } from "@heroui/accordion";
 
+import { useLanguage } from "./LanguageContext";
+
 const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     {...props}
@@ -37,6 +39,7 @@ const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleMenuClose = () => setMenuOpen(false);
+const { lang, setLang } = useLanguage();
 
   return (
     <div className="relative">
@@ -156,6 +159,24 @@ export const Navbar = () => {
         </NavbarContent>
 
         <NavbarContent justify="end" className="hidden sm:flex">
+           {/* Language Toggle */}
+  <div className="flex gap-1">
+    <button
+      className={`px-3 py-1 rounded-l ${lang === "en" ? "bg-brand-primary text-white" : "bg-gray-200"}`}
+      onClick={() => setLang("en")}
+      type="button"
+    >
+      EN
+    </button>
+    <button
+      className={`px-3 py-1 rounded-r ${lang === "am" ? "bg-brand-primary text-white" : "bg-gray-200"}`}
+      onClick={() => setLang("am")}
+      type="button"
+    >
+      አማ
+    </button>
+  </div>
+
           <ThemeSwitch />
         </NavbarContent>
 

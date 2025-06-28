@@ -8,6 +8,8 @@ import MeetThePeople from "./team";
 
 import Container from "@/components/ui/Container";
 import { HeroSection, CTABottomSection } from "@/components";
+import AboutIntroSectionWrapper from "@/wrappers/about/AboutIntroSectionWrapper";
+import ValuesSectionWrapper from "@/wrappers/about/ValuesSectionWrapper";
 
 export const metadata: Metadata = {
   title: "About Us | Aligoo Digital Agency",
@@ -44,7 +46,7 @@ Rooted in Addis Ababa, built for bold moves — we combine data, design, and dig
       />
       <Container>
         <div className="div" id="intro-section">
-        <Intro />
+        <AboutIntroSectionWrapper/>
         </div>
       </Container>
 
@@ -55,16 +57,9 @@ Rooted in Addis Ababa, built for bold moves — we combine data, design, and dig
         <AligooMarketingFix />
       </Container>
       <Container>
-        <Values />
+        <ValuesSectionWrapper/>
       </Container>
       <MeetThePeople />
-      <Container>
-        <CTABottomSection
-          firstbuttontext="😎 Let's catch up "
-          heading="Let’s Build Something Amazing!"
-          subheading="Start your next project with our expert team today."
-        />
-      </Container>
-    </>
+       </>
   );
 }

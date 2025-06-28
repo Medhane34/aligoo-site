@@ -1,58 +1,32 @@
-// components/HeroSection.jsx
+// components/HeroSection.tsx
 "use client";
-
 import { Button } from "@heroui/button";
 import { motion } from "framer-motion";
-import Link from "next/link"; // Import Link for internal navigation
-import { ButtonVariants } from "@/lib/motions/buttonVariants"; // Import your button variants
-// Assuming `title` is a utility function from your primitives that applies common styles
+import Link from "next/link";
+import { MyButton, MyOutlineButton } from "./custom/extendVariants";
 import { title } from "@/components/primitives";
 
-// --- Framer Motion Variants (Keep as is, they are fine) ---
-import { MyButton, MyOutlineButton } from "./custom/extendVariants";
-// Define the props interface for better type safety (if using TypeScript)
-// For JavaScript, this acts as good documentation.
-interface HeroSectionProps {
-  headlineText1?: string; // e.g., "Make"
-  headlineText2?: string; // e.g., "beautiful" (with color)
-  headlineText3?: string; // e.g., "websites regardless of your design experience."
+export interface HeroSectionProps {
+  badgeText?: string;
+  headlineText1: string;
+  headlineText2: string;
+  headlineText3?: string;
   subheading: string;
   primaryButtonText: string;
   primaryButtonUrl: string;
   secondaryButtonText: string;
   secondaryButtonUrl: string;
-  badgeText?: string; // Optional badge text
 }
 
-const headerVariants= {
+const sectionVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 2.2,
-    },
-  },
-};
-const buttonContainerVariants= {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.2 },
   },
 };
 
-const subheadingVariants= {
-  hidden: { opacity: 0, y: 15 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeInOut" },
-  },
-};
-
-const headingVariants= {
+const headingVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
@@ -70,30 +44,43 @@ const badgeVariants = {
   },
 };
 
-const sectionVariants = {
-  hidden: { opacity: 0 },
+const subheadingVariants = {
+  hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
+    y: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
   },
 };
 
+const buttonContainerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2 },
+  },
+};
 
-// Update the component to accept props
+const buttonVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5 },
+  },
+};
+
 export default function HeroSection({
-  headlineText1 = "Make", // Default values for headline parts
-  headlineText2 = "beautiful",
-  headlineText3 = "websites regardless of your design experience.",
+  badgeText,
+  headlineText1,
+  headlineText2,
+  headlineText3,
   subheading,
   primaryButtonText,
   primaryButtonUrl,
   secondaryButtonText,
   secondaryButtonUrl,
-  badgeText, // Optional badge text prop
 }: HeroSectionProps) {
-  // Add the props to the function signature
   return (
     <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark mt-[-60px] xs:p-4 sm:mt-[-80px] sm:p-6 md:mt-[-105px] md:p-9">
       {/* Background Pattern */}
@@ -109,7 +96,7 @@ export default function HeroSection({
           initial="hidden"
           variants={sectionVariants}
         >
-          {/* Badge (now optional via prop) */}
+          {/* Badge */}
           {badgeText && (
             <motion.div variants={badgeVariants}>
               <Button
@@ -118,12 +105,12 @@ export default function HeroSection({
                 radius="full"
                 variant="bordered"
               >
-                {badgeText} {/* Use badgeText prop */}
+                {badgeText}
               </Button>
             </motion.div>
           )}
 
-          {/* Headline (using props) */}
+          {/* Headline */}
           <motion.div
             className="text-center text-heading font-bold leading-[0.8] sm:leading-[0.8] tracking-tighter sm:text-[64px]"
             variants={headingVariants}
@@ -134,36 +121,40 @@ export default function HeroSection({
                 <span className={title({ color: "violet" })}>
                   {headlineText2}{" "}
                 </span>
-                <br />
-                <span className={title()}>{headlineText3}</span>
+                {headlineText3 && (
+                  <>
+                    <br />
+                    <span className={title()}>{headlineText3}</span>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
 
-          {/* Sub-heading (using prop) */}
+          {/* Subheading */}
           <motion.p
             className="text-center text-body font-normal leading-6 sm:leading-7 text-text-light dark:text-text-dark w-full xs:w-[90%] sm:w-[466px] md:w-[550px]"
             variants={subheadingVariants}
           >
-            {subheading} {/* Use subheading prop */}
+            {subheading}
           </motion.p>
 
-          {/* Buttons (using props and Link component) */}
+          {/* Buttons */}
           <motion.div
             className="flex flex-row items-center justify-center gap-6 sm:flex-row"
             variants={buttonContainerVariants}
           >
-            <motion.div variants={ButtonVariants}>
+            <motion.div variants={buttonVariants}>
               <Link passHref href={primaryButtonUrl}>
                 <MyButton>
-                  {primaryButtonText} {/* Use primaryButtonText prop */}
+                  {primaryButtonText}
                 </MyButton>
               </Link>
             </motion.div>
-            <motion.div variants={ButtonVariants}>
+            <motion.div variants={buttonVariants}>
               <Link passHref href={secondaryButtonUrl}>
                 <MyOutlineButton>
-                  {secondaryButtonText} {/* Use secondaryButtonText prop */}
+                  {secondaryButtonText}
                 </MyOutlineButton>
               </Link>
             </motion.div>
