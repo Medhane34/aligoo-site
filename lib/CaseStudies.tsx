@@ -7,9 +7,26 @@ import {
   featuredCaseStudyQuery,
   getTotalCaseStudiesCountQuery,
   HomeCaseStudyQuery,
+  SECTION_HEADING_BLOCK_QUERY,
   wbCaseStudyQuery,
 } from "@/sanity/queries/caseStudies";
 import { CaseStudy } from "@/types/CaseStudyTypes";
+import { SECTION_HEADING_BLOCK_QUERY_WEB } from "@/sanity/queries/services";
+
+export type SectionHeadingBlockData = {
+  heading_en: string;
+  heading_am: string;
+  subheading_en?: string;
+  subheading_am?: string;
+};
+
+ export type SectionHeadingBlockDataWEB = {  
+    heading_en: string;  
+    heading_am: string;  
+    subheading_en?: string;  
+    subheading_am?: string;  
+  }; 
+
 
 // Helper to coerce all fields to the correct type
 function mapToCaseStudy(post: any): CaseStudy {
@@ -27,6 +44,15 @@ function mapToCaseStudy(post: any): CaseStudy {
     excerpt: String(post.excerpt ?? ""),
     
   };
+}
+// function to fetch Sectionheading for Facebook Ad 
+export async function fetchSectionHeadingBlock(name: string): Promise<SectionHeadingBlockData | null> {
+  return await client.fetch(SECTION_HEADING_BLOCK_QUERY, { name });
+}
+
+// function to fetch sectionheading for web design 
+export async function fetchSectionHeadingBlockWEB(name: string): Promise<SectionHeadingBlockDataWEB | null> {
+  return await client.fetch(SECTION_HEADING_BLOCK_QUERY_WEB, { name });
 }
 
 export async function fetchCaseStudies(

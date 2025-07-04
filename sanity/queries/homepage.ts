@@ -21,12 +21,16 @@ export const HERO_SECTION_QUERY = `
 
 export const ABOUT_US_SECTION_QUERY = `
   *[_type == "aboutUsSection"][0]{
-    sectionHeading,
-    accentText,
-    paragraphs,
+    sectionHeading_en,
+    sectionHeading_am,
+    accentText_en,
+    accentText_am,
+    paragraphs_en,
+    paragraphs_am,
     "imageUrl": image.asset->url,
     imageAlt,
-    buttonText,
+    buttonText_en,
+    buttonText_am,
     buttonUrl
   }
 `;

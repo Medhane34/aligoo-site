@@ -19,7 +19,7 @@ import { CaseStudy } from "@/types/CaseStudyTypes";
 type FeaturedPostsSectionProps = {
   posts: CaseStudy[];
   heading: string;
-  subheading: string;
+  subheading?: string;
 };
 
 const placeholderCaseStudy: CaseStudy = {

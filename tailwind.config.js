@@ -21,6 +21,9 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],
+        // amharic fonts 
+      amharicHeading: ['Chiret', 'sans-serif'],
+      amharicBody: ['Noto Sans Ethiopic', 'sans-serif'],
       },
       backgroundImage: {
       'light-gradient': 'linear-gradient(to bottom right, #ffe4e6, #ddd6fe, #c7d2fe)',

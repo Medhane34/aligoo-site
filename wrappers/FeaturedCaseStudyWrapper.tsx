@@ -1,6 +1,6 @@
 // wrappers/FetchCaseStudiesWrapper.tsx
 import { fetchFeaturedCaseStudy } from "@/lib/CaseStudies";
-import FetchCaseStudies from "@/app/works/Featured";
+import FetchCaseStudies from "@/app/[lang]/works/Featured";
 
 export default async function FetchCaseStudiesWrapper() {
   const featured = await fetchFeaturedCaseStudy();

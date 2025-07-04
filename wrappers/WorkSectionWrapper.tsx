@@ -1,5 +1,5 @@
 import { fetchCaseStudies, fetchTotalCaseStudiesCount } from "@/lib/CaseStudies";
-import WorkSection from "@/app/works/WorkSection"
+import WorkSection from "@/app/[lang]/works/WorkSection"
 
 type CaseStudy = {
   _id: string;

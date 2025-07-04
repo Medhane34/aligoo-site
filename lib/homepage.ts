@@ -24,7 +24,7 @@ export async function fetchHeroSection(): Promise<HeroSectionData | null> {
   return await client.fetch(HERO_SECTION_QUERY);
 }
 
-// About us section function 
+/* // About us section function 
 export type AboutUsSectionData = {
   sectionHeading: string;
   accentText: string;
@@ -32,6 +32,24 @@ export type AboutUsSectionData = {
   imageUrl: string;
   imageAlt: string;
   buttonText: string;
+  buttonUrl: string;
+};
+
+export async function fetchAboutUsSection(): Promise<AboutUsSectionData | null> {
+  return await client.fetch(ABOUT_US_SECTION_QUERY);
+} */
+
+  export type AboutUsSectionData = {
+  sectionHeading_en: string;
+  sectionHeading_am: string;
+  accentText_en: string;
+  accentText_am: string;
+  paragraphs_en: string[];
+  paragraphs_am: string[];
+  imageUrl: string;
+  imageAlt: string;
+  buttonText_en: string;
+  buttonText_am: string;
   buttonUrl: string;
 };
 

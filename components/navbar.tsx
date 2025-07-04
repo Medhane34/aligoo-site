@@ -13,25 +13,29 @@ import {
 import { Button } from "@heroui/button";
 import { Link } from "@heroui/link";
 import NextLink from "next/link";
-import { ThemeSwitch } from "@/components/theme-switch";
-import { Dropdown, DropdownMenu, DropdownTrigger, DropdownItem } from "@heroui/dropdown";
-import { Logo } from "./icons";
+import {
+  Dropdown,
+  DropdownMenu,
+  DropdownTrigger,
+  DropdownItem,
+} from "@heroui/dropdown";
 import { Accordion, AccordionItem } from "@heroui/accordion";
+import { usePathname } from "next/navigation";
 
-import { useLanguage } from "./LanguageContext";
+import { ThemeSwitch } from "@/components/theme-switch";
 
 const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     {...props}
-    viewBox="0 0 20 20"
-    fill="currentColor"
-    className="inline-block ml-1 w-4 h-4"
     aria-hidden="true"
+    className="inline-block ml-1 w-4 h-4"
+    fill="currentColor"
+    viewBox="0 0 20 20"
   >
     <path
-      fillRule="evenodd"
-      d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.25 3.846a.75.75 0 01-1.02 0l-4.25-3.846a.75.75 0 01.02-1.06z"
       clipRule="evenodd"
+      d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.25 3.846a.75.75 0 01-1.02 0l-4.25-3.846a.75.75 0 01.02-1.06z"
+      fillRule="evenodd"
     />
   </svg>
 );
@@ -39,16 +43,21 @@ const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const handleMenuClose = () => setMenuOpen(false);
-const { lang, setLang } = useLanguage();
+  // Language path handling
+  const pathname = usePathname();
+  const pathWithoutLang = pathname.replace(/^\/(en|am)/, "");
 
   return (
     <div className="relative">
       <HeroUINavbar
-        maxWidth="xl"
         className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background-light dark:bg-background-dark shadow"
         isMenuOpen={menuOpen}
+        maxWidth="xl"
+        style={{
+          WebkitBackdropFilter: "blur(12px)",
+          backdropFilter: "blur(12px)",
+        }}
         onMenuOpenChange={setMenuOpen}
-        style={{ WebkitBackdropFilter: "blur(12px)", backdropFilter: "blur(12px)" }}
       >
         {/* Mobile Navbar Content */}
         <NavbarContent className="sm:hidden relative w-full flex items-center justify-between px-2">
@@ -74,18 +83,19 @@ const { lang, setLang } = useLanguage();
         <NavbarContent className="hidden sm:flex" justify="start">
           <NavbarBrand as="li" className="gap-3 max-w-fit">
             <NextLink className="flex items-center gap-1" href="/">
-
               <p className="font-bold text-inherit">Aligoo</p>
             </NextLink>
           </NavbarBrand>
         </NavbarContent>
 
-        <NavbarContent className="hidden sm:flex gap-4 text-red-500 dark:text-text-dark" justify="center">
+        <NavbarContent
+          className="hidden sm:flex gap-4 text-red-500 dark:text-text-dark"
+          justify="center"
+        >
           <NavbarItem>
             <Link
-              href="/"
-
               className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
+              href="/"
             >
               Home
             </Link>
@@ -102,7 +112,7 @@ const { lang, setLang } = useLanguage();
                 </Button>
               </DropdownTrigger>
             </NavbarItem>
-            <DropdownMenu aria-label="Service Actions" >
+            <DropdownMenu aria-label="Service Actions">
               <DropdownItem key="Facebook Ad" href="/services/facebook-ad">
                 Facebook Ad
               </DropdownItem>
@@ -112,107 +122,112 @@ const { lang, setLang } = useLanguage();
               <DropdownItem key="TikTok Ads" href="/services/tiktok-ad">
                 TikTok Ads
               </DropdownItem>
-              <DropdownItem key="Digital Marketing Strategy" href="/services/digital-marketing">
-                Digital Marketing Strategy 
+              <DropdownItem
+                key="Digital Marketing Strategy"
+                href="/services/digital-marketing"
+              >
+                Digital Marketing Strategy
               </DropdownItem>
               <DropdownItem key="SEO" href="/services/seo">
                 SEO
               </DropdownItem>
-              <DropdownItem key="Content Marketing" href="/services/content-marketing">
-                Content Marketing  
+              <DropdownItem
+                key="Content Marketing"
+                href="/services/content-marketing"
+              >
+                Content Marketing
               </DropdownItem>
-              <DropdownItem key="Funnel Mapping" href="/services/funnel-mapping">
-                Funnel Mapping 
+              <DropdownItem
+                key="Funnel Mapping"
+                href="/services/funnel-mapping"
+              >
+                Funnel Mapping
               </DropdownItem>
-              <DropdownItem key="Graphic Design" href="/services/graphic-design">
-                Graphic Design  
+              <DropdownItem
+                key="Graphic Design"
+                href="/services/graphic-design"
+              >
+                Graphic Design
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
           <NavbarItem>
             <Link
-              href="/works"
-               
               className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
+              href="/works"
             >
               Our work
             </Link>
           </NavbarItem>
           <NavbarItem>
             <Link
-              href="/about"
-               
               className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
+              href="/about"
             >
               About Us
             </Link>
           </NavbarItem>
           <NavbarItem>
             <Link
-              href="/contact"
-               
               className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
+              href="/contact"
             >
               Contact Us
             </Link>
           </NavbarItem>
         </NavbarContent>
 
-        <NavbarContent justify="end" className="hidden sm:flex">
-           {/* Language Toggle */}
-  <div className="flex gap-1">
-    <button
-      className={`px-3 py-1 rounded-l ${lang === "en" ? "bg-brand-primary text-white" : "bg-gray-200"}`}
-      onClick={() => setLang("en")}
-      type="button"
-    >
-      EN
-    </button>
-    <button
-      className={`px-3 py-1 rounded-r ${lang === "am" ? "bg-brand-primary text-white" : "bg-gray-200"}`}
-      onClick={() => setLang("am")}
-      type="button"
-    >
-      አማ
-    </button>
-  </div>
+        <NavbarContent className="hidden sm:flex" justify="end">
+          {/* #region CTA */}
+          <div className="flex gap-1">
+            <Link
+              className={`px-3 py-1 rounded-l ${pathname.startsWith("/en") ? "bg-brand-primary text-white" : "bg-gray-200"}`}
+              href={`/en${pathWithoutLang === "" ? "/" : pathWithoutLang}`}
+            >
+              EN
+            </Link>
+            <Link
+              className={`px-3 py-1 rounded-r ${pathname.startsWith("/am") ? "bg-brand-primary text-white" : "bg-gray-200"}`}
+              href={`/am${pathWithoutLang === "" ? "/" : pathWithoutLang}`}
+            >
+              አማ
+            </Link>
+          </div>
+          {/* #endregion */}
 
           <ThemeSwitch />
         </NavbarContent>
-
+        {/* #endregion */}
         {/* Mobile Menu */}
         <NavbarMenu>
           <div className="mx-4 mt-2 flex flex-col gap-2">
             <NavbarMenuItem className="p-0">
               <Link
-                href="/"
                 className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                href="/"
                 onClick={handleMenuClose}
               >
                 Home
               </Link>
             </NavbarMenuItem>
-            <Accordion
-              className="w-full"
-              variant="light"
-            >
+            <Accordion className="w-full" variant="light">
               <AccordionItem
                 aria-label="Services"
-                title={
-                  <span className="flex items-center text-xl font-medium text-red-500 dark:text-text-dark text-left w-full">
-                    Services <ChevronDownIcon className="ml-1" />
-                  </span>
-                }
                 classNames={{
                   trigger: "py-2 px-0 w-full text-left",
                   title: "text-left w-full block",
                   content: "pl-0 pr-0",
                 }}
+                title={
+                  <span className="flex items-center text-xl font-medium text-red-500 dark:text-text-dark text-left w-full">
+                    Services <ChevronDownIcon className="ml-1" />
+                  </span>
+                }
               >
                 <NavbarMenuItem className="p-0">
                   <Link
-                    href="/services/facebook-ad"
                     className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    href="/services/facebook-ad"
                     onClick={handleMenuClose}
                   >
                     Facebook Ad
@@ -220,8 +235,8 @@ const { lang, setLang } = useLanguage();
                 </NavbarMenuItem>
                 <NavbarMenuItem className="p-0">
                   <Link
-                    href="/services/web-design"
                     className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    href="/services/web-design"
                     onClick={handleMenuClose}
                   >
                     Web Design
@@ -229,8 +244,8 @@ const { lang, setLang } = useLanguage();
                 </NavbarMenuItem>
                 <NavbarMenuItem className="p-0">
                   <Link
-                    href="/services/tiktok-ad"
                     className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    href="/services/tiktok-ad"
                     onClick={handleMenuClose}
                   >
                     TikTok Ads
@@ -238,8 +253,8 @@ const { lang, setLang } = useLanguage();
                 </NavbarMenuItem>
                 <NavbarMenuItem className="p-0">
                   <Link
-                    href="/services/seo"
                     className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    href="/services/seo"
                     onClick={handleMenuClose}
                   >
                     SEO
@@ -249,8 +264,8 @@ const { lang, setLang } = useLanguage();
             </Accordion>
             <NavbarMenuItem className="p-0">
               <Link
-                href="/works"
                 className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                href="/works"
                 onClick={handleMenuClose}
               >
                 Our Work
@@ -258,8 +273,8 @@ const { lang, setLang } = useLanguage();
             </NavbarMenuItem>
             <NavbarMenuItem className="p-0">
               <Link
-                href="/about"
                 className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                href="/about"
                 onClick={handleMenuClose}
               >
                 About Us
@@ -267,8 +282,8 @@ const { lang, setLang } = useLanguage();
             </NavbarMenuItem>
             <NavbarMenuItem className="p-0">
               <Link
-                href="/contact"
                 className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                href="/contact"
                 onClick={handleMenuClose}
               >
                 Contact Us

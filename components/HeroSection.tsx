@@ -80,15 +80,12 @@ export default function HeroSection({
   primaryButtonUrl,
   secondaryButtonText,
   secondaryButtonUrl,
-}: HeroSectionProps) {
+  lang = "en", // Add lang prop, default to "en"
+
+}: HeroSectionProps & { lang?: "en" | "am" }) {
   return (
     <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark mt-[-60px] xs:p-4 sm:mt-[-80px] sm:p-6 md:mt-[-105px] md:p-9">
-      {/* Background Pattern */}
-      <div className="absolute inset-0">
-        <div className="relative h-full w-full bg-background-light dark:bg-background-dark [&>div]:absolute [&>div]:inset-0 [&>div]:bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] [&>div]:bg-[size:14px_24px] [&>div]:[mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]">
-          <div />
-        </div>
-      </div>
+      {/* ...background pattern... */}
       <main className="container mx-auto flex flex-1 flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-4">
         <motion.section
           animate="visible"
@@ -112,11 +109,11 @@ export default function HeroSection({
 
           {/* Headline */}
           <motion.div
-            className="text-center text-heading font-bold leading-[0.8] sm:leading-[0.8] tracking-tighter sm:text-[64px]"
+            className={`text-center text-heading font-bold leading-[0.8] sm:leading-[0.8] tracking-tighter sm:text-[64px] ${lang === "am" ? "font-amharicHeading" : ""}`}
             variants={headingVariants}
           >
             <div className="relative">
-              <div className="inline-block max-w-[90%] xs:max-w-md sm:max-w-lg md:max-w-xl text-center text-text-light dark:text-text-dark justify-center relative z-10">
+              <div className={`inline-block max-w-[90%] xs:max-w-md sm:max-w-lg md:max-w-xl text-center text-text-light dark:text-text-dark justify-center relative z-10`}>
                 <span className={title()}>{headlineText1} </span>
                 <span className={title({ color: "violet" })}>
                   {headlineText2}{" "}
@@ -133,13 +130,13 @@ export default function HeroSection({
 
           {/* Subheading */}
           <motion.p
-            className="text-center text-body font-normal leading-6 sm:leading-7 text-text-light dark:text-text-dark w-full xs:w-[90%] sm:w-[466px] md:w-[550px]"
+            className={`text-center text-body font-normal leading-6 sm:leading-7 text-text-light dark:text-text-dark w-full xs:w-[90%] sm:w-[466px] md:w-[550px] ${lang === "am" ? "font-amharicBody" : ""}`}
             variants={subheadingVariants}
           >
             {subheading}
           </motion.p>
 
-          {/* Buttons */}
+          {/* Buttons (unchanged) */}
           <motion.div
             className="flex flex-row items-center justify-center gap-6 sm:flex-row"
             variants={buttonContainerVariants}

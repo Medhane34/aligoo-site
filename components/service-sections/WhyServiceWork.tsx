@@ -45,12 +45,12 @@ const statVariants = {
   },
 };
 
-type Stat = {
+export type Stat = {
   value: string;
   label: string;
 };
 
-type Props = {
+export type WhyServiceWorksProps = {
   heading: string;
   highlight: string;
   paragraph1: string;
@@ -58,7 +58,7 @@ type Props = {
   stats: Stat[];
 };
 
-const WhyServiceWorks: React.FC<Props> = ({
+const WhyServiceWorks: React.FC<WhyServiceWorksProps> = ({
   heading,
   highlight,
   paragraph1,
