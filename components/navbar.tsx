@@ -95,7 +95,7 @@ export const Navbar = () => {
           <NavbarItem>
             <Link
               className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
-              href="/"
+              href="/en/"
             >
               Home
             </Link>
@@ -113,22 +113,22 @@ export const Navbar = () => {
               </DropdownTrigger>
             </NavbarItem>
             <DropdownMenu aria-label="Service Actions">
-              <DropdownItem key="Facebook Ad" href="/services/facebook-ad">
+              <DropdownItem key="Facebook Ad" href="/en/services-back/facebook-ad">
                 Facebook Ad
               </DropdownItem>
-              <DropdownItem key="Web Design" href="/services/web-design">
+              <DropdownItem key="Web Design" href="/en/services-back/web-design">
                 Web Design
               </DropdownItem>
-              <DropdownItem key="TikTok Ads" href="/services/tiktok-ad">
+              <DropdownItem key="TikTok Ads" href="/en/services-back/tiktok-ad">
                 TikTok Ads
               </DropdownItem>
               <DropdownItem
                 key="Digital Marketing Strategy"
-                href="/services/digital-marketing"
+                href="/en/services-back/digital-marketing"
               >
                 Digital Marketing Strategy
               </DropdownItem>
-              <DropdownItem key="SEO" href="/services/seo">
+              <DropdownItem key="SEO" href="/en/services-back/seo">
                 SEO
               </DropdownItem>
               <DropdownItem
@@ -154,7 +154,7 @@ export const Navbar = () => {
           <NavbarItem>
             <Link
               className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
-              href="/works"
+              href="/en/works"
             >
               Our work
             </Link>
@@ -170,7 +170,7 @@ export const Navbar = () => {
           <NavbarItem>
             <Link
               className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
-              href="/contact"
+              href="/en/contact"
             >
               Contact Us
             </Link>
@@ -179,7 +179,7 @@ export const Navbar = () => {
 
         <NavbarContent className="hidden sm:flex" justify="end">
           {/* #region CTA */}
-          <div className="flex gap-1">
+         {/*  <div className="flex gap-1">
             <Link
               className={`px-3 py-1 rounded-l ${pathname.startsWith("/en") ? "bg-brand-primary text-white" : "bg-gray-200"}`}
               href={`/en${pathWithoutLang === "" ? "/" : pathWithoutLang}`}
@@ -192,7 +192,7 @@ export const Navbar = () => {
             >
               አማ
             </Link>
-          </div>
+          </div> */}
           {/* #endregion */}
 
           <ThemeSwitch />

@@ -99,6 +99,7 @@ const features: Feature[] = [
 ];
 
 
+export const revalidate = 3600; // Rebuild every hour
 
 export default async function IndexPage() {
   return (
@@ -184,11 +185,11 @@ export default async function IndexPage() {
   subheading="We’ve helped dozens of brands run profitable campaigns. Here are answers to the most common questions people ask before they sign up."
 />
 </Container>
- <Container>
+ {/* <Container>
       <CTABottomSection firstbuttontext={"👉 Book a Consultation"} 
       heading={"Ready to Turn Clicks Into Clients?"} 
       subheading={"Your funnel isn’t just a path—it’s your profit engine. Whether you’re stuck with scattered tools or just getting started, we’ll help you make sense of the chaos and create a clear, high-converting system."} />
-  </Container>
+  </Container> */}
     </>
   );
 }

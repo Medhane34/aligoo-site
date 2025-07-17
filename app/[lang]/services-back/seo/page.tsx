@@ -1,13 +1,11 @@
 /* eslint-disable prettier/prettier */
 import HeroSection from "@/components/HeroSection";
-
-import CTABottomSection from "@/components/CTA";
 import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
 import FaqSection from "@/components/service-sections/FaqSection";
 import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
-import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
 import OurProcess from "@/components/service-sections/ourprocess";
 import Container from "@/components/ui/Container";
+import SeoHeroSectionWrapper from "@/wrappers/services/seo/SeoHeroWrapper";
 const fbWhyContent = {
   heading: "Why SEO Still Reigns in the(Digital world if you know to",
   highlight: "use them)",
@@ -46,29 +44,24 @@ const processSteps = [
   },
 ];
 
-export default async function IndexPage() {
+export const revalidate = 3600; // Rebuild every hour
+
+export default async function IndexPage({ params }: { params: Promise<{ lang: "en" | "am" }> }) {
+  const { lang } = await params; // ✅
+
   return (
     <>
-      <HeroSection 
-      badgeText="Be Found Where It Matters Most!" // Optional badge text
-        headlineText1="Search Engine"
-        headlineText2="Visibility"
-        headlineText3=" Visibility That Drives Clicks, Leads & Sales"
-        primaryButtonText="📞 Book a Strategy Call"
-        primaryButtonUrl="/strategy-session"
-        secondaryButtonText="🔍 Get a Free SEO Audit"
-        secondaryButtonUrl="#our-process-seo"
-        subheading="We help you rank higher, get discovered faster, and convert more. Whether you're a local business or a growing brand, our SEO strategies are built to attract traffic that turns into paying customers — not just visitors."
-      />
+      
+      <SeoHeroSectionWrapper lang={lang}/>
       <Container>
       <WhyServiceWorks {...fbWhyContent} />
       <OurProcess
-        id="our-process-seo"
         heading="The Evergreen Growth Framework 🌱"
-        subheading="We don’t chase traffic. We build it organically, methodically, and strategically — so it keeps compounding over time. Here’s how:"
-        imageSrc="/page-content-images/ourprocess-seo.png" // Path to your image in the public folder
+        id="our-process-seo"
         imageAlt="“Marketers nurturing an organic growth ecosystem with SEO audit, optimized content, and authority-building strategies for long-term traffic.”"
+        imageSrc="/page-content-images/ourprocess-seo.png" // Path to your image in the public folder
         steps={processSteps}
+        subheading="We don’t chase traffic. We build it organically, methodically, and strategically — so it keeps compounding over time. Here’s how:"
       />
   </Container>
       <Container>
@@ -120,10 +113,10 @@ export default async function IndexPage() {
 />
 
 </Container>
-  
+  {/* 
     <Container>
       <CTABottomSection firstbuttontext={"📲 Book a Free Strategy Call"} heading={"Ready to get started?"} subheading={"Book a free strategy session with our team. "} />
-   </Container>
+   </Container> */}
     </>
   );
 }

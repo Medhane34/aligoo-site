@@ -1,4 +1,4 @@
-// wrappers/FetchCaseStudiesWrapper.tsx
+/* // wrappers/FetchCaseStudiesWrapper.tsx
 import { fetchFeaturedCaseStudy } from "@/lib/CaseStudies";
 import FetchCaseStudies from "@/app/[lang]/works/Featured";
 
@@ -10,4 +10,4 @@ export default async function FetchCaseStudiesWrapper() {
   }
 
   return <FetchCaseStudies featured={featured} />;
-}
+} */

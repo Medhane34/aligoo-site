@@ -12,6 +12,8 @@ import { CheckIcon } from "@heroicons/react/24/solid";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+import YouTube from "react-youtube";
+
 import { getHeadingId } from "@/lib/utilties/generateToc";
 
 const { projectId, dataset } = client.config();
@@ -19,6 +21,13 @@ const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
+const getYouTubeId = (urlOrId: string): string | null => {
+  // If it's already an ID
+  if (/^[\w-]{11}$/.test(urlOrId)) return urlOrId;
+  // Try to extract from URL
+  const match = urlOrId.match(/(?:v=|\/embed\/|\.be\/)([\w-]{11})/);
+  return match ? match[1] : null;
+};
 
 const components: PortableTextComponents = {
   types: {
@@ -63,6 +72,30 @@ const components: PortableTextComponents = {
         </div>
       );
     }, */
+    youtubeVideo: ({ value }) => {
+      const videoId = getYouTubeId(value?.url || "");
+      if (!videoId) return null;
+      return (
+        <div className="my-8 flex flex-col items-center">
+          <div className="w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-lg">
+            <YouTube
+              videoId={videoId}
+              opts={{
+                width: "100%",
+                height: "100%",
+                playerVars: { autoplay: 0 },
+              }}
+              className="w-full h-full"
+            />
+          </div>
+          {value.caption && (
+            <p className="text-sm text-gray-400 text-center mt-2">
+              {value.caption}
+            </p>
+          )}
+        </div>
+      );
+    },
     markdownTable: ({ value }) => {
       if (!value?.markdown) return null;
 
@@ -132,7 +165,7 @@ const components: PortableTextComponents = {
     tip: ({ value }) => (
       <aside className="rounded bg-yellow-100 border-l-4 border-yellow-500 p-4 my-4">
         <strong className="block text-yellow-800">{value.title}</strong>
-        <p className="text-body">{value.body}</p>
+        <p className="text-body text-violet">{value.body}</p>
       </aside>
     ),
     code: ({ value }) => (
@@ -195,6 +228,7 @@ const components: PortableTextComponents = {
       <p className="text-body my-2 leading-relaxed">{children}</p>
     ),
   },
+
   marks: {
     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
     em: ({ children }) => <em className="italic">{children}</em>,

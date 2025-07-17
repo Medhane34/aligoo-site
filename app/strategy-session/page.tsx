@@ -1,5 +1,6 @@
 // app/strategy-session/page.tsx
 import MultiStepForm from "./MultiStepForm";
+export const revalidate = 3600; // Rebuild every hour
 
 export default function StrategySessionPage() {
   return (

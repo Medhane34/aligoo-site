@@ -305,6 +305,29 @@ export const FAQ_SECTION_QUERY_DIGITAL = `
   }
 `;
 
+// SEO SERVICE QUEREIS
+export const HERO_SECTION_QUERY_SEO= `
+  *[_type == "heroSection" && name == $name][0]{
+    badgeText_en,
+    badgeText_am,
+    headlineText1_en,
+    headlineText1_am,
+    headlineText2_en,
+    headlineText2_am,
+    headlineText3_en,
+    headlineText3_am,
+    subheading_en,
+    subheading_am,
+    primaryButtonText_en,
+    primaryButtonText_am,
+    primaryButtonUrl,
+    secondaryButtonText_en,
+    secondaryButtonText_am,
+    secondaryButtonUrl
+  }
+`;
+
+
 
 
 

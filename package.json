@@ -60,6 +60,7 @@
     "react-hook-form": "^7.56.4",
     "react-markdown": "^10.1.0",
     "react-use": "^17.6.0",
+    "react-youtube": "^10.1.0",
     "remark-gfm": "^4.0.1",
     "resend": "^4.5.1",
     "tailwind-scrollbar-hide": "^2.0.0",

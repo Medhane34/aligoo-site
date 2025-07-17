@@ -1,26 +1,18 @@
 import { Metadata } from "next";
 
-import AboutUsSection from "../home/AboutUsSection";
 import TestimonialsSection from "../home/TestimonialsSection";
-import StatsSection from "../home/StatsSection";
-import ProcessSection from "../home/ProcessSection";
-import ServiceSection from "../home/ServiceSection";
 import BlogSection from "../home/blogSection";
-import WhyUsSection from "../home/WhyUsSection";
 
-import HeroSection from "@/components/HeroSection";
-import CTABottomSection from "@/components/CTA";
 import HomeCaseStudyWrapper from "@/wrappers/HomeCaseStudyWrapper";
 import Container from "@/components/ui/Container";
-
 import HeroSectionWrapper from "@/wrappers/homepage/HeroSectionWrapper";
 import AboutUsSectionWrapper from "@/wrappers/homepage/AboutUsSectionWrapper";
 import StatsSectionWrapper from "@/wrappers/homepage/StatsSectionWrapper";
 import ServiceSectionWrapper from "@/wrappers/homepage/ServiceSectionWrapper";
 import ProcessSectionWrapper from "@/wrappers/homepage/ProcessSectionWrapper";
-import WhyServiceWorksSection from "@/components/service-sections/WhyServiceWorksSection";
 import WhyUsSectionWrapper from "@/wrappers/homepage/WhyUsSectionWrapper";
 import CTABottomSectionWrapper from "@/wrappers/homepage/CTABottomSectionWrapper";
+import HomeHeroSectionWrapper from "@/wrappers/homepage/HeroSectionWrapper";
 
 export const metadata: Metadata = {
   title: "Aligoo Digital Agency | Digital Marketing in Addis Ababa",
@@ -42,14 +34,21 @@ export const metadata: Metadata = {
     canonical: "https://aligoo-digital.agency/",
   },
 };
+export const revalidate = 3600; // Rebuild every hour
 
-export default function Home({ params }: { params: { lang: "en" | "am" } }) {
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "am" }>;
+}) {
+  const { lang } = await params;
+
   return (
     <>
       <section className="bg-background-light dark:bg-background-dark">
-        <HeroSectionWrapper lang={params.lang} />
+        <HomeHeroSectionWrapper lang={lang} />
         <Container>
-          <AboutUsSectionWrapper lang={params.lang} />
+          <AboutUsSectionWrapper lang={lang} />
         </Container>
         <StatsSectionWrapper />
         <Container>

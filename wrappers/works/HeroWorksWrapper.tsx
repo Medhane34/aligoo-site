@@ -1,11 +1,9 @@
-// wrappers/homepage/HeroSectionWrapper.tsx
-import { fetchHeroSection, HeroSectionData } from "@/lib/homepage";
+import { fetchHeroSection, HeroSectionData } from "@/lib/works";
 import HeroSection from "@/components/HeroSection";
 
-export default async function HomeHeroSectionWrapper({ lang = "en" }: { lang?: "en" | "am" }) {
-  const data: HeroSectionData | null = await fetchHeroSection("heroSection-Home");
+export default async function WorksHeroSectionWrapper({ lang = "en" }: { lang?: "en" | "am" }) {
+  const data: HeroSectionData | null = await fetchHeroSection("heroSection-WorksPage");
   if (!data) return null;
-
   return (
     <HeroSection
       badgeText={lang === "am" ? data.badgeText_am : data.badgeText_en}

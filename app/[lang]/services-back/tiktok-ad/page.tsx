@@ -51,6 +51,7 @@ const processSteps = [
   },
 ];
 
+export const revalidate = 3600; // Rebuild every hour
 export default async function IndexPage({ params }: { params: Promise<{ lang: "en" | "am" }> }) {
  const { lang } = await params; // ✅
 

@@ -1,4 +1,4 @@
-export const HERO_SECTION_QUERY = `
+export const HERO_SECTION_QUERY_HOMEPAGE = `
   *[_type == "heroSection"][0]{
     badgeText_en,
     badgeText_am,

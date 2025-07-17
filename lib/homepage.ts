@@ -1,5 +1,5 @@
 import { client } from "@/src/sanity/client";
-import { ABOUT_US_SECTION_QUERY, CTA_SECTION_QUERY, HERO_SECTION_QUERY, PROCESS_SECTION_QUERY, SERVICE_SECTION_QUERY, STATS_SECTION_QUERY, WHY_US_SECTION_QUERY } from "@/sanity/queries/homepage";
+import { ABOUT_US_SECTION_QUERY, CTA_SECTION_QUERY, HERO_SECTION_QUERY_HOMEPAGE, PROCESS_SECTION_QUERY, SERVICE_SECTION_QUERY, STATS_SECTION_QUERY, WHY_US_SECTION_QUERY } from "@/sanity/queries/homepage";
 
 export type HeroSectionData = {
   badgeText_en?: string;
@@ -20,8 +20,8 @@ export type HeroSectionData = {
   secondaryButtonUrl: string;
 };
 
-export async function fetchHeroSection(): Promise<HeroSectionData | null> {
-  return await client.fetch(HERO_SECTION_QUERY);
+export async function fetchHeroSection(name:string): Promise<HeroSectionData | null> {
+  return await client.fetch(HERO_SECTION_QUERY_HOMEPAGE, { name });
 }
 
 /* // About us section function 

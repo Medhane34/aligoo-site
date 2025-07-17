@@ -20,6 +20,9 @@ export const metadata: Metadata = {
     canonical: "https://aligoo-digital.agency/contact",
   },
 };
+
+export const revalidate = 3600; // Rebuild every hour
+
 export default async function ContactPage({ params }: { params: Promise<{ lang: "en" | "am" }> }) {
   const { lang } = await params; // ✅
   

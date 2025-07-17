@@ -48,6 +48,8 @@ const processSteps = [
   },
 ];
 
+export const revalidate = 3600; // Rebuild every hour
+
 export default async function IndexPage() {
   return (
     <>
@@ -126,9 +128,9 @@ export default async function IndexPage() {
   subheading="We’ve helped dozens of brands run profitable campaigns. Here are answers to the most common questions people ask before they sign up."
 />
 </Container>
- <Container>
+ {/* <Container>
       <CTABottomSection firstbuttontext={"👉Plan Content Strategy"} heading={"Your audience is searching. Let’s make sure they find you"} subheading={"Whether you're starting from scratch or scaling up, our content strategies are built to drive traffic, earn trust, and convert leads."} />
-  </Container>
+  </Container> */}
     </>
   );
 }

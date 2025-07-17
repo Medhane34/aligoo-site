@@ -1,14 +1,10 @@
 import { Metadata } from "next";
 
-import IndustriesWeWorkedWith from "./IndustriesWeWorkedWith";
-
-import CTABottomSection from "@/components/CTA";
-import FetchCaseStudiesWrapper from "@/wrappers/FeaturedCaseStudyWrapper";
 import WorkSectionWrapper from "@/wrappers/WorkSectionWrapper";
-import HeroSection from "@/components/HeroSection";
 import Container from "@/components/ui/Container";
 import FeaturedCaseStudyWrapper from "@/wrappers/works/FeaturedCaseStudyWrapper";
 import IndustriesSectionWrapper from "@/wrappers/works/IndustriesSectionWrapper";
+import WorksHeroSectionWrapper from "@/wrappers/works/HeroWorksWrapper";
 export const metadata: Metadata = {
   title: "Our Work | Aligoo Digital Agency Projects & Case Studies",
   description:
@@ -28,31 +24,31 @@ export const metadata: Metadata = {
   },
 };
 
-export default function work({ params }: { params: { lang: "en" | "am" } }) {
+export async function generateStaticParams() {
+  return [{ lang: "en" }, { lang: "am" }];
+}
+
+export const revalidate = 3600; // Rebuild every hour
+
+export default async function WorksPage({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "am" }>;
+}) {
+  const { lang } = await params; // ✅
+
   return (
     <>
-     {/*  <HeroSection
-        badgeText="Our Work!" // Optional badge text
-        headlineText1="Digital marketing that "
-        headlineText2="delivers"
-        headlineText3="clarity, clicks, and conversions."
-        primaryButtonText="🚀 Start Your Project"
-        primaryButtonUrl="/strategy-session"
-        secondaryButtonText="📊 Explore Our works"
-        secondaryButtonUrl="#our-work-section"
-        subheading="Aligoo is a full-service digital marketing agency based in Addis Ababa.
-We build smart websites, run killer ad campaigns, and craft content that actually gets people to act."
-      /> */}
+      <WorksHeroSectionWrapper lang={lang} />
       <Container>
-   <FeaturedCaseStudyWrapper lang={params.lang}/>
+        <FeaturedCaseStudyWrapper lang={lang} />
       </Container>
       <div className="div" id="our-work-section">
-      <WorkSectionWrapper />
+        <WorkSectionWrapper />
       </div>
 
-      
       <Container>
-        <IndustriesSectionWrapper lang={params.lang} />
+        <IndustriesSectionWrapper lang={lang} />
       </Container>
       {/* <Container>
         <CTABottomSection

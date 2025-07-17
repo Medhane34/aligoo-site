@@ -7,11 +7,11 @@ import { ButtonVariants, imageVariants, textContainerVariants, textVariants } fr
 import { MyButton } from "@/components/custom/extendVariants";
 
 export interface FeaturedCaseStudyProps {
-  title: string;
-  excerpt: string;
-  imageUrl: string;
-  imageAlt: string;
-  slug: string;
+  title?: string;
+  excerpt?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  slug?: string;
 }
 
 export default function FeaturedCaseStudy({

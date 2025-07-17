@@ -6,6 +6,8 @@ import TableOfContents from "@/components/TableOfContents";
 import { Image } from "@heroui/image";
 import Link from "next/link";
 
+export const revalidate = 60; // Rebuild every minute
+
 export default async function PostPage({
   params,
 }: {

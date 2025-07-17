@@ -11,6 +11,7 @@ export interface CTABottomSectionProps {
   primaryButtonUrl: string;
   secondaryButtonText: string;
   secondaryButtonUrl: string;
+
 }
 
 const sectionVariants = { hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.2 } } };

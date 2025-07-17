@@ -4,7 +4,6 @@ import WhyFacebookAdsWork from "./WhyFacebookAdsWork";
 import AdPhilosophy from "./OurPhilosophy";
 
 import CTABottomSection from "@/components/CTA";
-import FetchCaseStudiesWrapper from "@/wrappers/FeaturedCaseStudyWrapper";
 import FeaturedFbCaseStudiesWrappers from "@/wrappers/FeaturedFbCaseStudiesWrappers";
 import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
 import FaqSection from "@/components/service-sections/FaqSection";
@@ -30,6 +29,8 @@ const facebookWhyContent = {
     { value: "~$12", label: "Avg. Ad Spend Per User" },
   ],
 };
+
+export const revalidate = 3600; // Rebuild every hour
 
 export default async function IndexPage({ params }: { params: Promise<{ lang: "en" | "am" }> }) {
   const { lang } = await params; // ✅

@@ -91,6 +91,8 @@ interface Props {
   params: Promise<{ slug: string }>;
 }
 
+export const revalidate = 60; // Rebuild every minute
+
 export default async function CaseStudyDetails({ params }: Props) {
   const { slug } = await params; // <-- Await the params Promise
 
