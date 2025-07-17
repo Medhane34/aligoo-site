@@ -25,7 +25,7 @@ export type HeroSectionData = {
 };
 
 export async function fetchHeroSection(name: string): Promise<HeroSectionData | null> {
-   console.log("Fetching hero section for name:", name); // <-- Add this line
+   
 
   return await client.fetch(HERO_SECTION_QUERY_HOMEPAGE, { name });
 }

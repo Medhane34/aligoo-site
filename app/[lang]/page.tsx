@@ -14,6 +14,7 @@ import WhyUsSectionWrapper from "@/wrappers/homepage/WhyUsSectionWrapper";
 import CTABottomSectionWrapper from "@/wrappers/homepage/CTABottomSectionWrapper";
 import HomeHeroSectionWrapper from "@/wrappers/homepage/HeroSectionWrapper";
 
+
 export const metadata: Metadata = {
   title: "Aligoo Digital Agency | Digital Marketing in Addis Ababa",
   description:
