@@ -1,9 +1,9 @@
 /* import { button, heroui } from "@heroui/theme"; // Verify this import works with @heroui/theme@latest
  */
-// Try named import or dynamic import
+/* // Try named import or dynamic import
 import { heroui } from "@heroui/theme"; // Attempt named export
-// OR
-// const { heroui } = await import("@heroui/theme"); // Dynamic import as a fallback
+// OR */
+const { heroui } = await import("@heroui/theme"); // Dynamic import as a fallback
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
