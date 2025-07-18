@@ -2,7 +2,6 @@
   "name": "next-app-template",
   "version": "0.0.1",
   "private": true,
-  "type": "module", 
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
@@ -38,7 +37,7 @@
     "@heroui/switch": "2.2.17",
     "@heroui/system": "^2.4.18",
     "@heroui/tabs": "^2.2.16",
-    "@heroui/theme": "2.4.15",
+    "@heroui/theme": "^2.4.19",
     "@heroui/toast": "^2.0.9",
     "@hookform/resolvers": "^5.0.1",
     "@radix-ui/react-dialog": "^1.1.14",
@@ -47,6 +46,7 @@
     "@sanity/image-url": "^1.1.0",
     "@sanity/react-loader": "^1.11.11",
     "@sanity/visual-editing": "^2.15.0",
+    "@tailwindcss/postcss": "^4.1.11",
     "@vercel/speed-insights": "^1.2.0",
     "clsx": "2.1.1",
     "framer-motion": "11.13.1",
@@ -78,7 +78,7 @@
     "@types/react-dom": "18.3.0",
     "@typescript-eslint/eslint-plugin": "8.31.1",
     "@typescript-eslint/parser": "8.31.1",
-    "autoprefixer": "10.4.21",
+    "autoprefixer": "^10.4.21",
     "eslint": "9.25.1",
     "eslint-config-next": "15.3.1",
     "eslint-config-prettier": "10.1.2",
@@ -90,10 +90,10 @@
     "eslint-plugin-react-hooks": "5.2.0",
     "eslint-plugin-unused-imports": "4.1.4",
     "globals": "16.0.0",
-    "postcss": "8.5.3",
+    "postcss": "^8.5.6",
     "prettier": "3.5.3",
     "tailwind-variants": "0.3.0",
-    "tailwindcss": "3.4.16",
+    "tailwindcss": "^4.1.11",
     "typescript": "5.6.3"
   }
 }

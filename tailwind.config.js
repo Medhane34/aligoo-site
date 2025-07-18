@@ -1,4 +1,4 @@
-const heroui = require("@heroui/theme").heroui; // Assume named export or adjust based on package
+const {heroui} = require("@heroui/react");
 
 /** @type {import('tailwindcss').Config} */
 const config = {
@@ -92,14 +92,8 @@ const config = {
     },
   },
   darkMode: "class",
-  
-};
-
-// ...existing code...
-module.exports = {
-  // your Tailwind config here
-plugins: [
-    require('tailwind-scrollbar-hide'), // Convert to ES Module import if possible
+  plugins: [
+    require('tailwind-scrollbar-hide'),
     heroui({
       prefix: "heroui",
       addCommonColors: false,
@@ -113,4 +107,5 @@ plugins: [
     }),
   ],
 };
-// ...existing code...
+
+module.exports = config; // Use module.exports instead of export default

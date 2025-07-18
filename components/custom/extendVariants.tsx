@@ -23,7 +23,7 @@ export const MyOutlineButton = extendVariants(Button, {
       full: "rounded-full",
     },
     variant: {
-      bordered: "borderd",
+    bordered: "bordered", // Corrected typo
     }
     // You can add more custom variants here if needed
   },
