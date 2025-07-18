@@ -1,9 +1,5 @@
-/* import { button, heroui } from "@heroui/theme"; // Verify this import works with @heroui/theme@latest
- */
-/* // Try named import or dynamic import
-import { heroui } from "@heroui/theme"; // Attempt named export
-// OR */
-const { heroui } = await import("@heroui/theme"); // Dynamic import as a fallback
+const heroui = require("@heroui/theme").heroui; // Assume named export or adjust based on package
+
 /** @type {import('tailwindcss').Config} */
 const config = {
   content: [
@@ -96,7 +92,13 @@ const config = {
     },
   },
   darkMode: "class",
-  plugins: [
+  
+};
+
+// ...existing code...
+module.exports = {
+  // your Tailwind config here
+plugins: [
     require('tailwind-scrollbar-hide'), // Convert to ES Module import if possible
     heroui({
       prefix: "heroui",
@@ -111,5 +113,4 @@ const config = {
     }),
   ],
 };
-
-export default config; // Replace module.exports with this
+// ...existing code...
