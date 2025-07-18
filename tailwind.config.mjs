@@ -1,4 +1,6 @@
-import { button, heroui } from "@heroui/theme"; // Verify this import works with @heroui/theme@latest
+/* import { button, heroui } from "@heroui/theme"; // Verify this import works with @heroui/theme@latest
+ */
+import heroui from "@heroui/theme"; // Import the default export
 
 /** @type {import('tailwindcss').Config} */
 const config = {
