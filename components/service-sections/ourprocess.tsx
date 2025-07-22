@@ -116,7 +116,7 @@ text-text-light dark:text-text-dark"
                   variants={itemVariants}
                   className="flex items-start"
                 >
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <CheckCircleIcon
                       className="h-8 w-8 text-brand-primary"
                       aria-hidden="true"

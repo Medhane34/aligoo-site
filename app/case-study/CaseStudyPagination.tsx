@@ -16,7 +16,7 @@ export default function CaseStudyPagination({ paginationData }: CaseStudyPaginat
 
   return (
     <nav className="py-12 px-4 sm:px-6 lg:px-8 bg-brand-primary border-t border-gray-200 text-white">
-      <div className="max-w-screen-xl mx-auto flex justify-between items-center">
+      <div className="max-w-(--breakpoint-xl) mx-auto flex justify-between items-center">
 
         {/* Previous Case Study Link/Disabled State */}
         {previousCaseStudy ? (

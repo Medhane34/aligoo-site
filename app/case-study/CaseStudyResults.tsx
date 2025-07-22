@@ -54,7 +54,7 @@ export default function CaseStudyResults({ resultsData }: CaseStudyResultsProps)
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-backround-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
-      <div className="max-w-screen-xl mx-auto">
+      <div className="max-w-(--breakpoint-xl) mx-auto">
         {/* Two-Column Grid for Results */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
 

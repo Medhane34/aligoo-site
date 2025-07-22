@@ -9,6 +9,7 @@ type HomeCaseStudyWrapper = {
 
 export default async function HomeCaseStudyWrapper() {
   const casestudyPosts = await fetchHomeCaseStudies();
+  
   if (casestudyPosts.length === 0) {
     return <div>No case studies available.</div>;
   }

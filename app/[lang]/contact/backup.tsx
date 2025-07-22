@@ -352,7 +352,7 @@ const ContactForm = () => {
                 <Input
                   {...register("phoneNumber")}
                   isClearable
-                  className="flex-grow"
+                  className="grow"
                   color={errors.phoneNumber ? "danger" : "primary"}
                   errorMessage={errors.phoneNumber?.message}
                   placeholder="Phone Number"

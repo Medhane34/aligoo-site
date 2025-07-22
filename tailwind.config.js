@@ -12,6 +12,24 @@ const config = {
   ],
   theme: {
     extend: {
+    /*   container: {
+    center: true,
+    padding: "1rem",
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
+  }, */
+      maxWidth: {
+      'screen-xs': '480px',
+      'screen-sm': '640px',
+      'screen-md': '768px',
+      'screen-lg': '1024px',
+      'screen-xl': '1280px',
+    },
       fontFamily: {
         sans: ["var(--font-sans)"],
         mono: ["var(--font-mono)"],

@@ -6,8 +6,8 @@ export interface WhyUsReason {
   emoji: string;
   title: string;
   description: string;
-  gradient: string;
-  span: string; // e.g., "col-span-1", "md:col-span-2"
+  gradient: string; // e.g., "from-blue-500 to-indigo-700"
+  span?: string;    // e.g., "col-span-1", "md:col-span-2"
 }
 export interface WhyUsSectionProps {
   sectionHeading: string;
@@ -46,10 +46,9 @@ export default function WhyUsSection({
   accentText,
   reasons,
 }: WhyUsSectionProps) {
-
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
-      <div className="max-w-screen-xl mx-auto">
+      <div className="max-w-7xl mx-auto">
         {/* Section Title and Subtext */}
         <motion.div
           className="text-center mb-16"
@@ -87,8 +86,9 @@ export default function WhyUsSection({
               key={i}
               className={`
                 relative overflow-hidden
-                ${reason.span || "col-span-1 row-span-2"}
+                ${reason.span || "col-span-1"}
                 bg-gradient-to-br ${reason.gradient}
+                
                 rounded-xl shadow-lg
                 p-8 flex flex-col justify-between
                 min-h-[220px] sm:min-h-[250px] lg:min-h-[280px]

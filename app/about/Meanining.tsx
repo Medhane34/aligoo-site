@@ -48,7 +48,7 @@ const MeaniningSection = () => {
 
   return (
     <div className="relative py-24 bg-background-light dark:bg-background-dark p-12">
-      <div className="absolute top-0 left-0 w-full h-full -z-10 bg-[length:200%_200%]" />
+      <div className="absolute top-0 left-0 w-full h-full -z-10 bg-size-[200%_200%]" />
       <div className="container mx-auto text-center">
         {/* pronounciation heading  */}
         <motion.div

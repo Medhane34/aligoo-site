@@ -72,7 +72,7 @@ export default function FaqSection() {
 
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+      <div className="max-w-(--breakpoint-xl) mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
         {/* Left Column - Static Content */}
         <motion.div
           className="lg:pr-8"
@@ -105,7 +105,7 @@ export default function FaqSection() {
             No fluff, no vague answers. Just honest responses to the most common questions we get about Facebook Ads and working with us.
           </motion.p>
           <motion.button
-            className="w-[263px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full"
+            className="w-[263px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-linear-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full"
             variants={leftItemVariants}
           >
             👉 GOT MORE QUESTIONS ASK 

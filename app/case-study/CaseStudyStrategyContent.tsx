@@ -91,7 +91,7 @@ export default function CaseStudyStrategyContent({
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark">
-      <div className="max-w-screen-xl mx-auto">
+      <div className="max-w-(--breakpoint-xl) mx-auto">
         {/* Section Header (Strategy Introduction) */}
         <div className="lg:space-y-2 xs:space-y-8 sm:space-y-10 md:space-y-12 
       mb-12 text-center ">

@@ -10,7 +10,7 @@ export default function IndustriesCarouselMobile({ industries = [] }: { industri
         {industries.map((industry, index) => (
           <div
             key={index}
-            className="flex-shrink-0 snap-start flex items-center gap-2 bg-gray-800 rounded-xl px-4 py-2 min-w-[180px] max-w-[220px] text-sm text-white border border-transparent hover:border-purple-500 hover:scale-105 transition-all duration-300"
+            className="shrink-0 snap-start flex items-center gap-2 bg-gray-800 rounded-xl px-4 py-2 min-w-[180px] max-w-[220px] text-sm text-white border border-transparent hover:border-purple-500 hover:scale-105 transition-all duration-300"
           >
             <span className="text-lg">{industry.emoji}</span>
             <span className="whitespace-nowrap overflow-hidden text-ellipsis">{industry.name}</span>

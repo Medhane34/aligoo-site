@@ -8,7 +8,7 @@ export default function ScrollProgress() {
   return (
     <div className="fixed top-[0px] left-0 right-0 h-2 bg-muted/20 z-40">
       <motion.div
-        className="h-full bg-gradient-to-b from-primary to-secondary shadow-sm"
+        className="h-full bg-linear-to-b from-primary to-secondary shadow-sm"
         style={{
           scaleX: scrollYProgress,
           transformOrigin: "0%",

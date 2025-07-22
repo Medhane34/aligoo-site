@@ -97,7 +97,7 @@ export default function HeroSection({
           {badgeText && (
             <motion.div variants={badgeVariants}>
               <Button
-                className="h-8 xs:px-3 xs:py-1 sm:h-9 sm:px-[14px] sm:py-1.5 md:px-[18px] md:py-2 overflow-hidden border-1 text-small font-normal leading-5 text-text-light dark:text-text-dark"
+                className="h-8 xs:px-3 xs:py-1 sm:h-9 sm:px-[14px] sm:py-1.5 md:px-[18px] md:py-2 overflow-hidden border text-small font-normal leading-5 text-text-light dark:text-text-dark"
                 endContent={<span>😎</span>}
                 radius="full"
                 variant="bordered"

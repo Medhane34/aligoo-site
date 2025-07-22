@@ -1,8 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { Button } from "@heroui/button"; // Assuming Button is imported if not already globally available
-import { Image } from "@heroui/image"; // Assuming Image component is available
+import { Image } from "@heroui/react"; // Assuming Image component is available
 import { motion } from "framer-motion";
+import NextImage from "next/image";
 
 const OurWayPoints = [
   {
@@ -153,7 +154,7 @@ const AligooMarketingFix = () => {
             >
               {/* Left: Image + Testimonial Box */}
               <motion.div className="relative" variants={problemLeftVariants}>
-                <Image
+                <NextImage
                   alt="Merchant testimonial"
                   className="rounded-xl shadow-2xl object-cover z-0"
                   height={500}
@@ -246,7 +247,7 @@ David Ogilvy
                   className="relative z-10"
                   variants={ourWayImageVariants}
                 >
-                  <Image
+                  <NextImage
                     alt="E-commerce Dashboard"
                     className="rounded-xl shadow-2xl object-cover"
                     height={300}
@@ -258,7 +259,7 @@ David Ogilvy
                   className="relative -mt-8 -ml-8 z-0"
                   variants={ourWayImageVariants}
                 >
-                  <Image
+                  <NextImage
                     alt="Cashier Interaction"
                     className="rounded-xl shadow-xl object-cover"
                     height={300}
@@ -279,7 +280,7 @@ David Ogilvy
                     className="flex items-start gap-4"
                     variants={ourWayListVariants}
                   >
-                    <span className="text-4xl font-bold text-brand-primary flex-shrink-0 mt-1">
+                    <span className="text-4xl font-bold text-brand-primary shrink-0 mt-1">
                       {point.number}
                     </span>
                     <div>

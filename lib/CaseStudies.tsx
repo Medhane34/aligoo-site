@@ -107,6 +107,7 @@ export async function fetchFacebookadCasestudy(): Promise<CaseStudy[]> {
 export async function fetchHomeCaseStudies(): Promise<CaseStudy[]> {
   try {
     const homeworks = await client.fetch<SanityDocument[]>(HomeCaseStudyQuery);
+  
     return homeworks.map(mapToCaseStudy);
   } catch (error) {
     console.error("Error fetching case studies:", error);

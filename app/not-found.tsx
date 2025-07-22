@@ -68,7 +68,7 @@ export default function NotFound() {
           <motion.button
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.97 }}
-            className="px-8 py-3 rounded-full bg-gradient-to-r from-brand-primary-light to-brand-primary-dark text-white font-semibold shadow-lg transition-all duration-300"
+            className="px-8 py-3 rounded-full bg-linear-to-r from-brand-primary-light to-brand-primary-dark text-white font-semibold shadow-lg transition-all duration-300"
           >
             GO HOME
           </motion.button>

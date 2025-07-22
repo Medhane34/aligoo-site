@@ -91,7 +91,7 @@ const CTABottomSection = () => {
             {/* Primary Button: Free trial */}
             <motion.div variants={buttonVariants}>
               <Button
-                className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker shadow-lg transition-all duration-300"
+                className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-linear-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker shadow-lg transition-all duration-300"
               >
                 Free trial
               </Button>

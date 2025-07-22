@@ -35,7 +35,7 @@ export const title = tv({
         "pink",
         "foreground",
       ],
-      class: "bg-clip-text text-transparent bg-gradient-to-b",
+      class: "bg-clip-text text-transparent bg-linear-to-b",
     },
   ],
 });
@@ -44,7 +44,7 @@ export const subtitle = tv({
   base: "w-full md:w-1/2 my-2 text-lg lg:text-xl text-default-600 block max-w-full",
   variants: {
     fullWidth: {
-      true: "!w-full",
+      true: "w-full!",
     },
   },
   defaultVariants: {
@@ -57,7 +57,7 @@ export const button = tv({
   variants: {
     variant: {
       primary: " text-violet-50 dark:bg-violet-700 dark:text-yellow rounded-full",
-      secondary: "border-1 border-default-100 dark:border-default-200 !important",
+      secondary: "border border-default-100 dark:border-default-200 !important",
     },
   },
   defaultVariants: {

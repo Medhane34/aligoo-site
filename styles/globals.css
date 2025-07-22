@@ -4,6 +4,24 @@
 @tailwind utilities; */
 @import "tailwindcss";
 
+@theme {
+  --color-brand-primary: #FF595E;
+  --color-brand-primary-light: #FF7A7D;
+  --color-brand-primary-dark: #E64F54;
+  --color-brand-primary-darker: #CC464B;
+  --color-background-light: #F9FAFB;
+  --color-background-dark: #080404;
+  --color-text-light: #1F2937;
+  --color-text-dark: #F9FAFB;
+  --color-button-primary-light: #FF595E;
+  --color-button-primary-dark: #FF595E;
+  --color-button-secondary-light: #FBBF24;
+  --color-button-secondary-dark: #F59E0B;
+}
+
+
+
+
 
 /* global.css 
 html.light {

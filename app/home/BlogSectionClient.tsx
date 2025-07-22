@@ -1,9 +1,10 @@
 "use client";
 import React, { useRef } from "react";
-import { Image } from "@heroui/image";
+import { Image } from "@heroui/react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { AccentText, SectionHeading } from "@/components/ui/typography";
+import NextImage from "next/image";
 
 type BlogPostType = {
   imageUrl: string;
@@ -17,13 +18,12 @@ type BlogPostType = {
 const BlogPost = ({ post }: { post: BlogPostType }) => (
   <Link
     href={`/blog/${post.slug}`}
-    className="group w-80 sm:w-96 flex-shrink-0 rounded-lg shadow-md overflow-hidden flex flex-col bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 snap-start"
+    className="group w-80 sm:w-96 shrink-0 rounded-lg shadow-md overflow-hidden flex flex-col bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 snap-start"
     tabIndex={0}
   >
     {post.imageUrl && (
-      <Image
-        isZoomed
-        src={post.imageUrl}
+      <NextImage
+       src={post.imageUrl}
         alt={post.title}
         className="object-cover w-full h-48"
         width={384}

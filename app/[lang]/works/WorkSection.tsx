@@ -9,13 +9,14 @@ import React, {
   useCallback,
 } from "react";
 import { Card } from "@heroui/card";
-import { Image } from "@heroui/image";
+import { Image } from "@heroui/react";
 import { Button } from "@heroui/button";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { Spinner } from "@heroui/spinner";
+import NextImage from "next/image";
 
 // IMPORTANT: Import the updated fetch functions from the correct path
 import {
@@ -29,7 +30,7 @@ import {
   Pagination,
   PaginationItem,
   PaginationCursor,
-} from "@heroui/pagination"; // Assuming this is the correct import path for HeroUI
+} from "@heroui/react"; // Assuming this is the correct import path for HeroUI
 
 // Define the CaseStudy type (ensure it matches your backend definition)
 type CaseStudy = {
@@ -241,8 +242,9 @@ export default function WorkSection({
                 className="block h-[280px] w-full relative"
                 href={`/case-study/${study.slug}`}
               >
-                <Image
-                  removeWrapper
+                <NextImage
+                  width={300}
+                  height={300}
                   alt={study.title}
                   className="z-0 w-full h-full object-cover transition-opacity duration-300 brightness-75 xs:brightness-100"
                   src={study.imageUrl}
@@ -267,11 +269,11 @@ export default function WorkSection({
 
       {/* HeroUI Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex justify-center items-center mt-12">
+        <div className="flex justify-center items-center mt-12 bg-background-light dark:bg-background-dark p-4 rounded-lg shadow-md">
           <Pagination
-            loop
+            
             showControls
-            color="primary"
+            color="success"
             initialPage={currentPage}
             total={totalPages}
             onChange={setCurrentPage}

@@ -47,7 +47,7 @@ export default function CTABottomSection({
           <motion.div className="flex flex-row items-center justify-center gap-4 w-full md:w-auto" variants={sectionVariants}>
             <motion.div variants={buttonVariants} className="flex-1 min-w-0">
               <Link href={primaryButtonUrl}>
-                <Button className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker shadow-lg transition-all duration-300 w-full">
+                <Button className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-linear-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker shadow-lg transition-all duration-300 w-full">
                   {primaryButtonText}
                 </Button>
               </Link>

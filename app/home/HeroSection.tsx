@@ -15,7 +15,7 @@ export default function HeroSection() {
       <main className="container mx-auto flex flex-1 flex-col items-center justify-center overflow-hidden px-8">
         <section className="z-20 flex flex-col items-center justify-center gap-[18px] sm:gap-6">
           <Button
-            className="h-9 overflow-hidden border-1 border-default-100 bg-default-50 px-[18px] py-2 text-small font-normal leading-5 text-default-500"
+            className="h-9 overflow-hidden border border-default-100 bg-default-50 px-[18px] py-2 text-small font-normal leading-5 text-default-500"
             endContent={
               <span className="pointer-events-none flex h-[22px] w-[22px] items-center justify-center rounded-full bg-default-100"></span>
             }
@@ -46,7 +46,7 @@ export default function HeroSection() {
               Get Started
             </Button>
             <Button
-              className="h-10 w-[163px] border-1 border-default-100 px-[16px] py-[10px] text-small font-medium leading-5"
+              className="h-10 w-[163px] border border-default-100 px-[16px] py-[10px] text-small font-medium leading-5"
               endContent={
                 <span className="pointer-events-none flex h-[22px] w-[22px] items-center justify-center rounded-full bg-default-100"></span>
               }

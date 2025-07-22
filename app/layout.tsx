@@ -68,7 +68,7 @@ export default async function RootLayout({
           <div className="relative flex flex-col h-screen">
             <Navbar />
             <LanguageProvider> 
-            <main className="pt-16 flex-grow">
+            <main className="pt-16 grow">
               {children}
               <SpeedInsights />
             </main>

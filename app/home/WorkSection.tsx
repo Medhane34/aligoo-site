@@ -8,6 +8,8 @@ import Link from "next/link";
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 import { MyButton } from "@/components/custom/extendVariants";
 
+import NextImage from "next/image";
+
 // Animation variants remain unchanged (good)
 const headerVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -148,8 +150,10 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     transition-shadow duration-300
                   "
                 >
-                  <Image
-                    removeWrapper
+                  <NextImage
+                    loading="lazy"
+                    width={300}
+                    height={300}
                     alt={study.title || "Case study image"}
                     className="z-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     src={
@@ -157,11 +161,11 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                       "https://heroui.com/images/card-example-4.jpeg"
                     }
                   />
-                  <CardHeader className="absolute z-10 top-1 flex-col !items-start opacity-100 transition-opacity duration-300 group-hover:opacity-0">
+                  <CardHeader className="absolute z-10 top-1 flex-col items-start! opacity-100 transition-opacity duration-300 group-hover:opacity-0">
                     <p className="text-small text-white uppercase font-bold bg-brand-primary rounded-full p-1">
                       {study.service || fallbackCategory}
                     </p>
-                    <h4 className="text-white font-medium text-large text-left text-base/2">
+                    <h4 className="text-white font-medium text-large text-left text-base/5">
                       {study.title}
                     </h4>
                   </CardHeader>
@@ -170,7 +174,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 left-0 
                       w-0 h-[3px]
-                      bg-gradient-to-r from-rose-500 to-red-500
+                      bg-linear-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:w-1/2
                       group-hover:opacity-100
@@ -183,7 +187,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 left-0 rounded-lg
                       w-[3px] h-0
-                      bg-gradient-to-r from-rose-500 to-red-500
+                      bg-linear-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:h-1/2
                       group-hover:opacity-100
@@ -196,7 +200,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 right-0 
                       w-0 h-[3px]
-                      bg-gradient-to-r from-rose-500 to-red-500
+                      bg-linear-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:w-1/2
                       group-hover:opacity-100
@@ -209,7 +213,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 right-0 
                       w-[3px] h-0
-                      bg-gradient-to-r from-rose-500 to-red-500
+                      bg-linear-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:h-1/2
                       group-hover:opacity-100
@@ -284,8 +288,9 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     transition-shadow duration-300
                   "
                 >
-                  <Image
-                    removeWrapper
+                  <NextImage
+                    width={300}
+                    height={200}
                     alt={study.title || "Case study image"}
                     className="z-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     src={
@@ -293,11 +298,11 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                       "https://heroui.com/images/card-example-6.jpeg"
                     }
                   />
-                  <CardHeader className="absolute z-10 top-1 flex-col !items-start opacity-100 transition-opacity duration-300 group-hover:opacity-0">
-                    <p className="text-tiny text-white uppercase font-bold bg-brand-primary rounded-full p-1">
+                  <CardHeader className="absolute z-10 top-1 flex-col items-start! opacity-100 transition-opacity duration-300 group-hover:opacity-0 ">
+                    <p className="text-tiny text-white uppercase font-bold rounded-xs p-1">
                       {study.service || fallbackCategory}
                     </p>
-                    <h4 className="text-white font-medium text-large">
+                    <h4 className="text-white font-medium text-large ">
                       {study.title}
                     </h4>
                   </CardHeader>
@@ -306,7 +311,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 left-0 
                       w-0 h-[3px]
-                      bg-gradient-to-r from-rose-500 to-red-500
+                      bg-linear-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:w-1/2
                       group-hover:opacity-100
@@ -319,7 +324,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 left-0 rounded-lg
                       w-[3px] h-0
-                      bg-gradient-to-r from-rose-500 to-red-500
+                      bg-linear-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:h-1/2
                       group-hover:opacity-100
@@ -332,7 +337,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 right-0 
                       w-0 h-[3px]
-                      bg-gradient-to-r from-rose-500 to-red-500
+                      bg-linear-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:w-1/2
                       group-hover:opacity-100
@@ -345,7 +350,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                     className="
                       absolute top-0 right-0 
                       w-[3px] h-0
-                      bg-gradient-to-r from-rose-500 to-red-500
+                      bg-linear-to-r from-rose-500 to-red-500
                       opacity-0
                       group-hover:h-1/2
                       group-hover:opacity-100

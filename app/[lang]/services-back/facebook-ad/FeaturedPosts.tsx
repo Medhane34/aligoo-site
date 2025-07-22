@@ -80,7 +80,7 @@ export default function FeaturedFbWorkSection({ fbcasestudyPosts }: FetchFbCaseP
             className="col-span-12 sm:col-span-4 h-[200px] xs:h-[250px] sm:h-[350px] md:h-[320px] lg:h-[350px]"
           >
             <Card className="h-full outline-2 outline-offset-2 outline-blue-500">
-              <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+              <CardHeader className="absolute z-10 top-1 flex-col items-start!">
                 <p className="text-small text-white/60 uppercase font-bold bg-brand-primary rounded-full p-1">
                   {post.service || "Service"}
                 </p>

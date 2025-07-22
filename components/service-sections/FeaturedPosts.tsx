@@ -90,7 +90,7 @@ export default function FeaturedPostsSection({
           >
             <Link href={`/case-study/${post.slug}`} className="block h-full">
               <Card className="h-full outline-2 outline-offset-2 outline-blue-500">
-                <CardHeader className="absolute z-10 top-1 flex-col !items-start">
+                <CardHeader className="absolute z-10 top-1 flex-col items-start!">
                   <p className="text-small text-white/60 uppercase font-bold bg-brand-primary rounded-full p-1">
                     {post.industry}
                   </p>

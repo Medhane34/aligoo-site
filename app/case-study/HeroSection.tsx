@@ -97,7 +97,7 @@ export default function HeroSection({
     <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark mt-[-60px] xs:p-4 sm:mt-[-80px] sm:p-6 md:mt-[-105px] md:p-9">
       {/* Background Pattern */}
       <div className="absolute inset-0">
-        <div className="relative h-full w-full bg-background-light dark:bg-background-dark [&>div]:absolute [&>div]:inset-0 [&>div]:bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] [&>div]:bg-[size:14px_24px] [&>div]:[mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]">
+        <div className="relative h-full w-full bg-background-light dark:bg-background-dark [&>div]:absolute [&>div]:inset-0 [&>div]:bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] [&>div]:bg-size-[14px_24px] [&>div]:mask-[radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]">
           <div />
         </div>
       </div>
@@ -112,7 +112,7 @@ export default function HeroSection({
           {badgeText && (
             <motion.div variants={badgeVariants}>
               <Button
-                className="h-8 xs:px-3 xs:py-1 sm:h-9 sm:px-[14px] sm:py-1.5 md:px-[18px] md:py-2 overflow-hidden border-1 text-small font-normal leading-5 text-text-light dark:text-text-dark"
+                className="h-8 xs:px-3 xs:py-1 sm:h-9 sm:px-[14px] sm:py-1.5 md:px-[18px] md:py-2 overflow-hidden border text-small font-normal leading-5 text-text-light dark:text-text-dark"
                 endContent={
                   <span className="pointer-events-none flex h-[22px] w-[22px] items-center justify-center rounded-full" />
                 }
@@ -157,7 +157,7 @@ export default function HeroSection({
             <motion.div variants={buttonVariants}>
               <Link href={primaryButtonUrl} passHref>
                 <Button
-                  className="w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker"
+                  className="w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-linear-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker"
                   radius="full"
                 >
                   {primaryButtonText} {/* Use primaryButtonText prop */}

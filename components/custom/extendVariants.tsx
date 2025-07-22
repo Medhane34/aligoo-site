@@ -4,7 +4,7 @@ export const MyButton = extendVariants(Button, {
   variants: {
     color: {
       gradient:
-        "h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-gradient-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full",
+        "h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-linear-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full",
     },
     // You can add more custom variants here if needed
   },

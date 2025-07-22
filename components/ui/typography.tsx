@@ -6,7 +6,7 @@ export function AccentText({ children, className = "" }: React.PropsWithChildren
         return classes.filter(Boolean).join(" ");
     }
   return (
-    <h1 className={cn("normal-case text-subheading tracking-widest font-semibold bg-gradient-to-r from-rose-500 to-red-500 text-transparent bg-clip-text", className)}>
+    <h1 className={cn("normal-case text-subheading tracking-widest font-semibold bg-linear-to-r from-rose-500 to-red-500 text-transparent bg-clip-text", className)}>
       {children}
     </h1>
   );

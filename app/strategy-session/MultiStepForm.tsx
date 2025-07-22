@@ -277,7 +277,7 @@ export default function MultiStepForm() {
       <Dialog.Root open={showExitModal} onOpenChange={setShowExitModal}>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50" />
-          <Dialog.Content className="fixed top-12 left-1/2 -translate-x-1/2 bg-white dark:bg-background-dark p-8 rounded-xl shadow-lg text-center max-w-md w-full z-[9999]">
+          <Dialog.Content className="fixed top-12 left-1/2 -translate-x-1/2 bg-white dark:bg-background-dark p-8 rounded-xl shadow-lg text-center max-w-md w-full z-9999">
             {/* Accessible title (can be visually hidden if you want) */}
             <Dialog.Title>Wait! Don’t leave yet!</Dialog.Title>
             {/* Or visually hidden: */}

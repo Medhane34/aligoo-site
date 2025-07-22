@@ -48,7 +48,7 @@ export default function CustomCursor() {
   return (
     <motion.div
       ref={cursorRef}
-      className={`pointer-events-none fixed top-0 left-0 z-[9999] h-6 w-6 rounded-full ${bgColor}`}
+      className={`pointer-events-none fixed top-0 left-0 z-9999 h-6 w-6 rounded-full ${bgColor}`}
       animate={{
         x: position.x - 12,
         y: position.y - 12,
