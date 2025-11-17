@@ -1,7 +1,10 @@
+// wrappers/home/ServiceWrapper.tsx
+import ServiceSection from "@/app/home/ServiceSection";
 import { fetchServiceSection } from "@/lib/homepage";
-import ServiceSection, { ServiceSectionProps } from "@/app/home/ServiceSection";
-export default async function ServiceSectionWrapper() {
-  const data: ServiceSectionProps | null = await fetchServiceSection();
+
+export default async function ServiceWrapper({ lang }: { lang: 'en' | 'am' }) {
+  const data = await fetchServiceSection(lang);
   if (!data) return null;
-  return <ServiceSection {...data} />;
+
+  return <ServiceSection {...data} lang={lang} />;
 }

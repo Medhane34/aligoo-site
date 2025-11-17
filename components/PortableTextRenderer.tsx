@@ -1,91 +1,57 @@
 // components/PortableTextRenderer.tsx
 "use client";
+import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
+
 import React from "react";
 import { PortableText, PortableTextComponents } from "@portabletext/react";
-import Image from "next/image";
 import imageUrlBuilder from "@sanity/image-url";
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { client } from "@/src/sanity/client";
-// If you want to use a HeroUI icon, import it here. Example:
-import { CheckIcon } from "@heroicons/react/24/solid";
-
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-
 import YouTube from "react-youtube";
-
-import { getHeadingId } from "@/lib/utilties/generateToc";
+import { client } from "@/src/sanity/client";
 
 const { projectId, dataset } = client.config();
 const urlFor = (source: SanityImageSource) =>
   projectId && dataset
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
+
+const getHeadingId = (block: any): string => {
+  if (!block || !block.children || !Array.isArray(block.children)) {
+    return "";
+  }
+  const text = block.children
+    .filter((child: any) => child._type === "span" && child.text)
+    .map((span: any) => span.text)
+    .join("");
+
+  return text
+    .toLowerCase()
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/[^\w-]+/g, ""); // Remove all non-word chars
+};
+
 const getYouTubeId = (urlOrId: string): string | null => {
-  // If it's already an ID
   if (/^[\w-]{11}$/.test(urlOrId)) return urlOrId;
-  // Try to extract from URL
   const match = urlOrId.match(/(?:v=|\/embed\/|\.be\/)([\w-]{11})/);
+
   return match ? match[1] : null;
 };
 
 const components: PortableTextComponents = {
   types: {
-    /*  image: ({ value }) => {
-      if (!value?.asset) return null
-
-      // Type assertion to silence TS error
-      const asset = value.asset as { _ref?: string; url?: string };
-
-      let imageUrl: string | undefined = undefined;
-
-      if (asset._ref) {
-        imageUrl =
-          urlFor(value as any)
-            .width(900)
-            .height(500)
-            .fit("max")
-            .auto("format")
-            .url() ?? undefined;
-      } else if (asset.url) {
-        imageUrl = asset.url;
-      }
-
-      if (!imageUrl) return null;
-
-      return (
-        <div className="my-8 rounded-xl overflow-hidden">
-          <Image
-            alt={value.alt || "Blog post image"}
-            className="rounded-xl object-cover w-full"
-            height={500}
-            priority={false}
-            sizes="(max-width: 900px) 100vw, 900px"
-            src={imageUrl}
-            width={900}
-          />
-          {value.caption && (
-            <figcaption className="text-sm text-gray-500 text-center mt-2">
-              {value.caption}
-            </figcaption>
-          )}
-        </div>
-      );
-    }, */
     youtubeVideo: ({ value }) => {
       const videoId = getYouTubeId(value?.url || "");
+
       if (!videoId) return null;
+
       return (
         <div className="my-8 flex flex-col items-center">
           <div className="w-full max-w-2xl aspect-video rounded-xl overflow-hidden shadow-lg">
             <YouTube
-              videoId={videoId}
-              opts={{
-                width: "100%",
-                height: "100%",
-                playerVars: { autoplay: 0 },
-              }}
               className="w-full h-full"
+              opts={{ width: "100%", height: "100%" }}
+              videoId={videoId}
             />
           </div>
           {value.caption && (
@@ -102,36 +68,7 @@ const components: PortableTextComponents = {
       return (
         <div className="overflow-x-auto my-6">
           <div className="prose prose-sm md:prose-lg max-w-none">
-            <ReactMarkdown
-              components={{
-                table: ({ node, ...props }) => (
-                  <table className="min-w-full border border-gray-300 rounded-lg bg-white dark:bg-gray-900">
-                    {props.children}
-                  </table>
-                ),
-                thead: ({ node, ...props }) => (
-                  <thead className="bg-gray-100 dark:bg-gray-800">
-                    {props.children}
-                  </thead>
-                ),
-                th: ({ node, ...props }) => (
-                  <th className="border border-gray-300 px-4 py-2 font-semibold text-gray-700 dark:text-gray-200 bg-gray-50 dark:bg-gray-800">
-                    {props.children}
-                  </th>
-                ),
-                tr: ({ node, ...props }) => (
-                  <tr className="even:bg-gray-50 dark:even:bg-gray-800">
-                    {props.children}
-                  </tr>
-                ),
-                td: ({ node, ...props }) => (
-                  <td className="border border-gray-300 px-4 py-2 text-gray-700 dark:text-gray-200">
-                    {props.children}
-                  </td>
-                ),
-              }}
-              remarkPlugins={[remarkGfm]}
-            >
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
               {value.markdown}
             </ReactMarkdown>
           </div>
@@ -139,19 +76,19 @@ const components: PortableTextComponents = {
       );
     },
     image: ({ value }) => {
-      // Only render if value.asset?.url exists
       const imageUrl = value?.asset?.url;
+
       if (!imageUrl) return null;
 
       return (
         <div className="my-8 rounded-xl overflow-hidden">
           <img
-            src={imageUrl}
             alt={value.alt || "Blog post image"}
             className="rounded-xl object-cover w-full"
             height={500}
-            width={900}
+            src={imageUrl}
             style={{ maxWidth: "100%", height: "auto" }}
+            width={900}
           />
           {value.caption && (
             <figcaption className="text-sm text-gray-500 text-center mt-2">
@@ -161,7 +98,6 @@ const components: PortableTextComponents = {
         </div>
       );
     },
-
     tip: ({ value }) => (
       <aside className="rounded bg-yellow-100 border-l-4 border-yellow-500 p-4 my-4">
         <strong className="block text-yellow-800">{value.title}</strong>
@@ -178,18 +114,16 @@ const components: PortableTextComponents = {
     bullet: ({ children }) => (
       <ul className="ml-5 my-2 text-body space-y-2">{children}</ul>
     ),
-
     number: ({ children }) => (
       <ol className="list-decimal list-inside ml-5 my-2 text-body">
         {children}
       </ol>
     ),
   },
-
   block: {
     h1: ({ children, value }) => (
       <h1
-        className="text-heading text-3xl font-bold my-6"
+        className="text-heading text-3xl font-bold my-6 scroll-mt-28"
         id={getHeadingId(value)}
       >
         {children}
@@ -197,7 +131,7 @@ const components: PortableTextComponents = {
     ),
     h2: ({ children, value }) => (
       <h2
-        className="text-heading text-2xl font-semibold my-5"
+        className="text-heading text-2xl font-semibold my-5 scroll-mt-28"
         id={getHeadingId(value)}
       >
         {children}
@@ -205,7 +139,7 @@ const components: PortableTextComponents = {
     ),
     h3: ({ children, value }) => (
       <h3
-        className="text-heading text-xl font-semibold my-4"
+        className="text-heading text-xl font-semibold my-4 scroll-mt-28"
         id={getHeadingId(value)}
       >
         {children}
@@ -213,7 +147,7 @@ const components: PortableTextComponents = {
     ),
     h4: ({ children, value }) => (
       <h4
-        className="text-heading text-lg font-semibold my-3"
+        className="text-heading text-lg font-semibold my-3 scroll-mt-28"
         id={getHeadingId(value)}
       >
         {children}
@@ -228,7 +162,6 @@ const components: PortableTextComponents = {
       <p className="text-body my-2 leading-relaxed">{children}</p>
     ),
   },
-
   marks: {
     strong: ({ children }) => <strong className="font-bold">{children}</strong>,
     em: ({ children }) => <em className="italic">{children}</em>,

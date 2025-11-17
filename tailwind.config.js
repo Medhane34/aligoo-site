@@ -110,7 +110,7 @@ const config = {
     },
   },
   darkMode: "class",
-  plugins: [
+/*   plugins: [
     require('tailwind-scrollbar-hide'),
     heroui({
       prefix: "heroui",
@@ -123,7 +123,19 @@ const config = {
         dark: { layout: {}, colors: { primary: "#FF595E", secondary: "#4B5563", accent: "#FBBF24", surface: "#1F2937" } },
       },
     }),
-  ],
+  ], */
 };
 
-module.exports = config; // Use module.exports instead of export default
+module.exports = {
+  config,
+  safelist: [
+    "from-blue-500", "to-indigo-700",
+    "from-green-500", "to-emerald-700",
+    "from-orange-500", "to-red-700",
+    "from-purple-500", "to-pink-700",
+    "from-teal-500", "to-cyan-700",
+    "from-yellow-500", "to-orange-700",
+    // Add any other gradient classes you use in Sanity
+  ],
+
+}; // Use module.exports instead of export default

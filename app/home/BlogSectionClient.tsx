@@ -1,10 +1,14 @@
 "use client";
 import React, { useRef } from "react";
-import { Image } from "@heroui/react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { AccentText, SectionHeading } from "@/components/ui/typography";
 import NextImage from "next/image";
+import { Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
+import { Divider } from "@heroui/divider";
+import { Calendar } from "lucide-react"; // Import calendar icon
+
+import { AccentText, SectionHeading } from "@/components/ui/typography";
+import BadgeText from "@/components/atoms/BadgeText";
 
 type BlogPostType = {
   imageUrl: string;
@@ -13,45 +17,88 @@ type BlogPostType = {
   excerpt: string;
   slug: string;
   publishedAt?: string;
+  category?: {
+    title_en?: string;
+    title_am?: string;
+  };
 };
 
-const BlogPost = ({ post }: { post: BlogPostType }) => (
+const BlogPost = ({
+  post: { imageUrl, title, excerpt, slug, publishedAt, category },
+  lang,
+}: {
+  post: BlogPostType;
+  lang: "en" | "am";
+}) => (
   <Link
-    href={`/blog/${post.slug}`}
-    className="group w-80 sm:w-96 shrink-0 rounded-lg shadow-md overflow-hidden flex flex-col bg-background-light dark:bg-background-dark border border-gray-200 dark:border-gray-800 hover:shadow-xl hover:-translate-y-1 transition-all duration-200 snap-start"
-    tabIndex={0}
+    className="block h-full w-96 flex-shrink-0 snap-center"
+    href={`/blog/${slug}`}
   >
-    {post.imageUrl && (
-      <NextImage
-       src={post.imageUrl}
-        alt={post.title}
-        className="object-cover w-full h-48"
-        width={384}
-        height={200}
-      />
-    )}
-    <div className="p-4 flex flex-col flex-1">
-      <h3 className="xl:text-heading lg:text-heading md:text-heading text-brand-primary font-semibold group-hover:underline">
-        {post.title}
-      </h3>
-      {post.publishedAt && (
-        <span className="text-xs text-gray-400 mb-2">
-          {new Date(post.publishedAt).toLocaleDateString()}
+    <Card className="h-full flex flex-col overflow-hidden border-0 bg-card shadow-sm hover:shadow-brand transition-shadow duration-300">
+      {/* Image Container with Category Badge */}
+      <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">
+        {imageUrl ? (
+          <NextImage
+            fill
+            alt={title}
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            src={imageUrl}
+          />
+        ) : (
+          <div className="w-full h-full bg-gray-200 dark:bg-gray-700" />
+        )}
+
+        {/* Category Badge - Top Right Corner */}
+        {category && (
+          <div className="absolute top-3 right-3 z-10">
+            <BadgeText size="sm" className="bg-white/90 dark:bg-gray-900/90 text-foreground backdrop-blur-sm">
+              {lang === "en" ? category.title_en : category.title_am}
+            </BadgeText>
+          </div>
+        )}
+      </div>
+
+      {/* Card Content */}
+      <CardHeader className="flex flex-col items-start gap-3 p-5 pb-3">
+        {" "}
+        {/* Increased gap */}
+        {/* Date with Calendar Icon - Left Aligned */}
+        <div className="flex items-start gap-2 text-sm text-gray-500 dark:text-gray-400">
+          <Calendar className="flex-shrink-0" size={16} />
+          <span>
+            {publishedAt &&
+              new Date(publishedAt).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+          </span>
+        </div>
+        {/* Title */}
+        <h3 className="text-lg font-semibold text-foreground line-clamp-2">
+          {title}
+        </h3>
+      </CardHeader>
+
+      <CardBody className="flex-1 p-5 pt-0">
+        <p className="text-sm text-muted-foreground line-clamp-3">{excerpt}</p>
+      </CardBody>
+      <Divider className="my-4" />
+
+      <CardFooter className="p-5 pt-0 mt-auto">
+        <span className="text-sm font-medium text-brand-primary hover:underline">
+          Read More
         </span>
-      )}
-      <p className="text-body text-gray-600 dark:text-gray-400 mt-1 mb-2 line-clamp-3">
-        {post.excerpt}
-      </p>
-      <span className="mt-auto text-sm text-red-500 font-medium group-hover:underline">
-        Read More &rarr;
-      </span>
-    </div>
+      </CardFooter>
+    </Card>
   </Link>
 );
 
 export default function BlogSectionClient({
   blogs,
 }: {
+  lang: "en" | "am";
   blogs: BlogPostType[];
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -92,28 +139,28 @@ export default function BlogSectionClient({
           </motion.div>
           <div className="flex space-x-2">
             <button
-              onClick={scrollLeft}
               aria-label="Scroll left"
               className="bg-brand-primary border rounded-md p-2 text-gray-600 hover:bg-gray-200"
+              onClick={scrollLeft}
             >
               &lt;
             </button>
             <button
-              onClick={scrollRight}
               aria-label="Scroll right"
               className="bg-brand-primary text-white border rounded-md p-2 hover:bg-gray-700"
+              onClick={scrollRight}
             >
               &gt;
             </button>
           </div>
         </div>
         <div
-          className="overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
           ref={scrollRef}
+          className="overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
         >
           <div className="flex flex-row gap-4 transition-transform duration-200">
             {blogs.map((post) => (
-              <BlogPost key={post._id} post={post} />
+              <BlogPost key={post._id} post={post} lang={"en"} />
             ))}
           </div>
         </div>

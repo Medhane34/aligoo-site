@@ -35,26 +35,26 @@ export default function HomePageClient() {
       <Container>
         <AboutUsSectionWrapper />
       </Container>
-      <StatsSectionWrapper />
+      <StatsSectionWrapper lang={"en"} />
       <Container>
         <div className="div" id="service-section">
-          <ServiceSectionWrapper />
+          <ServiceSectionWrapper lang={"en"} />
         </div>
       </Container>
       <Container>
         <HomeCaseStudyWrapper />
       </Container>
       <Container>
-        <ProcessSectionWrapper />
+        <ProcessSectionWrapper lang={"en"} />
       </Container>
       <Container>
-        <WhyUsSectionWrapper />
+        <WhyUsSectionWrapper lang={"en"} />
       </Container>
       <Container>
         <TestimonialsSection />
       </Container>
       <Container>
-        <BlogSection />
+        <BlogSection lang={"en"} />
       </Container>
       <Container>
         <CTABottomSectionWrapper />

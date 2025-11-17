@@ -1,5 +1,5 @@
 import { fetchAdPhilosophySection, AdPhilosophySectionData } from "@/lib/services/facebookad";
-import AdPhilosophySection from "@/app/[lang]/services-back/facebook-ad/OurPhilosophy";
+import AdPhilosophySection from "@/app/[lang]/services/facebook-ad/OurPhilosophy";
 
 export default async function AdPhilosophySectionWrapper({ lang = "en" }: { lang?: "en" | "am" }) {
   const data: AdPhilosophySectionData | null = await fetchAdPhilosophySection("adPhilosophySection-Fb");

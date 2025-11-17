@@ -9,10 +9,12 @@ export interface ProcessStep {
   heading: string;
   description: string;
 }
+
 export interface ProcessSectionProps {
   sectionHeading: string;
   accentText: string;
   steps: ProcessStep[];
+  lang: 'en' | 'am'; // Added
 }
 
 const stepVariants = {
@@ -31,6 +33,7 @@ export default function ProcessSection({
   sectionHeading,
   accentText,
   steps,
+  lang,
 }: ProcessSectionProps) {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: true });
@@ -38,9 +41,7 @@ export default function ProcessSection({
 
   useEffect(() => {
     if (isInView) {
-      const timer = setTimeout(() => {
-        setActiveStep(0);
-      }, 500);
+      const timer = setTimeout(() => setActiveStep(0), 500);
       return () => clearTimeout(timer);
     } else {
       setActiveStep(-1);
@@ -48,14 +49,8 @@ export default function ProcessSection({
   }, [isInView]);
 
   useEffect(() => {
-    if (
-      isInView &&
-      activeStep < steps.length - 1 &&
-      activeStep >= 0
-    ) {
-      const timer = setTimeout(() => {
-        setActiveStep((prev) => prev + 1);
-      }, 2000);
+    if (isInView && activeStep < steps.length - 1 && activeStep >= 0) {
+      const timer = setTimeout(() => setActiveStep((prev) => prev + 1), 2000);
       return () => clearTimeout(timer);
     }
   }, [isInView, activeStep, steps.length]);
@@ -67,15 +62,14 @@ export default function ProcessSection({
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1, transition: { duration: 1 } } : {}}
     >
-      <div className="container mx-auto px-4 text-center ">
+      <div className="container mx-auto px-4 text-center">
         <div className="space-y-2 mb-8">
           <SectionHeading className="text-3xl font-bold tracking-tight uppercase">
             {sectionHeading}
           </SectionHeading>
-          <AccentText className="normal-case">
-            {accentText}
-          </AccentText>
+          <AccentText className="normal-case">{accentText}</AccentText>
         </div>
+
         <div className="flex justify-around mb-8 relative">
           {Array.from({ length: steps.length }).map((_, index) => (
             <React.Fragment key={index}>
@@ -101,6 +95,7 @@ export default function ProcessSection({
             </React.Fragment>
           ))}
         </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-8 md:gap-y-12 px-4">
           {steps.map((step, index) => (
             <motion.div

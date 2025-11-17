@@ -13,6 +13,7 @@ import ProcessSectionWrapper from "@/wrappers/homepage/ProcessSectionWrapper";
 import WhyUsSectionWrapper from "@/wrappers/homepage/WhyUsSectionWrapper";
 import CTABottomSectionWrapper from "@/wrappers/homepage/CTABottomSectionWrapper";
 import HomeHeroSectionWrapper from "@/wrappers/homepage/HeroSectionWrapper";
+import { Lang } from "@/types/BlogPost";
 
 
 export const metadata: Metadata = {
@@ -52,27 +53,27 @@ export default async function Home({
         <Container >
           <AboutUsSectionWrapper lang={lang} />
         </Container>
-        <StatsSectionWrapper />
+        <StatsSectionWrapper lang={lang}/>
         <Container>
           <div className="div" id="service-section">
-            <ServiceSectionWrapper />
+            <ServiceSectionWrapper lang={lang}/>
           </div>
         </Container>
         <Container>
           <HomeCaseStudyWrapper />
         </Container>
         <Container>
-          <ProcessSectionWrapper />
+          <ProcessSectionWrapper lang={lang}/>
         </Container>
 
         <Container>
-          <WhyUsSectionWrapper />
+          <WhyUsSectionWrapper lang={lang}/>
         </Container>
         <Container>
           <TestimonialsSection />
         </Container>
         <Container>
-          <BlogSection />
+          <BlogSection lang={lang as Lang}/>
         </Container>
 
         <Container>
