@@ -89,9 +89,9 @@ export default function ProcessSection({
                   index + 1
                 )}
               </motion.div>
-              {index < steps.length - 1 && (
+             {/*  {index < steps.length - 1 && (
                 <div className="w-8 h-0.5 bg-gray-300 absolute top-1/2 left-full -translate-y-1/2" />
-              )}
+              )} */}
             </React.Fragment>
           ))}
         </div>

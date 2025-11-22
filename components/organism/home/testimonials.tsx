@@ -1,4 +1,10 @@
+import { GlowOutlineButton, PrimaryButton } from "@/components/atoms/button"
 import { Marquee } from "@/components/ui/marquee"
+import { AccentText, SectionHeading } from "@/components/ui/typography"
+import { textVariants } from "@/lib/motions/textVariants"
+import { motion } from "framer-motion"
+import { Zap } from "lucide-react"
+import Link from "next/link"
 
 
 
@@ -7,49 +13,49 @@ const testimonials = [
     name: "Yordanos G/silassie",
     username: "Founder, Kassina Sweets",
     body: "Aligo Marketing solution was the perfect partner for to help me grow my online business and I was very impressed with their service. They created a custom ads plan that suited my budget and goals, and helped me reach more customers across different platforms. They also provided me with detailed reports and insights on how to optimize my campaigns and increase my ROI. Aligo Marketing solution is a professional and reliable advertising company that I would highly recommend to anyone looking for online advertising solutions.",
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+    img: "/team/avatar-3.jpeg",
   },
   {
     name: "Abeslome Banjaw",
     username: "Owner, Aberhot Interior Designs",
     body: "Aligo Marketing solution was the best solution and partner for to help me grow my architectural business and I was very impressed with their service. Their custom ad plan, tailored to my budget and objectives, helped me connect with a wider audience across Ethiopia. I saw a significant increase in brand awareness and customer engagement, ultimately leading to a generating quality leads and 3x Return on my investement, I am very flattered to have them boost my company /abrehot designs/and I thank them with all my heart. Thanks aligoo",
-    img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face",
+    img: "/team/avatar-2.jpeg",
   },
   {
     name: "Zelalem Sima",
     username: "CEO, Zelalem Law Office",
     body: "The web Developing company Aligoo and its founding partner Daniel has been very compassionate and timely in delivering their development. I also like to thank Daniel for his relentless effort of making time for this project and his unwavering commitment to his work. I had a pleasure working with them !!!",
-    img: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+   img: "/team/avatar-2.jpeg",
   },
   {
     name: "Tenbit Ermiyas",
     username: "Marketing Manager, Charity Foundation",
     body: "Overall very pleased with Daniel and his friendliness with Me. He did everything I asked in a timely matter. I will definitely be recommending him to other companies. Thanks for such good work.",
-    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+  img: "/team/avatar-3.jpeg",
   },
   {
     name: "Ruta kesete",
     username: "Ruth KT hair",
     body: "Aligo Digital Betam new mamesegnew, tiru page nachu yserachulgn amesegnalew.",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+   img: "/team/avatar-4.jpeg",
   },
   {
     name: "Ephrem Hirut Export",
     username: "CEO, Hirtu Export",
     body: "Well experienced web designer",
-    img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face",
+    img: "/team/avatar-1.jpeg",
   },
   {
     name: "Kaleb Araya",
     username: "CEO, Kaleb Tech Solutions",
     body: "Had a great experience getting our website redesigned . Would recommend to all",
-    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+    img: "/team/avatar-1.jpeg",
   },
   {
     name: "Seid Mouna",
     username: "Founder, Seya Ethiopia Tours",
     body: "Here i am for appreciation! Daniel or aligoo did i great job for Me. his best website designer , he did My website on time and on exact way what i ask him to have. Thank you dani Thank you Aligoo",
-    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
+   img: "/team/avatar-1.jpeg",
   },
   /* {
     name: "James Roy",
@@ -75,16 +81,16 @@ const TestimonialCard = ({
   body: string
 }) => {
   return (
-    <div className="relative w-full max-w-xs overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-white/[0.02] p-10 shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)_inset]">
-      <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-[#e78a53]/10 to-transparent blur-md"></div>
+    <div className="relative w-full max-w-xs overflow-hidden rounded-3xl border border-gray-200 bg-background-light/50 p-10 shadow-[0px_2px_0px_0px_rgba(0,0,0,0.05)_inset] dark:border-white/10 dark:bg-gradient-to-b dark:from-white/5 dark:to-white/[0.02] dark:shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)_inset]">
+      <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-[#FF595E]/10 to-transparent blur-md"></div>
 
-      <div className="text-white/90 leading-relaxed">{body}</div>
+      <div className="text-foreground/90 leading-relaxed">{body}</div>
 
       <div className="mt-5 flex items-center gap-2">
         <img src={img || "/placeholder.svg"} alt={name} height="40" width="40" className="h-10 w-10 rounded-full" />
         <div className="flex flex-col">
-          <div className="leading-5 font-medium tracking-tight text-white">{name}</div>
-          <div className="leading-5 tracking-tight text-white/60">{username}</div>
+          <div className="leading-5 font-medium tracking-tight text-foreground">{name}</div>
+          <div className="leading-5 tracking-tight text-muted-foreground">{username}</div>
         </div>
       </div>
     </div>
@@ -96,23 +102,13 @@ export function TestimonialsSectionScroll() {
     <section id="testimonials" className="mb-24">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-[540px]">
-          <div className="flex justify-center">
-            <button
-              type="button"
-              className="group relative z-[60] mx-auto rounded-full border border-white/20 bg-white/5 px-6 py-1 text-xs backdrop-blur transition-all duration-300 hover:scale-105 hover:shadow-xl active:scale-100 md:text-sm"
-            >
-              <div className="absolute inset-x-0 -top-px mx-auto h-0.5 w-1/2 bg-gradient-to-r from-transparent via-[#e78a53] to-transparent shadow-2xl transition-all duration-500 group-hover:w-3/4"></div>
-              <div className="absolute inset-x-0 -bottom-px mx-auto h-0.5 w-1/2 bg-gradient-to-r from-transparent via-[#e78a53] to-transparent shadow-2xl transition-all duration-500 group-hover:h-px"></div>
-              <span className="relative text-white">Testimonials</span>
-            </button>
-          </div>
-          <h2 className="from-foreground/60 via-foreground to-foreground/60 dark:from-muted-foreground/55 dark:via-foreground dark:to-muted-foreground/55 mt-5 bg-gradient-to-r bg-clip-text text-center text-4xl font-semibold tracking-tighter text-transparent md:text-[54px] md:leading-[60px] __className_bb4e88 relative z-10">
-            What our users say
-          </h2>
+          
 
-          <p className="mt-5 relative z-10 text-center text-lg text-zinc-500">
-            From intuitive design to powerful features, our app has become an essential tool for users around the world.
-          </p>
+            <SectionHeading className="text-heading uppercase text-center">
+              Client Love 
+            </SectionHeading>
+      <AccentText className="normal-case text-center">Feedback That Fuels Us</AccentText>
+
         </div>
 
         <div className="my-16 flex max-h-[738px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
@@ -141,15 +137,13 @@ export function TestimonialsSectionScroll() {
           </div>
         </div>
 
-        <div className="-mt-8 flex justify-center">
-          <button className="group relative inline-flex items-center gap-2 rounded-full border border-[#e78a53]/30 bg-black/50 px-6 py-3 text-sm font-medium text-white transition-all hover:border-[#e78a53]/60 hover:bg-[#e78a53]/10 active:scale-95">
-            <div className="absolute inset-x-0 -top-px mx-auto h-px w-3/4 bg-gradient-to-r from-transparent via-[#e78a53]/40 to-transparent"></div>
-            <div className="absolute inset-x-0 -bottom-px mx-auto h-px w-3/4 bg-gradient-to-r from-transparent via-[#e78a53]/40 to-transparent"></div>
-            <svg className="h-4 w-4 text-[#e78a53]" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
-            </svg>
-            Share your experience
-          </button>
+        <div className="flex flex-col items-center gap-1 pb-1">
+          <Link href="https://www.google.com/search?q=aligoo&sourceid=chrome&ie=UTF-8#mpd=~10252779069624549640/customers/reviews">
+          <GlowOutlineButton size="md" icon={<Zap className="h-5 w-5" />} className="p-2">
+            See all reviews
+          </GlowOutlineButton>
+          </Link>
+          <div className="text-sm font-medium text-gray-500">4.9 out of 9</div>
         </div>
       </div>
     </section>

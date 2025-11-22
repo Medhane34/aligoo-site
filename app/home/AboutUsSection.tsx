@@ -6,6 +6,7 @@ import Link from "next/link";
 import { SectionHeading, AccentText } from "@/components/ui/typography";
 import { textVariants, textContainerVariants, ButtonVariants, imageVariants } from "@/lib/motions";
 import { MyButton } from "@/components/custom/extendVariants";
+import { PrimaryButton } from "@/components/atoms/button";
 
 export interface AboutUsSectionProps {
   sectionHeading: string;
@@ -73,8 +74,9 @@ export default function AboutUsSection({
           ))}
           <motion.div className="pt-6" variants={ButtonVariants}>
             <Link href={buttonUrl}>
-              <MyButton>{buttonText}</MyButton>
-            </Link>
+                <PrimaryButton size="md">{buttonText}</PrimaryButton>
+
+           </Link>
           </motion.div>
         </motion.div>
       </div>

@@ -8,10 +8,10 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { Navbar } from "@/components/navbar";
+/* import { Navbar } from "@/components/navbar"; */
 import Footer from "@/components/Footer"; // Corrected import path
 
-import { VisualEditing } from "next-sanity";
+/* import { VisualEditing } from "next-sanity"; */
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
 
@@ -20,6 +20,8 @@ import { SanityLive } from "@/src/sanity/live";
 import Script from "next/script";
 
 import { LanguageProvider } from "@/components/LanguageContext";
+import { Navbar } from "@/components/ui/navbar-copy";
+import MouseMoveEffect from "@/components/atoms/mouse-move-effect";
 
 export const metadata: Metadata = {
   icons: {
@@ -63,12 +65,13 @@ export default async function RootLayout({
           fontSans.variable,
         )}
       >
-        <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
+        <Providers >
           
           <div className="relative flex flex-col h-screen">
-            <Navbar />
+            <Navbar/>
             <LanguageProvider> 
             <main className="pt-16 grow">
+               <MouseMoveEffect />
               {children}
               <SpeedInsights />
             </main>

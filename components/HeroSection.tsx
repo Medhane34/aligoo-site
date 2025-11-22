@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { MyButton, MyOutlineButton } from "./custom/extendVariants";
 import { title } from "@/components/primitives";
+import { GlowOutlineButton, PrimaryButton } from "./atoms/button";
 
 export interface HeroSectionProps {
   badgeText?: string;
@@ -87,6 +88,21 @@ export default function HeroSection({
     <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark mt-[-60px] xs:p-4 sm:mt-[-80px] sm:p-6 md:mt-[-105px] md:p-9">
       {/* ...background pattern... */}
       <main className="container mx-auto flex flex-1 flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-4">
+        {/* Theme-aware Pearl Mist Background */}
+        {/* This is the background for DARK mode */}
+        <div
+          className="absolute inset-0 z-0 hidden dark:block"
+          style={{
+            background: "radial-gradient(ellipse 50% 35% at 50% 0%, rgba(226, 232, 240, 0.12), transparent 60%)",
+          }}
+        />
+        {/* This is the background for LIGHT mode */}
+        <div
+          className="absolute inset-0 z-0 dark:hidden"
+          style={{
+            background: "radial-gradient(ellipse 50% 35% at 50% 0%, rgba(45, 55, 72, 0.08), transparent 70%)",
+          }}
+        />
         <motion.section
           animate="visible"
           className="z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6"
@@ -136,23 +152,23 @@ export default function HeroSection({
             {subheading}
           </motion.p>
 
-          {/* Buttons (unchanged) */}
+          {/* Buttons  */}
           <motion.div
-            className="flex flex-row items-center justify-center gap-6 sm:flex-row"
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
             variants={buttonContainerVariants}
           >
             <motion.div variants={buttonVariants}>
               <Link passHref href={primaryButtonUrl}>
-                <MyButton>
-                  {primaryButtonText}
-                </MyButton>
+              <PrimaryButton size="md">{primaryButtonText}</PrimaryButton>
+            
               </Link>
             </motion.div>
             <motion.div variants={buttonVariants}>
               <Link passHref href={secondaryButtonUrl}>
-                <MyOutlineButton>
-                  {secondaryButtonText}
-                </MyOutlineButton>
+               <GlowOutlineButton size="md" >
+                            {secondaryButtonText}
+                        </GlowOutlineButton>
+               
               </Link>
             </motion.div>
           </motion.div>

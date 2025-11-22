@@ -1,6 +1,7 @@
+
 import { Metadata } from "next";
 
-import TestimonialsSection from "../home/TestimonialsSection";
+
 import BlogSection from "../home/blogSection";
 
 import HomeCaseStudyWrapper from "@/wrappers/HomeCaseStudyWrapper";
@@ -14,6 +15,7 @@ import WhyUsSectionWrapper from "@/wrappers/homepage/WhyUsSectionWrapper";
 import CTABottomSectionWrapper from "@/wrappers/homepage/CTABottomSectionWrapper";
 import HomeHeroSectionWrapper from "@/wrappers/homepage/HeroSectionWrapper";
 import { Lang } from "@/types/BlogPost";
+import { TestimonialsSectionScroll } from "@/components/organism/home/testimonials";
 
 
 export const metadata: Metadata = {
@@ -70,7 +72,15 @@ export default async function Home({
           <WhyUsSectionWrapper lang={lang}/>
         </Container>
         <Container>
-          <TestimonialsSection />
+           {/* Testimonials Section */}
+                        <div id="testimonials">
+                          <TestimonialsSectionScroll />
+                        </div>
+                  
+                   <a
+                className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+                >
+              </a>
         </Container>
         <Container>
           <BlogSection lang={lang as Lang}/>

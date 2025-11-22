@@ -9,6 +9,7 @@ import { AccentText, SectionHeading } from "@/components/ui/typography";
 import { MyButton } from "@/components/custom/extendVariants";
 
 import NextImage from "next/image";
+import { PrimaryButton } from "@/components/atoms/button";
 
 // Animation variants remain unchanged (good)
 const headerVariants = {
@@ -128,7 +129,9 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
           {/* Button */}
           <motion.div variants={headerVariants}>
             <Link passHref href="/works">
-              <MyButton>🏗️ More of our works </MyButton>
+                        <PrimaryButton size="md">🏗️ More of our works</PrimaryButton>
+
+              
             </Link>
           </motion.div>
         </motion.div>

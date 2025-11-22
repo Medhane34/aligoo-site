@@ -9,6 +9,7 @@ import { Calendar } from "lucide-react"; // Import calendar icon
 
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 import BadgeText from "@/components/atoms/BadgeText";
+import { PrimaryButton } from "@/components/atoms/button";
 
 type BlogPostType = {
   imageUrl: string;
@@ -137,7 +138,7 @@ export default function BlogSectionClient({
               Ideas, Insights & Marketing Rants
             </AccentText>
           </motion.div>
-          <div className="flex space-x-2">
+          {/* <div className="flex space-x-2">
             <button
               aria-label="Scroll left"
               className="bg-brand-primary border rounded-md p-2 text-gray-600 hover:bg-gray-200"
@@ -152,7 +153,14 @@ export default function BlogSectionClient({
             >
               &gt;
             </button>
-          </div>
+          </div> */}
+
+          <div className="flex flex-col items-center gap-1 pb-1">
+          <Link href="/blog">
+          <PrimaryButton size="md">📝 See all Blogs</PrimaryButton>
+          </Link>
+          {/* <div className="text-sm font-medium text-gray-500">4.9 out of 9</div> */}
+        </div>
         </div>
         <div
           ref={scrollRef}

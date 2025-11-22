@@ -6,6 +6,7 @@ import { AccentText, SectionHeading, Paragraph } from "@/components/ui/typograph
 import { ButtonVariants, imageVariants, textContainerVariants, textVariants } from "@/lib/motions";
 import { MyButton } from "@/components/custom/extendVariants";
 import NextImage from "next/image";
+import { PrimaryButton } from "@/components/atoms/button";
 
 export interface FeaturedCaseStudyProps {
   title?: string;
@@ -73,9 +74,7 @@ export default function FeaturedCaseStudy({
           </motion.div>
           <motion.div className="pt-6" variants={ButtonVariants}>
             <Link href={`/case-study/${slug}`}>
-              <MyButton className="w-[163px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-linear-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full">
-                📖 Read Case Study
-              </MyButton>
+            <PrimaryButton> 📖 Read Case Study</PrimaryButton>
             </Link>
           </motion.div>
         </motion.div>

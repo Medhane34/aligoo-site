@@ -55,20 +55,23 @@ export default function ServiceSection({
 }: ServiceSectionProps) {
   return (
     <div className="py-16 overflow-hidden text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
-      <div className="container mx-auto px-4">
+      <div className="relative container mx-auto px-4">
+   
+<div className="bg-gradient-to-r from-[#FF595E] to-[#FF595E]/80 absolute -top-10 left-1/2 h-16 w-44 -translate-x-1/2 rounded-full opacity-40 blur-3xl select-none"></div>
+<div className="via-primary/50 absolute top-0 left-1/2 h-px w-3/5 -translate-x-1/2 bg-gradient-to-r from-transparent to-transparent transition-all ease-in-out"></div>
         <motion.div className="text-center mb-12 space-y-2 xs:space-y-4" variants={headingVariants}>
-          <SectionHeading className="text-heading uppercase">
+          <SectionHeading className="uppercase">
             {sectionHeading}
           </SectionHeading>
-          <AccentText className="normal-case text-heading">{accentText}</AccentText>
+          <AccentText className="normal-case text-subheading">{accentText}</AccentText>
         </motion.div>
         <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-4 mb-12" variants={columnContainerVariants}>
           {columns.map((col, i) => (
-            <motion.div key={i} className="w-full md:w-auto md:flex-1 p-4 md:p-0 outline-none text-white" variants={columnVariants}>
-              <h2 className="text-2xl font-semibold mb-4 text-heading text-text-light dark:text-text-dark">
+            <motion.div key={i} className="w-full md:w-auto md:flex-1 p-4 md:p-0 outline-none" variants={columnVariants}>
+              <h2 className="text-subheading font-semibold mb-4 text-foreground">
                 {col.title}
               </h2>
-              <p className="text-gray-400 mb-6 text-body text-text-light dark:text-text-dark">
+              <p className="mb-6 text-body text-muted-foreground">
                 {col.description}
               </p>
               <Accordion showDivider={false}>
@@ -99,13 +102,13 @@ export default function ServiceSection({
                       )
                     }
                     title={
-                      <span className="hover:underline text-text-light dark:text-text-dark">
+                      <span className="hover:underline text-foreground">
                         {service.title}
                       </span>
                     }
                     /* variants={accordionVariants} */
                   >
-                    <div className="text-text-light dark:text-text-dark">
+                    <div className="text-muted-foreground">
                       {service.description}
                     </div>
                   </AccordionItem>

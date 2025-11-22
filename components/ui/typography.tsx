@@ -58,10 +58,8 @@ export function Paragraph({ children, className = "" }: React.PropsWithChildren<
         return classes.filter(Boolean).join(" ");
     }
   return (
-    <span className={cn("text-base md:text-lg dark:text-white text-black leading-relaxed", className)}>
+    <span className={cn("text-base md:text-lg text-text-light dark:text-text-dark leading-relaxed", className)}>
       {children}
     </span>
   );
 }
-
-

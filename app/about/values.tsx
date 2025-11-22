@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { SectionHeading, AccentText } from "@/components/ui/typography";
 import { MyButton } from "@/components/custom/extendVariants";
+import { PrimaryButton } from "@/components/atoms/button";
 
 export interface ValueCard {
   emoji: string;
@@ -53,7 +54,7 @@ export default function ValuesSection({
             <AccentText className="normal-case mb-4">{accentText}</AccentText>
             <div className="mt-4">
               <Link href={buttonUrl}>
-                <MyButton>{buttonText}</MyButton>
+              <PrimaryButton>{buttonText}</PrimaryButton>
               </Link>
             </div>
           </div>
@@ -131,9 +132,9 @@ export default function ValuesSection({
             <motion.div
               className={`
                 row-span-1 col-span-1
-                ${card4.bgColor} ${card4.textColor || "text-gray-900"}
-                rounded-lg shadow-md p-6 flex flex-col justify-between
-               
+                ${card4.bgColor} ${card4.textColor || "text-text-light dark:text-text-dark"}
+                rounded-lg shadow-md p-4 flex flex-col justify-between
+                 dark:bg-white
                 transform transition-transform duration-300 hover:scale-[1.02] hover:shadow-2xl
               `}
               initial="hidden"
@@ -142,10 +143,10 @@ export default function ValuesSection({
               variants={cardVariants}
             >
               <div>
-                <h3 className="font-semibold text-lg mb-2">
+                <h3 className="font-semibold text-lg mb-2 text-text-light dark:text-text-dark">
                   {card4.emoji} {card4.title}
                 </h3>
-                <p className="text-sm">{card4.description}</p>
+                <p className="text-sm text-text-light dark:text-text-dark" >{card4.description}</p>
               </div>
             </motion.div>
           )}

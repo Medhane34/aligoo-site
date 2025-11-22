@@ -26,7 +26,11 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <HeroUIProvider navigate={router.push}>
       <ToastProvider />
-      <NextThemesProvider attribute="class" defaultTheme="dark" {...themeProps}>
+      <NextThemesProvider attribute={['class','data-theme']} disableTransitionOnChange={true} defaultTheme="dark" {...themeProps}
+      enableSystem={false}   // IMPORTANT: avoids hydration mismatch
+      
+ 
+      >
         {children}
        </NextThemesProvider>
     </HeroUIProvider>

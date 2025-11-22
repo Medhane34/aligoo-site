@@ -1,141 +1,114 @@
-const {heroui} = require("@heroui/react");
+// tailwind.config.js
+/* const { heroui } = require("@heroui/react"); */
 
 /** @type {import('tailwindcss').Config} */
-const config = {
+module.exports = {
+  darkMode: "class",
+
   content: [
-    './app/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx,mdx}',
-    './lib/**/*.{js,ts,jsx,tsx,mdx}',
-    './sanity/**/*.{js,ts,jsx,tsx,mdx}',
-    './wrappers/**/*.{js,ts,jsx,tsx,mdx}',
-    './node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}',
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./wrappers/**/*.{js,ts,jsx,tsx,mdx}",
+    "./lib/**/*.{js,ts,jsx,tsx,mdx}",
+    "./sanity/**/*.{js,ts,jsx,tsx,mdx}",
+    "./node_modules/@heroui/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
+
+  // Tailwind v4 prefers a flat colors object
   theme: {
-    extend: {
-    /*   container: {
-    center: true,
-    padding: "1rem",
     screens: {
+      xs: "480px",
       sm: "640px",
       md: "768px",
       lg: "1024px",
       xl: "1280px",
-      "2xl": "1536px",
     },
-  }, */
-      maxWidth: {
-      'screen-xs': '480px',
-      'screen-sm': '640px',
-      'screen-md': '768px',
-      'screen-lg': '1024px',
-      'screen-xl': '1280px',
+
+    /*
+      Keep Tailwind defaults and add custom colors under `extend.colors`.
+      This avoids accidentally replacing the full `colors` object which
+      can prevent other utilities from being generated.
+    */
+
+    fontFamily: {
+      sans: ["var(--font-sans)", "system-ui", "sans-serif"],
+      mono: ["var(--font-mono)", "ui-monospace", "monospace"],
+      amharicHeading: ["Chiret", "sans-serif"],
+      amharicBody: ["Noto Sans Ethiopic", "sans-serif"],
     },
-      fontFamily: {
-        sans: ["var(--font-sans)"],
-        mono: ["var(--font-mono)"],
-        amharicHeading: ['Chiret', 'sans-serif'],
-        amharicBody: ['Noto Sans Ethiopic', 'sans-serif'],
+
+    backgroundImage: {
+      "light-gradient":
+        "linear-gradient(to bottom right, #ffe4e6, #ddd6fe, #c7d2fe)",
+      "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+      "gradient-conic":
+        "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+    },
+
+    extend: {
+      colors: {
+        // Brand
+        "brand-primary": "#FF595E",
+        "brand-primary-light": "#FF7A7D",
+        "brand-primary-dark": "#E64F54",
+        "brand-primary-darker": "#CC464B",
+
+        // Buttons (flat tokens)
+        "button-primary-light": "#FF595E",
+        "button-primary-dark": "#FF595E",
+        "button-secondary-light": "#FBBF24",
+        "button-secondary-dark": "#F59E0B",
+
+        // Background
+        "background-light": "#F9FAFB",
+        "background-dark": "#080404",
+
+        // Text
+        "text-light": "#1F2937",
+        "text-dark": "#F9FAFB",
+
+        // Generic
+        white: "#ffffff",
+        black: "#000000",
       },
-      backgroundImage: {
-        'light-gradient': 'linear-gradient(to bottom right, #ffe4e6, #ddd6fe, #c7d2fe)',
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+      // small extension area for utilities you might add later
+      dropShadow: {
+        brand: "0 4px 8px rgba(255, 89, 94, 0.2)",
       },
       animation: {
-        gradient: 'gradient-move 8s ease infinite alternate',
+        "gradient-move": "gradient-move 8s ease infinite alternate",
       },
       keyframes: {
-        'gradient-move': {
-          '0%': { backgroundPosition: '0% 50%' },
-          '100%': { backgroundPosition: '100% 50%' },
+        "gradient-move": {
+          "0%": { backgroundPosition: "0% 50%" },
+          "100%": { backgroundPosition: "100% 50%" },
         },
-      },
-      colors: {
-        'brand-primary': {
-          DEFAULT: '#FF595E',
-          'light': '#FF7A7D',
-          'dark': '#E64F54',
-          'darker': '#CC464B',
-        },
-        background: {
-          light: '#F9FAFB',
-          dark: '#080404',
-        },
-        text: {
-          light: '#1F2937',
-          dark: '#F9FAFB',
-        },
-        button: {
-          primary: {
-            light: '#FF595E',
-            dark: '#FF595E',
-          },
-          secondary: {
-            light: '#FBBF24',
-            dark: '#F59E0B',
-          },
-        },
-      },
-      dropShadow: {
-        brand: '0 4px 8px rgba(255, 89, 94, 0.4)',
-        'brand-hover': '0 6px 12px rgba(255, 89, 94, 0.5)',
-      },
-      screens: {
-        'xs': '480px',
-        'sm': '640px',
-        'md': '768px',
-        'lg': '1024px',
-        'xl': '1280px',
       },
       fontSize: {
-        'heading': ['1.5rem', { lineHeight: '2rem', '@screen sm': { fontSize: '1.875rem' }, '@screen md': { fontSize: '2.25rem' }, '@screen lg': { fontSize: '2.5rem' }, '@screen xl': { fontSize: '3rem' } }],
-        'subheading': ['1.25rem', { lineHeight: '1.75rem', '@screen sm': { fontSize: '1.5rem' }, '@screen md': { fontSize: '1.75rem' }, '@screen lg': { fontSize: '2rem' }, '@screen xl': { fontSize: '2.25rem' } }],
-        'body': ['0.875rem', { lineHeight: '1.25rem', '@screen sm': { fontSize: '1rem' }, '@screen md': { fontSize: '1.125rem' }, '@screen lg': { fontSize: '1.125rem' }, '@screen xl': { fontSize: '1.25rem' } }],
-        'small': ['0.75rem', { lineHeight: '1rem', '@screen sm': { fontSize: '0.875rem' }, '@screen md': { fontSize: '0.875rem' }, '@screen lg': { fontSize: '1rem' }, '@screen xl': { fontSize: '1rem' } }],
+        heading: ["1.5rem", { lineHeight: "2rem" }],
+        subheading: ["1.25rem", { lineHeight: "1.75rem" }],
+        body: ["0.875rem", { lineHeight: "1.25rem" }],
       },
     },
   },
-  animation: {
-    'fade-in-down': 'fade-in-down 0.5s ease-out',
-    'gradient-move': 'gradient-move 8s ease infinite alternate',
-  },
-  keyframes: {
-    'fade-in-down': {
-      '0%': { opacity: '0', transform: 'translateY(-10px)' },
-      '100%': { opacity: '1', transform: 'translateY(0)' },
-    },
-    'gradient-move': {
-      '0%': { backgroundPosition: '0% 50%' },
-      '100%': { backgroundPosition: '100% 50%' },
-    },
-  },
-  darkMode: "class",
-/*   plugins: [
-    require('tailwind-scrollbar-hide'),
+
+  safelist: [
+    // keep gradient utility classes when using dynamic class names
+    "from-brand-primary-light",
+    "to-brand-primary-dark",
+    "from-button-secondary-light",
+    "to-button-secondary-dark",
+  ],
+
+  /* plugins: [
     heroui({
       prefix: "heroui",
-      addCommonColors: false,
-      defaultTheme: "dark",
-      defaultExtendTheme: "light",
-      layout: {},
+      defaultTheme: "light",
       themes: {
-        light: { layout: {}, colors: { primary: "#007BFF", secondary: "#6C757D", accent: "#FFC107", surface: "#FFFFFF", text: "#212529" } },
-        dark: { layout: {}, colors: { primary: "#FF595E", secondary: "#4B5563", accent: "#FBBF24", surface: "#1F2937" } },
+        light: {},
+        dark: {},
       },
     }),
   ], */
 };
-
-module.exports = {
-  config,
-  safelist: [
-    "from-blue-500", "to-indigo-700",
-    "from-green-500", "to-emerald-700",
-    "from-orange-500", "to-red-700",
-    "from-purple-500", "to-pink-700",
-    "from-teal-500", "to-cyan-700",
-    "from-yellow-500", "to-orange-700",
-    // Add any other gradient classes you use in Sanity
-  ],
-
-}; // Use module.exports instead of export default

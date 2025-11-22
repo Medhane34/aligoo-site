@@ -1,69 +1,47 @@
-@import './glow.css';
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
+/* ---------------------------------------------------
+   Tailwind v4 Base Import
+--------------------------------------------------- */
 @import "tailwindcss";
 
-@theme {
-  --color-brand-primary: #FF595E;
-  --color-brand-primary-light: #FF7A7D;
-  --color-brand-primary-dark: #E64F54;
-  --color-brand-primary-darker: #CC464B;
-  --color-background-light: #F9FAFB;
-  --color-background-dark: #080404;
-  --color-text-light: #1F2937;
-  --color-text-dark: #F9FAFB;
-  --color-button-primary-light: #FF595E;
-  --color-button-primary-dark: #FF595E;
-  --color-button-secondary-light: #FBBF24;
-  --color-button-secondary-dark: #F59E0B;
-}
 
-
-
-
-
-/* global.css 
+/* ---------------------------------------------------
+   Global Light / Dark Variables
+--------------------------------------------------- */
 html.light {
-  @apply bg-gradient-to-br from-rose-100 via-violet-200 to-indigo-100 animate-gradient; //
-
+  --background: #F9FAFB;
+  --text: #1F2937;
 }
 
-html.light {
-  @apply bg-gray-100 text-black;
+html.dark {
+  --background: #080404;
+  --text: #F9FAFB;
 }
-*/
 
-/* styles/globals.css */
+/* ---------------------------------------------------
+   Global Base Styles
+--------------------------------------------------- */
 html,
 body {
   max-width: 100%;
-  overflow-x: visible; /* Allows intentional scrolling in child elements */
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--text);
+  scroll-behavior: smooth;
 }
 
 * {
   box-sizing: border-box;
 }
 
-/* Ensure sections don't overflow unintentionally */
-section {
-  max-width: 100%;
-}
-
-/* Fix for containers that might use 100vw */
+/* Fix layout issues with containers using vw */
 .container,
 .max-w-full {
   max-width: 100%;
 }
 
-html, body {
-  overflow-x: hidden;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
+/* ---------------------------------------------------
+   Custom Fonts
+--------------------------------------------------- */
 @font-face {
   font-family: 'Chiret';
   src: url('/fonts/Chiret-Regular.ttf') format('truetype');
@@ -75,7 +53,101 @@ html {
 @font-face {
   font-family: 'Noto Sans Ethiopic';
   src: url('/fonts/NotoSansEthiopic-VariableFont_wdth,wght.ttf') format('truetype');
-  font-weight: 100 900; /* Variable font range */
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
+}
+
+/* ---------------------------------------------------
+   Custom Typographic Utilities (responsive)
+   MUST be at the bottom to override Tailwind
+--------------------------------------------------- */
+@layer utilities {
+  /* Heading */
+  .text-heading {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 640px) {
+    .text-heading {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .text-heading {
+      font-size: 2.25rem;
+      line-height: 2.75rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-heading {
+      font-size: 2.5rem;
+      line-height: 3rem;
+    }
+  }
+
+  /* Subheading */
+  .text-subheading {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .text-subheading {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .text-subheading {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+  }
+
+  /* Body */
+  .text-body {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  /* Small text */
+  .text-small {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+/* Added marquee animations for testimonials section */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+/* Added missing utility classes to apply the marquee animations */
+.animate-marquee {
+  animation: marquee var(--duration) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
 }

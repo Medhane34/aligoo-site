@@ -21,8 +21,8 @@ import {
 } from "@heroui/dropdown";
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { usePathname } from "next/navigation";
+import ThemeSwitch from "./theme-switch";
 
-import { ThemeSwitch } from "@/components/theme-switch";
 
 const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
