@@ -110,6 +110,20 @@ export const WHY_US_SECTION_QUERY = (lang: 'en' | 'am') => groq`
     "reasons": reasons_${lang}[]
   }
 `;
+// testimonials 
+export const TESTIMONIALS_SECTION_QUERY = (lang: 'en' | 'am') => groq`
+  *[_type == "testimonial"][0] {
+    heading_${lang},
+    subheading_${lang},
+    "testimonials": testimonials_${lang}[] {
+      name,
+      username,
+      "body": body,
+      "imageUrl": image.asset->url,
+      "imageAlt": image.alt
+    }
+  }
+`
 
 export const CTA_SECTION_QUERY = `
   *[_type == "ctaSection"][0]{

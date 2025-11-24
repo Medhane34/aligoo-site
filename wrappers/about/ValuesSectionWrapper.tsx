@@ -1,8 +1,19 @@
+import ValuesSection from "@/components/about/values";
 import { fetchValuesSection } from "@/lib/about";
-import ValuesSection, { ValuesSectionProps } from "@/app/about/values"
 
-export default async function ValuesSectionWrapper() {
-  const data: ValuesSectionProps | null = await fetchValuesSection();
-  if (!data) return null;
-  return <ValuesSection {...data} />;
+export default async function ValuesWrapper({ lang }: { lang: 'en' | 'am' }) {
+  const data = await fetchValuesSection(lang)
+
+  if (!data || data.values.length < 5) return null
+
+  return (
+    <ValuesSection
+      sectionHeading={data.sectionHeading}
+      accentText={data.accentText}
+      buttonText={data.buttonText}
+      buttonUrl={data.buttonUrl}
+      values={data.values}
+      lang={lang}
+    />
+  )
 }

@@ -1,5 +1,5 @@
 import { client } from "@/src/sanity/client";
-import { ABOUT_US_SECTION_QUERY, CTA_SECTION_QUERY, HERO_SECTION_QUERY_HOMEPAGE, PROCESS_SECTION_QUERY, SERVICE_SECTION_QUERY, STATS_SECTION_QUERY, WHY_US_SECTION_QUERY } from "@/sanity/queries/homepage";
+import { ABOUT_US_SECTION_QUERY, CTA_SECTION_QUERY, HERO_SECTION_QUERY_HOMEPAGE, PROCESS_SECTION_QUERY, SERVICE_SECTION_QUERY, STATS_SECTION_QUERY, TESTIMONIALS_SECTION_QUERY, WHY_US_SECTION_QUERY } from "@/sanity/queries/homepage";
 
 export type HeroSectionData = {
   badgeText_en?: string;
@@ -251,6 +251,36 @@ export async function fetchWhyUsSection(lang: 'en' | 'am' = 'en'): Promise<WhyUs
     accentText: raw[`accentText_${lang}`] || "Default Accent",
     reasons: raw.reasons || [],
   };
+}
+
+//testimonial cta section 
+export type Testimonial = {
+  name: string
+  username: string
+  body: any[]
+  imageUrl?: string
+  imageAlt?: string
+}
+
+export type TestimonialsSectionData = {
+  heading: string
+  subheading: string
+  testimonials: Testimonial[]
+}
+
+export async function fetchTestimonialsSection(
+  lang: 'en' | 'am' = 'en'
+): Promise<TestimonialsSectionData | null> {
+  const query = TESTIMONIALS_SECTION_QUERY(lang)
+  const raw = await client.fetch<any>(query)
+
+  if (!raw) return null
+
+  return {
+    heading: raw[`heading_${lang}`] || 'Client Love',
+    subheading: raw[`subheading_${lang}`] || 'Feedback That Fuels Us',
+    testimonials: raw.testimonials || [],
+  }
 }
 
 export type CTASectionData = {
