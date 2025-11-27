@@ -11,7 +11,7 @@ import CTABottomSectionWrapper from "@/wrappers/homepage/CTABottomSectionWrapper
 import Container from "@/components/ui/Container";
 /* import TestimonialsSection from "./home/TestimonialsSection"; */
 import BlogSection from "./home/blogSection";
-import { TestimonialsSectionScroll } from "@/components/organism/home/testimonials";
+import TestimonialsSectionScroll from "@/components/organism/home/testimonials";
 
 export default function HomePageClient() {
   const [lang, setLang] = useState<"en" | "am">("en");
@@ -88,7 +88,7 @@ export default function HomePageClient() {
       <Container>
        {/* Testimonials Section */}
               <div id="testimonials">
-                <TestimonialsSectionScroll />
+                <TestimonialsSectionScroll heading={""} subheading={""} testimonials={[]} />
               </div>
         
          <a

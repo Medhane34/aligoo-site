@@ -14,8 +14,13 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600;
 
-export default function AboutPage({ params }: { params: { lang?: 'en' | 'am' } }) {
-  const lang =  params?.lang === 'am' ? 'am' : 'en';
+export default async function AboutPage({
+  params,
+}: {
+  params: Promise<{ lang?: 'en' | 'am' }>
+}) {
+  const { lang } = await params;
+  const locale = lang === 'am' ? 'am' : 'en';
 
   return (
     <>
@@ -33,21 +38,24 @@ export default function AboutPage({ params }: { params: { lang?: 'en' | 'am' } }
 
       <Container>
         <div id="intro-section">
-          <AboutIntroWrapper lang={lang} />
+          <AboutIntroWrapper lang={locale} />
         </div>
-      </Container>
-       <Container>
-        <MeaningWrapper lang={lang} />
-      </Container>
-      <Container>
-        <OurWayWrapper lang={lang} />
-      </Container>
-      <Container>
-        <ValuesWrapper lang={lang} />
       </Container>
 
       <Container>
-        <TeamWrapper lang={lang} />
+        <MeaningWrapper lang={locale} />
+      </Container>
+
+      <Container>
+        <OurWayWrapper lang={locale} />
+      </Container>
+
+      <Container>
+        <ValuesWrapper lang={locale} />
+      </Container>
+
+      <Container>
+        <TeamWrapper lang={locale} />
       </Container>
     </>
   );

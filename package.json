@@ -10,6 +10,7 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "@clerk/nextjs": "^6.35.5",
     "@heroicons/react": "^2.2.0",
     "@heroui/accordion": "^2.2.16",
     "@heroui/avatar": "^2.2.15",
@@ -49,6 +50,7 @@
     "@tailwindcss/postcss": "^4.1.11",
     "@vercel/speed-insights": "^1.2.0",
     "clsx": "2.1.1",
+    "firebase": "^12.6.0",
     "framer-motion": "11.13.1",
     "intl-messageformat": "10.7.16",
     "lucide-react": "^0.515.0",

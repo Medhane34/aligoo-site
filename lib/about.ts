@@ -95,7 +95,6 @@ export async function fetchMeaningSection(lang: 'en' | 'am' = 'en'): Promise<Mea
 
 //our way section 
 
-// lib/sanity.ts
 
 export type OurWaySectionData = {
   tabProblem: string

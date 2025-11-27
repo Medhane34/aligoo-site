@@ -1,3 +1,4 @@
+
 import React, { ButtonHTMLAttributes } from 'react';
 
 // --- UTILITY: Class Name Merger ---
@@ -12,10 +13,10 @@ function cn(...classes: (string | undefined)[]): string {
 
 // The primary brand color constant set to the requested hex code.
 // Used for CSS variable injection (GlowOutlineButton) and literal class generation (Standard Button).
-const BRAND_COLOR = '#FF595E'; 
+const BRAND_COLOR = '#FF595E';
 
 // 1. Variant Type: Defines the color/style of the button
-type Variant = 'primary' | 'secondary' | 'ghost' | 'danger'; 
+type Variant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
 // 2. Size Type: Defines the padding/scale of the button
 type Size = 'sm' | 'md' | 'lg';
@@ -25,33 +26,35 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: Variant;
     size?: Size;
     className?: string;
-    loading?: boolean; // Optional: for showing a loading spinner
+    loading?: boolean;
+
+    // Optional: for showing a loading spinner
 }
 
 // 4. Style Maps: Centralized Tailwind classes for easy management
-const baseClasses = 
+const baseClasses =
     // HeroUI Standard Base Styles
     "inline-flex items-center justify-center font-medium rounded-full focus:outline-none focus:ring-4 transition-all duration-200 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed relative whitespace-nowrap";
 
 const variantClasses: Record<Variant, string> = {
     // --- PRIMARY (Brand Gradient Solid) ---
     // Using literal hex codes for Tailwind compilation
-    primary: 
-        `bg-gradient-to-r from-[#FF595E] to-[#FF595E]/80 ` + 
-        `text-white shadow-lg shadow-[#FF595E]/25 ` + 
+    primary:
+        `bg-gradient-to-r from-[#FF595E] to-[#FF595E]/80 ` +
+        `text-white shadow-lg shadow-[#FF595E]/25 ` +
         `hover:shadow-[#FF595E]/40 focus:ring-[#FF595E]/40
          `,
-    
+
     // --- SECONDARY (Outline/White Tint) ---
-    secondary: 
+    secondary:
         "bg-white/10 text-white border border-white/20 hover:bg-white/20 " +
         "focus:ring-white/20 shadow-none",
-    
+
     // Ghost Button: Fully transparent
-    ghost: 
+    ghost:
         "bg-transparent text-gray-600 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 " +
         "focus:ring-gray-300 shadow-none border-none",
-    
+
     // Danger Button: Solid red color for destructive actions
     danger: "bg-red-600 text-white hover:bg-red-700 focus:ring-red-300 shadow-md",
 };
@@ -79,7 +82,7 @@ export const Button: React.FC<ButtonProps> = ({
     disabled,
     ...rest
 }) => {
-    
+
     // Combine base styles, variant styles, size styles, and custom className overrides
     const classes = cn(
         baseClasses,
@@ -91,13 +94,13 @@ export const Button: React.FC<ButtonProps> = ({
     // Determine content to display
     const buttonContent = loading ? (
         // For the loader, we use currentColor so it adapts to the text color of the button
-        <svg 
+        <svg
             className={cn(
-                "animate-spin h-5 w-5", 
+                "animate-spin h-5 w-5",
                 variant !== 'ghost' ? "text-white" : undefined // Ensure spinner is white on colored buttons
-            )} 
-            xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
+            )}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
             viewBox="0 0 24 24"
         >
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -141,8 +144,8 @@ export const GlowOutlineButton: React.FC<OutlineButtonProps> = ({
     // We reuse the size classes here for padding consistency
     const buttonSizeClasses = cn(
         size === 'sm' ? "px-4 py-2 text-sm" :
-        size === 'md' ? "px-6 py-3 text-base" :
-        size === 'lg' ? "px-8 py-4 text-lg" : ""
+            size === 'md' ? "px-6 py-3 text-base" :
+                size === 'lg' ? "px-8 py-4 text-lg" : ""
     );
 
     // The classes defining the unique visual style and hover effect
@@ -167,15 +170,15 @@ export const GlowOutlineButton: React.FC<OutlineButtonProps> = ({
         >
             {/* Top Glow Divider: Uses hardcoded hex for guaranteed Tailwind class generation */}
             <div className={`absolute inset-x-0 -top-px mx-auto h-px w-3/4 bg-gradient-to-r from-transparent via-[#FF595E]/40 to-transparent`}></div>
-            
+
             {/* Bottom Glow Divider: Uses hardcoded hex for guaranteed Tailwind class generation */}
             <div className={`absolute inset-x-0 -bottom-px mx-auto h-px w-3/4 bg-gradient-to-r from-transparent via-[#FF595E]/40 to-transparent`}></div>
-            
+
             {/* Icon Slot - ensures the icon itself uses the brand color for color consistency */}
             {icon && React.cloneElement(icon as React.ReactElement, {
                 className: cn((icon as React.ReactElement).props.className, `text-[${BRAND_COLOR}]`)
             })}
-            
+
             {/* Content */}
             {children}
         </button>

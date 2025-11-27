@@ -22,6 +22,14 @@ import Script from "next/script";
 import { LanguageProvider } from "@/components/LanguageContext";
 import { Navbar } from "@/components/ui/navbar-copy";
 import MouseMoveEffect from "@/components/atoms/mouse-move-effect";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignUpButton,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from '@clerk/nextjs'
 
 export const metadata: Metadata = {
   icons: {
@@ -42,44 +50,46 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en" className="root">
-      <head>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-RRB6DKZPQ9"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
+    <ClerkProvider>
+      <html suppressHydrationWarning lang="en" className="root">
+        <head>
+          {/* Google Analytics */}
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-RRB6DKZPQ9"
+            strategy="afterInteractive"
+          />
+          <Script id="gtag-init" strategy="afterInteractive">
+            {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-RRB6DKZPQ9');
           `}
-        </Script>
-      </head>
+          </Script>
+        </head>
 
-      <body
-        className={clsx(
-          "min-h-screen bg-background font-sans antialiased m-0",
-          fontSans.variable,
-        )}
-      >
-        <Providers >
-          
-          <div className="relative flex flex-col h-screen">
-            <Navbar/>
-            <LanguageProvider> 
-            <main className="pt-16 grow">
-               <MouseMoveEffect />
-              {children}
-              <SpeedInsights />
-            </main>
-            </LanguageProvider>
-            <Footer />
-          </div>
-        </Providers>
-      </body>
-    </html>
+        <body
+          className={clsx(
+            "min-h-screen bg-background font-sans antialiased m-0",
+            fontSans.variable,
+          )}
+        >
+          <Providers >
+
+            <div className="relative flex flex-col h-screen">
+              <Navbar />
+              <LanguageProvider>
+                <main className="pt-16 grow">
+                  <MouseMoveEffect />
+                  {children}
+                  <SpeedInsights />
+                </main>
+              </LanguageProvider>
+              <Footer />
+            </div>
+          </Providers>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
