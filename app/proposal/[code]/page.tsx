@@ -7,6 +7,8 @@ import PackagesWrapper from '@/wrappers/proposal/PackagesWrapper'
 import TimelineWrapper from '@/wrappers/proposal/TimelineWrapper'
 import { HeroData } from '@/types/ProposalType'
 import EmailUnlockForm from '@/components/auth/EmailUnlockForm'
+import ComparisonTable from '@/components/proposal/comparison/ComparisonTable'
+import PricingTableWrapper from '@/wrappers/proposal/PricingTableWrapper'
 
 export default async function ProposalPage({
   params,
@@ -34,14 +36,25 @@ export default async function ProposalPage({
   return (
     <main className="min-h-screen bg-gray-100">
       <HeroWrapper hero={proposal.template.hero as HeroData} clientName={proposal.clientName} />
-      <PackagesWrapper
+      {/* <PackagesWrapper
         packages={proposal.template.basePackages}
         addOns={proposal.template.addOns}
         currentSelection={proposal.currentSelection}
         proposalId={proposal._id}
         uniqueCode={proposal.uniqueCode}
-      />
+      /> */}
       <TimelineWrapper timeline={proposal.template.timeline} />
+      <PricingTableWrapper
+        comparisonTable={proposal.comparisonTable}
+        packagePricing={proposal.packagePricing}
+        currentSelection={proposal.currentSelection}
+        proposalId={proposal._id}
+        addOns={proposal.template.addOns}
+        uniqueCode={proposal.uniqueCode}
+      />
+
+
+
     </main>
   )
 }

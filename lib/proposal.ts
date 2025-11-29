@@ -1,81 +1,8 @@
 // lib/proposal.ts
 import { client } from '@/src/sanity/client'
 import { PROPOSAL_BY_CODE_QUERY } from '@/sanity/queries/proposal'
+import { ContractReadyProposal, ProposalData } from '@/types/ProposalType'
 
-export interface TimelineItem {
-  week: string
-  title: string
-  description?: string
-}
-
-export interface TimelineSection {
-  enabled: boolean
-  sectionTitle?: string
-  items: TimelineItem[]
-}
-
-export interface BasePackage {
-  name: string
-  price: number
-  isDefault: boolean
-  popular: boolean
-  features: string[]
-}
-
-export interface AddOn {
-  name: string
-  price: number
-  category?: string
-  preselected: boolean
-  description?: string
-}
-
-export type ProposalData = {
-  clientEmail: string | undefined
-  _id: string
-  clientName: string
-  status: 'draft' | 'sent' | 'viewed' | 'accepted' | 'expired' | 'payment_pending' | 'paid'
-  expiresAt: string
-  uniqueCode: string,
-  paymentProof: {
-    _id: string
-    asset: {
-      _id: string
-      url: string
-    }
-    caption?: string
-  } | null,
-  currentSelection: {
-    selectedPackage?: string
-    selectedAddOns?: string[]
-    totalPrice?: number
-    depositPercentage?: number
-    paymentStatus?: 'none' | 'pending' | 'paid' | 'failed'
-    paymentConfirmedByClientAt?: string
-    paymentConfirmedAt?: string
-  } | null
-  template: {
-    _id: string
-    title: string
-    hero: {
-      title: string
-      subtitle?: string
-      backgroundImage?: { asset?: { url: string } }
-    }
-    basePackages: BasePackage[]
-    addOns: AddOn[]
-    timeline: TimelineSection | null
-    testimonials: any
-    faq: any
-    extraSections: any[]
-  }
-  salesperson: {
-    name: string
-    email: string
-
-    telegramChatId?: string
-  } | null
-}
 
 export async function getProposalByCode(code: string): Promise<ProposalData | null> {
   try {
@@ -88,6 +15,91 @@ export async function getProposalByCode(code: string): Promise<ProposalData | nu
     return proposal || null
   } catch (error) {
     console.error('Fetch error:', error)
+    return null
+  }
+}
+
+
+// Client-side action to update selected package in Sanity (use in client components)
+export async function updateProposalSelection(
+  proposalId: string,
+  selectedPackage: string,
+  selectedAddOns?: string[] // Added optional param
+) {
+  try {
+    const patchData: any = {
+      'currentSelection.selectedPackage': selectedPackage,
+    };
+
+    if (selectedAddOns !== undefined) {
+      patchData['currentSelection.selectedAddOns'] = selectedAddOns;
+    }
+
+
+    await client
+      .patch(proposalId)
+      .set(patchData)
+      .commit();
+    console.log('Selection saved:', { selectedPackage, selectedAddOns });
+  } catch (error) {
+    console.error('Failed to save selection:', error);
+  }
+}
+
+// Update proposal with total price and status (for "Proceed to Contract")
+export async function updateProposalWithTotal(
+  proposalId: string,
+  selectedPackage: string,
+  selectedAddOns: string[],
+  totalPrice: number,
+  status: string = 'viewed'
+) {
+  try {
+    console.log('📊 Updating Sanity with:', {
+      selectedPackage,
+      selectedAddOns,
+      totalPrice,
+      status
+    });
+
+    await client
+      .patch(proposalId)
+      .set({
+        'currentSelection.selectedPackage': selectedPackage,
+        'currentSelection.selectedAddOns': selectedAddOns,
+        'currentSelection.totalPrice': totalPrice,
+        'status': status,
+      })
+      .commit();
+
+    console.log('✅ Proposal updated successfully!');
+    return { success: true };
+  } catch (error) {
+    console.error('❌ Failed to update proposal:', error);
+    return { success: false, error };
+  }
+}
+
+export async function getContractByCode(code: string): Promise<ContractReadyProposal | null> {
+  try {
+    const proposal = await client.fetch<ContractReadyProposal>(
+      PROPOSAL_BY_CODE_QUERY,
+      { code },
+      { next: { revalidate: 30 } }
+    )
+
+    console.log('Contract Page Loaded:', {
+      code,
+      clientName: proposal?.clientName,
+      status: proposal?.status,
+      hasContractTemplate: !!proposal?.contractTemplate,
+      hasClientSignature: !!proposal?.clientSignature,
+      hasSignedPdf: !!proposal?.signedContractPdf,
+    })
+
+    return proposal || null
+  } catch (error) {
+    console.error('getContractByCode failed:', error)
     return null
   }
 }

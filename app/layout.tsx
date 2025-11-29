@@ -9,7 +9,8 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 /* import { Navbar } from "@/components/navbar"; */
-import Footer from "@/components/Footer"; // Corrected import path
+// import Footer from "@/components/Footer"; // Moved to LayoutUI
+import LayoutUI from "@/components/LayoutUI";
 
 /* import { VisualEditing } from "next-sanity"; */
 import { draftMode } from "next/headers";
@@ -20,8 +21,8 @@ import { SanityLive } from "@/src/sanity/live";
 import Script from "next/script";
 
 import { LanguageProvider } from "@/components/LanguageContext";
-import { Navbar } from "@/components/ui/navbar-copy";
-import MouseMoveEffect from "@/components/atoms/mouse-move-effect";
+// import { Navbar } from "@/components/ui/navbar-copy"; // Moved to LayoutUI
+// import MouseMoveEffect from "@/components/atoms/mouse-move-effect"; // Moved to LayoutUI
 import {
   ClerkProvider,
   SignInButton,
@@ -75,18 +76,9 @@ export default async function RootLayout({
           )}
         >
           <Providers >
-
-            <div className="relative flex flex-col h-screen">
-              <Navbar />
-              <LanguageProvider>
-                <main className="pt-16 grow">
-                  <MouseMoveEffect />
-                  {children}
-                  <SpeedInsights />
-                </main>
-              </LanguageProvider>
-              <Footer />
-            </div>
+            <LayoutUI>
+              {children}
+            </LayoutUI>
           </Providers>
         </body>
       </html>

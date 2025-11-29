@@ -13,18 +13,27 @@ export const PROPOSAL_BY_CODE_QUERY = groq`
     currentSelection,
     paymentProof,
     viewLogs,
+    recommendedPackage,
+
+    // COMPARISON TABLE (with per-proposal override)
+    "comparisonTable": {
+      ...template->.comparisonTable,
+      "recommendedPackage": coalesce(
+        recommendedPackage,
+        template->.comparisonTable.recommendedPackage
+      )
+    },
+    
+    "packagePricing": template->.packagePricing,
+
+    // PROPOSAL TEMPLATE DATA
     "template": template-> {
       _id,
       title,
       hero {
         title,
         subtitle,
-        backgroundImage {
-          asset-> {
-            _id,
-            url
-          }
-        }
+        "backgroundImage": backgroundImage.asset->url
       },
       basePackages[] {
         name,
@@ -48,15 +57,41 @@ export const PROPOSAL_BY_CODE_QUERY = groq`
           title,
           description
         }
-      },
-      testimonials,
-      faq,
-      extraSections
+      }
     },
+
+    // SALESPERSON
     "salesperson": salesperson-> {
       name,
       email,
       telegramChatId
-    }
+    },
+
+    // ─────────────────────── CONTRACT DATA ───────────────────────
+    "contractTemplate": contractTemplate-> {
+      _id,
+      title,
+      header,
+      sections[] {
+        heading,
+        body,
+        bullets
+      },
+      priceSection,
+      legalSections[] {
+        heading,
+        body
+      },
+      agencySignature {
+        companyName,
+        signerName,
+        "signatureImage": signatureImage.asset->url
+      }
+    },
+
+    // SIGNATURE & PDF
+    clientSignature,
+    "signedContractPdf": signedContractPdf.asset->url,
+    contractSignedAt
   }
 `

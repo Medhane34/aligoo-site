@@ -146,32 +146,6 @@ export default function Calculator({
           ))}
         </div>
 
-        {/* Add-Ons */}
-        <motion.h3
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          className="text-3xl font-bold text-white text-center mb-10"
-        >
-          Add Powerful Features
-        </motion.h3>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-          {addOns.map((addon, i) => (
-            <motion.div
-              key={addon.name}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.08 }}
-            >
-              <AddonCard
-                addon={addon}
-                selected={selectedAddOns.includes(addon.name)}
-                onToggle={() => toggleAddOn(addon.name)}
-              />
-            </motion.div>
-          ))}
-        </div>
-
         {/* Sticky Confirm Bar */}
         <motion.div
           initial={{ y: 100 }}

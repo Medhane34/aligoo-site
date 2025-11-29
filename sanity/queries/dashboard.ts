@@ -37,7 +37,10 @@ export function getProposalStatus(proposal: DashboardProposal): { text: Proposal
         return { text: 'Accepted', color: 'bg-green-500' }
     if (proposal.currentSelection && proposal.currentSelection?.status === 'Rejected')
         return { text: 'Rejected', color: 'bg-red-500' }
-
+    if (proposal.currentSelection && proposal.currentSelection?.status === 'Payment_pending')
+        return { text: 'Payment_pending', color: 'bg-yellow-500' }
+    if (proposal.currentSelection && proposal.currentSelection?.status === 'Paid')
+        return { text: 'Paid', color: 'bg-green-500' }
     return { text: 'Opened', color: 'bg-blue-500' }
 }
 

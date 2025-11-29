@@ -1,3 +1,4 @@
+
 // src/types/dashboard.ts
 export type ProposalStatus =
     | 'Not Opened'
@@ -5,6 +6,8 @@ export type ProposalStatus =
     | 'Accepted'
     | 'Rejected'
     | 'Expired'
+    | 'Payment_pending'
+    | 'Paid'
 
 export interface ViewLog {
     timestamp: string
