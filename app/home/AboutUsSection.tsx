@@ -7,6 +7,8 @@ import { SectionHeading, AccentText } from "@/components/ui/typography";
 import { textVariants, textContainerVariants, ButtonVariants, imageVariants } from "@/lib/motions";
 import { MyButton } from "@/components/custom/extendVariants";
 import { PrimaryButton } from "@/components/atoms/button";
+import ButtonAtom from "@/components/atoms/ButtonAtom";
+import { ArrowRight, Gift } from "lucide-react";
 
 export interface AboutUsSectionProps {
   sectionHeading: string;
@@ -59,6 +61,11 @@ export default function AboutUsSection({
           whileInView="visible"
         >
           <motion.div variants={textVariants}>
+            <HeadingAtom
+              variant="split"
+              title="Trusted by"
+              highlight="Industry Leaders"
+            />
             <SectionHeading className="text-heading uppercase">
               {sectionHeading}
             </SectionHeading>
@@ -74,9 +81,14 @@ export default function AboutUsSection({
           ))}
           <motion.div className="pt-6" variants={ButtonVariants}>
             <Link href={buttonUrl}>
-                <PrimaryButton size="md">{buttonText}</PrimaryButton>
-
-           </Link>
+            </Link>
+            <ButtonAtom
+              variant="primary"
+              size="md"
+              shimmer
+            >
+              {buttonText}
+            </ButtonAtom>
           </motion.div>
         </motion.div>
       </div>
