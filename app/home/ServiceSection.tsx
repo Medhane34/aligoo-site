@@ -6,6 +6,8 @@ import Image from "next/image"; // Added for iconUrl
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { AccentText, SectionHeading } from "@/components/ui/typography";
+import BadgeAtom from "@/components/atoms/BadgeAtom";
+import { Clock, Sparkles, Star } from "lucide-react";
 
 export interface Service {
   title: string;
@@ -56,10 +58,31 @@ export default function ServiceSection({
   return (
     <div className="py-16 overflow-hidden text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
       <div className="relative container mx-auto px-4">
-   
-<div className="bg-gradient-to-r from-[#FF595E] to-[#FF595E]/80 absolute -top-10 left-1/2 h-16 w-44 -translate-x-1/2 rounded-full opacity-40 blur-3xl select-none"></div>
-<div className="via-primary/50 absolute top-0 left-1/2 h-px w-3/5 -translate-x-1/2 bg-gradient-to-r from-transparent to-transparent transition-all ease-in-out"></div>
+
+        <div className="bg-gradient-to-r from-[#FF595E] to-[#FF595E]/80 absolute -top-10 left-1/2 h-16 w-44 -translate-x-1/2 rounded-full opacity-40 blur-3xl select-none"></div>
+        <div className="via-primary/50 absolute top-0 left-1/2 h-px w-3/5 -translate-x-1/2 bg-gradient-to-r from-transparent to-transparent transition-all ease-in-out"></div>
         <motion.div className="text-center mb-12 space-y-2 xs:space-y-4" variants={headingVariants}>
+          <BadgeAtom
+            variant="outline"
+            icon={<Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />}
+            className="text-center"
+          >
+            Client Success Stories
+          </BadgeAtom>
+          <BadgeAtom
+            variant="filled"
+            color="red"
+            icon={<Clock className="w-4 h-4" />}
+          >
+            Estimated Duration: 28 Days
+          </BadgeAtom>
+          <BadgeAtom
+            variant="filled"
+            color="gradient"
+            icon={<Sparkles className="w-4 h-4" />}
+          >
+            Premium Feature
+          </BadgeAtom>
           <SectionHeading className="uppercase">
             {sectionHeading}
           </SectionHeading>
@@ -106,7 +129,7 @@ export default function ServiceSection({
                         {service.title}
                       </span>
                     }
-                    /* variants={accordionVariants} */
+                  /* variants={accordionVariants} */
                   >
                     <div className="text-muted-foreground">
                       {service.description}

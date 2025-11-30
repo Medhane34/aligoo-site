@@ -9,7 +9,7 @@ const heading = tv({
         variant: {
             default: 'text-white',
             split: 'text-white', // Base text is white, highlight is handled in component
-            gradient: 'bg-gradient-to-r from-[#FF595E] via-orange-500 to-yellow-500 bg-clip-text text-transparent',
+            gradient: 'bg-gradient-to-r from-brand-primary via-orange-500 to-yellow-500 bg-clip-text text-transparent',
         },
         size: {
             sm: 'text-2xl md:text-3xl',

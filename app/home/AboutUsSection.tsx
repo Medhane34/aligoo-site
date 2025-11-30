@@ -9,6 +9,8 @@ import { MyButton } from "@/components/custom/extendVariants";
 import { PrimaryButton } from "@/components/atoms/button";
 import ButtonAtom from "@/components/atoms/ButtonAtom";
 import { ArrowRight, Gift } from "lucide-react";
+import HeadingAtom from "@/components/atoms/HeadingAtom";
+import CardMolecule from "@/components/molecules/CardMolecule";
 
 export interface AboutUsSectionProps {
   sectionHeading: string;
@@ -60,18 +62,21 @@ export default function AboutUsSection({
           viewport={{ once: true }}
           whileInView="visible"
         >
+
           <motion.div variants={textVariants}>
             <HeadingAtom
               variant="split"
-              title="Trusted by"
-              highlight="Industry Leaders"
-            />
-            <SectionHeading className="text-heading uppercase">
-              {sectionHeading}
-            </SectionHeading>
+
+              highlight={sectionHeading} title={""} className="uppercase text-heading" />
           </motion.div>
           <motion.div className="text-heading pb-2 xs:pb-1 sm:pb-4" variants={textVariants}>
             <AccentText className="normal-case">{accentText}</AccentText>
+            <HeadingAtom
+              variant="gradient"
+              title={accentText}
+              size="sm"
+              className=""
+            />
           </motion.div>
           {paragraphs.map((p, i) => (
             <motion.div key={i} variants={textVariants}>
