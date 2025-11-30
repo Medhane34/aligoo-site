@@ -1,3 +1,4 @@
+
 "use client";
 import { useEffect, useState } from "react";
 import HeroSectionWrapper from "@/wrappers/homepage/HeroSectionWrapper";
@@ -12,44 +13,45 @@ import Container from "@/components/ui/Container";
 /* import TestimonialsSection from "./home/TestimonialsSection"; */
 import BlogSection from "./home/blogSection";
 import TestimonialsSectionScroll from "@/components/organism/home/testimonials";
+import ChatSupportWidget from "@/components/molecules/ChatSupport";
 
 export default function HomePageClient() {
   const [lang, setLang] = useState<"en" | "am">("en");
-     const [isScrolled, setIsScrolled] = useState(false)
-   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
- 
-   useEffect(() => {
-     const root = window.document.documentElement
-     root.classList.remove("light", "system")
-     root.classList.add("dark")
-   }, [])
- 
-   useEffect(() => {
-     const handleScroll = () => {
-       setIsScrolled(window.scrollY > 100)
-     }
- 
-     window.addEventListener("scroll", handleScroll)
-     return () => window.removeEventListener("scroll", handleScroll)
-   }, [])
- 
-   const handleMobileNavClick = (elementId: string) => {
-     setIsMobileMenuOpen(false)
-     setTimeout(() => {
-       const element = document.getElementById(elementId)
-       if (element) {
-         const headerOffset = 120 // Account for sticky header height + margin
-         const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
-         const offsetPosition = elementPosition - headerOffset
- 
-         window.scrollTo({
-           top: offsetPosition,
-           behavior: "smooth",
-         })
-       }
-     }, 100)
-   }
- 
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const root = window.document.documentElement
+    root.classList.remove("light", "system")
+    root.classList.add("dark")
+  }, [])
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
+
+  const handleMobileNavClick = (elementId: string) => {
+    setIsMobileMenuOpen(false)
+    setTimeout(() => {
+      const element = document.getElementById(elementId)
+      if (element) {
+        const headerOffset = 120 // Account for sticky header height + margin
+        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset
+        const offsetPosition = elementPosition - headerOffset
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth",
+        })
+      }
+    }, 100)
+  }
+
   return (
     <>
       <div className="flex justify-end p-4">
@@ -86,16 +88,16 @@ export default function HomePageClient() {
         <WhyUsSectionWrapper lang={"en"} />
       </Container>
       <Container>
-       {/* Testimonials Section */}
-              <div id="testimonials">
-                <TestimonialsSectionScroll heading={""} subheading={""} testimonials={[]} />
-              </div>
-        
-         <a
-      className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-      
-    >
-    </a>
+        {/* Testimonials Section */}
+        <div id="testimonials">
+          <TestimonialsSectionScroll heading={""} subheading={""} testimonials={[]} />
+        </div>
+
+        <a
+          className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+
+        >
+        </a>
       </Container>
       <Container>
         <BlogSection lang={"en"} />
@@ -103,6 +105,9 @@ export default function HomePageClient() {
       <Container>
         <CTABottomSectionWrapper />
       </Container>
+
+      <ChatSupportWidget />
+
     </>
   );
 }

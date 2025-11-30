@@ -31,6 +31,7 @@ import {
   SignedOut,
   UserButton,
 } from '@clerk/nextjs'
+import ChatSupportWidget from "@/components/molecules/ChatSupport";
 
 export const metadata: Metadata = {
   icons: {
@@ -79,6 +80,7 @@ export default async function RootLayout({
             <LayoutUI>
               {children}
             </LayoutUI>
+            <ChatSupportWidget />
           </Providers>
         </body>
       </html>

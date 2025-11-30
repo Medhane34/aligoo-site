@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { Check, X, ChevronDown } from 'lucide-react';
 import RecommendedBadge from './RecommendedBadge';
 import InfoTooltip from '@/components/ui/InfoTooltip';
-import type { AddOn } from '@/lib/proposal';
+import type { AddOn } from '@/types/ProposalType';
 import AddonCard from '../AddonCard';
 import StickyPriceFooter from './StickyPriceFooter';
 
@@ -71,6 +71,7 @@ export default function ComparisonTable({
     const [mobileViewPackage, setMobileViewPackage] = useState<PackageKey>(selectedPackage);
     const [hoveredPackage, setHoveredPackage] = useState<PackageKey | null>(null);
     const addOnsRef = useRef<HTMLDivElement>(null);
+    const pricingTableRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         setMobileViewPackage(selectedPackage);
@@ -139,7 +140,7 @@ export default function ComparisonTable({
     };
 
     return (
-        <div className="w-full max-w-7xl mx-auto my-20 px-4">
+        <div className="w-full max-w-7xl mx-auto my-20 px-4" ref={pricingTableRef}>
             {/* Mobile Dropdown */}
             <div className="md:hidden mb-10 relative">
                 <select
@@ -155,13 +156,22 @@ export default function ComparisonTable({
             </div>
 
             {/* TABLE CONTAINER */}
-            <div className="rounded-3xl border border-white/10 shadow-2xl bg-black/50 backdrop-blur-xl mb-20">
+            <div className="relative mb-20">
+                {/* Background & Glow Container (Separate to allow sticky headers) */}
+                <div className="absolute inset-0 rounded-3xl border border-white/10 shadow-2xl bg-neutral-950/80 backdrop-blur-xl -z-10">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-3xl bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
+                </div>
+
                 {/* DESKTOP FULL TABLE */}
-                <div className="hidden md:block">
+                <div className="hidden md:block rounded-3xl">
                     <table className="w-full border-collapse">
                         <thead>
                             <tr>
-                                <th className="text-left p-4 text-2xl font-black text-white bg-gray-900 rounded-tl-3xl sticky top-0 z-20 shadow-lg">Features</th>
+                                {/* Empty Top-Left Corner */}
+                                <th className="text-left p-4 text-2xl font-black text-transparent bg-neutral-950/90 backdrop-blur-xl sticky top-0 z-40 rounded-tl-3xl">
+                                    Features
+                                </th>
+
                                 {(['basic', 'pro', 'enterprise'] as PackageKey[]).map((pkg) => {
                                     const isRecommended = comparisonTable.recommendedPackage === pkg;
                                     return (
@@ -169,16 +179,21 @@ export default function ComparisonTable({
                                             key={pkg}
                                             onMouseEnter={() => setHoveredPackage(pkg)}
                                             onMouseLeave={() => setHoveredPackage(null)}
-                                            className={`p - 4 text - center relative sticky top - 0 z - 20 shadow - lg transition - all duration - 200 
-                                                ${pkg === 'basic' ? 'bg-gray-900' : pkg === 'pro' ? 'bg-gray-950' : 'bg-black rounded-tr-3xl'} 
+                                            className={`p-6 text-center sticky top-0 z-40 transition-all duration-200 backdrop-blur-xl
+                                                ${pkg === 'basic' ? 'bg-neutral-900/90' : pkg === 'pro' ? 'bg-neutral-950/90' : 'bg-black/90'}
+                                                ${pkg === 'enterprise' ? 'rounded-tr-3xl' : ''}
                                                 ${hoveredPackage === pkg ? 'brightness-125' : ''}
-                                                ${isRecommended ? 'border-t-2 border-l-2 border-r-2 border-yellow-500/50 shadow-[0_-10px_30px_-10px_rgba(234,179,8,0.2)]' : ''}
-`}
+                                                ${isRecommended ? 'border-t-2 border-yellow-500/50' : ''}
+                                            `}
                                         >
                                             <div className="text-2xl font-black text-white mb-4 z-10 relative">
                                                 {packageLabels[pkg]}
                                             </div>
-                                            {isRecommended && <RecommendedBadge />}
+                                            {isRecommended && (
+                                                <div className="absolute -top-4 left-0 right-0 flex justify-center z-50">
+                                                    <RecommendedBadge />
+                                                </div>
+                                            )}
                                         </th>
                                     );
                                 })}
@@ -199,7 +214,7 @@ export default function ComparisonTable({
                                 {group.items.map((item, index) => (
                                     <tr
                                         key={item._key}
-                                        className={`border - t border - white / 10 hover: bg - white / 5 transition ${index % 2 === 0 ? 'bg-white/[0.02]' : 'bg-transparent'
+                                        className={`border-t border-white/10 hover:bg-white/5 transition ${index % 2 === 0 ? 'bg-white/[0.02]' : 'bg-transparent'
                                             } `}
                                     >
                                         <td className="p-6 text-lg text-gray-300 font-medium pl-12">
@@ -212,7 +227,7 @@ export default function ComparisonTable({
                                                     key={pkg}
                                                     onMouseEnter={() => setHoveredPackage(pkg)}
                                                     onMouseLeave={() => setHoveredPackage(null)}
-                                                    className={`p - 6 text - center transition - colors duration - 200 
+                                                    className={`p-6 text-center transition-colors duration-200 
                                                         ${hoveredPackage === pkg ? 'bg-white/5' : ''}
                                                         ${isRecommended ? 'border-l-2 border-r-2 border-yellow-500/30 bg-yellow-500/[0.02]' : ''}
 `}
@@ -228,17 +243,19 @@ export default function ComparisonTable({
                         {/* PRICE ROW - Interactive Buttons */}
                         <tfoot>
                             <tr>
-                                <td className="p-8 text-2xl font-black text-white text-center bg-white/10 backdrop-blur-xl rounded-bl-3xl">Price</td>
+                                {/* Empty Bottom-Left Corner */}
+                                <td className="p-8 text-transparent bg-transparent">Price</td>
+
                                 {(['basic', 'pro', 'enterprise'] as PackageKey[]).map((pkg) => {
                                     const isRecommended = comparisonTable.recommendedPackage === pkg;
                                     const isSelected = selectedPackage === pkg;
                                     return (
                                         <td
                                             key={pkg}
-                                            className={`p-4 text-center transition-all duration-300 ${pkg === 'basic' ? 'bg-orange-600' :
-                                                pkg === 'pro' ? 'bg-orange-500' :
-                                                    'bg-yellow-600 rounded-br-3xl'
-                                                } ${isRecommended ? 'border-b-2 border-l-2 border-r-2 border-yellow-500/50 shadow-[0_10px_30px_-10px_rgba(234,179,8,0.2)]' : ''}`}
+                                            className={`p-4 text-center transition-all duration-300 ${pkg === 'basic' ? 'bg-orange-600/10' :
+                                                pkg === 'pro' ? 'bg-orange-500/10' :
+                                                    'bg-yellow-600/10'
+                                                } ${isRecommended ? 'border-b-2 border-l-2 border-r-2 border-yellow-500/50' : ''}`}
                                         >
                                             <button
                                                 onClick={() => handlePackageSelect(pkg)}
@@ -343,6 +360,8 @@ export default function ComparisonTable({
                 isPackageSelected={!!selectedPackage}
                 onProceed={onProceedToContract}
                 isProcessing={isProcessing}
+                selectedAddOns={selectedAddOnsWithPrices}
+                pricingTableRef={pricingTableRef}
             />
         </div>
     );

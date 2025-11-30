@@ -4,7 +4,7 @@
 import { useState, useEffect } from 'react';
 import ComparisonTable from '@/components/proposal/comparison/ComparisonTable';
 import { updateProposalSelection, updateProposalWithTotal } from '@/lib/proposal';
-import type { AddOn } from '@/lib/proposal';
+import type { AddOn } from '@/types/ProposalType';
 
 type PackageKey = 'basic' | 'pro' | 'enterprise';
 

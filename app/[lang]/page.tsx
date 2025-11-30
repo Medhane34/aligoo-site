@@ -50,44 +50,46 @@ export default async function Home({
   return (
     <>
       <section className="bg-background-light dark:bg-background-dark">
-    
+
         <HomeHeroSectionWrapper lang={lang} />
         <Container >
           <AboutUsSectionWrapper lang={lang} />
         </Container>
-        <StatsSectionWrapper lang={lang}/>
+        <StatsSectionWrapper lang={lang} />
         <Container>
           <div className="div" id="service-section">
-            <ServiceSectionWrapper lang={lang}/>
+            <ServiceSectionWrapper lang={lang} />
           </div>
         </Container>
         <Container>
           <HomeCaseStudyWrapper />
         </Container>
         <Container>
-          <ProcessSectionWrapper lang={lang}/>
+          <ProcessSectionWrapper lang={lang} />
         </Container>
 
         <Container>
-          <WhyUsSectionWrapper lang={lang}/>
+          <WhyUsSectionWrapper lang={lang} />
         </Container>
         <Container>
-           {/* Testimonials Section */}
-                        <div id="testimonials">
-<TestimonialsWrapper lang={lang} />                        </div>
-                  
-                   <a
-                className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
-                >
-              </a>
+          {/* Testimonials Section */}
+          <div id="testimonials">
+            <TestimonialsWrapper lang={lang} />                        </div>
+
+          <a
+            className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          >
+          </a>
         </Container>
         <Container>
-          <BlogSection lang={lang as Lang}/>
+          <BlogSection lang={lang as Lang} />
         </Container>
 
         <Container>
           <CTABottomSectionWrapper />
         </Container>
+
+
       </section>
     </>
   );

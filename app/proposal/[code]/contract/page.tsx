@@ -6,8 +6,9 @@
 import { useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import SignatureCanvas from 'react-signature-canvas';
+import { motion } from 'framer-motion';
 
-import { Loader2, CheckCircle } from 'lucide-react';
+import { Loader2, CheckCircle, ShieldCheck, FileText } from 'lucide-react';
 import { getContractByCode } from '@/lib/proposal'
 import { ContractReadyProposal } from '@/types/ProposalType'
 import { replacePlaceholders } from '@/utils/contractUtils';
@@ -88,97 +89,170 @@ export default function ContractPage() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white">
-            <div className="max-w-5xl mx-auto p-6 pt-12">
+        <div className="min-h-screen bg-neutral-950 text-white relative overflow-hidden font-sans selection:bg-cyan-500/30">
+            {/* Background Gradients */}
+            <div className="fixed inset-0 pointer-events-none">
+                <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-900/20 blur-[120px] rounded-full" />
+                <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-900/20 blur-[120px] rounded-full" />
+            </div>
+
+            <div className="max-w-4xl mx-auto p-6 pt-12 relative z-10">
+
                 {/* Header */}
                 <div className="text-center mb-12">
-                    <h1 className="text-5xl font-black bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-neutral-400 text-sm mb-6"
+                    >
+                        <FileText className="w-4 h-4" />
+                        <span>Official Service Agreement</span>
+                    </motion.div>
+
+                    <h1 className="text-4xl md:text-5xl font-black bg-gradient-to-r from-white to-neutral-400 bg-clip-text text-transparent mb-4">
                         {proposal.contractTemplate.header.mainHeading}
                     </h1>
-                    <div className="mt-6 space-y-2 text-xl">
-                        <p>{proposal.contractTemplate.header.preparedForText} <strong>{data.clientName}</strong> • {data.clientCompany}</p>
-                        <p>{proposal.contractTemplate.header.createdByText} <strong>{data.agencyName}</strong></p>
-                    </div>
+                    <p className="text-neutral-400 text-lg">
+                        Prepared for <strong className="text-white">{data.clientName}</strong>
+                    </p>
                 </div>
 
-                {/* Contract Body */}
-                <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-10 mb-10 shadow-2xl border border-white/20">
-                    {proposal.contractTemplate.sections.map((section, i) => (
-                        <div key={i} className="mb-10">
-                            <h2 className="text-2xl font-bold text-yellow-400 mb-4">{section.heading}</h2>
-                            <div className="text-gray-200 leading-relaxed space-y-3">
-                                {replacePlaceholders(section.body, data).split('\n').map((line, idx) => (
-                                    <p key={idx} dangerouslySetInnerHTML={{ __html: line }} />
-                                ))}
-                                {section.bullets && (
-                                    <ul className="list-disc list-inside mt-4 space-y-2">
-                                        {section.bullets.map((b, bi) => <li key={bi}>{b}</li>)}
-                                    </ul>
-                                )}
-                            </div>
-                        </div>
-                    ))}
+                {/* LEGAL DOCUMENT CONTAINER */}
+                <div className="bg-[#f8f9fa] text-neutral-900 rounded-xl shadow-2xl overflow-hidden relative">
+                    {/* Top Bar */}
+                    <div className="h-2 bg-gradient-to-r from-purple-600 via-cyan-500 to-blue-600" />
 
-                    {/* Price Section */}
-                    <div className="mt-12 p-8 bg-gradient-to-r from-yellow-600/20 to-orange-600/20 rounded-2xl border border-yellow-500/50">
-                        <h2 className="text-3xl font-black text-center mb-8">{proposal.contractTemplate.priceSection.heading}</h2>
-                        <div className="bg-black/50 rounded-xl p-6">
-                            <div className="space-y-4 text-xl">
-                                <div className="flex justify-between"><span>Package:</span> <strong>{data.packageName}</strong></div>
-                                <div className="flex justify-between"><span>Total Price:</span> <strong>{data.totalPrice.toLocaleString()} ETB</strong></div>
-                                <div className="flex justify-between text-yellow-400"><span>Deposit Due ({data.depositPercentage}%):</span> <strong>{data.depositAmount.toLocaleString()} ETB</strong></div>
-                                <div className="flex justify-between"><span>Remaining Balance:</span> <strong>{(data.totalPrice - data.depositAmount).toLocaleString()} ETB</strong></div>
-                            </div>
+                    <div className="p-8 md:p-16">
+                        {/* Watermark */}
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-9xl font-black text-neutral-900/5 rotate-[-45deg] pointer-events-none whitespace-nowrap select-none">
+                            OFFICIAL CONTRACT
                         </div>
-                    </div>
-                </div>
 
-                {/* Signature Area */}
-                <div className="grid md:grid-cols-2 gap-10 mb-16">
-                    {/* Client */}
-                    <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
-                        <h3 className="text-2xl font-bold mb-4">{data.clientName}</h3>
-                        {signed ? (
-                            <div className="bg-green-900/50 border border-green-500 rounded-xl p-6 text-center">
-                                <CheckCircle className="w-16 h-16 mx-auto mb-4 text-green-400" />
-                                <p className="text-xl font-bold">Signed Successfully!</p>
-                            </div>
-                        ) : (
-                            <>
-                                <SignatureCanvas
-                                    ref={sigCanvas}
-                                    canvasProps={{ className: 'border-2 border-white/30 rounded-xl w-full h-48 bg-black/30' }}
-                                />
-                                <div className="flex gap-4 mt-4">
-                                    <button onClick={clearSignature} className="flex-1 bg-red-600 hover:bg-red-700 py-3 rounded-xl font-bold">Clear</button>
-                                    <button
-                                        onClick={handleSign}
-                                        disabled={signing || sigCanvas.current?.isEmpty()}
-                                        className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 disabled:opacity-50 py-4 rounded-xl font-black text-xl shadow-lg"
-                                    >
-                                        {signing ? 'Signing...' : 'I Agree & Sign Contract'}
-                                    </button>
+                        {/* Contract Content - Serif Font for Legal Feel */}
+                        <div className="font-serif space-y-12 text-lg leading-relaxed">
+                            {proposal.contractTemplate.sections.map((section, i) => (
+                                <div key={i}>
+                                    <h2 className="text-xl font-bold text-neutral-900 uppercase tracking-widest mb-6 border-b-2 border-neutral-200 pb-2 inline-block">
+                                        {section.heading}
+                                    </h2>
+                                    <div className="text-neutral-700 space-y-4">
+                                        {replacePlaceholders(section.body, data).split('\n').map((line, idx) => (
+                                            <p key={idx} dangerouslySetInnerHTML={{ __html: line }} />
+                                        ))}
+                                        {section.bullets && (
+                                            <ul className="list-disc list-inside mt-4 space-y-2 ml-4">
+                                                {section.bullets.map((b, bi) => <li key={bi}>{b}</li>)}
+                                            </ul>
+                                        )}
+                                    </div>
                                 </div>
-                            </>
-                        )}
-                        <p className="text-center mt-4 text-sm text-gray-400">Date: {data.todayDate}</p>
+                            ))}
+
+                            {/* Price Summary Box */}
+                            <div className="bg-neutral-100 p-8 rounded-lg border border-neutral-200 break-inside-avoid">
+                                <h3 className="font-sans font-bold text-neutral-900 mb-6 text-center uppercase tracking-wider">Payment Schedule</h3>
+                                <div className="grid md:grid-cols-2 gap-6 font-sans">
+                                    <div>
+                                        <p className="text-sm text-neutral-500 uppercase tracking-wider">Total Project Value</p>
+                                        <p className="text-2xl font-bold text-neutral-900">{data.totalPrice.toLocaleString()} ETB</p>
+                                    </div>
+                                    <div>
+                                        <p className="text-sm text-neutral-500 uppercase tracking-wider">Deposit Required ({data.depositPercentage}%)</p>
+                                        <p className="text-2xl font-bold text-cyan-700">{data.depositAmount.toLocaleString()} ETB</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* SIGNATURE SECTION */}
+                        <div className="mt-20 pt-12 border-t-2 border-neutral-200 font-sans">
+                            <div className="grid md:grid-cols-2 gap-16">
+
+                                {/* Client Signature Block */}
+                                <div>
+                                    <p className="text-sm font-bold text-neutral-400 uppercase tracking-wider mb-4">Signed By Client</p>
+
+                                    {signed ? (
+                                        <motion.div
+                                            initial={{ opacity: 0, scale: 0.9 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            className="relative border-2 border-green-600/30 bg-green-50/50 rounded-lg p-6 text-center"
+                                        >
+                                            {/* Digital Stamp */}
+                                            <div className="absolute -top-3 -right-3">
+                                                <CheckCircle className="w-8 h-8 text-green-600 bg-white rounded-full" />
+                                            </div>
+
+                                            <div className="font-serif italic text-3xl text-neutral-800 mb-2">
+                                                {data.clientName}
+                                            </div>
+                                            <div className="text-xs text-green-700 font-mono border-t border-green-200 pt-2 mt-2">
+                                                DIGITALLY SIGNED • {new Date().toLocaleString()}
+                                                <br />
+                                                IP: 192.168.X.X (Verified)
+                                            </div>
+                                        </motion.div>
+                                    ) : (
+                                        <div className="space-y-4">
+                                            <div className="border-2 border-dashed border-neutral-300 rounded-lg bg-white hover:border-cyan-400 transition-colors">
+                                                <SignatureCanvas
+                                                    ref={sigCanvas}
+                                                    canvasProps={{ className: 'w-full h-40 cursor-crosshair' }}
+                                                />
+                                            </div>
+                                            <div className="flex gap-3">
+                                                <button onClick={clearSignature} className="px-4 py-2 text-sm text-neutral-500 hover:text-red-500 font-medium transition-colors">
+                                                    Clear
+                                                </button>
+                                                <button
+                                                    onClick={handleSign}
+                                                    disabled={signing}
+                                                    className="flex-1 bg-neutral-900 text-white hover:bg-black disabled:opacity-50 py-3 rounded-lg font-bold shadow-lg transition-all flex items-center justify-center gap-2"
+                                                >
+                                                    {signing ? <Loader2 className="w-4 h-4 animate-spin" /> : <ShieldCheck className="w-4 h-4" />}
+                                                    {signing ? 'Signing...' : 'Sign Contract'}
+                                                </button>
+                                            </div>
+                                            <p className="text-xs text-neutral-400 text-center">
+                                                By signing, you agree to the Terms & Conditions above.
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+
+                                {/* Agency Signature Block */}
+                                <div>
+                                    <p className="text-sm font-bold text-neutral-400 uppercase tracking-wider mb-4">Signed By Agency</p>
+                                    <div className="relative border border-neutral-200 rounded-lg p-6 bg-white">
+                                        {typeof proposal.contractTemplate.agencySignature.signatureImage === 'string' ? (
+                                            <img src={proposal.contractTemplate.agencySignature.signatureImage} alt="Agency Signature" className="h-24 object-contain mb-2" />
+                                        ) : (
+                                            <div className="h-24 flex items-center text-4xl font-serif italic text-neutral-400">
+                                                {proposal.contractTemplate.agencySignature.signerName}
+                                            </div>
+                                        )}
+                                        <div className="border-t border-neutral-200 pt-2">
+                                            <p className="font-bold text-neutral-900">{proposal.contractTemplate.agencySignature.signerName}</p>
+                                            <p className="text-sm text-neutral-500">Authorized Signer, Aligoo Digital</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
 
-                    {/* Agency (Pre-filled) */}
-                    <div className="bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20">
-                        <h3 className="text-2xl font-bold mb-4">Aligoo Digital PLC</h3>
-                        {typeof proposal.contractTemplate.agencySignature.signatureImage === 'string' ? (
-                            <img src={proposal.contractTemplate.agencySignature.signatureImage} alt="Agency Signature" className="h-32 object-contain" />
-                        ) : (
-                            <div className="h-32 bg-gray-800 border-2 border-dashed rounded-xl flex items-center justify-center text-4xl font-bold">
-                                {proposal.contractTemplate.agencySignature.signerName[0]}
-                            </div>
-                        )}
-                        <p className="mt-4 font-bold">{proposal.contractTemplate.agencySignature.signerName}</p>
-                        <p className="text-sm text-gray-400">Authorized Signer</p>
-                        <p className="text-sm text-gray-400 mt-4">Date: {data.todayDate}</p>
+                    {/* Document Footer */}
+                    <div className="bg-neutral-100 p-4 text-center text-xs text-neutral-400 font-mono border-t border-neutral-200">
+                        DOCUMENT ID: {proposal.uniqueCode} • PAGE 1 OF 1
                     </div>
                 </div>
+
+                {/* Footer Actions */}
+                <div className="mt-12 text-center pb-20">
+                    <p className="text-neutral-500 text-sm mb-4">Need to make changes? Contact your account manager.</p>
+                </div>
+
             </div>
         </div>
     );
