@@ -1,6 +1,8 @@
+
+
 // components/wrappers/TimelineWrapper.tsx
 import TimelineSection from '@/components/proposal/TimelineSection'
-import type { ProposalData } from '@/lib/proposal'
+import type { ProposalData } from '@/types/ProposalType'
 
 interface TimelineWrapperProps {
   timeline: ProposalData['template']['timeline']

@@ -11,6 +11,7 @@ import ButtonAtom from "@/components/atoms/ButtonAtom";
 import { ArrowRight, Gift } from "lucide-react";
 import HeadingAtom from "@/components/atoms/HeadingAtom";
 import CardMolecule from "@/components/molecules/CardMolecule";
+import CreativeCore from "@/components/molecules/CreativeCore";
 
 export interface AboutUsSectionProps {
   sectionHeading: string;
@@ -36,22 +37,16 @@ export default function AboutUsSection({
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center gap-12">
         {/* Left Column: Image */}
         <motion.div
-          className="w-full md:w-1/2"
+          className="w-full md:w-1/2 flex flex-col items-center justify-center gap-6"
           initial="hidden"
           variants={imageVariants}
           viewport={{ once: true }}
           whileInView="visible"
         >
-          <div className="rounded-2xl overflow-hidden shadow-xl">
-            <Image
-              isBlurred
-              alt={imageAlt}
-              className="object-cover w-full h-full"
-              height={500}
-              src={imageUrl}
-              width={600}
-            />
-          </div>
+          <CreativeCore />
+          <p className="text-center text-sm font-medium tracking-wide text-muted-foreground/80 max-w-xs mx-auto italic">
+            &ldquo;Igniting the creative energy that makes your business glow globally.&rdquo;
+          </p>
         </motion.div>
 
         {/* Right Column: Text Content */}
@@ -66,11 +61,9 @@ export default function AboutUsSection({
           <motion.div variants={textVariants}>
             <HeadingAtom
               variant="split"
-
               highlight={sectionHeading} title={""} className="uppercase text-heading" />
           </motion.div>
           <motion.div className="text-heading pb-2 xs:pb-1 sm:pb-4" variants={textVariants}>
-            <AccentText className="normal-case">{accentText}</AccentText>
             <HeadingAtom
               variant="gradient"
               title={accentText}

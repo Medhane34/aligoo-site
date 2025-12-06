@@ -1,11 +1,13 @@
 // components/HeroSection.tsx
 "use client";
-import { Button } from "@heroui/button";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { MyButton, MyOutlineButton } from "./custom/extendVariants";
-import { title } from "@/components/primitives";
-import { GlowOutlineButton, PrimaryButton } from "./atoms/button";
+import ButtonAtom from "./atoms/ButtonAtom";
+import HeadingAtom from "./atoms/HeadingAtom";
+import BadgeAtom from "./atoms/BadgeAtom";
+import ParallaxBackground from "./molecules/ParallaxBackground";
+import CreativeCore from "./molecules/CreativeCore";
+import ConstellationBackground from "./molecules/ConstellationBackground";
 
 export interface HeroSectionProps {
   badgeText?: string;
@@ -17,6 +19,7 @@ export interface HeroSectionProps {
   primaryButtonUrl: string;
   secondaryButtonText: string;
   secondaryButtonUrl: string;
+  lang?: "en" | "am";
 }
 
 const sectionVariants = {
@@ -32,16 +35,16 @@ const headingVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: "easeInOut" },
+    transition: { duration: 0.8, ease: "easeOut" },
   },
 };
 
 const badgeVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
+  hidden: { opacity: 0, scale: 0.9 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5, ease: "easeInOut" },
+    transition: { duration: 0.5, ease: "backOut" },
   },
 };
 
@@ -50,24 +53,19 @@ const subheadingVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeInOut" },
+    transition: { duration: 0.6, ease: "easeOut" },
   },
 };
 
 const buttonContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2 },
-  },
-};
-
-const buttonVariants = {
   hidden: { opacity: 0, y: 20 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 },
+    transition: {
+      staggerChildren: 0.1,
+      duration: 0.5
+    },
   },
 };
 
@@ -81,96 +79,96 @@ export default function HeroSection({
   primaryButtonUrl,
   secondaryButtonText,
   secondaryButtonUrl,
-  lang = "en", // Add lang prop, default to "en"
-
-}: HeroSectionProps & { lang?: "en" | "am" }) {
+  lang = "en",
+}: HeroSectionProps) {
   return (
-    <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark mt-[-60px] xs:p-4 sm:mt-[-80px] sm:p-6 md:mt-[-105px] md:p-9">
-      {/* ...background pattern... */}
-      <main className="container mx-auto flex flex-1 flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-4">
-        {/* Theme-aware Pearl Mist Background */}
-        {/* This is the background for DARK mode */}
-        <div
-          className="absolute inset-0 z-0 hidden dark:block"
-          style={{
-            background: "radial-gradient(ellipse 50% 35% at 50% 0%, rgba(226, 232, 240, 0.12), transparent 60%)",
-          }}
-        />
-        {/* This is the background for LIGHT mode */}
-        <div
-          className="absolute inset-0 z-0 dark:hidden"
-          style={{
-            background: "radial-gradient(ellipse 50% 35% at 50% 0%, rgba(45, 55, 72, 0.08), transparent 70%)",
-          }}
-        />
+    <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark mt-[-60px] xs:p-4 sm:mt-[-80px] sm:p-6 md:mt-[-105px] md:p-9 mt-50">
+
+      {/* Background Animation */}
+      {/* <ParallaxBackground /> */}
+      <ConstellationBackground />
+
+
+      <main className="container mx-auto flex flex-1 flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-4 relative z-10">
         <motion.section
           animate="visible"
-          className="z-20 flex flex-col items-center justify-center gap-3 sm:gap-4 md:gap-6"
+          className="flex flex-col items-center justify-center gap-6 sm:gap-8 md:gap-10 max-w-4xl mx-auto"
           initial="hidden"
           variants={sectionVariants}
         >
           {/* Badge */}
           {badgeText && (
             <motion.div variants={badgeVariants}>
-              <Button
-                className="h-8 xs:px-3 xs:py-1 sm:h-9 sm:px-[14px] sm:py-1.5 md:px-[18px] md:py-2 overflow-hidden border text-small font-normal leading-5 text-text-light dark:text-text-dark"
-                endContent={<span>😎</span>}
-                radius="full"
-                variant="bordered"
-              >
+              <BadgeAtom variant="outline" icon={<span>🔥</span>}>
                 {badgeText}
-              </Button>
+              </BadgeAtom>
             </motion.div>
           )}
 
           {/* Headline */}
+          {/* Headline */}
           <motion.div
-            className={`text-center text-heading font-bold leading-[0.8] sm:leading-[0.8] tracking-tighter sm:text-[64px] ${lang === "am" ? "font-amharicHeading" : ""}`}
+            className={`text-center flex flex-col items-center justify-center gap-0 md:gap-1`}
             variants={headingVariants}
           >
-            <div className="relative">
-              <div className={`inline-block max-w-[90%] xs:max-w-md sm:max-w-lg md:max-w-xl text-center text-text-light dark:text-text-dark justify-center relative z-10`}>
-                <span className={title()}>{headlineText1} </span>
-                <span className={title({ color: "violet" })}>
-                  {headlineText2}{" "}
-                </span>
-                {headlineText3 && (
-                  <>
-                    <br />
-                    <span className={title()}>{headlineText3}</span>
-                  </>
-                )}
-              </div>
-            </div>
+            <HeadingAtom
+              size="xl"
+              variant="default"
+              align="center"
+              title={headlineText1}
+              className="leading-tight dark:text-gray-100"
+            />
+            <HeadingAtom
+              size="xl"
+              variant="default"
+              align="center"
+              title={headlineText2}
+              className="leading-tight bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent pb-2"
+            />
+            {headlineText3 && (
+              <HeadingAtom
+                size="xl"
+                variant="default"
+                align="center"
+                title={headlineText3}
+                className="leading-tight dark:text-gray-100 -mt-2" // Slight negative margin to pull 3rd line closer if needed
+              />
+            )}
           </motion.div>
 
           {/* Subheading */}
           <motion.p
-            className={`text-center text-body font-normal leading-6 sm:leading-7 text-text-light dark:text-text-dark w-full xs:w-[90%] sm:w-[466px] md:w-[550px] ${lang === "am" ? "font-amharicBody" : ""}`}
+            className={`text-center text-lg sm:text-xl text-text-light dark:text-gray-300 max-w-2xl font-medium leading-relaxed ${lang === "am" ? "font-amharicBody" : ""}`}
             variants={subheadingVariants}
           >
             {subheading}
           </motion.p>
 
-          {/* Buttons  */}
+          {/* Buttons */}
           <motion.div
-            className="flex flex-col items-center justify-center gap-4 sm:flex-row sm:gap-6"
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
             variants={buttonContainerVariants}
           >
-            <motion.div variants={buttonVariants}>
-              <Link passHref href={primaryButtonUrl}>
-              <PrimaryButton size="md">{primaryButtonText}</PrimaryButton>
-            
-              </Link>
-            </motion.div>
-            <motion.div variants={buttonVariants}>
-              <Link passHref href={secondaryButtonUrl}>
-               <GlowOutlineButton size="md" >
-                            {secondaryButtonText}
-                        </GlowOutlineButton>
-               
-              </Link>
-            </motion.div>
+            <Link href={primaryButtonUrl} className="w-full sm:w-auto">
+              <ButtonAtom
+                variant="primary"
+                size="lg"
+                fullWidth={true} // Full width on mobile, auto on desktop via CSS 
+                shimmer={true}
+              >
+                {primaryButtonText}
+              </ButtonAtom>
+            </Link>
+
+            <Link href={secondaryButtonUrl} className="w-full sm:w-auto">
+              <ButtonAtom
+                variant="outline"
+                size="lg"
+                fullWidth={true}
+              >
+                {secondaryButtonText}
+              </ButtonAtom>
+            </Link>
           </motion.div>
         </motion.section>
       </main>

@@ -7,6 +7,7 @@ import { Check, X, ChevronDown } from 'lucide-react';
 import RecommendedBadge from './RecommendedBadge';
 import InfoTooltip from '@/components/ui/InfoTooltip';
 import type { AddOn } from '@/types/ProposalType';
+import type { Discount } from '@/types/ProposalType';
 import AddonCard from '../AddonCard';
 import StickyPriceFooter from './StickyPriceFooter';
 
@@ -47,6 +48,7 @@ interface ComparisonTableProps {
     uniqueCode: string;
     onProceedToContract: () => Promise<void>;
     isProcessing?: boolean;
+    discount?: Discount;
 }
 
 const packageLabels = {
@@ -67,6 +69,7 @@ export default function ComparisonTable({
     uniqueCode,
     onProceedToContract,
     isProcessing = false,
+    discount,
 }: ComparisonTableProps) {
     const [mobileViewPackage, setMobileViewPackage] = useState<PackageKey>(selectedPackage);
     const [hoveredPackage, setHoveredPackage] = useState<PackageKey | null>(null);
@@ -362,6 +365,7 @@ export default function ComparisonTable({
                 isProcessing={isProcessing}
                 selectedAddOns={selectedAddOnsWithPrices}
                 pricingTableRef={pricingTableRef}
+                discount={discount}
             />
         </div>
     );

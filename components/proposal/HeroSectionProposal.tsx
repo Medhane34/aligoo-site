@@ -7,19 +7,34 @@ import Image from 'next/image'
 import { useRef } from 'react'
 import { Sparkles, MousePointer2 } from 'lucide-react'
 import VideoGreeting from './VideoGreeting'
+import VideoGreetingWrapper from '@/wrappers/proposal/VideoGreetingWrapper'
 
 interface HeroData {
   title: string
   subtitle?: string
   backgroundImage?: string
+  videoGreeting?: {
+    enabled?: boolean
+    videoUrl?: string
+    thumbnailUrl?: string
+    tooltipText?: string
+  } | null
+
 }
 
 interface HeroSectionProps {
   hero: HeroData
   clientName: string
+  videoGreeting?: {
+    enabled?: boolean
+    videoUrl?: string
+    thumbnailUrl?: string
+    tooltipText?: string
+  } | null
+
 }
 
-export default function HeroSection({ hero, clientName }: HeroSectionProps) {
+export default function HeroSection({ hero, clientName, videoGreeting }: HeroSectionProps) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -104,7 +119,10 @@ export default function HeroSection({ hero, clientName }: HeroSectionProps) {
       </div>
 
       {/* Video Greeting Widget */}
-      <VideoGreeting clientName={clientName} />
+      <VideoGreetingWrapper
+        clientName={clientName}
+        videoGreeting={videoGreeting}
+      />
     </section>
   )
 }

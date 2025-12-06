@@ -1,3 +1,4 @@
+// components/proposal/TestimonialSection.tsx
 'use client'
 
 import { motion, useMotionTemplate, useMotionValue } from 'framer-motion'
@@ -15,44 +16,27 @@ interface Testimonial {
     rating: number
 }
 
-const testimonials: Testimonial[] = [
-    {
-        id: '1',
-        name: 'Sarah Kebede',
-        role: 'Marketing Director',
-        company: 'Muko Furniture',
-        image: '/team/avatar-1.jpeg', // Placeholder
-        content: "Aligoo didn't just build a website; they transformed our entire digital presence. The attention to detail and premium design has directly increased our online sales by 40%.",
-        rating: 5
-    },
-    {
-        id: '2',
-        name: 'Dawit Tadesse',
-        role: 'CEO',
-        company: 'Hirut Export',
-        image: '/team/avatar-rediet.jpg', // Placeholder
-        content: "The team's professionalism is unmatched. They understood our vision immediately and delivered a platform that perfectly represents our global brand. Highly recommended.",
-        rating: 5
-    },
-    {
-        id: '3',
-        name: 'Michael Alemu',
-        role: 'Operations Manager',
-        company: 'GPS Express',
-        image: '/team/avatar-1.jpeg', // Placeholder
-        content: "Fast, creative, and technically brilliant. The new site loads instantly and the user experience is seamless. It's rare to find an agency that cares this much about quality.",
-        rating: 5
-    }
-]
+interface TestimonialSectionProps {
+    badgeText?: string
+    mainHeading?: string
+    highlightedText?: string
+    testimonials: Testimonial[]
+}
 
-export default function TestimonialSection() {
+export default function TestimonialSection({
+    badgeText = 'Client Success Stories',
+    mainHeading = 'Trusted by Industry Leaders',
+    highlightedText = 'Industry Leaders',
+    testimonials,
+}: TestimonialSectionProps) {
+    if (!testimonials || testimonials.length === 0) return null
+
     return (
         <section className="relative py-32 overflow-hidden bg-neutral-950">
             {/* Background Gradient */}
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900 via-neutral-950 to-neutral-950 opacity-50" />
 
             <div className="max-w-7xl mx-auto px-4 relative z-10">
-
                 {/* Header */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
@@ -62,13 +46,29 @@ export default function TestimonialSection() {
                 >
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-sm">
                         <Star className="w-4 h-4 text-yellow-500 fill-yellow-500" />
-                        <span className="text-sm font-medium text-white">Client Success Stories</span>
+                        <span className="text-sm font-medium text-white">{badgeText}</span>
                     </div>
-                    <h2 className="text-5xl md:text-6xl font-black mb-6 text-white">
-                        Trusted by <br />
-                        <span className="bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent">
-                            Industry Leaders
-                        </span>
+                    <h2 className="text-5xl md:text-6xl font-black mb-6 text-white leading-tight">
+                        {mainHeading.includes(highlightedText) ? (
+                            <>
+                                {mainHeading.split(highlightedText)[0]}
+                                <br className="md:hidden" />
+                                <span className="bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent">
+                                    {highlightedText}
+                                </span>
+                                {mainHeading.split(highlightedText)[1] && (
+                                    <>{mainHeading.split(highlightedText)[1]}</>
+                                )}
+                            </>
+                        ) : (
+                            <>
+                                {mainHeading}
+                                <br className="md:hidden" />
+                                <span className="bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent">
+                                    {highlightedText}
+                                </span>
+                            </>
+                        )}
                     </h2>
                 </motion.div>
 
@@ -104,28 +104,31 @@ export default function TestimonialSection() {
                                             alt={testimonial.name}
                                             fill
                                             className="object-cover"
+                                            sizes="48px"
                                         />
                                     </div>
                                     <div>
                                         <h4 className="text-white font-bold text-sm">{testimonial.name}</h4>
-                                        <p className="text-neutral-500 text-xs">{testimonial.role}, {testimonial.company}</p>
+                                        <p className="text-neutral-500 text-xs">
+                                            {testimonial.role}, {testimonial.company}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
                         </SpotlightCard>
                     ))}
                 </div>
-
             </div>
         </section>
     )
 }
 
+// SpotlightCard — unchanged, perfect as is
 function SpotlightCard({ children, index }: { children: React.ReactNode; index: number }) {
     const mouseX = useMotionValue(0)
     const mouseY = useMotionValue(0)
 
-    function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
+    function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent<HTMLDivElement>) {
         const { left, top } = currentTarget.getBoundingClientRect()
         mouseX.set(clientX - left)
         mouseY.set(clientY - top)
@@ -145,12 +148,12 @@ function SpotlightCard({ children, index }: { children: React.ReactNode; index: 
                 className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
                 style={{
                     background: useMotionTemplate`
-                        radial-gradient(
-                            650px circle at ${mouseX}px ${mouseY}px,
-                            rgba(255, 89, 94, 0.15),
-                            transparent 80%
-                        )
-                    `,
+            radial-gradient(
+              650px circle at ${mouseX}px ${mouseY}px,
+              rgba(255, 89, 94, 0.15),
+              transparent 80%
+            )
+          `,
                 }}
             />
 
@@ -159,12 +162,12 @@ function SpotlightCard({ children, index }: { children: React.ReactNode; index: 
                 className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-300 group-hover:opacity-100"
                 style={{
                     background: useMotionTemplate`
-                        radial-gradient(
-                            650px circle at ${mouseX}px ${mouseY}px,
-                            rgba(255, 89, 94, 0.4),
-                            transparent 80%
-                        )
-                    `,
+            radial-gradient(
+              650px circle at ${mouseX}px ${mouseY}px,
+              rgba(255, 89, 94, 0.4),
+              transparent 80%
+            )
+          `,
                 }}
             />
 

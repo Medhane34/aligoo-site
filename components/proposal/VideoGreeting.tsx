@@ -7,14 +7,15 @@ import Image from 'next/image'
 
 interface VideoGreetingProps {
     clientName?: string
-    videoUrl?: string // URL to video file
-    thumbnailUrl?: string // URL to thumbnail image
+    videoUrl?: string
+    thumbnailUrl?: string
+    tooltipText?: string  // ← NEW: Dynamic from Sanity
 }
-
 export default function VideoGreeting({
     clientName = 'there',
-    videoUrl = '/video/mockup-preview.mp4', // Fallback
-    thumbnailUrl = '/team/avatar-1.jpeg' // Fallback to Abel's image
+    videoUrl = '/video/mockup-preview.mp4',
+    thumbnailUrl = '/team/avatar-1.jpeg',
+    tooltipText = 'Hi {{clientName}}, watch this!'
 }: VideoGreetingProps) {
     const [isOpen, setIsOpen] = useState(false)
     const [isHovered, setIsHovered] = useState(false)
@@ -53,7 +54,7 @@ export default function VideoGreeting({
                                 transition={{ delay: 1.5 }}
                                 className="absolute left-full top-1/2 -translate-y-1/2 ml-4 whitespace-nowrap bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 rounded-xl text-white text-sm font-medium"
                             >
-                                <span className="relative z-10">Hi {clientName}, watch this! 👋</span>
+                                <span className="relative z-10">{tooltipText}</span>
                                 {/* Arrow */}
                                 <div className="absolute right-full top-1/2 -translate-y-1/2 -mr-[1px] border-8 border-transparent border-r-white/10" />
                             </motion.div>

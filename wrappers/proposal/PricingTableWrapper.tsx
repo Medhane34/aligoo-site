@@ -3,16 +3,14 @@
 
 import { useState, useEffect } from 'react';
 import ComparisonTable from '@/components/proposal/comparison/ComparisonTable';
+import DiscountBanner from '@/components/proposal/comparison/DiscountBanner';
 import { updateProposalSelection, updateProposalWithTotal } from '@/lib/proposal';
-import type { AddOn } from '@/types/ProposalType';
+import type { AddOn, ComparisonTable as ComparisonTableType, Discount } from '@/types/ProposalType';
 
 type PackageKey = 'basic' | 'pro' | 'enterprise';
 
 interface PricingTableWrapperProps {
-    comparisonTable?: {
-        recommendedPackage?: PackageKey;
-        groups: any[];
-    } | null;
+    comparisonTable?: ComparisonTableType | null;
     packagePricing?: {
         basic: number;
         pro: number;
@@ -25,6 +23,8 @@ interface PricingTableWrapperProps {
     proposalId: string;
     addOns: AddOn[];
     uniqueCode: string;
+    discount?: Discount;
+    daysLeftText?: string;
 }
 
 export default function PricingTableWrapper({
@@ -34,6 +34,8 @@ export default function PricingTableWrapper({
     proposalId,
     addOns,
     uniqueCode,
+    discount,
+    daysLeftText,
 }: PricingTableWrapperProps) {
     console.log('PricingTableWrapper Debug:', {
         comparisonTable: !!comparisonTable,
@@ -41,12 +43,15 @@ export default function PricingTableWrapper({
         groups: comparisonTable?.groups?.length || 0,
         currentSelection,
         proposalId,
-        addOnsCount: addOns?.length
+        addOnsCount: addOns?.length,
+        discount,
+        daysLeftText,
+        discountEnabled: discount?.enabled,
     });
 
-    // If no new data → hide (just like TimelineWrapper)
-    if (!comparisonTable || !packagePricing || !comparisonTable.groups || comparisonTable.groups.length === 0) {
-        console.log('No comparison table data → hidden');
+    // If disabled or no new data → hide
+    if (comparisonTable?.enabled === false || !comparisonTable || !packagePricing || !comparisonTable.groups || comparisonTable.groups.length === 0) {
+        console.log('Comparison table disabled or missing data → hidden');
         return null;
     }
 
@@ -165,19 +170,39 @@ export default function PricingTableWrapper({
         }
     };
 
+    // Calculate total price for DiscountBanner
+    let totalPrice = packagePricing[selectedPackage] || 0;
+    selectedAddOns.forEach(addonName => {
+        const addon = addOns.find(a => a.name === addonName);
+        if (addon) totalPrice += addon.price;
+    });
+
     return (
-        <ComparisonTable
-            comparisonTable={comparisonTable}
-            packagePricing={packagePricing}
-            selectedPackage={selectedPackage}
-            onPackageChange={handlePackageChange}
-            proposalId={proposalId}
-            addOns={addOns}
-            selectedAddOns={selectedAddOns}
-            onToggleAddOn={handleToggleAddOn}
-            uniqueCode={uniqueCode}
-            onProceedToContract={handleProceedToContract}
-            isProcessing={isProcessing}
-        />
+        <section>
+            {/* Discount Banner */}
+            {discount?.enabled && (
+                <DiscountBanner
+                    discount={discount}
+                    totalPrice={totalPrice}
+                    daysLeftText={daysLeftText}
+                />
+            )}
+
+            {/* Comparison Table */}
+            <ComparisonTable
+                comparisonTable={comparisonTable}
+                packagePricing={packagePricing}
+                selectedPackage={selectedPackage}
+                onPackageChange={handlePackageChange}
+                proposalId={proposalId}
+                addOns={addOns}
+                selectedAddOns={selectedAddOns}
+                onToggleAddOn={handleToggleAddOn}
+                uniqueCode={uniqueCode}
+                onProceedToContract={handleProceedToContract}
+                isProcessing={isProcessing}
+                discount={discount}
+            />
+        </section>
     );
 }

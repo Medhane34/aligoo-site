@@ -3,21 +3,20 @@
 import { motion } from 'framer-motion'
 import { ExternalLink, Play } from 'lucide-react'
 import { useState } from 'react'
+import type { MockupShowcaseData } from '@/types/ProposalType'
 
 interface MockupShowcaseProps {
-    title?: string
-    description?: string
-    videoSrc?: string
-    mockupLink?: string
+    data?: MockupShowcaseData | null
 }
 
-export default function MockupShowcase({
-    title = "Putting Our Process into Action",
-    description = "Building on the insights from the discovery and planning phase, we translate client needs into a high-converting landing page. This mockup demonstrates how we can transform your vision into a powerful lead generation tool.",
-    videoSrc = "/video/mockup-preview.mp4", // Default placeholder
-    mockupLink = "#"
-}: MockupShowcaseProps) {
+export default function MockupShowcase({ data }: MockupShowcaseProps) {
     const [isVideoLoaded, setIsVideoLoaded] = useState(false)
+
+    // Fallback to static content if no data provided
+    const title = data?.title || "Putting Our Process into Action"
+    const description = data?.description || "Building on the insights from the discovery and planning phase, we translate client needs into a high-converting landing page. This mockup demonstrates how we can transform your vision into a powerful lead generation tool."
+    const videoSrc = data?.video?.asset?.url || "/video/mockup-preview.mp4"
+    const mockupLink = data?.mockupLink || "#"
 
     return (
         <section className="relative py-24 overflow-hidden bg-neutral-950">

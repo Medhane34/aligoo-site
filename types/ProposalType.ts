@@ -1,9 +1,149 @@
+import { SanityImageSource } from '@sanity/image-url/lib/types/types'
+
 export interface HeroData {
+  enabled?: boolean
   title: string
   subtitle?: string
-  backgroundImage?: { asset: { url: string } }
+  backgroundImage?: string
+  videoGreeting?: {
+    enabled?: boolean
+    videoUrl?: string
+    thumbnailUrl?: string
+    tooltipText?: string
+  } | null
 }
 
+//video greeting 
+export interface VideoGreeting {
+  _type?: 'videoGreeting'
+  enabled?: boolean
+  videoUrl?: string
+  thumbnailUrl?: string
+  tooltipText?: string
+}
+
+// About Us Section
+export interface AboutUsData {
+  enabled?: boolean
+  badge?: {
+    icon?: string
+    text?: string
+  }
+  heading?: string
+  subheading?: string
+  paragraphs?: string[]
+  expertiseTags?: Array<{
+    icon?: string
+    label?: string
+  }>
+  cta?: {
+    text?: string
+    url?: string
+  }
+  card?: {
+    companyName?: string
+    establishedYear?: string
+    yearsText?: string
+    subtitle?: string
+    badges?: string[]
+  }
+}
+
+// Case Study Section
+export interface CaseStudyData {
+  enabled?: boolean
+  badge?: {
+    icon?: string
+    text?: string
+  }
+  heading?: string
+  subheading?: string
+  description?: string
+  projects?: Array<{
+    name: string
+    industry?: string
+    result?: string
+    image?: {
+      asset?: {
+        url: string
+      }
+    }
+    url?: string
+    color?: string
+    icon?: string
+  }>
+  cta?: {
+    text?: string
+    url?: string
+  }
+}
+
+// Mockup Showcase Section
+export interface MockupShowcaseData {
+  enabled?: boolean
+  title?: string
+  description?: string
+  video?: {
+    asset?: {
+      url: string
+    }
+  }
+  mockupLink?: string
+}
+// Testimonials Section 
+export interface TestimonialItem {
+  name: string
+  role: string
+  company: string
+  image?: { asset?: { url: string } }
+  content: string
+  rating: number
+}
+export interface TestimonialsSection {
+  enabled?: boolean
+  badgeText?: string
+  mainHeading?: string
+  highlightedText?: string
+  items: TestimonialItem[]
+}
+
+// faq 
+export interface FAQItem {
+  question: string
+  answer: string
+}
+
+export interface FAQSection {
+  enabled?: boolean
+  badgeText?: string
+  mainHeading?: string
+  highlightedText?: string
+  items: FAQItem[]
+}
+// Bonus Gifts 
+// types/ProposalType.ts
+export interface BonusGiftItem {
+  title: string
+  value: number
+  description: string
+  features: string[]
+  icon?: string
+}
+
+export interface BonusGiftSection {
+  enabled?: boolean
+  headline?: string
+  urgencyMessage?: string
+  countdownHours?: number
+  ctaText?: string
+  gifts: BonusGiftItem[]
+}
+
+// In template:
+
+
+
+//timeline 
 export interface TimelineItem {
   week: string
   title: string
@@ -27,6 +167,7 @@ export interface ComparisonTableGroup {
 }
 
 export interface ComparisonTable {
+  enabled?: boolean
   recommendedPackage?: 'basic' | 'pro' | 'enterprise'
   groups: ComparisonTableGroup[]
 }
@@ -56,7 +197,7 @@ export interface AddOn {
   price: number
   category?: string
   preselected: boolean
-  description?: string
+  description?: any
 }
 
 // ADD THESE NEW INTERFACES
@@ -65,6 +206,33 @@ export interface ContractTemplateSection {
   body: string
   bullets?: string[]
 }
+
+// next steps 
+// Add to your existing types
+
+export interface NextStepItem {
+  number: number
+  title: string
+  description: string
+  timeEstimate: string
+  color: string
+  details: string[]
+  status: 'current' | 'pending' | 'complete';
+  faqs: Array<{
+    question: string
+    answer: string
+  }>
+}
+
+export interface NextStepsSection {
+  enabled?: boolean
+  title?: string
+  subtitle?: string
+  daysLeftText: string;
+  steps: NextStepItem[]
+}
+
+
 
 export interface ContractTemplateData {
   _id: string
@@ -90,13 +258,25 @@ export interface ContractTemplateData {
   }
 }
 
+// Discount 
+export interface Discount {
+  enabled: boolean
+  percentage: number        // e.g. 15 = 15%
+  reason?: string           // optional, shown to client
+}
+
 export type ProposalData = {
   clientEmail: string | undefined
   _id: string
   clientName: string
   status: 'draft' | 'sent' | 'viewed' | 'accepted' | 'contract_sent' | 'signed' | 'expired' | 'payment_pending' | 'paid'
   recommendedPackage?: 'basic' | 'pro' | 'enterprise' | null;
+  expiresAt?: string;
+  daysLeftText?: string;
   uniqueCode: string,
+  videoGreeting?: VideoGreeting | null,
+  nextSteps?: NextStepsSection,
+  discount?: Discount
   paymentProof: {
     _id: string
     asset: {
@@ -116,19 +296,27 @@ export type ProposalData = {
   } | null
   comparisonTable?: ComparisonTable
   packagePricing?: PackagePricing
+  mockupShowcase?: MockupShowcaseData
   template: {
     _id: string
     title: string
     hero: {
+      [x: string]: any
       title: string
       subtitle?: string
-      backgroundImage?: { asset?: { url: string } }
+      backgroundImage?: string
+      videoGreeting?: VideoGreeting | null
     }
     basePackages: BasePackage[]
     addOns: AddOn[]
+    aboutUs?: AboutUsData | null
+    caseStudy?: CaseStudyData | null
+    mockupShowcase?: MockupShowcaseData | null
     timeline: TimelineSection | null
-    testimonials: any
-    faq: any
+    testimonials?: TestimonialsSection | null
+    faq?: FAQSection | null
+    bonusGift?: BonusGiftSection
+    nextSteps?: NextStepsSection
     extraSections: any[]
   }
   salesperson: {

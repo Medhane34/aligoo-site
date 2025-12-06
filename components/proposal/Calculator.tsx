@@ -8,7 +8,7 @@ import AddonCard from './AddonCard'
 import { addToast } from "@heroui/toast"
 
 import { CheckCircle2, Loader2 } from 'lucide-react'
-import type { ProposalData, BasePackage, AddOn } from '@/lib/proposal'
+import type { ProposalData, BasePackage, AddOn } from '@/types/ProposalType'
 import { PrimaryButton } from '../atoms/button'
 import { useRouter } from 'next/navigation'
 

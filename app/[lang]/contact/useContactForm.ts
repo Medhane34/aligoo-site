@@ -4,9 +4,10 @@ import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useMemo } from "react";
 import { contactFormSchema, ContactFormInputs } from "./contactFormSchema";
-import { addToast } from "@heroui/toast";
+import { useToast } from "@/components/providers/ToastProvider";
 
 export function useContactForm() {
+  const { addToast } = useToast();
   const {
     control,
     handleSubmit,
@@ -80,20 +81,28 @@ export function useContactForm() {
         setSubmissionStatus("success");
         reset();
         addToast({
-          title: "✅ Form Received — We're On It!",
-          description: "Sit tight — one of our team members will reach out within 5–10 minutes.",
-          color: "success",
+          type: "success",
+          title: "Message Sent!",
+          message: "Sit tight — one of our team members will reach out within 5–10 minutes.",
         });
         fireGAEvent();
+
+        // Scroll to "What Happens Next" section so user sees the process
+        setTimeout(() => {
+          const nextSection = document.getElementById("what-happens-next");
+          if (nextSection) {
+            nextSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 3000);
       } else {
         setErrorMessage(errorData?.message || "Something went wrong. Please try again.");
         setSubmissionStatus("error");
       }
     } catch (error) {
       addToast({
-        title: "❌ Oops! Something Went Wrong.",
-        description: "Looks like the form didn’t go through — please try again or email us directly.",
-        color: "danger",
+        type: "error",
+        title: "Submission Failed",
+        message: "Looks like the form didn’t go through. Please try again or email us directly.",
       });
       setErrorMessage("");
       setSubmissionStatus("error");

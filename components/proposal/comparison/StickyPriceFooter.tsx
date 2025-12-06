@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Loader2, ChevronDown, ChevronUp, X } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { calculateDiscount } from '@/utils/discount';
+import type { Discount } from '@/types/ProposalType';
 
 interface StickyPriceFooterProps {
     totalPrice: number;
@@ -17,6 +19,7 @@ interface StickyPriceFooterProps {
     isProcessing?: boolean;
     selectedAddOns?: Array<{ name: string; price: number }>;
     pricingTableRef?: React.RefObject<HTMLDivElement>;
+    discount?: Discount;
 }
 
 export default function StickyPriceFooter({
@@ -30,6 +33,7 @@ export default function StickyPriceFooter({
     isProcessing = false,
     selectedAddOns = [],
     pricingTableRef,
+    discount,
 }: StickyPriceFooterProps) {
     const [isVisible, setIsVisible] = useState(false);
     const [isCollapsed, setIsCollapsed] = useState(false);
@@ -37,6 +41,10 @@ export default function StickyPriceFooter({
     const [prevPrice, setPrevPrice] = useState(totalPrice);
 
     const formatPrice = (price: number) => `ETB ${price.toLocaleString('en-US')}`;
+
+    // Calculate discount if applicable
+    const subtotal = selectedPackagePrice + selectedAddOns.reduce((sum, addon) => sum + addon.price, 0);
+    const discountResult = calculateDiscount(subtotal, discount);
 
     // Smart visibility: Show only when scrolled past pricing table
     useEffect(() => {
@@ -183,6 +191,22 @@ export default function StickyPriceFooter({
                                                                         <span className="text-white font-medium">{formatPrice(addon.price)}</span>
                                                                     </div>
                                                                 ))}
+
+                                                                {/* Discount Line Item */}
+                                                                {discountResult.hasDiscount && (
+                                                                    <>
+                                                                        <div className="border-t border-white/10 pt-2 mt-2">
+                                                                            <div className="flex justify-between text-sm">
+                                                                                <span className="text-white/70">Subtotal</span>
+                                                                                <span className="text-white font-medium">{formatPrice(subtotal)}</span>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div className="flex justify-between text-sm">
+                                                                            <span className="text-green-400 font-medium">Discount ({discountResult.percentage}%)</span>
+                                                                            <span className="text-green-400 font-medium">-{formatPrice(discountResult.amount)}</span>
+                                                                        </div>
+                                                                    </>
+                                                                )}
 
                                                                 <div className="border-t border-white/10 pt-2 mt-2">
                                                                     <div className="flex justify-between font-bold">

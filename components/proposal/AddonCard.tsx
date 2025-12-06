@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { Plus, Check, Sparkles } from 'lucide-react'
 import type { AddOn } from '@/types/ProposalType'
 import { cn } from '@/utils/cn'
+import PortableText from '@/components/ui/PortableTextSanity'
 
 interface AddonCardProps {
   addon: AddOn
@@ -68,9 +69,13 @@ export default function AddonCard({ addon, selected, onToggle }: AddonCardProps)
         </div>
 
         {/* Description */}
-        <p className="text-sm text-neutral-400 leading-relaxed mb-4 flex-grow">
-          {addon.description}
-        </p>
+        <div className="text-sm text-neutral-400 leading-relaxed mb-4 flex-grow prose prose-invert prose-sm max-w-none">
+          {typeof addon.description === 'string' ? (
+            addon.description
+          ) : (
+            <PortableText blocks={addon.description} />
+          )}
+        </div>
 
         {/* Status Badge */}
         <div className="mt-auto pt-4 border-t border-white/5 flex items-center justify-between">

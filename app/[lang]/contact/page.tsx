@@ -1,6 +1,7 @@
 import ContactForm from "./ContactForm";
 import HeroSection from "@/components/HeroSection";
 import ContactSectionWrapper from "@/wrappers/contact/ContactSectionWrapper";
+import WhatHappensNextSection from "./WhatHappensNextSection";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export const revalidate = 3600; // Rebuild every hour
 
 export default async function ContactPage({ params }: { params: Promise<{ lang: "en" | "am" }> }) {
   const { lang } = await params; // ✅
-  
+
   return (
     <>
       <HeroSection
@@ -40,7 +41,8 @@ export default async function ContactPage({ params }: { params: Promise<{ lang: 
         badgeText="Let’s Make Something Amazing Together 💬!" // Optional badge text
       />
       <div className="div" id="quick-chat">
-     <ContactSectionWrapper lang={lang} />;
+        <ContactSectionWrapper lang={lang} />
+        <WhatHappensNextSection />
       </div>
     </>
   );

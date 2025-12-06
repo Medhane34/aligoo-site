@@ -5,25 +5,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { MessageCircle, X, Send, Phone } from 'lucide-react'
 import Image from 'next/image'
 
-interface ChatSupportWidgetProps {
-    clientName?: string
-    managerName?: string
-    managerRole?: string
-    managerImage?: string
-    whatsappNumber?: string
-}
+export default function ChatSupportWidget() {
+    const managerName = "Aligoo Support"
+    const managerRole = "Customer Success"
+    // Using a default avatar or logo if available, keeping previous default for safety
+    const managerImage = "/team/avatar-1.jpeg"
+    const whatsappNumber = "251910584712"
 
-export default function ChatSupportWidget({
-    clientName = 'there',
-    managerName = 'Daniel Aregawi',
-    managerRole = 'General Manager',
-    managerImage = '/team/avatar-1.jpeg', // Default to Abel's image
-    whatsappNumber = '251911223344' // Replace with actual number
-}: ChatSupportWidgetProps) {
     const [isVisible, setIsVisible] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const [showGreeting, setShowGreeting] = useState(false)
-    const [position, setPosition] = useState<'bottom' | 'top'>('bottom')
 
     // Smart scroll detection
     useEffect(() => {
@@ -32,24 +23,23 @@ export default function ChatSupportWidget({
             const windowHeight = window.innerHeight
             const documentHeight = document.documentElement.scrollHeight
 
-            // Show when scrolled past 50%
-            if (scrollY + windowHeight > documentHeight * 0.5) {
+            // Show immediately if page is short (no scroll needed)
+            if (documentHeight <= windowHeight + 100) {
+                setIsVisible(true)
+                return
+            }
+
+            // Show when scrolled past 30% of viewport (earlier visibility)
+            if (scrollY > windowHeight * 0.5) {
                 setIsVisible(true)
             } else {
                 setIsVisible(false)
                 setIsOpen(false)
             }
-
-            // Check for BonusGift section to switch position
-            // We'll use a threshold near the bottom where the footer appears
-            const footerThreshold = documentHeight - 1200 // Approximate position of BonusGift/Pricing
-
-            if (scrollY > footerThreshold) {
-                setPosition('top')
-            } else {
-                setPosition('bottom')
-            }
         }
+
+        // Trigger once on mount to check initial state
+        handleScroll()
 
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
@@ -68,7 +58,7 @@ export default function ChatSupportWidget({
     }, [isVisible, isOpen])
 
     const handleWhatsAppClick = () => {
-        const message = `Hi ${managerName}, I'm reviewing the proposal and have a few questions.`
+        const message = `Hi Aligoo Team, I'm checking out your website and have a few questions.`
         window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank')
     }
 
@@ -77,16 +67,17 @@ export default function ChatSupportWidget({
             {isVisible && (
                 <motion.div
                     layout
-                    className={`fixed right-4 md:right-8 z-40 flex flex-col items-end gap-4 transition-all duration-500
-                        ${position === 'top' ? 'top-24' : 'bottom-32'}
-                    `}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 20 }}
+                    className="fixed right-4 md:right-8 bottom-8 z-[9999] flex flex-col items-end gap-4"
                 >
 
                     {/* Chat Window */}
                     <AnimatePresence>
                         {isOpen && (
                             <motion.div
-                                initial={{ opacity: 0, scale: 0.9, y: 20, transformOrigin: position === 'top' ? 'top right' : 'bottom right' }}
+                                initial={{ opacity: 0, scale: 0.9, y: 20, transformOrigin: 'bottom right' }}
                                 animate={{ opacity: 1, scale: 1, y: 0 }}
                                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                                 className="w-[350px] bg-neutral-900/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
@@ -123,8 +114,8 @@ export default function ChatSupportWidget({
                                 <div className="p-6 bg-neutral-900/50">
                                     <div className="bg-white/5 rounded-xl p-4 rounded-tl-none border border-white/5 mb-6">
                                         <p className="text-neutral-200 text-sm leading-relaxed">
-                                            Hi {clientName}! 👋 <br /><br />
-                                            I noticed you're reviewing the proposal. Do you have any questions about the packages or timeline?
+                                            Hi there! 👋 <br /><br />
+                                            Thanks for visiting Aligoo. How can we help you grow your business today?
                                         </p>
                                         <span className="text-neutral-500 text-xs mt-2 block">Just now</span>
                                     </div>

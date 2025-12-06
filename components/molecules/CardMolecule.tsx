@@ -13,6 +13,7 @@ const card = tv({
             active: 'bg-neutral-900/50 border-2 border-[#FF595E] shadow-2xl shadow-[#FF595E]/30 scale-[1.02]',
         },
         padding: {
+            none: 'p-0',
             sm: 'p-4',
             md: 'p-6',
             lg: 'p-8',
@@ -89,7 +90,7 @@ export default function CardMolecule({
                 />
 
                 {/* Content */}
-                <div className="relative z-20">
+                <div className="relative z-20 h-full">
                     {children}
                 </div>
             </motion.div>

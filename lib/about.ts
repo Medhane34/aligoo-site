@@ -63,6 +63,13 @@ export type TeamMember = {
   lastNameColor?: string
   imageUrl?: string
   imageAlt?: string
+  yearsOfExperience?: string
+  superpower?: string
+  socialLinks?: {
+    linkedin?: string
+    twitter?: string
+    github?: string
+  }
 }
 
 export type TeamSectionData = {

@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Providers } from "./providers";
+import { ToastProvider } from "@/components/providers/ToastProvider";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
@@ -77,10 +78,13 @@ export default async function RootLayout({
           )}
         >
           <Providers >
-            <LayoutUI>
-              {children}
-            </LayoutUI>
-            <ChatSupportWidget />
+            <ToastProvider>
+              <LayoutUI>
+                {children}
+
+              </LayoutUI>
+
+            </ToastProvider>
           </Providers>
         </body>
       </html>

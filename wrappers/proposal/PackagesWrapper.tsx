@@ -1,7 +1,7 @@
 
 // components/wrappers/PackagesWrapper.tsx
 import Calculator from '@/components/proposal/Calculator'
-import type { ProposalData } from '@/lib/proposal'
+import type { ProposalData } from '@/types/ProposalType'
 
 interface PackagesWrapperProps {
   packages: ProposalData['template']['basePackages']

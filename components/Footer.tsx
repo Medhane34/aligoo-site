@@ -3,6 +3,7 @@
 import React from "react";
 import { Button } from "@heroui/button";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import ButtonAtom from "./atoms/ButtonAtom";
 
 const services = [
   { label: "Facebook & Instagram Ads", href: "/services/facebook-ad" },
@@ -143,15 +144,9 @@ const Footer: React.FC = () => {
             Get the latest marketing tips and agency news. Join our Telegram
             bot!
           </p>
-          <Button
-            as="a"
-            href="https://t.me/aligoo_leads_bot?start=start" // Replace with your actual Telegram bot link
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-red-500 text-white px-6 py-2 rounded-md font-semibold hover:bg-red-600 transition"
-          >
-            Join our Telegram Bot
-          </Button>
+          <a href="https://t.me/AligooClientBot?start=web" target="_blank" rel="noopener noreferrer">
+            <ButtonAtom shimmer> Get Exclusive Insights </ButtonAtom>
+          </a>
         </div>
       </div>
       {/* Bottom Bar */}

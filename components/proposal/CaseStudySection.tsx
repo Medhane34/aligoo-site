@@ -1,9 +1,11 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowRight, ExternalLink, Sparkles, Globe, Layout, ShoppingBag } from 'lucide-react'
+import { ArrowRight, ExternalLink, Sparkles, Globe, Layout, ShoppingBag, LucideIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useState } from 'react'
+import type { CaseStudyData } from '@/types/ProposalType'
+import * as LucideIcons from 'lucide-react'
 
 interface Project {
     id: string
@@ -16,41 +18,73 @@ interface Project {
     icon: any
 }
 
-const projects: Project[] = [
-    {
-        id: 'muko',
-        name: 'Muko Furniture',
-        industry: 'E-Commerce',
-        result: '🚀 Launched in 2 Weeks',
-        image: '/mockup/muko.png', // Placeholder - will need actual image
-        url: '#',
-        color: 'from-orange-500 to-yellow-500',
-        icon: ShoppingBag
-    },
-    {
-        id: 'hirut',
-        name: 'Hirut Export',
-        industry: 'Export & Trade',
-        result: '🌍 Global Reach',
-        image: '/mockup/hirut.png', // Placeholder
-        url: '#',
-        color: 'from-green-500 to-emerald-500',
-        icon: Globe
-    },
-    {
-        id: 'gps',
-        name: 'GPS Express',
-        industry: 'Logistics',
-        result: '⚡ 200% Faster Load',
-        image: '/mockup/muko.png', // Placeholder
-        url: '#',
-        color: 'from-blue-500 to-cyan-500',
-        icon: Layout
-    }
-]
+interface CaseStudySectionProps {
+    data?: CaseStudyData | null
+}
 
-export default function CaseStudySection() {
+// Icon mapper to convert string names to Lucide components
+const getIcon = (iconName?: string): LucideIcon => {
+    if (!iconName) return Layout
+    const Icon = (LucideIcons as any)[iconName]
+    return Icon || Layout
+}
+
+export default function CaseStudySection({ data }: CaseStudySectionProps) {
     const [hoveredProject, setHoveredProject] = useState<string | null>(null)
+
+    // Fallback to static content if no data provided
+    const badge = data?.badge || { icon: 'Sparkles', text: 'Proven Track Record' }
+    const heading = data?.heading || 'Delivering Results:'
+    const subheading = data?.subheading || 'Digital Excellence Unveiled'
+    const description = data?.description || 'We don\'t just build websites; we build business assets. Here are a few of our recent success stories showcasing the impact we deliver.'
+    const cta = data?.cta || { text: 'Request More Case Studies', url: '#' }
+
+    // Transform Sanity projects to component format with fallbacks
+    const projects: Project[] = data?.projects && data.projects.length > 0
+        ? data.projects.map((project, index) => ({
+            id: project.name.toLowerCase().replace(/\s+/g, '-'),
+            name: project.name,
+            industry: project.industry || 'Industry',
+            result: project.result || '✨ Success',
+            image: project.image?.asset?.url || '/mockup/muko.png',
+            url: project.url || '#',
+            color: project.color || 'from-orange-500 to-yellow-500',
+            icon: getIcon(project.icon)
+        }))
+        : [
+            {
+                id: 'muko',
+                name: 'Muko Furniture',
+                industry: 'E-Commerce',
+                result: '🚀 Launched in 2 Weeks',
+                image: '/mockup/muko.png',
+                url: '#',
+                color: 'from-orange-500 to-yellow-500',
+                icon: ShoppingBag
+            },
+            {
+                id: 'hirut',
+                name: 'Hirut Export',
+                industry: 'Export & Trade',
+                result: '🌍 Global Reach',
+                image: '/mockup/hirut.png',
+                url: '#',
+                color: 'from-green-500 to-emerald-500',
+                icon: Globe
+            },
+            {
+                id: 'gps',
+                name: 'GPS Express',
+                industry: 'Logistics',
+                result: '⚡ 200% Faster Load',
+                image: '/mockup/muko.png',
+                color: 'from-blue-500 to-cyan-500',
+                url: '#',
+                icon: Layout
+            }
+        ]
+
+    const BadgeIcon = getIcon(badge.icon)
 
     return (
         <section className="relative py-32 overflow-hidden bg-neutral-950">
@@ -70,17 +104,17 @@ export default function CaseStudySection() {
                     className="text-center mb-20"
                 >
                     <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-6 backdrop-blur-sm">
-                        <Sparkles className="w-4 h-4 text-[#FF595E]" />
-                        <span className="text-sm font-medium text-white">Proven Track Record</span>
+                        <BadgeIcon className="w-4 h-4 text-[#FF595E]" />
+                        <span className="text-sm font-medium text-white">{badge.text}</span>
                     </div>
                     <h2 className="text-5xl md:text-6xl font-black mb-6 text-white">
-                        Delivering Results: <br />
+                        {heading} <br />
                         <span className="bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent">
-                            Digital Excellence Unveiled
+                            {subheading}
                         </span>
                     </h2>
                     <p className="text-xl text-neutral-400 max-w-3xl mx-auto">
-                        We don't just build websites; we build business assets. Here are a few of our recent success stories showcasing the impact we deliver.
+                        {description}
                     </p>
                 </motion.div>
 
@@ -128,7 +162,7 @@ export default function CaseStudySection() {
                     <button className="group relative px-8 py-4 bg-white/5 hover:bg-white/10 border border-white/10 rounded-full overflow-hidden transition-all">
                         <div className="absolute inset-0 bg-gradient-to-r from-[#FF595E]/20 to-orange-500/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                         <span className="relative flex items-center gap-3 text-white font-bold">
-                            Request More Case Studies
+                            {cta.text}
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </span>
                     </button>

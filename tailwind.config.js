@@ -1,5 +1,5 @@
 // tailwind.config.js
-/* const { heroui } = require("@heroui/react"); */
+const { heroui } = require("@heroui/react");
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -102,7 +102,7 @@ module.exports = {
     "to-button-secondary-dark",
   ],
 
-  /* plugins: [
+  plugins: [
     heroui({
       prefix: "heroui",
       defaultTheme: "light",
@@ -111,5 +111,5 @@ module.exports = {
         dark: {},
       },
     }),
-  ], */
+  ],
 };

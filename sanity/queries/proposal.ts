@@ -10,11 +10,18 @@ export const PROPOSAL_BY_CODE_QUERY = groq`
     uniqueCode,                 
     status,
     expiresAt,
+    daysLeftText,
     currentSelection,
     paymentProof,
     viewLogs,
     recommendedPackage,
-
+   // PERSONALIZED VIDEO GREETING (PER-PROPOSAL!)
+    "videoGreeting": videoGreeting {
+  enabled,
+  "tooltipText": greetingText,
+  "videoUrl": video.asset->url,
+  "thumbnailUrl": thumbnail.asset->url
+},
     // COMPARISON TABLE (with per-proposal override)
     "comparisonTable": {
       ...template->.comparisonTable,
@@ -26,11 +33,26 @@ export const PROPOSAL_BY_CODE_QUERY = groq`
     
     "packagePricing": template->.packagePricing,
 
+    // MOCKUP SHOWCASE (with per-proposal override)
+    "mockupShowcase": {
+      ...template->.mockupShowcase,
+      "video": coalesce(mockupShowcase.video.asset->url, template->.mockupShowcase.video.asset->url),
+      "mockupLink": coalesce(mockupShowcase.mockupLink, template->.mockupShowcase.mockupLink)
+    },
+
+    // DISCOUNT
+    "discount": discount {
+      enabled,
+      percentage,
+      reason
+    },
+
     // PROPOSAL TEMPLATE DATA
     "template": template-> {
       _id,
       title,
       hero {
+        enabled,
         title,
         subtitle,
         "backgroundImage": backgroundImage.asset->url
@@ -48,6 +70,94 @@ export const PROPOSAL_BY_CODE_QUERY = groq`
         category,
         preselected,
         description
+      },
+      aboutUs {
+        enabled,
+        badge,
+        heading,
+        subheading,
+        paragraphs,
+        expertiseTags,
+        cta,
+        card
+      },
+      caseStudy {
+        enabled,
+        badge,
+        heading,
+        subheading,
+        description,
+        projects[] {
+          name,
+          industry,
+          result,
+          "image": image.asset->url,
+          url,
+          color,
+          icon
+        },
+        cta
+      },
+      mockupShowcase {
+        enabled,
+        title,
+        description,
+      },
+      testimonials {
+        enabled,
+        badgeText,
+        mainHeading,
+
+        highlightedText,
+        items[] {
+          name,
+          role,
+          company,
+          "image": image.asset->url,
+          content,
+          rating
+        }
+      },
+      faq {
+        enabled,
+        badgeText,
+        mainHeading,
+        highlightedText,
+        items[] {
+          question,
+          answer
+        }
+      },
+      bonusGift {
+        enabled,
+        headline,
+        urgencyMessage,
+        countdownHours,
+        ctaText,
+        gifts[] {
+          title,
+          value,
+          description,
+          features,
+          icon
+        }
+      },
+      nextSteps {
+        enabled,
+        title,
+        subtitle,
+        steps[] {
+          number,
+          title,
+          description,
+          timeEstimate,
+          color,
+          details,
+          faqs[] {
+            question,
+            answer
+          }
+        }
       },
       timeline {
         enabled,

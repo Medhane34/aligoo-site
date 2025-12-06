@@ -1,53 +1,15 @@
 // components/sections/WorkSection.tsx
 "use client";
-import { Card, CardHeader } from "@heroui/card";
-import { Image } from "@heroui/image";
+import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import { ArrowUpRight, Briefcase } from "lucide-react";
 
-import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { MyButton } from "@/components/custom/extendVariants";
-
-import NextImage from "next/image";
-import { PrimaryButton } from "@/components/atoms/button";
-
-// Animation variants remain unchanged (good)
-const headerVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.5, ease: "easeInOut" },
-  },
-};
-
-const cardContainerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.6, ease: "easeInOut" },
-  },
-};
-
-const additionalCardVariants = {
-  hidden: { opacity: 0, x: 20 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: { duration: 0.6, ease: "easeInOut" },
-  },
-};
+import HeadingAtom from "@/components/atoms/HeadingAtom";
+import BadgeAtom from "@/components/atoms/BadgeAtom";
+import ButtonAtom from "@/components/atoms/ButtonAtom";
+import CardMolecule from "@/components/molecules/CardMolecule";
 
 type CaseStudy = {
   _id: string;
@@ -59,7 +21,7 @@ type CaseStudy = {
   hasImage: boolean;
   hasService: boolean;
   slug: string;
-  challenge?: string; // Add these for the hover content
+  challenge?: string;
   outcome?: string;
 };
 
@@ -77,332 +39,166 @@ const placeholderCaseStudy: CaseStudy = {
   slug: "#",
   challenge: "Stay tuned for exciting new case studies!",
   outcome: "More amazing results are on the way!",
-  goalsSummary: "",
-  challengeSummary: "",
+  goalsSummary: "We are working on something great.",
+  challengeSummary: "New projects are being baked.",
 };
 
-const fallbackCategory = "Case Study Category";
-const fallbackChallenge =
-  "This is a sample challenge description for the case study.";
-const fallbackOutcome =
-  "This is a sample outcome description for the case study.";
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const cardItemVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.6, ease: [0.215, 0.61, 0.355, 1] },
+  },
+};
 
 export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
-  // Ensure we always have 5 items for the grid, filling with placeholders if needed
+  // Ensure we always have 5 items for the grid
   const paddedCaseStudyPosts = [
     ...casestudyPosts,
     ...Array(5 - casestudyPosts.length).fill(placeholderCaseStudy),
-  ].slice(0, 5); // Slice to exactly 5 in case more than 5 are passed
+  ].slice(0, 5);
 
   return (
-    <section className="w-full text-center bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark py-16 md:py-24 lg:py-32">
-      {" "}
-      {/* Added vertical padding to the section */}
-      {/* Centralized content container that defines the "boxed" width */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        {" "}
-        {/* Adjusted max-w and responsive px */}
-        {/* Header - Now inside the common container */}
-        <motion.div
-          className="flex flex-col md:flex-row items-center md:justify-between mb-12 md:mb-16 lg:mb-20" /* Responsive margins */
-          initial="hidden"
-          variants={headerVariants}
-          viewport={{ once: true }}
-          whileInView="visible"
-        >
-          {/* Heading Text Group */}
-          <motion.div
-            className="text-center md:text-left space-y-2 mb-8 md:mb-0" /* Align text based on screen size, remove bottom margin on md+ */
-            variants={headerVariants}
-          >
-            <SectionHeading className="font-bold tracking-tight uppercase">
-              Our Work
-            </SectionHeading>
-            <motion.div variants={headerVariants} />
-            <motion.div variants={headerVariants}>
-              <AccentText className="normal-case">
-                Real Projects. Real Impact.
-              </AccentText>
-            </motion.div>
-          </motion.div>
+    <section className="py-24 bg-background-light dark:bg-background-dark relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
-          {/* Button */}
-          <motion.div variants={headerVariants}>
-            <Link passHref href="/works">
-                        <PrimaryButton size="md">🏗️ More of our works</PrimaryButton>
+      <div className="container mx-auto px-4 max-w-7xl relative z-10">
 
-              
-            </Link>
-          </motion.div>
-        </motion.div>
-        {/* Cards Grid - Now simplified and inside the common container */}
-        <div className="grid grid-cols-12 gap-4 lg:gap-6">
-          {" "}
-          {/* Unified grid container for all cards, responsive gap */}
-          {/* Row 1: First 3 Cards (col-span-12 on xs, sm:col-span-4 for 3-column layout) */}
-          {paddedCaseStudyPosts.slice(0, 3).map((study, index) => (
-            <motion.div
-              key={study._id + index}
-              className="col-span-12 sm:col-span-6 lg:col-span-4" /* Responsive column spans: 12 on xs, 6 on sm (2 columns), 4 on lg (3 columns) */
+        {/* Header */}
+        <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
+          <div className="space-y-4 max-w-2xl">
+            <BadgeAtom
+              variant="filled"
+              color="orange"
+              icon={<Briefcase className="w-3.5 h-3.5" />}
             >
-              <Link href={`/case-study/${study.slug}`}>
-                <Card
-                  className="
-                    relative h-[300px] w-full rounded-lg overflow-hidden cursor-pointer group
-                    hover:shadow-xl hover:drop-shadow-brand-hover /* Enhanced hover shadow */
-                    transition-shadow duration-300
-                  "
-                >
-                  <NextImage
-                    loading="lazy"
-                    width={300}
-                    height={300}
-                    alt={study.title || "Case study image"}
-                    className="z-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    src={
-                      study.imageUrl ||
-                      "https://heroui.com/images/card-example-4.jpeg"
-                    }
-                  />
-                  <CardHeader className="absolute z-10 top-1 flex-col items-start! opacity-100 transition-opacity duration-300 group-hover:opacity-0">
-                    <p className="text-small text-white uppercase font-bold bg-brand-primary rounded-full p-1">
-                      {study.service || fallbackCategory}
-                    </p>
-                    <h4 className="text-white font-medium text-large text-left text-base/5">
-                      {study.title}
-                    </h4>
-                  </CardHeader>
-                  {/* ... (gradient borders - keep as is, they are fine) ... */}
-                  <div
-                    className="
-                      absolute top-0 left-0 
-                      w-0 h-[3px]
-                      bg-linear-to-r from-rose-500 to-red-500
-                      opacity-0
-                      group-hover:w-1/2
-                      group-hover:opacity-100
-                      transition-all duration-300 ease-out
-                      z-30
-                      rounded-tl-lg
-                    "
-                  />
-                  <div
-                    className="
-                      absolute top-0 left-0 rounded-lg
-                      w-[3px] h-0
-                      bg-linear-to-r from-rose-500 to-red-500
-                      opacity-0
-                      group-hover:h-1/2
-                      group-hover:opacity-100
-                      transition-all duration-300 ease-out
-                      z-30
-                      rounded-tl-lg
-                    "
-                  />
-                  <div
-                    className="
-                      absolute top-0 right-0 
-                      w-0 h-[3px]
-                      bg-linear-to-r from-rose-500 to-red-500
-                      opacity-0
-                      group-hover:w-1/2
-                      group-hover:opacity-100
-                      transition-all duration-300 ease-out
-                      z-30
-                      rounded-tr-lg
-                    "
-                  />
-                  <div
-                    className="
-                      absolute top-0 right-0 
-                      w-[3px] h-0
-                      bg-linear-to-r from-rose-500 to-red-500
-                      opacity-0
-                      group-hover:h-1/2
-                      group-hover:opacity-100
-                      transition-all duration-300 ease-out
-                      z-30
-                      rounded-tr-lg
-                    "
-                  />
-                  {/* Hover content */}
-                  <div
-                    className="
-                      absolute bottom-0 left-0 right-0
-                      h-0
-                      bg-black/80
-                      flex flex-col justify-end items-start
-                      p-6
-                      opacity-0
-                      group-hover:h-3/4
-                      group-hover:opacity-100
-                      transition-all duration-500 ease-in-out
-                      z-20
-                      rounded-b-lg /* Match card border radius */
-                    "
-                  >
-                    <div
-                      className="
-                        h-full
-                        flex flex-col justify-end
-                        text-white
-                      "
-                    >
-                      <p className="text-base font-semibold mb-2">
-                        The Challenge:
-                      </p>
-                      <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-                        {study.challengeSummary || fallbackChallenge}
-                      </p>
-                      <p className="text-base font-semibold mb-2">
-                        The Outcome:
-                      </p>
-                      <p className="text-sm text-gray-300 leading-relaxed">
-                        {study.goalsSummary || fallbackOutcome}
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              </Link>
-            </motion.div>
-          ))}
-          {/* Row 2: Remaining 2 Cards */}
-          {/* Note: Instead of separate grid containers for "col-span-5" and "col-span-7",
-                     we put them in the same grid and let col-span handle layout.
-                     This makes the grid more consistent. */}
-          {paddedCaseStudyPosts.slice(3, 5).map((study, index) => (
-            <motion.div
-              key={
-                study._id + index
-              } /* Use index for unique key if IDs might be duplicated from placeholders */
-              className={`
-                col-span-12 sm:col-span-6 /* Each card takes half width on sm, full on xs */
-                ${index === 0 ? "lg:col-span-5" : "lg:col-span-7"} /* Apply specific col-span on larger screens */
-              `}
-              variants={
-                additionalCardVariants
-              } /* Using the different variant for these */
+              Our Portfolio
+            </BadgeAtom>
+            <HeadingAtom
+              as="h2"
+              size="xl"
+              title="Real Projects."
+              highlight="Real Impact."
+              variant="split"
+            />
+            <p className="text-muted-foreground text-lg max-w-xl">
+              Explore a selection of our recent work, showcasing our expertise in design, development, and digital strategy.
+            </p>
+          </div>
+
+          <Link href="/works">
+            <ButtonAtom
+              variant="outline"
+              size="lg"
+              icon={<ArrowUpRight className="w-5 h-5" />}
+              iconPosition="right"
+              className="hidden md:flex border-foreground/20 text-foreground hover:bg-foreground/5"
             >
-              <Link href={`/case-study/${study.slug}`}>
-                <Card
-                  className="
-                    relative h-[300px] w-full rounded-lg overflow-hidden cursor-pointer group
-                    hover:shadow-xl hover:shadow-red-500/20
-                    transition-shadow duration-300
-                  "
-                >
-                  <NextImage
-                    width={300}
-                    height={200}
-                    alt={study.title || "Case study image"}
-                    className="z-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    src={
-                      study.imageUrl ||
-                      "https://heroui.com/images/card-example-6.jpeg"
-                    }
-                  />
-                  <CardHeader className="absolute z-10 top-1 flex-col items-start! opacity-100 transition-opacity duration-300 group-hover:opacity-0 ">
-                    <p className="text-tiny text-white uppercase font-bold rounded-xs p-1">
-                      {study.service || fallbackCategory}
-                    </p>
-                    <h4 className="text-white font-medium text-large ">
-                      {study.title}
-                    </h4>
-                  </CardHeader>
-                  {/* ... (gradient borders and hover content - keep as is) ... */}
-                  <div
-                    className="
-                      absolute top-0 left-0 
-                      w-0 h-[3px]
-                      bg-linear-to-r from-rose-500 to-red-500
-                      opacity-0
-                      group-hover:w-1/2
-                      group-hover:opacity-100
-                      transition-all duration-300 ease-out
-                      z-30
-                      rounded-tl-lg
-                    "
-                  />
-                  <div
-                    className="
-                      absolute top-0 left-0 rounded-lg
-                      w-[3px] h-0
-                      bg-linear-to-r from-rose-500 to-red-500
-                      opacity-0
-                      group-hover:h-1/2
-                      group-hover:opacity-100
-                      transition-all duration-300 ease-out
-                      z-30
-                      rounded-tl-lg
-                    "
-                  />
-                  <div
-                    className="
-                      absolute top-0 right-0 
-                      w-0 h-[3px]
-                      bg-linear-to-r from-rose-500 to-red-500
-                      opacity-0
-                      group-hover:w-1/2
-                      group-hover:opacity-100
-                      transition-all duration-300 ease-out
-                      z-30
-                      rounded-tr-lg
-                    "
-                  />
-                  <div
-                    className="
-                      absolute top-0 right-0 
-                      w-[3px] h-0
-                      bg-linear-to-r from-rose-500 to-red-500
-                      opacity-0
-                      group-hover:h-1/2
-                      group-hover:opacity-100
-                      transition-all duration-300 ease-out
-                      z-30
-                      rounded-tr-lg
-                    "
-                  />
-                  <div
-                    className="
-                      absolute bottom-0 left-0 right-0
-                      h-0
-                      bg-black/80
-                      flex flex-col justify-end items-start
-                      p-6
-                      opacity-0
-                      group-hover:h-3/4
-                      group-hover:opacity-100
-                      transition-all duration-500 ease-in-out
-                      z-20
-                      rounded-b-lg
-                    "
-                  >
-                    <div
-                      className="
-                        h-full
-                        flex flex-col justify-end
-                        text-white 
-                      "
-                    >
-                      <p className="text-base font-semibold mb-2">
-                        The Challenge:
-                      </p>
-                      <p className="text-sm text-gray-300 mb-4 leading-relaxed">
-                        {study.challengeSummary || fallbackChallenge}
-                      </p>
-                      <p className="text-base font-semibold mb-2">
-                        The Outcome:
-                      </p>
-                      <p className="text-sm text-gray-300 leading-relaxed">
-                        {study.goalsSummary || fallbackOutcome}
-                      </p>
-                    </div>
-                  </div>
-                </Card>
-              </Link>
-            </motion.div>
-          ))}
+              View All Projects
+            </ButtonAtom>
+          </Link>
         </div>
+
+        {/* Bento Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-1 md:grid-cols-6 gap-6"
+        >
+          {paddedCaseStudyPosts.map((study, index) => {
+            // Layout Logic:
+            // First 3 items: 2 columns each (3 items * 2 = 6 total width)
+            // Next 2 items: 3 columns each (2 items * 3 = 6 total width)
+            const colSpanClass = index < 3 ? "md:col-span-2" : "md:col-span-3";
+            const heightClass = index < 3 ? "h-[400px]" : "h-[450px]";
+
+            return (
+              <motion.div
+                key={study._id + index}
+                variants={cardItemVariants}
+                className={`col-span-1 ${colSpanClass}`}
+              >
+                <Link href={`/case-study/${study.slug}`} className="block h-full">
+                  <CardMolecule
+                    variant="spotlight"
+                    padding="none"
+                    className={`relative ${heightClass} w-full group p-0 overflow-hidden border-0`}
+                  >
+                    {/* Background Image */}
+                    <Image
+                      src={study.imageUrl || "https://heroui.com/images/card-example-4.jpeg"}
+                      alt={study.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+
+                    {/* Content */}
+                    <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                      {/* Top Badge */}
+                      <div className="self-start opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100">
+                        <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider border border-white/10">
+                          {study.service || "Case Study"}
+                        </span>
+                      </div>
+
+                      {/* Bottom Text */}
+                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                        <h3 className="text-2xl font-bold text-white mb-2 leading-tight">
+                          {study.title}
+                        </h3>
+
+                        {/* Slide-up Details */}
+                        <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
+                          <div className="overflow-hidden">
+                            <p className="text-gray-300 text-sm line-clamp-3 pt-2 border-t border-white/20 mt-2">
+                              {study.challengeSummary || study.goalsSummary || "Discover how we helped this client achieve their goals through innovative digital solutions."}
+                            </p>
+                            <div className="mt-4 flex items-center gap-2 text-brand-primary font-medium text-sm">
+                              Read Case Study <ArrowUpRight className="w-4 h-4" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </CardMolecule>
+                </Link>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
+        {/* Mobile Button (visible only on small screens) */}
+        <div className="mt-12 flex justify-center md:hidden">
+          <Link href="/works">
+            <ButtonAtom
+              variant="primary"
+              size="lg"
+              icon={<ArrowUpRight className="w-5 h-5" />}
+              iconPosition="right"
+            >
+              View All Projects
+            </ButtonAtom>
+          </Link>
+        </div>
+
       </div>
     </section>
   );

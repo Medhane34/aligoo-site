@@ -1,8 +1,10 @@
+// components/sections/ProcessSection.tsx
 "use client";
-import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
-import { SectionHeading, AccentText } from "@/components/ui/typography";
-import React from "react";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import HeadingAtom from "@/components/atoms/HeadingAtom";
+import BadgeAtom from "@/components/atoms/BadgeAtom";
+import { Layers, ArrowRight } from "lucide-react";
 
 export interface ProcessStep {
   icon: string;
@@ -14,19 +16,26 @@ export interface ProcessSectionProps {
   sectionHeading: string;
   accentText: string;
   steps: ProcessStep[];
-  lang: 'en' | 'am'; // Added
+  lang: 'en' | 'am';
 }
 
-const stepVariants = {
-  initial: { opacity: 0, scale: 0.8 },
-  animate: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-  complete: { opacity: 1, scale: 1 },
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  },
 };
 
-const descriptionVariants = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0, transition: { duration: 0.7, delay: 0.3 } },
-  initialInactive: { opacity: 0.5, y: 20 },
+const stepVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
 };
 
 export default function ProcessSection({
@@ -35,86 +44,107 @@ export default function ProcessSection({
   steps,
   lang,
 }: ProcessSectionProps) {
-  const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true });
-  const [activeStep, setActiveStep] = useState(-1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"],
+  });
 
-  useEffect(() => {
-    if (isInView) {
-      const timer = setTimeout(() => setActiveStep(0), 500);
-      return () => clearTimeout(timer);
-    } else {
-      setActiveStep(-1);
-    }
-  }, [isInView]);
-
-  useEffect(() => {
-    if (isInView && activeStep < steps.length - 1 && activeStep >= 0) {
-      const timer = setTimeout(() => setActiveStep((prev) => prev + 1), 2000);
-      return () => clearTimeout(timer);
-    }
-  }, [isInView, activeStep, steps.length]);
+  // Animate the line width/height based on scroll
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lineWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <motion.div
-      ref={sectionRef}
-      className="py-16 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark"
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1, transition: { duration: 1 } } : {}}
-    >
-      <div className="container mx-auto px-4 text-center">
-        <div className="space-y-2 mb-8">
-          <SectionHeading className="text-3xl font-bold tracking-tight uppercase">
-            {sectionHeading}
-          </SectionHeading>
-          <AccentText className="normal-case">{accentText}</AccentText>
+    <section ref={containerRef} className="py-24 bg-background-light dark:bg-background-dark relative overflow-hidden">
+      {/* Ambient Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-primary/5 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="container mx-auto px-4 relative z-10">
+
+        {/* Header */}
+        <div className="text-center mb-20 flex flex-col items-center gap-6">
+          <BadgeAtom
+            variant="filled"
+            color="blue"
+            icon={<Layers className="w-3.5 h-3.5" />}
+          >
+            How We Work
+          </BadgeAtom>
+
+          <HeadingAtom
+            as="h2"
+            size="xl"
+            align="center"
+            title={sectionHeading}
+            highlight={accentText}
+            variant="split"
+            className="max-w-4xl mx-auto"
+          />
         </div>
 
-        <div className="flex justify-around mb-8 relative">
-          {Array.from({ length: steps.length }).map((_, index) => (
-            <React.Fragment key={index}>
-              <motion.div
-                className={`relative w-12 h-12 rounded-full border-2 ${
-                  activeStep >= index
-                    ? "border-blue-500 text-blue-500"
-                    : "border-gray-300 text-gray-600"
-                } flex items-center justify-center font-semibold bg-background-light dark:bg-background-dark`}
-                variants={stepVariants}
-                initial="initial"
-                animate={activeStep >= index ? "animate" : "initial"}
-              >
-                {steps[index].icon ? (
-                  <span className="text-2xl">{steps[index].icon}</span>
-                ) : (
-                  index + 1
-                )}
-              </motion.div>
-             {/*  {index < steps.length - 1 && (
-                <div className="w-8 h-0.5 bg-gray-300 absolute top-1/2 left-full -translate-y-1/2" />
-              )} */}
-            </React.Fragment>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-8 md:gap-y-12 px-4">
-          {steps.map((step, index) => (
+        {/* Steps Container */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="relative grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8"
+        >
+          {/* Connector Line (Desktop - Horizontal) */}
+          <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-neutral-200 dark:bg-neutral-800 -z-10">
             <motion.div
-              key={index}
-              className="text-center"
-              variants={descriptionVariants}
-              initial="initial"
-              animate={activeStep >= index ? "animate" : "initialInactive"}
-            >
-              <h3 className="text-xl font-semibold mb-2 text-brand-primary-light dark:text-text-dark">
-                {step.heading}
-              </h3>
-              <motion.p className="text-white-600 text-sm">
-                {step.description}
-              </motion.p>
-            </motion.div>
-          ))}
-        </div>
+              style={{ width: lineWidth }}
+              className="h-full bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 origin-left"
+            />
+          </div>
+
+          {/* Connector Line (Mobile - Vertical) */}
+          <div className="md:hidden absolute top-0 left-8 w-0.5 h-full bg-neutral-200 dark:bg-neutral-800 -z-10">
+            <motion.div
+              style={{ height: lineHeight }}
+              className="w-full bg-gradient-to-b from-red-500 via-orange-500 to-yellow-500 origin-top"
+            />
+          </div>
+
+          {steps.map((step, index) => {
+            const emojis = ['🚀', '📅', '📄', '🤝'];
+            const displayIcon = emojis[index] || step.icon;
+
+            return (
+              <motion.div
+                key={index}
+                variants={stepVariants}
+                className="relative flex md:flex-col items-start md:items-center gap-6 md:gap-8 group"
+              >
+                {/* Icon Container */}
+                <div className="relative flex-shrink-0">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center text-3xl shadow-lg shadow-orange-500/25 group-hover:scale-110 transition-transform duration-300 z-10 relative text-white">
+                    {displayIcon}
+                  </div>
+                  {/* Pulse Effect */}
+                  <div className="absolute inset-0 rounded-full bg-orange-500/40 animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
+
+                {/* Content */}
+                <div className="flex-1 md:text-center pt-2 md:pt-0">
+                  <div className="flex items-center md:justify-center gap-3 mb-3">
+                    <span className="text-4xl font-black text-neutral-200 dark:text-neutral-800 select-none">
+                      0{index + 1}
+                    </span>
+                    <h3 className="text-xl font-bold text-foreground">
+                      {step.heading}
+                    </h3>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
+
       </div>
-    </motion.div>
+    </section>
   );
 }

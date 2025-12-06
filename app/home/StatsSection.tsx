@@ -1,7 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { useInView } from "framer-motion";
-import { Divider } from "@heroui/divider";
+import { useEffect, useRef } from "react";
+import { useInView, useMotionValue, useSpring, motion } from "framer-motion";
+import { Palette, Infinity as InfinityIcon } from "lucide-react";
 
 export interface Stat {
   label: string;
@@ -14,63 +14,80 @@ export interface Stat {
 export interface StatsSectionProps {
   stats: Stat[];
   footerText?: string;
-  lang: 'en' | 'am'; // Added
+  lang: 'en' | 'am';
 }
 
-function Counter({ value, suffix = "", prefix = "", duration = 2 }: Stat) {
-  const [current, setCurrent] = useState(0);
-  const ref = useRef<HTMLSpanElement | null>(null);
-  const inView = useInView(ref, { once: true });
+function Counter({ value, suffix = "", prefix = "", duration = 2.5 }: Stat) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, {
+    damping: 60,
+    stiffness: 100,
+  });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   useEffect(() => {
-    if (!inView) return;
-    let start = 0;
-    const end = Number(value);
-    if (start === end) return;
-    let startTimestamp: number | null = null;
-    const step = (timestamp: number) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
-      setCurrent(Math.round(progress * (end - start) + start));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }, [inView, value, duration]);
+    if (isInView) {
+      motionValue.set(value);
+    }
+  }, [isInView, value, motionValue]);
 
-  return (
-    <span ref={ref}>
-      {prefix}
-      {current}
-      {suffix}
-    </span>
-  );
+  useEffect(() => {
+    springValue.on("change", (latest) => {
+      if (ref.current) {
+        ref.current.textContent = `${prefix}${Math.round(latest)}${suffix}`;
+      }
+    });
+  }, [springValue, prefix, suffix]);
+
+  return <span ref={ref}>{prefix}0{suffix}</span>;
 }
 
 export default function StatsSection({ stats, footerText, lang }: StatsSectionProps) {
   return (
-    <section className="max-w-full overflow-x-hidden py-16 gap-4 xs:gap-3 sm:gap-6 md:gap-7 lg:gap-8 px-4 xs:px-5 sm:px-6 md:px-8 text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
-      <div className="container mx-auto grid grid-cols-1 gap-12 px-6 text-center xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 sm:w-1/2 md:w-4/5 lg:w-3/4 xl:w-2/3">
-        {stats.map((stat, i) => (
-          <div key={i} className="flex items-center justify-center">
-            <div className="space-y-2 px-4 text-center">
-              <h3 className="text-4xl font-bold tracking-tight text-brand-primary-light dark:text-text-dark">
+    <section className="relative py-24 bg-background-light dark:bg-background-dark overflow-hidden">
+
+      {/* Container */}
+      <div className="container mx-auto px-4">
+
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12 md:gap-8 justify-items-center">
+          {stats.map((stat, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1, duration: 0.5 }}
+              className="flex flex-col items-center justify-center text-center group"
+            >
+              <h3 className="text-5xl md:text-7xl font-black tracking-tighter bg-gradient-to-r from-red-500 to-yellow-500 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-transform duration-300">
                 <Counter {...stat} />
               </h3>
-              <p className="text-sm font-medium uppercase tracking-wide">
+              <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground">
                 {stat.label}
               </p>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Footer */}
+        {footerText && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.5 }}
+            className="mt-16 text-center"
+          >
+            <div className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground uppercase tracking-wider px-6 py-2 rounded-full border border-neutral-200 dark:border-neutral-800 bg-background/50 backdrop-blur-sm">
+
+              {footerText}
             </div>
-            {i < stats.length - 1 && (
-              <div className="hidden md:block">
-                <Divider className="h-16" orientation="vertical" />
-              </div>
-            )}
-          </div>
-        ))}
+          </motion.div>
+        )}
+
       </div>
-      {footerText && (
-        <p className="text-center text-small pt-8">{footerText}</p>
-      )}
     </section>
   );
 }

@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion'
 import { CheckCircle2 } from 'lucide-react'
 
-import type { BasePackage } from '@/lib/proposal'
+import type { BasePackage } from '@/types/ProposalType'
 import { cn } from '@/utils/cn'
 
 interface PackageCardProps {
@@ -15,7 +15,7 @@ interface PackageCardProps {
 
 export default function PackageCard({ pkg, selected, onSelect }: PackageCardProps) {
   return (
-    <div 
+    <div
       className={cn(
         "bg-white/10 backdrop-blur-md p-6 rounded-xl cursor-pointer transition-all",
         selected ? "border-4 border-blue-500 scale-105" : "border border-white/20 hover:scale-102"
