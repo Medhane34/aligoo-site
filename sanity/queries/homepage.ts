@@ -1,7 +1,7 @@
 import { groq } from 'next-sanity';
 
 export const HERO_SECTION_QUERY_HOMEPAGE = `
-  *[_type == "heroSection"][0]{
+  *[_type == "heroSection" && name == $name][0]{
     badgeText_en,
     badgeText_am,
     headlineText1_en,

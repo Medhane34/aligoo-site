@@ -47,6 +47,8 @@ export const viewport: Viewport = {
   ],
 };
 
+import LanguagePrompt from "@/components/LanguagePrompt";
+
 export default async function RootLayout({
   children,
 }: {

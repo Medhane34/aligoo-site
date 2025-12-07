@@ -101,8 +101,8 @@ export const revalidate = 3600; // Rebuild every hour
 export default async function IndexPage() {
   return (
     <>
-      <HeroSection 
-      badgeText="Content that winds customers" // Optional badge text
+      <HeroSection
+        badgeText="Content that winds customers" // Optional badge text
         headlineText1="🎯 Map the "
         headlineText2="Path."
         headlineText3="Maximize the Conversions."
@@ -114,11 +114,11 @@ export default async function IndexPage() {
 "
       />
       <Container>
-<WhyFunnelMappingWorksSection
-        heading="Why Funnel Mapping Works"
-        subheading="We’ve designed a 4-step framework to map, design, and optimize funnels that convert. Here's how it works:"
-        features={features}
-      />
+        <WhyFunnelMappingWorksSection
+          heading="Why Funnel Mapping Works"
+          subheading="We’ve designed a 4-step framework to map, design, and optimize funnels that convert. Here's how it works:"
+          features={features}
+        />
 
       </Container>
       <ProcessSection
@@ -128,58 +128,58 @@ export default async function IndexPage() {
       />
 
       <Container>
-        
-      <WhoThisIsForSection
-      heading="Who This Is For"
-      highlightedPhrases={[
-        " If you’re just looking to “fill your blog”",
-        " or copy what your competitors are doing—this might not be the right fit.",
-        "If you’re serious about building,”",
-        "a content system that drives traffic, ",
-        " builds authority,",
-        "grow your business — ",
-        "and generates leads on autopilot—then we just might be the perfect content partner."
-      ]}
-      introText="We’re not the team that pumps out generic content with zero strategy."
-      subheading="we build strategic ones that drive results."
-    />
-   </Container>
+
+        <WhoThisIsForSection
+          heading="Who This Is For"
+          highlightedPhrases={[
+            " If you’re just looking to “fill your blog”",
+            " or copy what your competitors are doing—this might not be the right fit.",
+            "If you’re serious about building,”",
+            "a content system that drives traffic, ",
+            " builds authority,",
+            "grow your business — ",
+            "and generates leads on autopilot—then we just might be the perfect content partner."
+          ]}
+          introText="We’re not the team that pumps out generic content with zero strategy."
+          subheading="we build strategic ones that drive results."
+        />
+      </Container>
 
 
- 
-   
-  <Container>
-      <FaqSection
-  ctaText="📩 Need Custom Advice?"
-  eyebrow="❓ FAQs about Our Funnel Mapping Service"
-  faqs={[
-    {
-      question: "Q: Is this just a diagram?",
-      answer:
-        "Nope! You’ll get a full breakdown of your customer journey, messaging flow, traffic plan, and key conversion points—not just a pretty flowchart.",
-    },
-    {
-      question: "Q: Do you help build the funnel too?",
-      answer:
-        "Yes, that’s available as an add-on. We can help implement your funnel on platforms like ClickFunnels, WordPress, Webflow, or even via email automations.",
-    },
-     {
-      question: "Q: What if I don’t have any funnel yet?",
-      answer:
-        "Even better! We’ll help you craft your funnel from scratch, based on your goals, audience, and offer.",
-    },
-    {
-      question: "Q: Can you revise the funnel after delivery?",
-      answer:
-        "Absolutely. Each package includes 1 round of revisions. Additional strategy support is also available if needed.",
-    },
 
-  ]}
-  heading="Still Wondering If It Works?"
-  subheading="We’ve helped dozens of brands run profitable campaigns. Here are answers to the most common questions people ask before they sign up."
-/>
-</Container>
-{/*  <Container>
+
+      <Container>
+        <FaqSection
+          ctaText="📩 Need Custom Advice?"
+          eyebrow="❓ FAQs about Our Funnel Mapping Service"
+          faqs={[
+            {
+              question: "Q: Is this just a diagram?",
+              answer:
+                "Nope! You’ll get a full breakdown of your customer journey, messaging flow, traffic plan, and key conversion points—not just a pretty flowchart.",
+            },
+            {
+              question: "Q: Do you help build the funnel too?",
+              answer:
+                "Yes, that’s available as an add-on. We can help implement your funnel on platforms like ClickFunnels, WordPress, Webflow, or even via email automations.",
+            },
+            {
+              question: "Q: What if I don’t have any funnel yet?",
+              answer:
+                "Even better! We’ll help you craft your funnel from scratch, based on your goals, audience, and offer.",
+            },
+            {
+              question: "Q: Can you revise the funnel after delivery?",
+              answer:
+                "Absolutely. Each package includes 1 round of revisions. Additional strategy support is also available if needed.",
+            },
+
+          ]}
+          heading="Still Wondering If It Works?"
+          subheading="We’ve helped dozens of brands run profitable campaigns. Here are answers to the most common questions people ask before they sign up."
+        />
+      </Container>
+      {/*  <Container>
       <CTABottomSection firstbuttontext={"👉 Book Funnel Strategy Call"} 
       heading={"Ready to Turn Clicks Into Clients?"} 
       subheading={"Your funnel isn’t just a path—it’s your profit engine. Whether you’re stuck with scattered tools or just getting started, we’ll help you make sense of the chaos and create a clear, high-converting system."} />

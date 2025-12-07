@@ -51,7 +51,7 @@ export default async function Home({
     <>
       <section className="bg-background-light dark:bg-background-dark">
 
-        <HomeHeroSectionWrapper lang={lang} />
+        <HeroSectionWrapper lang={lang} />
         <Container >
           <AboutUsSectionWrapper lang={lang} />
         </Container>

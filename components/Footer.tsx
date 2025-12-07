@@ -4,6 +4,7 @@ import React from "react";
 import { Button } from "@heroui/button";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 import ButtonAtom from "./atoms/ButtonAtom";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const services = [
   { label: "Facebook & Instagram Ads", href: "/services/facebook-ad" },
@@ -79,6 +80,11 @@ const Footer: React.FC = () => {
             the noise with clarity, creativity, and measurable results. Elevate
             your online presence with our innovative digital solutions.
           </p>
+
+          {/* Language Switcher */}
+          <div className="pt-2">
+            <LanguageSwitcher />
+          </div>
         </div>
 
         {/* Services */}
