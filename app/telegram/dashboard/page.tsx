@@ -1,14 +1,16 @@
 import React from "react";
-import { client } from "@/src/sanity/client";
+import { automationClient } from "@/src/sanity/client";
 import CardMolecule from "@/components/molecules/CardMolecule";
 import { UserGroupIcon, PaperAirplaneIcon, ChartBarIcon } from "@heroicons/react/24/outline";
 
-export const dynamic = 'force-dynamic';
+// This enables Incremental Static Regeneration (ISR) for this page.
+// The page will be regenerated at most every 24 hours.
+export const revalidate = 86400;
 
 async function getStats() {
-    const subscribers = await client.fetch(`count(*[_type == "subscriber"])`);
-    const activeSubscribers = await client.fetch(`count(*[_type == "subscriber" && isActive == true])`);
-    const campaigns = await client.fetch(`*[_type == "campaign"]{status, stats}`);
+    const subscribers = await automationClient.fetch(`count(*[_type == "subscriber"])`);
+    const activeSubscribers = await automationClient.fetch(`count(*[_type == "subscriber" && isActive == true])`);
+    const campaigns = await automationClient.fetch(`*[_type == "campaign"]{status, stats}`);
 
     let totalSent = 0;
     let totalFailed = 0;

@@ -5,6 +5,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { PrimaryButton } from "./atoms/button";
 import { AccentText, SectionHeading } from "./ui/typography";
+import HeadingAtom from "./atoms/HeadingAtom";
+import ButtonAtom from "./atoms/ButtonAtom";
 
 export interface CTABottomSectionProps {
   heading: string;
@@ -39,16 +41,23 @@ export default function CTABottomSection({
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
         <div className="flex flex-col items-center text-center md:flex-row md:justify-between md:items-center md:text-left gap-8 md:gap-0 lg:gap-12">
           <motion.div className="flex flex-col items-center md:items-start space-y-2 max-w-lg" variants={sectionVariants}>
-            <SectionHeading className="">{heading}</SectionHeading>
-                        <AccentText className="normal-case">
-{subheading}                        </AccentText>
-            
+            <HeadingAtom
+              size="md"
+              title={heading}
+              highlight={subheading}
+              variant="split"
+
+            ></HeadingAtom>
+
+
+
+
           </motion.div>
           <motion.div className="flex flex-row items-center justify-center gap-4 w-full md:w-auto" variants={sectionVariants}>
             <motion.div variants={buttonVariants} className="flex-1 min-w-0">
               <Link href={primaryButtonUrl}>
-              
-<PrimaryButton>{primaryButtonText}</PrimaryButton>
+
+                <ButtonAtom shimmer size="md">{primaryButtonText}</ButtonAtom>
 
 
               </Link>

@@ -1,16 +1,23 @@
 // app/api/broadcast/trigger/route.ts
 import { NextResponse } from 'next/server';
-import { client } from '@/src/sanity/client';
+import { automationClient } from '@/src/sanity/client';
 import { sendTelegramMessage } from '@/lib/telegram';
+import { isAutomationEnabled } from '@/lib/automation-guard';
 
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
-    const { campaignId } = await req.json();
+    // Kill switch check
+    if (!isAutomationEnabled()) {
+        return NextResponse.json({ paused: 'Automations are disabled' });
+    }
+
+    const { campaignId, campaignData } = await req.json();
 
     try {
-        // FIXED: Remove the 'status !== draft' check — we trigger on publish now
-        const campaign = await client.getDocument(campaignId);
+        // OPTIMIZATION: Use campaign data from webhook if available (saves 1 Sanity read)
+        const campaign = campaignData || await automationClient.getDocument(campaignId);
+
         if (!campaign) {
             return NextResponse.json({ error: 'Campaign not found' }, { status: 404 });
         }
@@ -19,9 +26,6 @@ export async function POST(req: Request) {
         if (campaign.status === 'sent' || campaign.status === 'sending') {
             return NextResponse.json({ already: 'sent or sending' });
         }
-
-        // Mark as sending
-        await client.patch(campaignId).set({ status: 'sending', debugLog: 'Starting broadcast...' }).commit();
 
         // Fetch subscribers based on segmentation
         let query = `*[_type == "subscriber" && isActive == true]{telegramId, firstName}`;
@@ -32,10 +36,14 @@ export async function POST(req: Request) {
             params = { service: campaign.service };
         }
 
-        const subscribers = await client.fetch(query, params);
+        const subscribers = await automationClient.fetch(query, params);
 
         if (!subscribers || subscribers.length === 0) {
-            await client.patch(campaignId).set({ status: 'failed', debugLog: 'No active subscribers found.' }).commit();
+            // Single write for "no subscribers" case
+            await automationClient.patch(campaignId).set({
+                status: 'failed',
+                debugLog: 'No active subscribers found.'
+            }).commit();
             return NextResponse.json({ error: 'No subscribers' });
         }
 
@@ -56,15 +64,13 @@ export async function POST(req: Request) {
             ? `Completed with errors. Failed IDs: ${JSON.stringify(errors)}`
             : `Success! Sent to ${sent} subscribers.`;
 
-        await client
-            .patch(campaignId)
-            .set({
-                status: finalStatus,
-                sentAt: new Date().toISOString(),
-                stats: { totalSubscribers: subscribers.length, sent, failed },
-                debugLog: debugMessage
-            })
-            .commit();
+        // OPTIMIZATION: Single write at the end (removed separate "sending" status update)
+        await automationClient.patch(campaignId).set({
+            status: finalStatus,
+            sentAt: new Date().toISOString(),
+            stats: { totalSubscribers: subscribers.length, sent, failed },
+            debugLog: debugMessage
+        }).commit();
 
         return NextResponse.json({ sent, failed, total: subscribers.length, errors });
 
@@ -73,7 +79,7 @@ export async function POST(req: Request) {
 
         // Try to log error to Sanity if possible
         try {
-            await client.patch(campaignId).set({
+            await automationClient.patch(campaignId).set({
                 status: 'failed',
                 debugLog: `CRITICAL ERROR: ${err.message || JSON.stringify(err)}`
             }).commit();

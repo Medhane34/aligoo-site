@@ -2,9 +2,11 @@
 import { motion } from "framer-motion";
 import React from "react";
 import { AccentText, SectionHeading } from "@/components/ui/typography";
+import HeadingAtom from "../atoms/HeadingAtom";
+import BadgeAtom from "../atoms/BadgeAtom";
 
 interface WhoThisIsForSectionProps {
-  id?:string;
+  id?: string;
   heading: string;
   subheading?: string;
   highlightedPhrases: string[];
@@ -38,9 +40,15 @@ const WhoThisIsForSection: React.FC<WhoThisIsForSectionProps> = ({
             visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeInOut" } },
           }}
         >
-          <SectionHeading className="text-heading uppercase">
-            {heading}
-          </SectionHeading>
+  
+      
+          <HeadingAtom
+            highlight={heading}
+            title=""
+            variant="split"
+            size="lg"
+            align="center"
+          ></HeadingAtom>
         </motion.div>
         {subheading && (
           <motion.div
@@ -50,7 +58,13 @@ const WhoThisIsForSection: React.FC<WhoThisIsForSectionProps> = ({
               visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeInOut" } },
             }}
           >
-            <AccentText className="normal-case">{subheading}</AccentText>
+
+            <HeadingAtom
+              title={subheading}
+              variant="split"
+              size="sm"
+              align="center"
+            ></HeadingAtom>
           </motion.div>
         )}
       </motion.div>

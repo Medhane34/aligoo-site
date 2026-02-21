@@ -23,6 +23,17 @@ export interface CaseStudyCoreData {
   };
   mainImage?: string; // URL of the main image asset
   mainImageAlt?: string; // Alt text for the main image
+
+  // New Metadata Fields
+  servicesList?: string[];
+  projectDuration?: string;
+  techStack?: string[];
+  liveSiteUrl?: string;
+  teamMembers?: {
+    name: string;
+    role?: string;
+    image?: string;
+  }[];
 }
 
 export interface CaseStudyOverviewData {

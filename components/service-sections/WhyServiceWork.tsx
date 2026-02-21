@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import HeadingAtom from "../atoms/HeadingAtom";
 
 const headingVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -69,16 +70,28 @@ const WhyServiceWorks: React.FC<WhyServiceWorksProps> = ({
     <div className="py-16 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
       {/* Heading */}
       <div className="container mx-auto px-4 text-center mb-12">
-        <motion.h2
+        <motion.div
           className="text-heading font-bold"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={headingVariants}
         >
-          {heading}{" "}
-          <span className="text-brand-primary">{highlight}</span>
-        </motion.h2>
+          <HeadingAtom
+            highlight={heading}
+            title=""
+            variant="split"
+            size="lg"
+          ></HeadingAtom>
+
+
+          <HeadingAtom
+            highlight={highlight}
+            title=""
+            variant="default"
+            size="sm"
+          ></HeadingAtom>
+        </motion.div>
       </div>
 
       {/* Two-Column Text */}

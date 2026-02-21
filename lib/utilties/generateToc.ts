@@ -4,10 +4,17 @@ export type TocItem = {
   level: number;
 };
 
+// Helper to generate consistent IDs from portable text blocks
 export function getHeadingId(block: any): string {
-  const text = block.children?.map((c: any) => c.text).join("") || "";
+  // Handle both direct text children and Portable Text nested spans
+  const children = block.children || [];
+  const text = children
+    .map((child: any) => (typeof child === "string" ? child : child.text || ""))
+    .join("");
+
   return text
     .toLowerCase()
+    .trim()
     .replace(/\s+/g, "-")
     .replace(/[^\w-]+/g, "");
 }

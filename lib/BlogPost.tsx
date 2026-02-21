@@ -17,7 +17,7 @@ export async function fetchLatestBlogs(
   const langField = (field: string) => `${field}_${lang}`;
 
   const query = groq`
-    *[_type == "post" && publishedAt < now() && ${langField("title")} != null] 
+    *[_type == "post" && publishedAt < now() && isExclusive != true && ${langField("title")} != null] 
     | order(publishedAt desc)[0...6] {
       _id,
       "title": ${langField("title")},
@@ -29,7 +29,7 @@ export async function fetchLatestBlogs(
   `;
 
   const posts = await client.fetch<BlogPostListItem[]>(query);
-  console.log(`[fetchLatestBlogs] Fetched ${posts.length} latest posts for lang '${lang}'`);
+  /*   console.log(`[fetchLatestBlogs] Fetched ${posts.length} latest posts for lang '${lang}'`); */
   return posts;
 }
 
@@ -45,15 +45,15 @@ export async function fetchBlogPosts(
     categorySlug && categorySlug.trim() !== "" ? categorySlug : undefined;
   const filter = cat ? `&& category->slug.current == $categorySlug` : "";
 
-  console.log("[fetchBlogPosts] variables:", {
+  /*   console.log("[fetchBlogPosts] variables:", {
     start,
     end,
     lang,
     categorySlug: cat,
-  });
+  }); */
 
   const query = groq`
-    *[_type == "post" && publishedAt < now() ${filter} && ${langField("title")} != null && ${langField("excerpt")} != null] 
+    *[_type == "post" && publishedAt < now() && isExclusive != true ${filter} && ${langField("title")} != null && ${langField("excerpt")} != null] 
     | order(publishedAt desc) 
     [$start...$end] {
       _id,
@@ -89,19 +89,19 @@ export async function fetchTotalBlogPostsCount(
     categorySlug && categorySlug.trim() !== "" ? categorySlug : undefined;
   const filter = cat ? `&& category->slug.current == $categorySlug` : "";
 
-  console.log("[fetchTotalBlogPostsCount] variables:", {
+  /*   console.log("[fetchTotalBlogPostsCount] variables:", {
     lang,
     categorySlug: cat,
-  });
+  }); */
 
   const query = groq`
-    count(*[_type == "post" && publishedAt < now() ${filter}])
+    count(*[_type == "post" && publishedAt < now() && isExclusive != true ${filter}])  // ADDED: && isExclusive != true
   `;
 
   const count = await client.fetch<number>(query, { categorySlug: cat });
 
-  console.log("[fetchTotalBlogPostsCount] count:", count);
-
+  /*   console.log("[fetchTotalBlogPostsCount] count:", count);
+   */
   return count;
 }
 
@@ -151,16 +151,44 @@ export async function fetchBlogPostBySlug(
       "category": category-> {
         _id,
         title_en,
-        title_am
+        title_am,
+        "slug": slug.current
+      },
+      "author": author-> {
+        name,
+        "image": image.asset->url,
+        "image": image.asset->url,
+        "bio": bio[]{
+          ...,
+          markDefs[]{
+            ...,
+            _type == "internalLink" => {
+              "slug": reference->slug
+            }
+          }
+        }
+      },
+      promotionalCard {
+        heading,
+        description,
+        buttonText,
+        buttonLink
       }
     }
   `;
 
   const post = await (client as SanityClient).fetch<BlogPostDetail | null>(query, { slug });
 
-  console.log(
+  if (post && post.body) {
+    // Calculate reading time: avg 200 words per minute
+    const text = JSON.stringify(post.body);
+    const wordCount = text.split(/\s+/).length;
+    post.estimatedReadingTime = Math.ceil(wordCount / 200);
+  }
+
+  /* console.log(
     `[fetchBlogPostBySlug] Fetched post '${slug}' for lang '${lang}'`,
-  );
+  ); */
 
   return post;
 }
@@ -168,13 +196,19 @@ export async function fetchBlogPostBySlug(
 // === 6. FETCH RELATED POSTS (Detail Page) ===
 export async function fetchRelatedPosts(
   currentSlug: string,
+  categorySlug?: string,
   lang: Lang = "en",
   limit = 3,
 ): Promise<BlogPostListItem[]> {
   const langField = (field: string) => `${field}_${lang}`;
 
+  // Filter by category if provided
+  const categoryFilter = categorySlug
+    ? `&& category->slug.current == $categorySlug`
+    : "";
+
   const query = groq`
-    *[_type == "post" && slug.current != $currentSlug && ${langField("title")} != null] 
+    *[_type == "post" && slug.current != $currentSlug && isExclusive != true ${categoryFilter} && ${langField("title")} != null] 
     | order(publishedAt desc)[0...$limit] {
       _id,
       "title": ${langField("title")},
@@ -185,7 +219,11 @@ export async function fetchRelatedPosts(
     }
   `;
 
-  const posts = await client.fetch<BlogPostListItem[]>(query, { currentSlug, limit });
+  const posts = await client.fetch<BlogPostListItem[]>(query, {
+    currentSlug,
+    categorySlug,
+    limit
+  });
   console.log(`[fetchRelatedPosts] Fetched ${posts.length} related posts for lang '${lang}'`);
   return posts;
 }

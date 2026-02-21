@@ -25,6 +25,7 @@ import ChatSupportWidget from '@/components/proposal/ChatSupportWidget'
 import TestimonialsWrapper from '@/wrappers/proposal/TestimonialsWrapper'
 import BonusGiftWrapper from '@/wrappers/proposal/BonusGiftWrapper'
 import NextStepsWrapper from '@/wrappers/proposal/NextStepsWrapper'
+import RoadmapWrapper from '@/wrappers/proposal/RoadmapWrapper'
 
 export default async function ProposalPage({
   params,
@@ -66,6 +67,9 @@ export default async function ProposalPage({
       <TestimonialsWrapper testimonials={proposal.template.testimonials} />
       <TeamSection />
       <FAQWrapper faq={proposal.template.faq} />
+
+      <RoadmapWrapper proposal={proposal} />
+
       <PricingTableWrapper
         comparisonTable={proposal.comparisonTable}
         packagePricing={proposal.packagePricing}

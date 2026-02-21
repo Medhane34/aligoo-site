@@ -9,6 +9,8 @@ import {
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
 import { AccentText, SectionHeading } from "../ui/typography";
+import BadgeAtom from "../atoms/BadgeAtom";
+import HeadingAtom from "../atoms/HeadingAtom";
 
 export type ProcessStep = {
   icon: React.ReactNode;
@@ -81,11 +83,17 @@ const ProcessStepsSection: React.FC<ProcessStepsSectionProps> = ({
 }) => (
   <section className="w-full bg-background-light dark:bg-background-dark py-16">
     <div className="max-w-6xl mx-auto px-4 flex flex-col items-center">
-      <SectionHeading>{heading}</SectionHeading>
-      
+      <BadgeAtom variant="filled" color="yellow"> PROCESS</BadgeAtom>
+      <HeadingAtom
+        highlight={heading}
+        title=""
+        variant="split"
+        size="lg"
+      ></HeadingAtom>
+
       {subheading && (
-        <AccentText>{subheading}</AccentText>
-        
+        <HeadingAtom title={subheading} variant="default" size="sm"></HeadingAtom>
+
       )}
       <div className="flex flex-col md:flex-row items-stretch justify-center gap-0 w-full">
         {steps.map((step, idx) => (

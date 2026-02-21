@@ -16,20 +16,7 @@ const urlFor = (source: SanityImageSource) =>
     ? imageUrlBuilder({ projectId, dataset }).image(source)
     : null;
 
-const getHeadingId = (block: any): string => {
-  if (!block || !block.children || !Array.isArray(block.children)) {
-    return "";
-  }
-  const text = block.children
-    .filter((child: any) => child._type === "span" && child.text)
-    .map((span: any) => span.text)
-    .join("");
-
-  return text
-    .toLowerCase()
-    .replace(/\s+/g, "-") // Replace spaces with -
-    .replace(/[^\w-]+/g, ""); // Remove all non-word chars
-};
+import { getHeadingId } from "@/lib/utilties/generateToc";
 
 const getYouTubeId = (urlOrId: string): string | null => {
   if (/^[\w-]{11}$/.test(urlOrId)) return urlOrId;
@@ -99,9 +86,9 @@ const components: PortableTextComponents = {
       );
     },
     tip: ({ value }) => (
-      <aside className="rounded bg-yellow-100 border-l-4 border-yellow-500 p-4 my-4">
-        <strong className="block text-yellow-800">{value.title}</strong>
-        <p className="text-body text-violet">{value.body}</p>
+      <aside className="rounded bg-blue-100 border-l-4 border-yellow-500 p-4 my-4">
+        <strong className="block text-black-800">{value.title}</strong>
+        <p className="text-body text-black">{value.body}</p>
       </aside>
     ),
     code: ({ value }) => (

@@ -13,6 +13,7 @@ import TikTokProcessSectionWrapper from "@/wrappers/services/TikTok-ad/ProcessTi
 import WhoThisIsForSectionWrapper from "@/wrappers/services/facebook-ad/WhoThisIsForSectionWrapper";
 import FaqTikTokSectionWrapper from "@/wrappers/services/TikTok-ad/FaqTikTokWrappers";
 import CTATikTokSectionWrapper from "@/wrappers/services/TikTok-ad/CtaTikTokWrapper";
+import WhoThisIsForTikTokWrapper from "@/wrappers/services/TikTok-ad/WhothisforTikTokWrappers";
 const fbWhyContent = {
   heading: "Why TikTok Ad Works(if you know to",
   highlight: "use them)",
@@ -53,34 +54,33 @@ const processSteps = [
 
 export const revalidate = 3600; // Rebuild every hour
 export default async function IndexPage({ params }: { params: Promise<{ lang: "en" | "am" }> }) {
- const { lang } = await params; // ✅
+  const { lang } = await params; // ✅
 
   return (
     <>
       <HeroTikTokSectionWrapper lang={lang} />
       <Container>
-      <WhyTikTokWorksSectionWrapper lang={lang} id="why-tiktok-works" />
-     </Container>
+        <WhyTikTokWorksSectionWrapper lang={lang} id="why-tiktok-works" />
+      </Container>
 
       <Container>
-      <TikTokProcessSectionWrapper lang={lang} />
-     </Container>
+        <TikTokProcessSectionWrapper lang={lang} />
+      </Container>
       <Container>
-      <WhoThisIsForSectionWrapper lang={lang} />
-
-    </Container>
-    <Container>
-    <AreWeMatch/>
+        <WhoThisIsForTikTokWrapper lang={lang} />
    </Container>
-   <Container>
-  
-<FaqTikTokSectionWrapper lang={lang} />
+      <Container>
+        <AreWeMatch />
+      </Container>
+      <Container>
 
-</Container>
-<Container>
+        <FaqTikTokSectionWrapper lang={lang} />
 
-      <CTATikTokSectionWrapper lang={lang} />
-    </Container> 
+      </Container>
+      <Container>
+
+        <CTATikTokSectionWrapper lang={lang} />
+      </Container>
     </>
   );
 }

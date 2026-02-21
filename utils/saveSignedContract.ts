@@ -1,5 +1,5 @@
 // lib/saveSignedContract.ts
-import { client as sanityClient } from '@/src/sanity/client';
+import { automationClient as sanityClient } from '@/src/sanity/client';
 
 export async function saveSignedContract({
     proposalId,

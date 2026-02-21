@@ -40,6 +40,22 @@ export const PROPOSAL_BY_CODE_QUERY = groq`
       "mockupLink": coalesce(mockupShowcase.mockupLink, template->.mockupShowcase.mockupLink)
     },
 
+    // ROADMAP OVERRIDE
+    "roadmap": roadmap {
+      enabled,
+      useTemplate,
+      heading,
+      subheading,
+      phases[] {
+        title,
+        duration,
+        description,
+        deliverables,
+        outcome,
+        color
+      }
+    },
+
     // DISCOUNT
     "discount": discount {
       enabled,
@@ -157,6 +173,19 @@ export const PROPOSAL_BY_CODE_QUERY = groq`
             question,
             answer
           }
+        }
+      },
+      roadmap {
+        enabled,
+        heading,
+        subheading,
+        phases[] {
+          title,
+          duration,
+          description,
+          deliverables,
+          outcome,
+          color
         }
       },
       timeline {

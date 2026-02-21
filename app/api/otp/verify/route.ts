@@ -6,6 +6,7 @@ import { NextRequest } from 'next/server'
 import { cookies } from 'next/headers'
 import { client } from '@/src/sanity/client'
 
+
 export async function POST(req: NextRequest) {
   try {
     const { proposalId } = await req.json()

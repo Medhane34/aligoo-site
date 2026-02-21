@@ -2,7 +2,9 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { AccentText, SectionHeading } from "../ui/typography";
+import { AccentText, Paragraph, SectionHeading } from "../ui/typography";
+import BadgeAtom from "../atoms/BadgeAtom";
+import HeadingAtom from "../atoms/HeadingAtom";
 
 export type Feature = {
   emoji: string;
@@ -70,10 +72,18 @@ const WhyServiceWorksSection: React.FC<WhyServiceWorksSectionProps> = ({
     <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12">
       {/* Left column: Headline and subheadline */}
       <div className="flex flex-col justify-center">
-        <SectionHeading>{heading}</SectionHeading>
-       
+        <HeadingAtom
+          highlight={heading}
+          title=""
+          variant="split"
+          size="lg"
+        ></HeadingAtom>
+
         {subheading && (
-        <AccentText>{subheading}</AccentText>
+          <Paragraph
+
+
+          >{subheading}</Paragraph>
         )}
       </div>
       {/* Right column: Features grid */}

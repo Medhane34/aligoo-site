@@ -18,8 +18,8 @@ export interface ValueCard {
 export interface ValuesSectionProps {
   sectionHeading: string
   accentText: string
-  buttonText: string
-  buttonUrl: string
+  buttonText?: string
+  buttonUrl?: string
   values: ValueCard[]
   lang: 'en' | 'am'
 }
@@ -46,6 +46,10 @@ export default function ValuesSection({
   // Always expect exactly 5 cards (your design requires it)
   const [card1, card2, card3, card4, card5] = values
 
+  // Fallback URL if buttonUrl is null/undefined
+  const safeButtonUrl = buttonUrl || "https://aligoo-digital.agency/strategy-session"
+
+
   return (
     <section className="py-20 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
       <div className="max-w-6xl mx-auto">
@@ -64,9 +68,10 @@ export default function ValuesSection({
             </div>
 
             <div className="mt-8">
-              <Link href={buttonUrl}>
+              <Link href={safeButtonUrl}>
                 <PrimaryButton size="lg" className="w-full sm:w-auto">
                   {buttonText}
+                  {buttonText || "Get In Touch"}
                 </PrimaryButton>
               </Link>
             </div>
@@ -163,7 +168,7 @@ export default function ValuesSection({
           {/* Card 5 */}
           {card5 && (
             <motion.div
-             className=" bg-white/10 backdrop-blur-xl rounded-3xl p-12 border border-white/20 
+              className=" bg-white/10 backdrop-blur-xl rounded-3xl p-12 border border-white/20 
                 rounded-2xl shadow-lg p-8 flex flex-col justify-center
                 hover:scale-[1.03] hover:shadow-2xl transition-all duration-300
                  

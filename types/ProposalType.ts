@@ -233,6 +233,25 @@ export interface NextStepsSection {
 }
 
 
+export interface RoadmapPhase {
+  _key: string
+  title: string
+  duration: string
+  description: string
+  deliverables?: any[] // Portable Text
+  outcome?: string
+  color: 'green' | 'yellow' | 'blue' | 'purple'
+}
+
+export interface RoadmapSection {
+  enabled?: boolean
+  useTemplate?: boolean
+  heading?: string
+  subheading?: string
+  phases?: RoadmapPhase[]
+}
+
+
 
 export interface ContractTemplateData {
   _id: string
@@ -275,6 +294,7 @@ export type ProposalData = {
   daysLeftText?: string;
   uniqueCode: string,
   videoGreeting?: VideoGreeting | null,
+  roadmap?: RoadmapSection,
   nextSteps?: NextStepsSection,
   discount?: Discount
   paymentProof: {
@@ -317,6 +337,7 @@ export type ProposalData = {
     faq?: FAQSection | null
     bonusGift?: BonusGiftSection
     nextSteps?: NextStepsSection
+    roadmap?: RoadmapSection
     extraSections: any[]
   }
   salesperson: {

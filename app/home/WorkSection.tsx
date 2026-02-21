@@ -101,7 +101,8 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
 
           <Link href="/works">
             <ButtonAtom
-              variant="outline"
+              variant="primary"
+              shimmer
               size="lg"
               icon={<ArrowUpRight className="w-5 h-5" />}
               iconPosition="right"
@@ -141,7 +142,7 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                   >
                     {/* Background Image */}
                     <Image
-                      src={study.imageUrl || "https://heroui.com/images/card-example-4.jpeg"}
+                      src={study.imageUrl || "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
                       alt={study.title}
                       fill
                       className="object-cover transition-transform duration-700 group-hover:scale-110"

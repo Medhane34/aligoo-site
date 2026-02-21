@@ -12,3 +12,5 @@ import { token } from "@/sanity/lib/token"
 export const { GET } = defineEnableDraftMode({
   client: client.withConfig({ token }),
 });
+
+console.log("Draft Mode Route Loaded. Token present:", !!token);

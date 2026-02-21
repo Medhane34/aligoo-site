@@ -5,20 +5,7 @@ import { Button } from "@heroui/button";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
 import ButtonAtom from "./atoms/ButtonAtom";
 import LanguageSwitcher from "./LanguageSwitcher";
-
-const services = [
-  { label: "Facebook & Instagram Ads", href: "/services/facebook-ad" },
-  { label: "Web Design & Development", href: "/services/web-design" },
-  {
-    label: "Digital Marketing (all-in-one)",
-    href: "/services/digital-marketing",
-  },
-  { label: "Content Marketing", href: "/services/content-marketing" },
-  { label: "Search Engine Optimization (SEO)", href: "/services/seo" },
-  { label: "TikTok Ads", href: "/services/tiktok-ad" },
-  { label: "Graphic Design", href: "/services/graphic-design" },
-  { label: "Funnel Mapping", href: "/services/funnel-mapping" },
-];
+import { usePathname } from "next/navigation";
 
 const contacts = [
   {
@@ -67,6 +54,23 @@ const socialLinks = [
 ];
 
 const Footer: React.FC = () => {
+  const pathname = usePathname();
+  const lang = pathname?.startsWith("/am") ? "am" : "en";
+
+  const services = [
+    { label: "Facebook & Instagram Ads", href: `/${lang}/services/facebook-ad` },
+    { label: "Web Design & Development", href: `/${lang}/services/web-design` },
+    {
+      label: "Digital Marketing (all-in-one)",
+      href: `/${lang}/services/digital-marketing`,
+    },
+    { label: "Content Marketing", href: `/${lang}/services/content-marketing` },
+    { label: "Search Engine Optimization (SEO)", href: `/${lang}/services/seo` },
+    { label: "TikTok Ads", href: `/${lang}/services/tiktok-ad` },
+    { label: "Graphic Design", href: `/${lang}/services/graphic-design` },
+    { label: "Funnel Mapping", href: `/${lang}/services/funnel-mapping` },
+  ];
+
   return (
     <footer className="bg-background-dark text-gray-400 pt-12 pb-8 px-4 border-t border-gray-800">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
@@ -160,10 +164,10 @@ const Footer: React.FC = () => {
         Copyright © {new Date().getFullYear()} Aligoo Digital Agency. All
         rights reserved.
         <div className="mt-4 flex flex-wrap justify-center gap-6">
-          <a href="/terms" className="hover:text-red-400 transition-colors">
+          <a href={`/${lang}/terms`} className="hover:text-red-400 transition-colors">
             Terms of Service
           </a>
-          <a href="/privacy" className="hover:text-red-400 transition-colors">
+          <a href={`/${lang}/privacy`} className="hover:text-red-400 transition-colors">
             Privacy Policy
           </a>
         </div>

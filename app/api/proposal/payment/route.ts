@@ -1,5 +1,5 @@
 // app/api/proposal/payment/route.ts → v2.2 DEBUG MODE
-import { client } from '@/src/sanity/client'
+import { automationClient } from '@/src/sanity/client'
 import { NextResponse } from 'next/server'
 
 export async function POST(req: Request) {
@@ -22,7 +22,7 @@ export async function POST(req: Request) {
 
         // 1. Upload to Sanity
         console.log('Uploading image to Sanity...')
-        const imageAsset = await client.assets.upload('image', proofFile, {
+        const imageAsset = await automationClient.assets.upload('image', proofFile, {
             filename: `payment-proof-${code}-${Date.now()}`,
             title: `Payment Proof - ${clientName}`,
         })
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
 
         // 2. Patch proposal
         console.log('Patching proposal in Sanity...')
-        await client
+        await automationClient
             .patch(proposalId)
             .set({
                 paymentProof: { _type: 'image', asset: { _type: 'reference', _ref: imageAsset._id } },

@@ -9,7 +9,10 @@ import CaseStudyResults from "../CaseStudyResults";
 import CaseStudyTestimonial from "../CaseStudyTestimonial";
 import CaseStudyPagination from "../CaseStudyPagination";
 import CaseStudyOverview from "../OverviewSection";
-import HeroSection from "../HeroSection";
+// import HeroSection from "../HeroSection"; // Removed generic hero
+import CaseStudyHero from "../CaseStudyHero";
+// import ProjectMetaSidebar from "../ProjectMetaSidebar"; // Removed Sidebar
+import CaseStudyCredits from "../CaseStudyCredits";
 import {
   fetchCaseStudyCoreDataBySlug,
   fetchCaseStudyOverviewBySlug,
@@ -66,13 +69,13 @@ export async function generateMetadata({
       type: "article",
       images: caseStudy.mainImage?.asset?.url
         ? [
-            {
-              url: caseStudy.mainImage.asset.url,
-              width: 1200,
-              height: 630,
-              alt: caseStudy.title,
-            },
-          ]
+          {
+            url: caseStudy.mainImage.asset.url,
+            width: 1200,
+            height: 630,
+            alt: caseStudy.title,
+          },
+        ]
         : [],
     },
     twitter: {
@@ -123,20 +126,20 @@ export default async function CaseStudyDetails({ params }: Props) {
 
   return (
     <>
-      <HeroSection
-        headlineText1={coreData.title}
-        headlineText2=" "
-        headlineText3=" "
-        excerpt={coreData.excerpt}
-        primaryButtonText="📖 Read Case Study"
-        primaryButtonUrl="#case-study-details"
-        secondaryButtonText="✅ Talk about your project"
-        secondaryButtonUrl="/strategy-session"
+      <CaseStudyHero
+        title={coreData.title}
+        subtitle={coreData.service?.name}
+        mainImageUrl={coreData.mainImage}
+        servicesList={coreData.servicesList}
+        projectDuration={coreData.projectDuration}
+        liveSiteUrl={coreData.liveSiteUrl}
       />
       <ScrollProgress />
 
-      <Container className="">
-        <div className="div" id="case-study-details">
+      <main className="relative max-w-7xl mx-auto px-4 py-12 lg:py-24 space-y-24">
+
+        {/* Overview */}
+        <div id="case-study-details">
           {overviewData && (
             <CaseStudyOverview
               heroImageAlt={overviewData.heroImageAlt}
@@ -146,34 +149,43 @@ export default async function CaseStudyDetails({ params }: Props) {
             />
           )}
         </div>
-      </Container>
-      <Container>
+
+        {/* Goals */}
         {goalData && (
           <CaseStudyStrategy
             goalBody={goalData.goalBody}
             goalTitle={goalData.goalTitle}
           />
         )}
-      </Container>
-      <Container>
+
+        {/* Strategy Content */}
         {strategyData && (
           <CaseStudyStrategyContent strategyData={strategyData} />
         )}
-      </Container>
-      <Container>
+
+        {/* Image Gallery */}
         {imageGalleryData && (
           <CaseStudyImageGallery imageGalleryData={imageGalleryData} />
         )}
-      </Container>
-      <Container>
+
+        {/* Results */}
         {resultsData && <CaseStudyResults resultsData={resultsData} />}
+
+        {/* Testimonial */}
         {testimonialData && (
           <CaseStudyTestimonial
             testimonialData={testimonialData}
             rating={testimonialData.rating}
           />
         )}
-      </Container>
+
+        {/* Credits & Tech Stack */}
+        <CaseStudyCredits
+          techStack={coreData.techStack}
+          teamMembers={coreData.teamMembers}
+        />
+
+      </main>
 
       {fetchedPaginationData && (
         <CaseStudyPagination paginationData={fetchedPaginationData} />

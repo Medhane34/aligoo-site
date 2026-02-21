@@ -1,130 +1,115 @@
+// src/lib/about.ts
+
 import { client } from "@/src/sanity/client";
-import { ABOUT_INTRO_SECTION_QUERY, MEANING_SECTION_QUERY, OUR_WAY_QUERY, TEAM_SECTION_QUERY, VALUES_SECTION_QUERY } from "@/sanity/queries/about";
+import { ABOUT_PAGE_QUERY } from "@/sanity/queries/about";
 
+// ────────────────────────────────────────────────
+// Existing types (Intro + Values) – no change
 export type AboutIntroSectionData = {
-  mainHeading: string
-  introText: string
-  founded: string
-  focus: string
-  campaignsLaunched: string
-  momentsProudOf: string
-}
-
-export async function fetchAboutIntroSection(
-  lang: 'en' | 'am' = 'en'
-): Promise<AboutIntroSectionData | null> {
-  const query = ABOUT_INTRO_SECTION_QUERY(lang)
-  const data = await client.fetch<AboutIntroSectionData>(query)
-
-  // Only return if all required fields exist
-  if (!data?.mainHeading || !data?.introText) return null
-
-  return data
-}
-
-// value section 
+  mainHeading: string;
+  introText: string;
+  founded: string;
+  focus: string;
+  campaignsLaunched: string;
+  momentsProudOf: string;
+};
 
 export type ValueCard = {
-  emoji: string
-  title: string
-  description: string
-  bgColor: string
-  textColor?: string
-}
+  emoji: string;
+  title: string;
+  description: string;
+  bgColor: string;
+  textColor?: string;
+};
 
 export type ValuesSectionData = {
-  sectionHeading: string
-  accentText: string
-  buttonText: string
-  buttonUrl: string
-  values: ValueCard[]
-}
+  sectionHeading: string;
+  accentText: string;
+  buttonText?: string;
+  buttonUrl?: string;
+  values: ValueCard[];
+};
 
-export async function fetchValuesSection(
-  lang: 'en' | 'am' = 'en'
-): Promise<ValuesSectionData | null> {
-  const query = VALUES_SECTION_QUERY(lang)
-  const data = await client.fetch<ValuesSectionData>(query)
-
-  if (!data?.sectionHeading || !data?.values?.length) return null
-
-  return data
-}
-
-// team section 
-
-export type TeamMember = {
-  name: string
-  role: string
-  bio: string
-  department?: string
-  departmentColor?: string
-  firstNameColor?: string
-  lastNameColor?: string
-  imageUrl?: string
-  imageAlt?: string
-  yearsOfExperience?: string
-  superpower?: string
-  socialLinks?: {
-    linkedin?: string
-    twitter?: string
-    github?: string
-  }
-}
-
-export type TeamSectionData = {
-  heading: string
-  subheading: string
-  members: TeamMember[]
-}
-
-export async function fetchTeamSection(lang: 'en' | 'am' = 'en'): Promise<TeamSectionData | null> {
-  const data = await client.fetch<TeamSectionData>(TEAM_SECTION_QUERY(lang))
-  if (!data?.members?.length) return null
-  return data
-}
-
-// pronunciation section 
+// ────────────────────────────────────────────────
+// New type for Our Way section
+export type OurWaySectionData = {
+  tabProblem: string;
+  tabOurWay: string;
+  problemHeadline: string;
+  problemText: string;
+  problemPoints: string[];
+  testimonialQuote: string;
+  testimonialAuthor: string;
+  testimonialRole: string;
+  ourWayPoints: {
+    number: string;
+    heading: string;
+    description: string;
+  }[];
+  imageProblemUrl?: string;
+  imageOurWay1Url?: string;
+  imageOurWay2Url?: string;
+};
 
 export type MeaningSectionData = {
-  mainHeading: string
-  pronunciation: string
-  definitionLines: string[]
-  tagline: string
-  audioUrl?: string
-}
+  mainHeading: string;
+  pronunciation: string;
+  definitionLines: string[];
+  tagline: string;
+  audioUrl?: string;
+};
 
-export async function fetchMeaningSection(lang: 'en' | 'am' = 'en'): Promise<MeaningSectionData | null> {
-  const data = await client.fetch<MeaningSectionData>(MEANING_SECTION_QUERY(lang))
-  if (!data?.mainHeading) return null
-  return data
-}
+export type TeamMember = {
+  name: string;
+  role: string;
+  bio: string;
+  yearsOfExperience?: string;
+  superpower?: string;
+  socialLinks?: {
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+  };
+  department?: string;
+  departmentColor?: string;
+  firstNameColor?: string;
+  lastNameColor?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+};
 
-//our way section 
+export type TeamSectionData = {
+  heading: string;
+  subheading: string;
+  members: TeamMember[];
+};
+// ────────────────────────────────────────────────
+// Unified data type
+export type AboutPageData = {
+  intro: AboutIntroSectionData | null;
+  values: ValuesSectionData | null;
+  ourWay: OurWaySectionData | null;
+  meaning: MeaningSectionData | null;
+  team: TeamSectionData | null;
+};
 
+// ────────────────────────────────────────────────
+// The single fetch function
+export async function fetchAboutPageData(
+  lang: 'en' | 'am' = 'en'
+): Promise<AboutPageData> {
+  try {
+    const data = await client.fetch<AboutPageData>(ABOUT_PAGE_QUERY, { lang });
 
-export type OurWaySectionData = {
-  tabProblem: string
-  tabOurWay: string
-  problemHeadline: string
-  problemText: string
-  problemPoints: string[]
-  testimonialQuote: string
-  testimonialAuthor: string
-  testimonialRole: string
-  ourWayPoints: {
-    number: string
-    heading: string
-    description: string
-  }[]
-  imageProblemUrl?: string
-  imageOurWay1Url?: string
-  imageOurWay2Url?: string
-}
-
-
-export async function fetchOurWaySection(lang: 'en' | 'am' = 'en'): Promise<OurWaySectionData | null> {
-  const data = await client.fetch<OurWaySectionData>(OUR_WAY_QUERY(lang))
-  if (!data) return null
-  return data
+    return {
+      intro: data.intro && data.intro.mainHeading ? data.intro : null,
+      values: data.values && data.values.values?.length ? data.values : null,
+      ourWay: data.ourWay && data.ourWay.tabProblem ? data.ourWay : null,
+      meaning: data.meaning && data.meaning.mainHeading ? data.meaning : null,
+      team: data.team && data.team.members?.length ? data.team : null,
+    };
+  } catch (err) {
+    console.error("About page fetch failed:", err);
+    return { intro: null, values: null, ourWay: null, meaning: null, team: null };
+  }
 }

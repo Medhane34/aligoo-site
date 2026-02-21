@@ -2,6 +2,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import ComparisonTable from '@/components/proposal/comparison/ComparisonTable';
 import DiscountBanner from '@/components/proposal/comparison/DiscountBanner';
 import { updateProposalSelection, updateProposalWithTotal } from '@/lib/proposal';
@@ -37,6 +38,7 @@ export default function PricingTableWrapper({
     discount,
     daysLeftText,
 }: PricingTableWrapperProps) {
+    const router = useRouter();
     console.log('PricingTableWrapper Debug:', {
         comparisonTable: !!comparisonTable,
         packagePricing: !!packagePricing,
@@ -158,7 +160,7 @@ export default function PricingTableWrapper({
             if (result.success) {
                 console.log('✅ Proposal saved via API');
                 // TODO: Show success toast
-                // TODO: Navigate to contract page (disabled for testing)
+                router.push(`/proposal/${uniqueCode}/contract`);
             } else {
                 console.error('❌ Save failed:', result);
                 // TODO: Show error toast

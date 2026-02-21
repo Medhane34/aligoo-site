@@ -1,8 +1,6 @@
 # *
 User-agent: *
 Allow: /
-Disallow: /app/proposal/
-Disallow: /app/telegram/
 
 # Host
 Host: https://aligoo-digital.agency

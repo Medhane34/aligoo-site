@@ -1,6 +1,6 @@
 // File: app/api/proposal/save/route.ts
 import { NextResponse } from 'next/server';
-import { client } from '@/src/sanity/client';
+import { automationClient } from '@/src/sanity/client';
 
 /**
  * Expected payload shape
@@ -36,7 +36,7 @@ export async function POST(request: Request) {
             status,
         };
 
-        await client.patch(proposalId).set(patchData).commit();
+        await automationClient.patch(proposalId).set(patchData).commit();
 
         return NextResponse.json({ success: true });
     } catch (err) {

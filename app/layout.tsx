@@ -13,7 +13,7 @@ import { fontSans } from "@/config/fonts";
 // import Footer from "@/components/Footer"; // Moved to LayoutUI
 import LayoutUI from "@/components/LayoutUI";
 
-/* import { VisualEditing } from "next-sanity"; */
+import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
 
@@ -82,10 +82,16 @@ export default async function RootLayout({
           <Providers >
             <ToastProvider>
               <LayoutUI>
+                <LanguagePrompt />
                 {children}
-
               </LayoutUI>
-
+              {(await draftMode()).isEnabled && (
+                <>
+                  <DisableDraftMode />
+                  <VisualEditing />
+                </>
+              )}
+              <SanityLive />
             </ToastProvider>
           </Providers>
         </body>

@@ -10,6 +10,8 @@ import { Calendar } from "lucide-react"; // Import calendar icon
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 import BadgeText from "@/components/atoms/BadgeText";
 import { PrimaryButton } from "@/components/atoms/button";
+import HeadingAtom from "@/components/atoms/HeadingAtom";
+import ButtonAtom from "@/components/atoms/ButtonAtom";
 
 type BlogPostType = {
   imageUrl: string;
@@ -98,6 +100,7 @@ const BlogPost = ({
 
 export default function BlogSectionClient({
   blogs,
+  lang,
 }: {
   lang: "en" | "am";
   blogs: BlogPostType[];
@@ -133,10 +136,15 @@ export default function BlogSectionClient({
             className="text-heading pb-2 xs:pb-3 sm:pb-4"
             variants={textVariants}
           >
-            <SectionHeading>BLOGS</SectionHeading>
-            <AccentText className="normal-case">
-              Ideas, Insights & Marketing Rants
-            </AccentText>
+            <SectionHeading></SectionHeading>
+            <HeadingAtom
+              size="md"
+              title="BLOGS"
+              highlight="Ideas, Insights & Marketing Rants"
+              variant="split"
+
+            ></HeadingAtom>
+
           </motion.div>
           {/* <div className="flex space-x-2">
             <button
@@ -156,11 +164,11 @@ export default function BlogSectionClient({
           </div> */}
 
           <div className="flex flex-col items-center gap-1 pb-1">
-          <Link href="/blog">
-          <PrimaryButton size="md">📝 See all Blogs</PrimaryButton>
-          </Link>
-          {/* <div className="text-sm font-medium text-gray-500">4.9 out of 9</div> */}
-        </div>
+            <Link href={`/${lang}/blog`}>
+              <ButtonAtom shimmer size="md">📝 See all Blogs</ButtonAtom>
+            </Link>
+            {/* <div className="text-sm font-medium text-gray-500">4.9 out of 9</div> */}
+          </div>
         </div>
         <div
           ref={scrollRef}

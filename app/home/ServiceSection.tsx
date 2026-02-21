@@ -8,6 +8,7 @@ import { motion } from "framer-motion";
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 import BadgeAtom from "@/components/atoms/BadgeAtom";
 import { Clock, Sparkles, Star } from "lucide-react";
+import HeadingAtom from "@/components/atoms/HeadingAtom";
 
 export interface Service {
   title: string;
@@ -70,10 +71,16 @@ export default function ServiceSection({
           >
             our Services
           </BadgeAtom>
-          <SectionHeading className="uppercase">
-            {sectionHeading}
-          </SectionHeading>
-          <AccentText className="normal-case text-subheading">{accentText}</AccentText>
+          <HeadingAtom
+            as="h2"
+            size="lg"
+            align="center"
+            title={sectionHeading}
+            highlight={accentText}
+            variant="split"
+            className="max-w-4xl mx-auto"
+          />
+
         </motion.div>
         <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-4 mb-12" variants={columnContainerVariants}>
           {columns.map((col, i) => (

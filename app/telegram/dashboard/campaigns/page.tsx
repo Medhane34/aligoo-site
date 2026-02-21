@@ -1,11 +1,11 @@
 import React from "react";
-import { client } from "@/src/sanity/client";
+import { automationClient } from "@/src/sanity/client";
 import CampaignsTable from "@/components/telegram/CampaignsTable";
 
-export const dynamic = 'force-dynamic';
+export const revalidate = 86400;
 
 async function getCampaigns() {
-    return await client.fetch(`*[_type == "campaign"] | order(_createdAt desc)`);
+    return await automationClient.fetch(`*[_type == "campaign"] | order(_createdAt desc)`);
 }
 
 export default async function CampaignsPage() {

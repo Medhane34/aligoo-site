@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { client } from '@/src/sanity/client';
+import { automationClient } from '@/src/sanity/client';
 
 export async function POST(req: Request) {
     try {
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
         console.log(`🗑️ Deleting ${ids.length} documents...`);
 
         // Sanity Transaction for bulk delete
-        const transaction = client.transaction();
+        const transaction = automationClient.transaction();
         ids.forEach((id) => transaction.delete(id));
         await transaction.commit();
 

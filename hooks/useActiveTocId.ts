@@ -3,28 +3,34 @@ import { useEffect, useState } from "react";
 import type { TocItem } from "@/components/TableOfContents";
 
 export function useActiveTocId(toc: TocItem[]) {
-  const [activeId, setActiveId] = useState<string | undefined>(toc[0]?.id);
+  const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
-    const handleScroll = () => {
-      let currentId = toc[0]?.id;
-      for (const item of toc) {
-        const el = document.getElementById(item.id);
-        if (el) {
-          const { top } = el.getBoundingClientRect();
-          // Use a larger threshold to account for sticky navbars
-          if (top < 200) {
-            currentId = item.id;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
           }
-        }
+        });
+      },
+      {
+        rootMargin: "-100px 0px -40% 0px",
+        threshold: 1.0,
       }
-      setActiveId(currentId);
-      // Debug: see which heading is active as you scroll
-      // console.log("Active TOC ID:", currentId);
+    );
+
+    toc.forEach((item) => {
+      const element = document.getElementById(item.id);
+      if (element) observer.observe(element);
+    });
+
+    return () => {
+      toc.forEach((item) => {
+        const element = document.getElementById(item.id);
+        if (element) observer.unobserve(element);
+      });
     };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
   }, [toc]);
 
   return activeId;

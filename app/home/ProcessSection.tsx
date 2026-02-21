@@ -63,17 +63,17 @@ export default function ProcessSection({
 
         {/* Header */}
         <div className="text-center mb-20 flex flex-col items-center gap-6">
-          <BadgeAtom
+          {/*  <BadgeAtom
             variant="filled"
             color="blue"
             icon={<Layers className="w-3.5 h-3.5" />}
           >
             How We Work
-          </BadgeAtom>
+          </BadgeAtom> */}
 
           <HeadingAtom
             as="h2"
-            size="xl"
+            size="lg"
             align="center"
             title={sectionHeading}
             highlight={accentText}

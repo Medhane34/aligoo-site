@@ -1,3 +1,5 @@
+// app/[lang]/about/page.tsx   (adjust path if different)
+
 import { Metadata } from "next";
 import Container from "@/components/ui/Container";
 import { HeroSection } from "@/components";
@@ -6,6 +8,7 @@ import AboutIntroWrapper from "@/wrappers/about/AboutIntroSectionWrapper";
 import ValuesWrapper from "@/wrappers/about/ValuesSectionWrapper";
 import MeaningWrapper from "@/wrappers/about/MeaningWrapper";
 import OurWayWrapper from "@/wrappers/about/OurWayWrapper";
+import { fetchAboutPageData } from "@/lib/about";
 
 export const metadata: Metadata = {
   title: "About Us | Aligoo Digital Agency",
@@ -17,10 +20,12 @@ export const revalidate = 3600;
 export default async function AboutPage({
   params,
 }: {
-  params: Promise<{ lang?: 'en' | 'am' }>
+  params: Promise<{ lang?: 'en' | 'am' }>;
 }) {
   const { lang } = await params;
   const locale = lang === 'am' ? 'am' : 'en';
+
+  const data = await fetchAboutPageData(locale);
 
   return (
     <>
@@ -38,25 +43,32 @@ export default async function AboutPage({
 
       <Container>
         <div id="intro-section">
-          <AboutIntroWrapper lang={locale} />
+          <AboutIntroWrapper
+            data={data.intro}
+            lang={locale}   // ← pass locale if Intro still needs it
+          />
         </div>
       </Container>
-
       <Container>
-        <MeaningWrapper lang={locale} />
+        <MeaningWrapper data={data.meaning} lang={locale} />
+      </Container>
+      <Container>
+        <ValuesWrapper
+          data={data.values}
+          lang={locale}     // ← pass locale if Values still needs it
+        />
+      </Container>
+      <Container>
+        <OurWayWrapper data={data.ourWay} lang={locale} />
+      </Container>
+      <Container>
+        <TeamWrapper data={data.team} lang={locale} />
       </Container>
 
-      <Container>
-        <OurWayWrapper lang={locale} />
-      </Container>
+      {/* Temporarily comment out other sections while testing */}
+      {/* <Container><MeaningWrapper data={data.meaning} lang={locale} /></Container> */}
+      {/* ... */}
 
-      <Container>
-        <ValuesWrapper lang={locale} />
-      </Container>
-
-      <Container>
-        <TeamWrapper lang={locale} />
-      </Container>
     </>
   );
 }

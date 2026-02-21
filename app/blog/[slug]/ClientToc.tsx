@@ -1,4 +1,3 @@
-// app/[lang]/blog/[slug]/ClientToc.tsx
 "use client";
 import TableOfContents, { TocItem } from "@/components/TableOfContents";
 import { useActiveTocId } from "@/hooks/useActiveTocId";

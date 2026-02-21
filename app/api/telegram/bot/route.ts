@@ -1,5 +1,5 @@
 import { Bot, InlineKeyboard } from "gramio";
-import { client } from "@/src/sanity/client";
+import { automationClient } from "@/src/sanity/client";
 
 export const dynamic = "force-dynamic";
 
@@ -28,7 +28,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
         const docId = `subscriber-${id}`;
 
         // Create if not exists
-        await client.createIfNotExists({
+        await automationClient.createIfNotExists({
             _id: docId,
             _type: "subscriber",
             telegramId: id,
@@ -52,10 +52,10 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
             updateData.source = payload;
         }
 
-        await client.patch(docId).set(updateData).commit();
+        await automationClient.patch(docId).set(updateData).commit();
 
         // Fetch updated subscriber
-        const subscriber = await client.getDocument(docId);
+        const subscriber = await automationClient.getDocument(docId);
 
         if (!subscriber?.phone) {
             return context.send("Welcome to Aligoo! 🚀\n\nTo get started, please share your phone number so we can send you the exclusive updates.", {
@@ -84,7 +84,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
 
         try {
             // Set user as inactive
-            await client.patch(docId).set({
+            await automationClient.patch(docId).set({
                 isActive: false,
                 lastActive: new Date().toISOString()
             }).commit();
@@ -108,7 +108,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
 
         try {
             // Set user as active again
-            await client.patch(docId).set({
+            await automationClient.patch(docId).set({
                 isActive: true,
                 lastActive: new Date().toISOString()
             }).commit();
@@ -146,7 +146,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
         const docId = `subscriber-${id}`;
 
         // Update lastActive on any message
-        await client.patch(docId).set({ lastActive: new Date().toISOString() }).commit();
+        await automationClient.patch(docId).set({ lastActive: new Date().toISOString() }).commit();
 
         // FIXED: Access contact directly from context (not context.message.contact)
         // GramIO merges message properties into context
@@ -154,10 +154,10 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
             // FIXED: Use camelCase (phoneNumber)
             const phone = context.contact.phoneNumber;
 
-            await client.patch(docId).set({ phone }).commit();
+            await automationClient.patch(docId).set({ phone }).commit();
 
             // New Flow: After phone, go to services
-            const subscriber = await client.getDocument(docId);
+            const subscriber = await automationClient.getDocument(docId);
             const currentServices = subscriber?.services || [];
 
             return context.send(
@@ -169,7 +169,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
         // HANDLE CONFIRMATION (Final Step)
         if (context.text === "✅ Confirm Subscription") {
             // Add 'confirmed' tag
-            await client.patch(docId)
+            await automationClient.patch(docId)
                 .setIfMissing({ tags: [] })
                 .append("tags", ["confirmed"])
                 .commit();
@@ -187,7 +187,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
         console.log("🔘 Button clicked:", { userId, callbackData });
 
         // 1. Update lastActive
-        await client.patch(docId).set({
+        await automationClient.patch(docId).set({
             lastActive: new Date().toISOString()
         }).commit();
 
@@ -198,7 +198,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
             const buttonText = parts.slice(2).join('_');
 
             try {
-                await client.create({
+                await automationClient.create({
                     _type: 'interaction',
                     subscriber: { _type: 'reference', _ref: docId },
                     campaign: { _type: 'reference', _ref: campaignId },
@@ -217,7 +217,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
             const serviceId = callbackData.replace('service_', '');
 
             // Fetch current subscriber
-            const subscriber = await client.getDocument(docId);
+            const subscriber = await automationClient.getDocument(docId);
             const currentServices = subscriber?.services || [];
             let newServices = [...currentServices];
 
@@ -252,7 +252,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
             // Update Sanity
             // Ensure we are patching the correct document ID
             console.log(`Updating services for ${docId}:`, newServices);
-            await client.patch(docId).set({ services: newServices }).commit();
+            await automationClient.patch(docId).set({ services: newServices }).commit();
 
             // Update Keyboard
             try {

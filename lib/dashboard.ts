@@ -1,12 +1,12 @@
 // src/lib/dashboard.ts — FINAL WORKING VERSION (NO -> NEEDED)
-import { client } from '@/src/sanity/client'
+import { automationClient } from '@/src/sanity/client'
 import { DashboardProposal, ProposalStatus } from '@/types/dashboard'
 import { formatDistanceToNow } from 'date-fns'
 
 export async function subscribeToProposals(callback: (proposals: DashboardProposal[]) => void) {
     const query = `*[_type == "proposal"] | order(_createdAt desc)`
 
-    const subscription = client.listen(query).subscribe(() => {
+    const subscription = automationClient.listen(query).subscribe(() => {
         fetchAllProposals().then(callback)
     })
 
@@ -16,7 +16,7 @@ export async function subscribeToProposals(callback: (proposals: DashboardPropos
 }
 
 async function fetchAllProposals(): Promise<DashboardProposal[]> {
-    const proposals = await client.fetch<DashboardProposal[]>(`
+    const proposals = await automationClient.fetch<DashboardProposal[]>(`
     *[_type == "proposal"] | order(_createdAt desc) {
       _id,
       _updatedAt,

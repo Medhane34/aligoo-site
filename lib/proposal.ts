@@ -1,12 +1,12 @@
 // lib/proposal.ts
-import { client } from '@/src/sanity/client'
+import { automationClient } from '@/src/sanity/client'
 import { PROPOSAL_BY_CODE_QUERY } from '@/sanity/queries/proposal'
 import { ContractReadyProposal, ProposalData } from '@/types/ProposalType'
 
 
 export async function getProposalByCode(code: string): Promise<ProposalData | null> {
   try {
-    const proposal = await client.fetch<ProposalData>(
+    const proposal = await automationClient.fetch<ProposalData>(
       PROPOSAL_BY_CODE_QUERY,
       { code },
       /* { next: { revalidate: 60 } } */
@@ -36,7 +36,7 @@ export async function updateProposalSelection(
     }
 
 
-    await client
+    await automationClient
       .patch(proposalId)
       .set(patchData)
       .commit();
@@ -62,7 +62,7 @@ export async function updateProposalWithTotal(
       status
     });
 
-    await client
+    await automationClient
       .patch(proposalId)
       .set({
         'currentSelection.selectedPackage': selectedPackage,
@@ -82,7 +82,7 @@ export async function updateProposalWithTotal(
 
 export async function getContractByCode(code: string): Promise<ContractReadyProposal | null> {
   try {
-    const proposal = await client.fetch<ContractReadyProposal>(
+    const proposal = await automationClient.fetch<ContractReadyProposal>(
       PROPOSAL_BY_CODE_QUERY,
       { code },
       { next: { revalidate: 30 } }

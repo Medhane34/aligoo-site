@@ -34,7 +34,20 @@ export interface BlogPostDetail {
     _id: string;
     title_en: string;
     title_am: string;
+    slug: string;
   };
+  author?: {
+    name: string;
+    image?: string;
+    bio?: any[];
+  };
+  promotionalCard?: {
+    heading: string;
+    description: string;
+    buttonText: string;
+    buttonLink: string;
+  };
+  estimatedReadingTime?: number;
 }
 
 // NEW: For list & related posts

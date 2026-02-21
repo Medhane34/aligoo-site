@@ -1,55 +1,182 @@
-// app/[lang]/blog/[slug]/page.tsx
 import { notFound } from "next/navigation";
-import ClientToc from "./ClientToc";
 import { fetchBlogPostBySlug, fetchRelatedPosts } from "@/lib/BlogPost";
-import PortableTextRenderer from "@/components/PortableTextRenderer";
-import RelatedPosts from "@/components/organism/blog/RelatedPosts";
-import { Lang } from "@/types/BlogPost";
 import { generateToc } from "@/lib/utilties/generateToc";
+import PortableTextRenderer from "@/components/PortableTextRenderer";
+import TableOfContents from "@/components/TableOfContents";
+import Image from "next/image";
+import ReadingProgress from "@/components/blog/ReadingProgress";
+import ShareButtons from "@/components/blog/ShareButtons";
+import RelatedPosts from "@/components/blog/RelatedPosts";
+import PromotionalCard from "@/components/blog/PromotionalCard";
+import { Lang } from "@/types/BlogPost";
 
-// Correct props type for Next.js 15+
+import { DEFAULT_PROMOTIONAL_CARD } from "@/lib/constants/blogDefaults";
+
+// Client-only TOC with scroll spy
+import dynamic from "next/dynamic";
+const ClientToc = dynamic(() => import("./ClientToc"), { ssr: true });
+
+export const revalidate = 60;
+
 interface BlogPostPageProps {
   params: Promise<{ lang: Lang; slug: string }>;
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  // Must await params!
   const { lang, slug } = await params;
 
   const post = await fetchBlogPostBySlug(slug, lang);
 
-  if (!post) notFound();
+  if (!post) return notFound();
+
+  // Fix: fetchRelatedPosts(currentSlug, categorySlug, lang)
+  const relatedPosts = await fetchRelatedPosts(slug, post.category?.slug, lang);
 
   const toc = generateToc(post.body);
-  const related = await fetchRelatedPosts(slug, lang);
 
+  // Default Promo Card Data
+  const promoCard = post.promotionalCard?.heading
+    ? post.promotionalCard
+    : DEFAULT_PROMOTIONAL_CARD;
+
+  // The TOC and scroll spy must be rendered on the client
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="grid lg:grid-cols-[1fr_300px] gap-12">
-        {/* Main Content */}
-        <article className="prose prose-lg max-w-none dark:prose-invert">
-          <header className="mb-8">
-            <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-            <p className="text-muted-foreground">{post.excerpt}</p>
-            <time className="text-sm text-muted-foreground">
-              {new Date(post.publishedAt).toLocaleDateString(lang === "am" ? "en-ET" : "en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-          </header>
+    <main className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col items-center py-12 px-4 relative">
+      <ReadingProgress />
 
-          <PortableTextRenderer value={post.body} />
-        </article>
+      <div className="w-full max-w-7xl flex flex-col gap-12">
+        {/* Hero Section */}
+        <header className="flex flex-col items-center text-center gap-6 max-w-4xl mx-auto">
+          <div className="flex flex-col gap-4 items-center">
+            <h1 className="text-3xl md:text-5xl font-bold text-text-light dark:text-text-dark leading-tight">
+              {post.title}
+            </h1>
 
-        {/* Sidebar: TOC */}
-        <aside className="lg:sticky lg:top-24 h-fit">
-          <ClientToc toc={toc} />
-        </aside>
+            <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-500 relative">
+              {post.author && (
+                <div className="flex items-center gap-2">
+                  {post.author.image && (
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden">
+                      <Image
+                        src={post.author.image}
+                        alt={post.author.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <span className="font-medium text-text-light dark:text-white">
+                    {post.author.name}
+                  </span>
+                  <span className="text-gray-300">•</span>
+                </div>
+              )}
+
+              <span>
+                {post.publishedAt
+                  ? new Date(post.publishedAt).toLocaleDateString(lang === "am" ? "en-ET" : "en-US", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                  })
+                  : "—"}
+              </span>
+
+              {post.estimatedReadingTime && (
+                <>
+                  <span className="text-gray-300">•</span>
+                  <span>{post.estimatedReadingTime} min read</span>
+                </>
+              )}
+
+              {/* Share Button (Hover to reveal) */}
+              <div className="ml-4 border-l pl-4 border-gray-300 dark:border-gray-700">
+                <ShareButtons
+                  url={`https://aligoo.ethio-tech.com/${lang}/blog/${slug}`}
+                  title={post.title}
+                />
+              </div>
+            </div>
+          </div>
+
+          {post.excerpt && (
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
+              {post.excerpt}
+            </p>
+          )}
+
+          {post.imageUrl && (
+            <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl mt-4">
+              <Image
+                src={post.imageUrl}
+                alt={post.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1200px"
+                priority
+              />
+            </div>
+          )}
+        </header>
+
+        {/* 3-Column Content Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative items-start">
+          {/* Left: TOC (Sticky) */}
+          <div className="hidden lg:block lg:col-span-3 sticky top-32">
+            <ClientToc toc={toc} />
+          </div>
+
+          {/* Center: Content */}
+          <div className="lg:col-span-6 flex flex-col gap-12">
+            {/* TOC for mobile */}
+            <div className="lg:hidden">
+              <TableOfContents toc={toc} />
+            </div>
+
+            <article className="prose prose-lg dark:prose-invert max-w-none text-body text-text-light dark:text-gray-200">
+              {Array.isArray(post.body) && <PortableTextRenderer value={post.body} />}
+            </article>
+
+            {/* Author Bio Section */}
+            {post.author && (
+              <div className="w-full flex flex-col sm:flex-row gap-6 items-start mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+                {post.author.image && (
+                  <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                    <Image
+                      src={post.author.image}
+                      alt={post.author.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-xl font-bold text-text-light dark:text-white">
+                    Written by: {post.author.name}
+                  </h3>
+                  {post.author.bio && (
+                    <div className="prose prose-sm dark:prose-invert text-gray-600 dark:text-gray-300 max-w-none">
+                      <PortableTextRenderer value={post.author.bio} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <RelatedPosts lang={lang} posts={relatedPosts} />
+          </div>
+
+          {/* Right: Promotional Card (Sticky) */}
+          <div className="hidden lg:block lg:col-span-3 sticky top-32">
+            <PromotionalCard
+              heading={promoCard.heading}
+              description={promoCard.description}
+              buttonText={promoCard.buttonText}
+              buttonLink={promoCard.buttonLink}
+            />
+          </div>
+        </div>
       </div>
-
-      <RelatedPosts lang={lang} posts={related} />
-    </div>
+    </main>
   );
 }

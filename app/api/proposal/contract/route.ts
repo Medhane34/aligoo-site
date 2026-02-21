@@ -1,6 +1,6 @@
 // app/api/proposal/contract/route.ts
 import { NextResponse } from 'next/server';
-import { client as sanityClient } from '@/src/sanity/client';
+import { automationClient as sanityClient } from '@/src/sanity/client';
 import { generateSignedContractPDF } from '@/utils/pdfGenerator';
 import { saveSignedContract } from '@/utils/saveSignedContract';
 

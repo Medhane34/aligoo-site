@@ -7,6 +7,8 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid"; // CheckCircleIcon 
 import { motion } from "framer-motion"; // For animation
 
 import { AccentText, SectionHeading } from "../ui/typography";
+import HeadingAtom from "../atoms/HeadingAtom";
+import BadgeAtom from "../atoms/BadgeAtom";
 
 // Define the data structure for each step
 interface Step {
@@ -17,7 +19,7 @@ interface Step {
 
 // Define the props interface for the OurProcess component
 interface OurProcessProps {
-  id?:string;
+  id?: string;
   heading: string;
   subheading: string;
   imageSrc: string;
@@ -26,7 +28,7 @@ interface OurProcessProps {
 }
 
 const OurProcess: React.FC<OurProcessProps> = ({
-  id, 
+  id,
   heading,
   subheading,
   imageSrc,
@@ -68,14 +70,26 @@ text-text-light dark:text-text-dark"
             animate={{ opacity: 1, y: 0 }} // Animate to visible, original position
             transition={{ duration: 0.6 }} // Animation duration
           >
-            <SectionHeading>{heading}</SectionHeading>
+            <BadgeAtom variant="filled" color="yellow"> PROCESS</BadgeAtom>
+            <HeadingAtom
+              highlight={heading}
+              title=""
+              variant="split"
+              size="lg"
+              align="center"
+            ></HeadingAtom>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }} // Staggered delay for sub-heading
           >
-            <AccentText>{subheading}</AccentText>
+            <HeadingAtom
+              title={subheading}
+              variant="default"
+              size="sm"
+              align="center"
+            ></HeadingAtom>
           </motion.div>
         </div>
 

@@ -1,16 +1,63 @@
 // components/case-studies/CaseStudyResults.tsx
 "use client";
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { CaseStudyResultsData as ImportedResultsData, ResultStatItem } from "@/types/CaseStudyTypes"; // Import the types
+import { CaseStudyResultsData as ImportedResultsData, ResultStatItem } from "@/types/CaseStudyTypes";
+import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 
-// Define the props interface for the component
+// Defines the props interface
 interface CaseStudyResultsProps {
   resultsData: ImportedResultsData;
 }
 
+// Animated Counter Component
+function Counter({ value }: { value: string }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  // Extract number and suffix (e.g., "18.2x" -> 18.2 and "x")
+  const numericValue = parseFloat(value.replace(/[^0-9.]/g, ''));
+  const suffix = value.replace(/[0-9.]/g, '');
+  const prefix = value.match(/^[^0-9.]/)?.[0] || '';
+
+  const motionValue = useMotionValue(0);
+  const springValue = useSpring(motionValue, {
+    damping: 50,
+    stiffness: 100,
+  });
+
+  useEffect(() => {
+    if (isInView && !isNaN(numericValue)) {
+      motionValue.set(numericValue);
+    }
+  }, [isInView, numericValue, motionValue]);
+
+  useEffect(() => {
+    springValue.on("change", (latest) => {
+      if (ref.current && !isNaN(numericValue)) {
+        // Handle integers vs floats
+        const isFloat = numericValue % 1 !== 0;
+        ref.current.textContent = isFloat ? latest.toFixed(1) : Math.round(latest).toString();
+      } else if (ref.current) {
+        // Fallback for non-numeric strings
+        ref.current.textContent = value;
+      }
+    });
+  }, [springValue, numericValue, value]);
+
+  // If strictly non-numeric, just return the string
+  if (isNaN(numericValue)) {
+    return <span>{value}</span>;
+  }
+
+  return (
+    <span className="flex items-baseline">
+      {prefix}<span ref={ref} />{suffix}
+    </span>
+  );
+}
+
 export default function CaseStudyResults({ resultsData }: CaseStudyResultsProps) {
-  // Destructure the data for easier access
   const {
     resultsHeading,
     resultsBody,
@@ -19,58 +66,56 @@ export default function CaseStudyResults({ resultsData }: CaseStudyResultsProps)
     resultsStat3,
   } = resultsData;
 
-  // Helper function to render a single stat block
   const renderStatBlock = (stat: ResultStatItem | undefined, index: number) => {
-    // Return null if the stat item is undefined or missing essential data
-    if (!stat || !stat.value || !stat.label) {
-      console.warn(`Results stat block at index ${index} is missing crucial data (value or label). Skipping render.`);
-      return null;
-    }
+    if (!stat || !stat.value || !stat.label) return null;
 
-    // You can customize colors based on index or add them to Sanity
-    const statColors = ["text-blue-600", "text-green-600", "text-purple-600"];
-    const currentColor = statColors[index % statColors.length]; // Cycle through colors
+    const statColors = ["text-brand-primary", "text-brand-secondary", "text-blue-500"];
+    const currentColor = statColors[index % statColors.length];
 
     return (
-      <div className="text-left">
-        <h4 className={`text-heading font-bold ${currentColor}`}>
-          {stat.value}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: index * 0.2 }}
+        className="text-left"
+      >
+        <h4 className={`text-5xl md:text-6xl font-black tracking-tighter ${currentColor}`}>
+          <Counter value={stat.value} />
         </h4>
-        <h5 className="text-subheading md:text-2xl font-semibold text-white-900 mt-2">
+        <h5 className="text-xl font-bold text-text-light dark:text-text-dark mt-2">
           {stat.label}
         </h5>
-        {stat.description && ( // Only render description if it exists
-          <p className="text-small text-gray-600 mt-1">{stat.description}</p>
+        {stat.description && (
+          <p className="text-gray-600 dark:text-gray-400 mt-2">{stat.description}</p>
         )}
-      </div>
+      </motion.div>
     );
   };
 
-  // Don't render the entire section if main heading or body is missing
-  if (!resultsHeading || !resultsBody) {
-    console.warn("CaseStudyResults: Skipping render due to missing heading or body text.");
-    return null;
-  }
+  if (!resultsHeading || !resultsBody) return null;
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-backround-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
-      <div className="max-w-(--breakpoint-xl) mx-auto">
-        {/* Two-Column Grid for Results */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-start">
-
-          {/* Left Column: Main Narrative */}
-          <div>
-            <SectionHeading className="text-heading md:text-4xl font-bold tracking-tight mt-2 text-left md:text-left uppercase">
-              {resultsHeading}
-            </SectionHeading>
-            <AccentText className="text-left md:text-left normal-case">The Outcome</AccentText> {/* Hardcoded as per schema */}
-            <p className="text-body md:text-xl mt-6 leading-relaxed text-left md:text-left">
+    <section className="py-24 px-4 bg-gray-50 dark:bg-gray-900/50">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          {/* Left: Narrative */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <AccentText>The Outcome</AccentText>
+            <SectionHeading className="!text-left">{resultsHeading}</SectionHeading>
+            <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
               {resultsBody}
             </p>
-          </div>
+          </motion.div>
 
-          {/* Right Column: Vertically Listed Stats */}
-          <div className="space-y-10 xs:space-y-12 mt-8 md:mt-0">
+          {/* Right: Stats */}
+          <div className="grid gap-12 sm:grid-cols-1">
+            {/* Render vertically on desktop/tablet to match design */}
             {renderStatBlock(resultsStat1, 0)}
             {renderStatBlock(resultsStat2, 1)}
             {renderStatBlock(resultsStat3, 2)}

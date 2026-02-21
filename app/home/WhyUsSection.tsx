@@ -1,6 +1,9 @@
 // components/sections/WhyUsSection.tsx
+import BadgeAtom from "@/components/atoms/BadgeAtom";
+import HeadingAtom from "@/components/atoms/HeadingAtom";
 import { SectionHeading, AccentText } from "@/components/ui/typography";
 import { WhyUsSectionData } from "@/lib/homepage";
+import { Clock } from "lucide-react";
 
 // Create a map of gradient keys to full Tailwind classes.
 // This allows Tailwind's JIT compiler to detect these classes at build time.
@@ -25,9 +28,23 @@ export default function WhyUsSection({ sectionHeading, accentText, reasons, lang
 
   return (
     <section className="py-12">
-      <div className="text-center mb-8">
-        <SectionHeading>{sectionHeading}</SectionHeading>
-        <AccentText className="normal-case">{accentText}</AccentText>
+      <div className="text-center mb-8 space-y-2 xs:space-y-4">
+        <BadgeAtom
+          variant="filled"
+          color="orange"
+          icon={<Clock className="w-4 h-4" />}
+        >
+          Why Us
+        </BadgeAtom>
+        <HeadingAtom
+          as="h2"
+          size="lg"
+          align="center"
+          title={sectionHeading}
+          highlight={accentText}
+          variant="split"
+          className="max-w-4xl mx-auto"
+        />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
         {reasons.map((reason, i) => (

@@ -6,8 +6,8 @@ import TableClient from './TableClient'
 import Link from 'next/link'
 import { SignOutButton } from '@clerk/nextjs'
 
-export const dynamic = 'force-dynamic'
-export const revalidate = 0
+// referesh data in 24 hours 
+export const revalidate = 86400
 
 export default async function DashboardHome() {
     const user = await currentUser()

@@ -20,12 +20,12 @@ export type SectionHeadingBlockData = {
   subheading_am?: string;
 };
 
- export type SectionHeadingBlockDataWEB = {  
-    heading_en: string;  
-    heading_am: string;  
-    subheading_en?: string;  
-    subheading_am?: string;  
-  }; 
+export type SectionHeadingBlockDataWEB = {
+  heading_en: string;
+  heading_am: string;
+  subheading_en?: string;
+  subheading_am?: string;
+};
 
 
 // Helper to coerce all fields to the correct type
@@ -42,7 +42,7 @@ function mapToCaseStudy(post: any): CaseStudy {
     hasService: Boolean(post.hasService),
     slug: String(post.slug ?? ""),
     excerpt: String(post.excerpt ?? ""),
-    
+
   };
 }
 // function to fetch Sectionheading for Facebook Ad 
@@ -107,7 +107,13 @@ export async function fetchFacebookadCasestudy(): Promise<CaseStudy[]> {
 export async function fetchHomeCaseStudies(): Promise<CaseStudy[]> {
   try {
     const homeworks = await client.fetch<SanityDocument[]>(HomeCaseStudyQuery);
-  
+
+    // Handle null/undefined or empty array
+    if (!homeworks || !Array.isArray(homeworks)) {
+      console.warn("No home case studies found or invalid data returned.");
+      return [];
+    }
+
     return homeworks.map(mapToCaseStudy);
   } catch (error) {
     console.error("Error fetching case studies:", error);

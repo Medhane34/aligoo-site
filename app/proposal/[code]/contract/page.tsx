@@ -4,8 +4,8 @@
 
 'use client';
 
-import { useRef, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useRef, useState, useEffect } from 'react';
+import { useParams, useRouter } from 'next/navigation';
 import SignatureCanvas from 'react-signature-canvas';
 import { motion } from 'framer-motion';
 
@@ -18,6 +18,7 @@ export const dynamic = 'force-dynamic';
 
 export default function ContractPage() {
     const { code } = useParams() as { code: string };
+    const router = useRouter();
     const [proposal, setProposal] = useState<ContractReadyProposal | null>(null);
     const [loading, setLoading] = useState(true);
     const [signing, setSigning] = useState(false);
@@ -62,6 +63,11 @@ export default function ContractPage() {
                 }
 
                 setSigned(true);
+
+                // Auto-redirect to checkout
+                setTimeout(() => {
+                    router.push(`/proposal/${code}/checkout`);
+                }, 2000);
             } catch (error: any) {
                 console.error('Signing Error:', error);
                 alert(`Error: ${error.message || 'Failed to sign contract. Please try again.'}`);
@@ -190,7 +196,9 @@ export default function ContractPage() {
                                             <div className="text-xs text-green-700 font-mono border-t border-green-200 pt-2 mt-2">
                                                 DIGITALLY SIGNED • {new Date().toLocaleString()}
                                                 <br />
-                                                IP: 192.168.X.X (Verified)
+                                                DIGITALLY SIGNED • {new Date().toLocaleString()}
+                                                <br />
+                                                Redirecting to secure payment...
                                             </div>
                                         </motion.div>
                                     ) : (

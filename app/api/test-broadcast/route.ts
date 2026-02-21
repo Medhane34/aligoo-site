@@ -5,6 +5,12 @@ import { sendTelegramMessage } from '@/lib/telegram';
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: Request) {
+    // Protect from accidental/bot triggers
+    const authHeader = req.headers.get('authorization');
+    if (authHeader !== `Bearer ${process.env.ADMIN_SECRET}`) {
+        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
     const { searchParams } = new URL(req.url);
     const campaignId = searchParams.get('campaignId');
 

@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server";
-import { client } from "@/src/sanity/client";
+import { automationClient } from "@/src/sanity/client";
 
 export async function GET(
     req: NextRequest,
@@ -9,14 +9,14 @@ export async function GET(
         const { id: subscriberId } = await params;
 
         // 1. Fetch subscriber info
-        const subscriber = await client.getDocument(subscriberId);
+        const subscriber = await automationClient.getDocument(subscriberId);
 
         if (!subscriber) {
             return Response.json({ error: "Subscriber not found" }, { status: 404 });
         }
 
         // 2. Fetch all interactions for this subscriber
-        const interactions = await client.fetch(`
+        const interactions = await automationClient.fetch(`
             *[_type == "interaction" && subscriber._ref == $subscriberId] 
             | order(timestamp desc) {
                 _id,
@@ -32,7 +32,7 @@ export async function GET(
         `, { subscriberId });
 
         // 3. Fetch all sent campaigns (we'll check delivery in timeline)
-        const campaigns = await client.fetch(`
+        const campaigns = await automationClient.fetch(`
             *[_type == "campaign" && status == "sent"] 
             | order(sentAt desc) {
                 _id,
@@ -78,6 +78,10 @@ export async function GET(
             subscriber,
             timeline,
             stats
+        }, {
+            headers: {
+                'Cache-Control': 'private, s-maxage=60, stale-while-revalidate=30',
+            }
         });
 
     } catch (error: any) {

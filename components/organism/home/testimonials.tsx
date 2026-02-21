@@ -4,9 +4,11 @@
 import { Marquee } from "@/components/ui/marquee"
 import { AccentText, SectionHeading } from "@/components/ui/typography"
 import { GlowOutlineButton } from "@/components/atoms/button"
-import { Zap } from "lucide-react"
+import { Clock, Zap } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
+import BadgeAtom from "@/components/atoms/BadgeAtom"
+import HeadingAtom from "@/components/atoms/HeadingAtom"
 
 type Testimonial = {
   name: string
@@ -76,13 +78,26 @@ export default function TestimonialsSectionScroll({ heading, subheading, testimo
   return (
     <section id="testimonials" className="mb-24">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-[540px]">
-          <SectionHeading className="text-heading uppercase text-center">
-            {heading}
-          </SectionHeading>
-          <AccentText className="normal-case text-center">
-            {subheading}
-          </AccentText>
+        <div className="mx-auto max-w-[540px] item-center">
+          <BadgeAtom
+            variant="filled"
+            color="orange"
+            icon={<Clock className="w-4 h-4" />}
+            className="item-center"
+          >
+            Testimonials
+          </BadgeAtom>
+          <HeadingAtom
+            as="h2"
+            size="lg"
+            align="center"
+            title={heading}
+            highlight={subheading}
+            variant="split"
+            className="max-w-4xl mx-auto"
+          />
+
+
         </div>
 
         <div className="my-16 flex max-h-[738px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">

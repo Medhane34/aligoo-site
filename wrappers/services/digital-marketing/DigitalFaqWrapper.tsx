@@ -6,9 +6,9 @@ export default async function DigitalFaqTikTokSectionWrapper({
 }: {
   lang?: "en" | "am";
 }) {
-  // Note: Changed "faqSection-Fb" to "faqSection-TikTok" to match the service.
+  // Note: Changed "faqSection-Fb" to "faqSection-Digital" to match the service.
   const data: FaqSectionData | null = await fetchFaqSection(
-    " faqSection-digital",
+    "faqSection-Digital",
   );
 
   if (!data) return null;

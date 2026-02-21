@@ -1,11 +1,11 @@
 import React from "react";
-import { client } from "@/src/sanity/client";
+import { automationClient } from "@/src/sanity/client";
 import SubscribersTable from "@/components/telegram/SubscribersTable";
 
-export const dynamic = 'force-dynamic';
 
+export const revalidate = 86400;
 async function getSubscribers() {
-    return await client.fetch(`*[_type == "subscriber"] | order(joinedAt desc) {
+    return await automationClient.fetch(`*[_type == "subscriber"] | order(joinedAt desc) {
         _id,
         firstName,
         username,
@@ -14,7 +14,6 @@ async function getSubscribers() {
         joinedAt,
         tags,
         notes,
-        lastActive,
         lastActive,
         source,
         services

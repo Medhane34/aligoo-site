@@ -1,11 +1,15 @@
 import { notFound } from "next/navigation";
-import { fetchBlogPostBySlug } from "@/lib/BlogPost";
+import { fetchBlogPostBySlug, fetchRelatedPosts } from "@/lib/BlogPost";
 import { generateToc } from "@/lib/utilties/generateToc";
 import PortableTextRenderer from "@/components/PortableTextRenderer";
 import TableOfContents from "@/components/TableOfContents";
-import { useActiveTocId } from "@/hooks/useActiveTocId";
-import { Image } from "@heroui/image";
-import Link from "next/link";
+import Image from "next/image";
+import ReadingProgress from "@/components/blog/ReadingProgress";
+import ShareButtons from "@/components/blog/ShareButtons";
+import RelatedPosts from "@/components/blog/RelatedPosts";
+import PromotionalCard from "@/components/blog/PromotionalCard";
+
+import { DEFAULT_PROMOTIONAL_CARD } from "@/lib/constants/blogDefaults";
 
 export const revalidate = 60;
 
@@ -14,49 +18,157 @@ export default async function PostPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const { slug } = await params;
+  const term = await params;
+  const slug = term.slug;
   const post = await fetchBlogPostBySlug(slug);
 
   if (!post) return notFound();
 
+  const relatedPosts = await fetchRelatedPosts(slug, post.category?.slug);
+
   const toc = generateToc(post.body);
+
+  // Default Promo Card Data
+  const promoCard = post.promotionalCard?.heading
+    ? post.promotionalCard
+    : DEFAULT_PROMOTIONAL_CARD;
 
   // The TOC and scroll spy must be rendered on the client
   return (
-    <main className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col items-center py-12 px-4">
-      <div className="w-full max-w-7xl flex flex-col lg:flex-row gap-8">
-        {/* Left: TOC (sticky, only on desktop) */}
-        <div className="hidden lg:block w-60 flex-shrink-0">
-          <ClientToc toc={toc} />
-        </div>
-        {/* Right: Main content */}
-        <div className="flex-1 flex flex-col gap-8">
-          {post.imageUrl && (
-            <Image
-              isZoomed
-              src={post.imageUrl}
-              alt={post.title}
-              className="w-full aspect-video object-cover rounded-2xl shadow"
-              width={900}
-              height={400}
-            />
-          )}
-          <header className="flex flex-col items-center text-center gap-2">
-            <h1 className="text-heading font-bold text-text-light dark:text-text-dark">{post.title}</h1>
-            <div className="text-body text-gray-500">
-              Published:{" "}
-              {post.publishedAt
-                ? new Date(post.publishedAt).toLocaleDateString()
-                : "—"}
+    <main className="min-h-screen bg-background-light dark:bg-background-dark flex flex-col items-center py-12 px-4 relative">
+      <ReadingProgress />
+
+      <div className="w-full max-w-7xl flex flex-col gap-12">
+        {/* Hero Section */}
+        <header className="flex flex-col items-center text-center gap-6 max-w-4xl mx-auto">
+          <div className="flex flex-col gap-4 items-center">
+            <h1 className="text-3xl md:text-5xl font-bold text-text-light dark:text-text-dark leading-tight">
+              {post.title}
+            </h1>
+
+            <div className="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-500 relative">
+              {post.author && (
+                <div className="flex items-center gap-2">
+                  {post.author.image && (
+                    <div className="relative w-8 h-8 rounded-full overflow-hidden">
+                      <Image
+                        src={post.author.image}
+                        alt={post.author.name}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+                  <span className="font-medium text-text-light dark:text-white">
+                    {post.author.name}
+                  </span>
+                  <span className="text-gray-300">•</span>
+                </div>
+              )}
+
+              <span>
+                {post.publishedAt
+                  ? new Date(post.publishedAt).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "long",
+                    year: "numeric"
+                  })
+                  : "—"}
+              </span>
+
+              {post.estimatedReadingTime && (
+                <>
+                  <span className="text-gray-300">•</span>
+                  <span>{post.estimatedReadingTime} min read</span>
+                </>
+              )}
+
+              {/* Share Button (Hover to reveal) */}
+              <div className="ml-4 border-l pl-4 border-gray-300 dark:border-gray-700">
+                <ShareButtons
+                  url={`https://aligoo.ethio-tech.com/blog/${slug}`}
+                  title={post.title}
+                />
+              </div>
             </div>
-          </header>
-          {/* TOC for mobile (optional) */}
-          <div className="lg:hidden mb-8">
-            <TableOfContents toc={toc} />
           </div>
-          <article className="prose prose-lg max-w-none mx-auto text-body text-text-light dark:text-white px-2">
-            {Array.isArray(post.body) && <PortableTextRenderer value={post.body} />}
-          </article>
+
+          {post.excerpt && (
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl">
+              {post.excerpt}
+            </p>
+          )}
+
+          {post.imageUrl && (
+            <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl mt-4">
+              <Image
+                src={post.imageUrl}
+                alt={post.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1280px) 100vw, 1200px"
+                priority
+              />
+            </div>
+          )}
+        </header>
+
+        {/* 3-Column Content Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 relative items-start">
+          {/* Left: TOC (Sticky) */}
+          <div className="hidden lg:block lg:col-span-3 sticky top-32">
+            <ClientToc toc={toc} />
+          </div>
+
+          {/* Center: Content */}
+          <div className="lg:col-span-6 flex flex-col gap-12">
+            {/* TOC for mobile */}
+            <div className="lg:hidden">
+              <TableOfContents toc={toc} />
+            </div>
+
+            <article className="prose prose-lg dark:prose-invert max-w-none text-body text-text-light dark:text-gray-200">
+              {Array.isArray(post.body) && <PortableTextRenderer value={post.body} />}
+            </article>
+
+            {/* Author Bio Section */}
+            {post.author && (
+              <div className="w-full flex flex-col sm:flex-row gap-6 items-start mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+                {post.author.image && (
+                  <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
+                    <Image
+                      src={post.author.image}
+                      alt={post.author.name}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <div className="flex flex-col gap-2">
+                  <h3 className="text-xl font-bold text-text-light dark:text-white">
+                    Written by: {post.author.name}
+                  </h3>
+                  {post.author.bio && (
+                    <div className="prose prose-sm dark:prose-invert text-gray-600 dark:text-gray-300 max-w-none">
+                      <PortableTextRenderer value={post.author.bio} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <RelatedPosts posts={relatedPosts} />
+          </div>
+
+          {/* Right: Promotional Card (Sticky) */}
+          <div className="hidden lg:block lg:col-span-3 sticky top-32">
+            <PromotionalCard
+              heading={promoCard.heading}
+              description={promoCard.description}
+              buttonText={promoCard.buttonText}
+              buttonLink={promoCard.buttonLink}
+            />
+          </div>
         </div>
       </div>
     </main>

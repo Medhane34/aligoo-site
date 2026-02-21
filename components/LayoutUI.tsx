@@ -12,8 +12,8 @@ export default function LayoutUI({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     // Check if the current path starts with /proposal
     const isProposalPage = pathname?.startsWith('/proposal');
-
-    if (isProposalPage) {
+    const isMaintenancePage = pathname?.startsWith('/maintenance');
+    if (isProposalPage || isMaintenancePage) {
         return (
             <LanguageProvider>
                 <main className="grow min-h-screen bg-background">

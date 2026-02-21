@@ -1,10 +1,10 @@
 // app/api/proposal/verify-email/route.ts
-import { client } from '@/src/sanity/client'
+import { automationClient } from '@/src/sanity/client'
 
 export async function POST(req: Request) {
     const { proposalId, email } = await req.json()
 
-    const proposal = await client.fetch(
+    const proposal = await automationClient.fetch(
         `*[_type == "proposal" && _id == $proposalId && clientEmail == $email][0]{
       clientName,
       clientEmail

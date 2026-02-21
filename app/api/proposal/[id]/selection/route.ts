@@ -1,5 +1,5 @@
 // app/api/proposal/[id]/selection/route.ts
-import { client } from '@/src/sanity/client'
+import { automationClient } from '@/src/sanity/client'
 import { NextResponse } from 'next/server'
 
 export async function PATCH(
@@ -11,7 +11,7 @@ export async function PATCH(
     const { selectedPackage, selectedAddOns, totalPrice } = await req.json()
 
     // FIXED: Deep update — preserves depositPercentage & paymentStatus
-    await client
+    await automationClient
       .patch(id)
       .setIfMissing({ currentSelection: { _type: 'object' } })
       .set({
@@ -24,7 +24,7 @@ export async function PATCH(
       .commit()
 
     // Fetch fresh data
-    const proposal = await client.getDocument(id)
+    const proposal = await automationClient.getDocument(id)
     const clientName = proposal?.clientName || 'Client'
     const code = proposal?.uniqueCode || 'unknown'
 
