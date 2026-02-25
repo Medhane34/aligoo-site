@@ -1,5 +1,6 @@
-import { client } from "@/src/sanity/client";
 import type { SanityDocument } from "next-sanity";
+
+import { client } from "@/src/sanity/client";
 
 type CaseStudy = {
   _id: string;
@@ -8,7 +9,7 @@ type CaseStudy = {
   service: string;
   hasImage: boolean;
   hasService: boolean;
-  slug: string
+  slug: string;
 };
 
 export async function fetchCaseStudies(): Promise<CaseStudy[]> {
@@ -26,6 +27,7 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
 
   try {
     const rawData = await client.fetch<SanityDocument[]>(query);
+
     return rawData.map((post) => ({
       _id: post._id,
       title: post.title,
@@ -37,6 +39,7 @@ export async function fetchCaseStudies(): Promise<CaseStudy[]> {
     }));
   } catch (error) {
     console.error("Error fetching case studies:", error);
+
     return [];
   }
 }
@@ -70,6 +73,7 @@ export async function fetchFeaturedCaseStudy(): Promise<CaseStudy | null> {
     };
   } catch (error) {
     console.error("Error fetching featured case study:", error);
+
     return null;
   }
 }

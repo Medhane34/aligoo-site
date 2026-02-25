@@ -1,27 +1,28 @@
 // app/about/ValuesSection.tsx
-'use client'
+"use client";
 
-import React from "react"
-import { motion } from "framer-motion"
-import Link from "next/link"
-import { SectionHeading, AccentText } from "@/components/ui/typography"
-import { PrimaryButton } from "@/components/atoms/button"
+import React from "react";
+import { motion } from "framer-motion";
+import Link from "next/link";
+
+import { SectionHeading, AccentText } from "@/components/ui/typography";
+import { PrimaryButton } from "@/components/atoms/button";
 
 export interface ValueCard {
-  emoji: string
-  title: string
-  description: string
-  bgColor: string
-  textColor?: string
+  emoji: string;
+  title: string;
+  description: string;
+  bgColor: string;
+  textColor?: string;
 }
 
 export interface ValuesSectionProps {
-  sectionHeading: string
-  accentText: string
-  buttonText: string
-  buttonUrl: string
-  values: ValueCard[]
-  lang: 'en' | 'am'
+  sectionHeading: string;
+  accentText: string;
+  buttonText: string;
+  buttonUrl: string;
+  values: ValueCard[];
+  lang: "en" | "am";
 }
 
 const cardVariants = {
@@ -31,7 +32,7 @@ const cardVariants = {
     scale: 1,
     transition: { duration: 0.6, ease: "easeInOut" },
   },
-}
+};
 
 export default function ValuesSection({
   sectionHeading,
@@ -41,10 +42,10 @@ export default function ValuesSection({
   values,
   lang,
 }: ValuesSectionProps) {
-  const isAmharic = lang === 'am'
+  const isAmharic = lang === "am";
 
   // Always expect exactly 5 cards (your design requires it)
-  const [card1, card2, card3, card4, card5] = values
+  const [card1, card2, card3, card4, card5] = values;
 
   return (
     <section className="py-20 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
@@ -54,18 +55,20 @@ export default function ValuesSection({
           <div className="row-span-1 col-span-1 flex flex-col justify-between">
             <div>
               <SectionHeading
-                className={`text-heading mb-4 ${isAmharic ? 'font-amharicHeading text-5xl' : 'text-4xl'}`}
+                className={`text-heading mb-4 ${isAmharic ? "font-amharicHeading text-5xl" : "text-4xl"}`}
               >
                 {sectionHeading}
               </SectionHeading>
-              <AccentText className={`normal-case text-lg ${isAmharic ? 'font-amharicBody text-2xl leading-relaxed' : ''}`}>
+              <AccentText
+                className={`normal-case text-lg ${isAmharic ? "font-amharicBody text-2xl leading-relaxed" : ""}`}
+              >
                 {accentText}
               </AccentText>
             </div>
 
             <div className="mt-8">
               <Link href={buttonUrl}>
-                <PrimaryButton size="lg" className="w-full sm:w-auto">
+                <PrimaryButton className="w-full sm:w-auto" size="lg">
                   {buttonText}
                 </PrimaryButton>
               </Link>
@@ -81,14 +84,18 @@ export default function ValuesSection({
                  text-black dark:text-white
               "
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
               variants={cardVariants}
+              viewport={{ once: true }}
+              whileInView="visible"
             >
-              <h3 className={`font-bold text-2xl mb-4 ${isAmharic ? 'font-amharicHeading' : ''}`}>
+              <h3
+                className={`font-bold text-2xl mb-4 ${isAmharic ? "font-amharicHeading" : ""}`}
+              >
                 {card1.emoji} {card1.title}
               </h3>
-              <p className={`text-base leading-relaxed ${isAmharic ? 'font-amharicBody text-lg' : ''}`}>
+              <p
+                className={`text-base leading-relaxed ${isAmharic ? "font-amharicBody text-lg" : ""}`}
+              >
                 {card1.description}
               </p>
             </motion.div>
@@ -103,14 +110,18 @@ export default function ValuesSection({
                  text-black dark:text-white
               "
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
               variants={cardVariants}
+              viewport={{ once: true }}
+              whileInView="visible"
             >
-              <h3 className={`font-bold text-2xl mb-4 ${isAmharic ? 'font-amharicHeading' : ''}`}>
+              <h3
+                className={`font-bold text-2xl mb-4 ${isAmharic ? "font-amharicHeading" : ""}`}
+              >
                 {card2.emoji} {card2.title}
               </h3>
-              <p className={`text-base leading-relaxed ${isAmharic ? 'font-amharicBody text-lg' : ''}`}>
+              <p
+                className={`text-base leading-relaxed ${isAmharic ? "font-amharicBody text-lg" : ""}`}
+              >
                 {card2.description}
               </p>
             </motion.div>
@@ -125,14 +136,18 @@ export default function ValuesSection({
                  text-black dark:text-white
               "
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
               variants={cardVariants}
+              viewport={{ once: true }}
+              whileInView="visible"
             >
-              <h3 className={`font-bold text-2xl mb-4 ${isAmharic ? 'font-amharicHeading' : ''}`}>
+              <h3
+                className={`font-bold text-2xl mb-4 ${isAmharic ? "font-amharicHeading" : ""}`}
+              >
                 {card3.emoji} {card3.title}
               </h3>
-              <p className={`text-base leading-relaxed ${isAmharic ? 'font-amharicBody text-lg' : ''}`}>
+              <p
+                className={`text-base leading-relaxed ${isAmharic ? "font-amharicBody text-lg" : ""}`}
+              >
                 {card3.description}
               </p>
             </motion.div>
@@ -147,14 +162,18 @@ export default function ValuesSection({
                  text-black dark:text-white
               "
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
               variants={cardVariants}
+              viewport={{ once: true }}
+              whileInView="visible"
             >
-              <h3 className={`font-bold text-3xl mb-6 ${isAmharic ? 'font-amharicHeading' : ''}`}>
+              <h3
+                className={`font-bold text-3xl mb-6 ${isAmharic ? "font-amharicHeading" : ""}`}
+              >
                 {card4.emoji} {card4.title}
               </h3>
-              <p className={`text-lg leading-loose ${isAmharic ? 'font-amharicBody text-xl' : ''}`}>
+              <p
+                className={`text-lg leading-loose ${isAmharic ? "font-amharicBody text-xl" : ""}`}
+              >
                 {card4.description}
               </p>
             </motion.div>
@@ -163,20 +182,24 @@ export default function ValuesSection({
           {/* Card 5 */}
           {card5 && (
             <motion.div
-             className=" bg-white/10 backdrop-blur-xl rounded-3xl p-12 border border-white/20 text-gray-900
+              className=" bg-white/10 backdrop-blur-xl rounded-3xl p-12 border border-white/20 text-gray-900
                 rounded-2xl shadow-lg p-8 flex flex-col justify-center
                 hover:scale-[1.03] hover:shadow-2xl transition-all duration-300
                  text-black dark:text-white
               "
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
               variants={cardVariants}
+              viewport={{ once: true }}
+              whileInView="visible"
             >
-              <h3 className={`font-bold text-2xl mb-4 ${isAmharic ? 'font-amharicHeading' : ''}`}>
+              <h3
+                className={`font-bold text-2xl mb-4 ${isAmharic ? "font-amharicHeading" : ""}`}
+              >
                 {card5.emoji} {card5.title}
               </h3>
-              <p className={`text-base leading-relaxed ${isAmharic ? 'font-amharicBody text-lg' : ''}`}>
+              <p
+                className={`text-base leading-relaxed ${isAmharic ? "font-amharicBody text-lg" : ""}`}
+              >
                 {card5.description}
               </p>
             </motion.div>
@@ -184,5 +207,5 @@ export default function ValuesSection({
         </div>
       </div>
     </section>
-  )
+  );
 }

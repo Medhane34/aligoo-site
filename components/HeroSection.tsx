@@ -2,11 +2,10 @@
 "use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
+
 import ButtonAtom from "./atoms/ButtonAtom";
 import HeadingAtom from "./atoms/HeadingAtom";
 import BadgeAtom from "./atoms/BadgeAtom";
-import ParallaxBackground from "./molecules/ParallaxBackground";
-import CreativeCore from "./molecules/CreativeCore";
 import ConstellationBackground from "./molecules/ConstellationBackground";
 
 export interface HeroSectionProps {
@@ -64,7 +63,7 @@ const buttonContainerVariants = {
     y: 0,
     transition: {
       staggerChildren: 0.1,
-      duration: 0.5
+      duration: 0.5,
     },
   },
 };
@@ -83,11 +82,9 @@ export default function HeroSection({
 }: HeroSectionProps) {
   return (
     <div className="relative flex h-dvh w-full flex-col overflow-hidden bg-background-light dark:bg-background-dark mt-[-60px] xs:p-4 sm:mt-[-80px] sm:p-6 md:mt-[-105px] md:p-9 mt-50">
-
       {/* Background Animation */}
       {/* <ParallaxBackground /> */}
       <ConstellationBackground />
-
 
       <main className="container mx-auto flex flex-1 flex-col items-center justify-center overflow-hidden px-4 sm:px-6 md:px-4 relative z-10">
         <motion.section
@@ -99,7 +96,7 @@ export default function HeroSection({
           {/* Badge */}
           {badgeText && (
             <motion.div variants={badgeVariants}>
-              <BadgeAtom variant="outline" icon={<span>🔥</span>}>
+              <BadgeAtom icon={<span>🔥</span>} variant="outline">
                 {badgeText}
               </BadgeAtom>
             </motion.div>
@@ -112,26 +109,26 @@ export default function HeroSection({
             variants={headingVariants}
           >
             <HeadingAtom
-              size="xl"
-              variant="default"
               align="center"
-              title={headlineText1}
               className="leading-tight dark:text-gray-100"
+              size="xl"
+              title={headlineText1}
+              variant="default"
             />
             <HeadingAtom
-              size="xl"
-              variant="default"
               align="center"
-              title={headlineText2}
               className="leading-tight bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent pb-2"
+              size="xl"
+              title={headlineText2}
+              variant="default"
             />
             {headlineText3 && (
               <HeadingAtom
-                size="xl"
-                variant="default"
                 align="center"
-                title={headlineText3}
                 className="leading-tight dark:text-gray-100 -mt-2" // Slight negative margin to pull 3rd line closer if needed
+                size="xl"
+                title={headlineText3}
+                variant="default"
               />
             )}
           </motion.div>
@@ -149,23 +146,19 @@ export default function HeroSection({
             className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto"
             variants={buttonContainerVariants}
           >
-            <Link href={primaryButtonUrl} className="w-full sm:w-auto">
+            <Link className="w-full sm:w-auto" href={primaryButtonUrl}>
               <ButtonAtom
-                variant="primary"
-                size="lg"
-                fullWidth={true} // Full width on mobile, auto on desktop via CSS 
+                fullWidth={true} // Full width on mobile, auto on desktop via CSS
                 shimmer={true}
+                size="lg"
+                variant="primary"
               >
                 {primaryButtonText}
               </ButtonAtom>
             </Link>
 
-            <Link href={secondaryButtonUrl} className="w-full sm:w-auto">
-              <ButtonAtom
-                variant="outline"
-                size="lg"
-                fullWidth={true}
-              >
+            <Link className="w-full sm:w-auto" href={secondaryButtonUrl}>
+              <ButtonAtom fullWidth={true} size="lg" variant="outline">
                 {secondaryButtonText}
               </ButtonAtom>
             </Link>

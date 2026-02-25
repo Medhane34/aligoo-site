@@ -3,12 +3,12 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-
-import AccordionItem from "./AccordionItem";
-import { SectionHeading, AccentText } from "@/components/ui/typography";
 import Link from "next/link";
+
 import HeadingAtom from "../atoms/HeadingAtom";
 import ButtonAtom from "../atoms/ButtonAtom";
+
+import AccordionItem from "./AccordionItem";
 
 interface FaqItem {
   question: string;
@@ -80,8 +80,6 @@ export default function FaqSection({
           viewport={{ once: true }}
           whileInView="visible"
         >
-
-
           {eyebrow && (
             <motion.div
               className="text-sm font-semibold uppercase tracking-wider mb-2"
@@ -89,10 +87,10 @@ export default function FaqSection({
             >
               <HeadingAtom
                 highlight={eyebrow}
+                size="lg"
                 title=""
                 variant="split"
-                size="lg"
-              ></HeadingAtom>
+              />
             </motion.div>
           )}
 
@@ -100,11 +98,7 @@ export default function FaqSection({
             className="text-heading sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6"
             variants={leftItemVariants}
           >
-            <HeadingAtom
-              title={heading}
-              variant="default"
-              size="sm"
-            ></HeadingAtom>
+            <HeadingAtom size="sm" title={heading} variant="default" />
           </motion.div>
 
           <motion.p
@@ -115,12 +109,8 @@ export default function FaqSection({
           </motion.p>
           {ctaText && (
             <motion.div variants={leftItemVariants}>
-              <Link href="/strategy-session" passHref>
-                <ButtonAtom
-                  shimmer
-                >
-                  {ctaText}
-                </ButtonAtom>
+              <Link passHref href="/strategy-session">
+                <ButtonAtom shimmer>{ctaText}</ButtonAtom>
               </Link>
             </motion.div>
           )}

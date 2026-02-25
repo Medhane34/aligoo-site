@@ -1,6 +1,7 @@
 // sanity/BlogPost.ts
-import { Lang } from '@/types/BlogPost';
-import { groq } from 'next-sanity';
+import { groq } from "next-sanity";
+
+import { Lang } from "@/types/BlogPost";
 
 export const BLOG_POST_QUERY = (lang: Lang) => groq`
   *[_type == "post" && slug.current == $slug][0]{
@@ -31,7 +32,11 @@ export const BLOG_POST_QUERY = (lang: Lang) => groq`
 `;
 
 // For related posts (optional)
-export const RELATED_POSTS_QUERY = (lang: Lang, currentSlug: string, limit = 3) => groq`
+export const RELATED_POSTS_QUERY = (
+  lang: Lang,
+  currentSlug: string,
+  limit = 3,
+) => groq`
   *[_type == "post" && slug.current != $currentSlug] | order(publishedAt desc)[0...$limit] {
     _id,
     title_${lang},
@@ -42,7 +47,7 @@ export const RELATED_POSTS_QUERY = (lang: Lang, currentSlug: string, limit = 3) 
   }
 `;
 
-export const LATEST_BLOGS_QUERY = (lang: 'en' | 'am') => groq`
+export const LATEST_BLOGS_QUERY = (lang: "en" | "am") => groq`
   *[_type == "post"] | order(_createdAt desc)[0...10] {
     _id,
     title_${lang},

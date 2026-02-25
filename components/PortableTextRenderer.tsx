@@ -8,6 +8,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import YouTube from "react-youtube";
+
 import { client } from "@/src/sanity/client";
 
 const { projectId, dataset } = client.config();

@@ -2,9 +2,8 @@
 "use client";
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+
 import HeadingAtom from "@/components/atoms/HeadingAtom";
-import BadgeAtom from "@/components/atoms/BadgeAtom";
-import { Layers, ArrowRight } from "lucide-react";
 
 export interface ProcessStep {
   icon: string;
@@ -16,7 +15,7 @@ export interface ProcessSectionProps {
   sectionHeading: string;
   accentText: string;
   steps: ProcessStep[];
-  lang: 'en' | 'am';
+  lang: "en" | "am";
 }
 
 const containerVariants = {
@@ -55,12 +54,14 @@ export default function ProcessSection({
   const lineWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={containerRef} className="py-24 bg-background-light dark:bg-background-dark relative overflow-hidden">
+    <section
+      ref={containerRef}
+      className="py-24 bg-background-light dark:bg-background-dark relative overflow-hidden"
+    >
       {/* Ambient Background */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
       <div className="container mx-auto px-4 relative z-10">
-
         {/* Header */}
         <div className="text-center mb-20 flex flex-col items-center gap-6">
           {/*  <BadgeAtom
@@ -72,49 +73,49 @@ export default function ProcessSection({
           </BadgeAtom> */}
 
           <HeadingAtom
-            as="h2"
-            size="lg"
             align="center"
-            title={sectionHeading}
-            highlight={accentText}
-            variant="split"
+            as="h2"
             className="max-w-4xl mx-auto"
+            highlight={accentText}
+            size="lg"
+            title={sectionHeading}
+            variant="split"
           />
         </div>
 
         {/* Steps Container */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
           className="relative grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8"
+          initial="hidden"
+          variants={containerVariants}
+          viewport={{ once: true, margin: "-100px" }}
+          whileInView="visible"
         >
           {/* Connector Line (Desktop - Horizontal) */}
           <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-neutral-200 dark:bg-neutral-800 -z-10">
             <motion.div
-              style={{ width: lineWidth }}
               className="h-full bg-gradient-to-r from-red-500 via-orange-500 to-yellow-500 origin-left"
+              style={{ width: lineWidth }}
             />
           </div>
 
           {/* Connector Line (Mobile - Vertical) */}
           <div className="md:hidden absolute top-0 left-8 w-0.5 h-full bg-neutral-200 dark:bg-neutral-800 -z-10">
             <motion.div
-              style={{ height: lineHeight }}
               className="w-full bg-gradient-to-b from-red-500 via-orange-500 to-yellow-500 origin-top"
+              style={{ height: lineHeight }}
             />
           </div>
 
           {steps.map((step, index) => {
-            const emojis = ['🚀', '📅', '📄', '🤝'];
+            const emojis = ["🚀", "📅", "📄", "🤝"];
             const displayIcon = emojis[index] || step.icon;
 
             return (
               <motion.div
                 key={index}
-                variants={stepVariants}
                 className="relative flex md:flex-col items-start md:items-center gap-6 md:gap-8 group"
+                variants={stepVariants}
               >
                 {/* Icon Container */}
                 <div className="relative flex-shrink-0">
@@ -143,7 +144,6 @@ export default function ProcessSection({
             );
           })}
         </motion.div>
-
       </div>
     </section>
   );

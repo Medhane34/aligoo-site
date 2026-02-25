@@ -1,2 +1,2 @@
-export { default } from './BadgeText';
-export type { BadgeTextProps } from './BadgeText';
+export { default } from "./BadgeText";
+export type { BadgeTextProps } from "./BadgeText";

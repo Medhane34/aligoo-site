@@ -1,41 +1,41 @@
-'use client'
+"use client";
 
-import NextStepsSection from '@/components/proposal/NextSteps'
-import { NextStepsSection as NextStepsSectionType } from '@/types/ProposalType'
+import NextStepsSection from "@/components/proposal/NextSteps";
+import { NextStepsSection as NextStepsSectionType } from "@/types/ProposalType";
 
 interface NextStepsWrapperProps {
-  nextSteps?: NextStepsSectionType
-  daysLeftText?: string
-  onProceedToContract?: () => void
+  nextSteps?: NextStepsSectionType;
+  daysLeftText?: string;
+  onProceedToContract?: () => void;
 }
 
 export default function NextStepsWrapper({
   nextSteps,
-  daysLeftText = '14 days',
+  daysLeftText = "14 days",
   onProceedToContract,
 }: NextStepsWrapperProps) {
-  console.log('NextStepsWrapper received:', nextSteps)
+  console.log("NextStepsWrapper received:", nextSteps);
   if (!nextSteps?.enabled || !nextSteps.steps?.length) {
-    return null
+    return null;
   }
 
   // Map the steps and ensure the first one is marked as current if status is missing
   const stepsWithStatus = nextSteps.steps.map((step, index) => ({
     ...step,
-    status: step.status || (index === 0 ? 'current' : 'pending'),
+    status: step.status || (index === 0 ? "current" : "pending"),
     // Ensure details is string[]
     details: step.details || [],
     // Ensure faqs is correct structure
-    faqs: step.faqs || []
-  }))
+    faqs: step.faqs || [],
+  }));
 
   return (
     <NextStepsSection
-      title={nextSteps.title}
-      subtitle={nextSteps.subtitle}
       daysLeftText={daysLeftText}
       steps={stepsWithStatus}
+      subtitle={nextSteps.subtitle}
+      title={nextSteps.title}
       onProceedToContract={onProceedToContract}
     />
-  )
+  );
 }

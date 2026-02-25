@@ -1,18 +1,10 @@
 /* eslint-disable prettier/prettier */
-import HeroSection from "@/components/HeroSection";
 
-import CTABottomSection from "@/components/CTA";
-import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
+import HeroSection from "@/components/HeroSection";
 import FaqSection from "@/components/service-sections/FaqSection";
 import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
-import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
-import OurProcess from "@/components/service-sections/ourprocess";
-
 import ProcessSection, { ProcessStep } from "@/components/service-sections/ProcessSection";
-
 import Container from "@/components/ui/Container";
-import { MagnifyingGlassIcon, UserGroupIcon, DocumentTextIcon, RocketLaunchIcon, UserIcon, BoltIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
-
 import WhyServiceWorksSection from "@/components/service-sections/WhyServiceWorksSection";
 
 
@@ -118,9 +110,9 @@ export default async function IndexPage() {
       />
       <Container>
        <WhyServiceWorksSection
+        features={features}
         heading="Why Graphic Design Works"
         subheading="If you know how to do them"
-        features={features}
       />
 
       </Container>
@@ -129,8 +121,8 @@ export default async function IndexPage() {
       
       <ProcessSection
         heading="✨ The VIBE Method"
-        subheading="A 4-step breakdown with a catchy name and personality"
         steps={steps}
+        subheading="A 4-step breakdown with a catchy name and personality"
       />
   </div>
       <Container>

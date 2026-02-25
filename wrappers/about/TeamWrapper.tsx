@@ -5,7 +5,7 @@ import { TeamSectionData } from "@/lib/about";
 
 interface TeamWrapperProps {
   data: TeamSectionData | null;
-  lang: 'en' | 'am';
+  lang: "en" | "am";
 }
 
 export default function TeamWrapper({ data, lang }: TeamWrapperProps) {

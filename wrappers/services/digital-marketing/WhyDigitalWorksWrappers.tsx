@@ -1,4 +1,7 @@
-import { fetchWhyServiceWorksSection, WhyServiceWorksSectionData } from "@/lib/services/digitalmarketing";
+import {
+  fetchWhyServiceWorksSection,
+  WhyServiceWorksSectionData,
+} from "@/lib/services/digitalmarketing";
 import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
 export default async function WhyDigitalWorksSectionWrapper({
   lang = "en",
@@ -7,8 +10,11 @@ export default async function WhyDigitalWorksSectionWrapper({
   lang?: "en" | "am";
   id: string;
 }) {
-  const data: WhyServiceWorksSectionData | null = await fetchWhyServiceWorksSection(id);
+  const data: WhyServiceWorksSectionData | null =
+    await fetchWhyServiceWorksSection(id);
+
   if (!data) return null;
+
   return (
     <WhyServiceWorks
       heading={lang === "am" ? data.heading_am : data.heading_en}

@@ -1,5 +1,5 @@
 // types/BlogPost.ts
-export type Lang = 'en' | 'am';
+export type Lang = "en" | "am";
 
 export interface BlogPost {
   _id: string;
@@ -47,11 +47,15 @@ export interface BlogPostDetail {
     buttonText: string;
     buttonLink: string;
   };
+  faqs?: {
+    question: string;
+    answer: string;
+  }[];
   estimatedReadingTime?: number;
 }
 
 // NEW: For list & related posts
 export type BlogPostListItem = Pick<
   BlogPost,
-  '_id' | 'title' | 'excerpt' | 'slug' | 'imageUrl' | 'publishedAt'
+  "_id" | "title" | "excerpt" | "slug" | "imageUrl" | "publishedAt"
 >;

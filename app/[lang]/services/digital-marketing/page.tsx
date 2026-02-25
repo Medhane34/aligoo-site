@@ -1,8 +1,5 @@
 /* eslint-disable prettier/prettier */
 
-import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
-import FaqSection from "@/components/service-sections/FaqSection";
-import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
 import Container from "@/components/ui/Container";
 import HeroDigitalSectionWrapper from "@/wrappers/services/digital-marketing/HeroDigitalWrapper";
 import WhyDigitalWorksSectionWrapper from "@/wrappers/services/digital-marketing/WhyDigitalWorksWrappers";
@@ -34,7 +31,7 @@ export default async function IndexPage({ params }: { params: Promise<{ lang: "e
     <>
       <HeroDigitalSectionWrapper lang={lang} />
       <Container>
-     <WhyDigitalWorksSectionWrapper lang={lang} id="whyServiceWorksSection-Digital" />
+     <WhyDigitalWorksSectionWrapper id="whyServiceWorksSection-Digital" lang={lang} />
       </Container>
       <DigitalProcessSectionWrapper lang={lang} />
       <Container>

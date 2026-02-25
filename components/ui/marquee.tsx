@@ -1,18 +1,17 @@
-"use client"
+"use client";
 
+import type { ReactNode } from "react";
 
-
-import { cn } from "@/utils/cn"
-import type { ReactNode } from "react"
+import { cn } from "@/utils/cn";
 
 interface MarqueeProps {
-  className?: string
-  reverse?: boolean
-  pauseOnHover?: boolean
-  children?: ReactNode
-  vertical?: boolean
-  repeat?: number
-  [key: string]: any
+  className?: string;
+  reverse?: boolean;
+  pauseOnHover?: boolean;
+  children?: ReactNode;
+  vertical?: boolean;
+  repeat?: number;
+  [key: string]: any;
 }
 
 export function Marquee({
@@ -52,5 +51,5 @@ export function Marquee({
           </div>
         ))}
     </div>
-  )
+  );
 }

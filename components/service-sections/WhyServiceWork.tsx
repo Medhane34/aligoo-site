@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+
 import HeadingAtom from "../atoms/HeadingAtom";
 
 const headingVariants = {
@@ -73,24 +74,18 @@ const WhyServiceWorks: React.FC<WhyServiceWorksProps> = ({
         <motion.div
           className="text-heading font-bold"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
           variants={headingVariants}
+          viewport={{ once: true }}
+          whileInView="visible"
         >
-          <HeadingAtom
-            highlight={heading}
-            title=""
-            variant="split"
-            size="lg"
-          ></HeadingAtom>
-
+          <HeadingAtom highlight={heading} size="lg" title="" variant="split" />
 
           <HeadingAtom
             highlight={highlight}
+            size="sm"
             title=""
             variant="default"
-            size="sm"
-          ></HeadingAtom>
+          />
         </motion.div>
       </div>
 
@@ -98,9 +93,9 @@ const WhyServiceWorks: React.FC<WhyServiceWorksProps> = ({
       <motion.div
         className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-2 mb-12"
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
         variants={textContainerVariants}
+        viewport={{ once: true }}
+        whileInView="visible"
       >
         <motion.div className="md:w-2/5 text-body" variants={textVariants}>
           <p>{paragraph1}</p>
@@ -114,9 +109,9 @@ const WhyServiceWorks: React.FC<WhyServiceWorksProps> = ({
       <motion.div
         className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-2 text-center"
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
         variants={statsContainerVariants}
+        viewport={{ once: true }}
+        whileInView="visible"
       >
         {stats.map((stat, i) => (
           <motion.div key={i} variants={statVariants}>

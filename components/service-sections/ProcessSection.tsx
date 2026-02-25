@@ -2,13 +2,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  MagnifyingGlassIcon,
-  UserGroupIcon,
-  DocumentTextIcon,
-  RocketLaunchIcon,
-} from "@heroicons/react/24/outline";
-import { AccentText, SectionHeading } from "../ui/typography";
+
 import BadgeAtom from "../atoms/BadgeAtom";
 import HeadingAtom from "../atoms/HeadingAtom";
 
@@ -54,24 +48,21 @@ const CurvyDottedArrow: React.FC<{ index: number }> = ({ index }) => (
   <motion.div
     className="hidden md:flex items-center justify-center"
     initial="hidden"
-    whileInView="visible"
     viewport={{ once: true, amount: 0.2 }}
+    whileInView="visible"
   >
-    <svg width="120" height="60" viewBox="0 0 120 60" fill="none">
+    <svg fill="none" height="60" viewBox="0 0 120 60" width="120">
       <motion.path
+        custom={index}
         d="M10 30 C 40 0, 80 60, 110 30"
+        fill="none"
         stroke="#94a3b8"
-        strokeWidth="2"
         strokeDasharray="4 6"
         strokeLinecap="round"
-        fill="none"
+        strokeWidth="2"
         variants={arrowVariants}
-        custom={index}
       />
-      <polygon
-        points="110,30 104,26 106,30 104,34"
-        fill="#94a3b8"
-      />
+      <polygon fill="#94a3b8" points="110,30 104,26 106,30 104,34" />
     </svg>
   </motion.div>
 );
@@ -83,17 +74,14 @@ const ProcessStepsSection: React.FC<ProcessStepsSectionProps> = ({
 }) => (
   <section className="w-full bg-background-light dark:bg-background-dark py-16">
     <div className="max-w-6xl mx-auto px-4 flex flex-col items-center">
-      <BadgeAtom variant="filled" color="yellow"> PROCESS</BadgeAtom>
-      <HeadingAtom
-        highlight={heading}
-        title=""
-        variant="split"
-        size="lg"
-      ></HeadingAtom>
+      <BadgeAtom color="yellow" variant="filled">
+        {" "}
+        PROCESS
+      </BadgeAtom>
+      <HeadingAtom highlight={heading} size="lg" title="" variant="split" />
 
       {subheading && (
-        <HeadingAtom title={subheading} variant="default" size="sm"></HeadingAtom>
-
+        <HeadingAtom size="sm" title={subheading} variant="default" />
       )}
       <div className="flex flex-col md:flex-row items-stretch justify-center gap-0 w-full">
         {steps.map((step, idx) => (
@@ -109,9 +97,9 @@ const ProcessStepsSection: React.FC<ProcessStepsSectionProps> = ({
               "
               custom={idx}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
               variants={cardVariants}
+              viewport={{ once: true, amount: 0.2 }}
+              whileInView="visible"
             >
               <div className="flex items-center justify-center w-16 h-16 rounded-full mb-4 border-2 border-white bg-white/80 shadow-md">
                 {step.icon}
@@ -119,8 +107,12 @@ const ProcessStepsSection: React.FC<ProcessStepsSectionProps> = ({
               <div className="text-xs text-gray-400 font-semibold mb-1 uppercase tracking-wider">
                 Step {idx + 1}
               </div>
-              <div className="text-heading font-semibold mb-2 text-center">{step.title}</div>
-              <div className="text-body text-center max-w-xs mx-auto">{step.description}</div>
+              <div className="text-heading font-semibold mb-2 text-center">
+                {step.title}
+              </div>
+              <div className="text-body text-center max-w-xs mx-auto">
+                {step.description}
+              </div>
             </motion.div>
             {idx < steps.length - 1 && <CurvyDottedArrow index={idx} />}
           </React.Fragment>

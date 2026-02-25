@@ -1,23 +1,24 @@
 // components/proposal/Calculator.tsx
-'use client'
+"use client";
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
-import PackageCard from './PackageCard'
-import AddonCard from './AddonCard'
-import { addToast } from "@heroui/toast"
+import type { ProposalData, BasePackage, AddOn } from "@/types/ProposalType";
 
-import { CheckCircle2, Loader2 } from 'lucide-react'
-import type { ProposalData, BasePackage, AddOn } from '@/types/ProposalType'
-import { PrimaryButton } from '../atoms/button'
-import { useRouter } from 'next/navigation'
+import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { addToast } from "@heroui/toast";
+import { CheckCircle2, Loader2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+import { PrimaryButton } from "../atoms/button";
+
+import PackageCard from "./PackageCard";
 
 interface CalculatorProps {
-  initialSelection: ProposalData['currentSelection']
-  packages: BasePackage[]
-  addOns: AddOn[]
-  proposalId: string
-  uniqueCode: ProposalData['uniqueCode']
+  initialSelection: ProposalData["currentSelection"];
+  packages: BasePackage[];
+  addOns: AddOn[];
+  proposalId: string;
+  uniqueCode: ProposalData["uniqueCode"];
 }
 
 export default function Calculator({
@@ -25,102 +26,107 @@ export default function Calculator({
   packages,
   addOns,
   proposalId,
-  uniqueCode
-
+  uniqueCode,
 }: CalculatorProps) {
-  const [selectedPackage, setSelectedPackage] = useState<string | undefined>(initialSelection?.selectedPackage)
-  const [selectedAddOns, setSelectedAddOns] = useState<string[]>(initialSelection?.selectedAddOns || [])
-  const [total, setTotal] = useState<number>(initialSelection?.totalPrice || 0)
-  const [isSaved, setIsSaved] = useState(false)
-  const [isSaving, setIsSaving] = useState(false)
+  const [selectedPackage, setSelectedPackage] = useState<string | undefined>(
+    initialSelection?.selectedPackage,
+  );
+  const [selectedAddOns, setSelectedAddOns] = useState<string[]>(
+    initialSelection?.selectedAddOns || [],
+  );
+  const [total, setTotal] = useState<number>(initialSelection?.totalPrice || 0);
+  const [isSaved, setIsSaved] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
 
   // Load defaults on mount
   useEffect(() => {
-    const defaultPkg = packages.find(p => p.isDefault)?.name
-    if (!selectedPackage && defaultPkg) setSelectedPackage(defaultPkg)
+    const defaultPkg = packages.find((p) => p.isDefault)?.name;
 
-    const preselected = addOns.filter(a => a.preselected).map(a => a.name)
+    if (!selectedPackage && defaultPkg) setSelectedPackage(defaultPkg);
+
+    const preselected = addOns.filter((a) => a.preselected).map((a) => a.name);
+
     if (selectedAddOns.length === 0 && preselected.length > 0) {
-      setSelectedAddOns(preselected)
+      setSelectedAddOns(preselected);
     }
-  }, [packages, addOns])
+  }, [packages, addOns]);
 
   // Recalculate total instantly (preview only)
   useEffect(() => {
-    let newTotal = 0
-    const pkg = packages.find(p => p.name === selectedPackage)
-    if (pkg) newTotal += pkg.price
+    let newTotal = 0;
+    const pkg = packages.find((p) => p.name === selectedPackage);
 
-    selectedAddOns.forEach(name => {
-      const addon = addOns.find(a => a.name === name)
-      if (addon) newTotal += addon.price
-    })
-    setTotal(newTotal)
-  }, [selectedPackage, selectedAddOns, packages, addOns])
+    if (pkg) newTotal += pkg.price;
 
-  const router = useRouter()
+    selectedAddOns.forEach((name) => {
+      const addon = addOns.find((a) => a.name === name);
+
+      if (addon) newTotal += addon.price;
+    });
+    setTotal(newTotal);
+  }, [selectedPackage, selectedAddOns, packages, addOns]);
+
+  const router = useRouter();
 
   const confirmSelection = async () => {
-    setIsSaving(true)
+    setIsSaving(true);
     try {
       const res = await fetch(`/api/proposal/${proposalId}/selection`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           selectedPackage,
           selectedAddOns,
-          totalPrice: total
+          totalPrice: total,
         }),
-      })
-      const data = await res.json()  // ADD THIS
-      console.log('API response:', data)  // ADD THIS
-      if (!res.ok) throw new Error('Failed')
+      });
+      const data = await res.json(); // ADD THIS
 
-      setIsSaved(true)
+      console.log("API response:", data); // ADD THIS
+      if (!res.ok) throw new Error("Failed");
+
+      setIsSaved(true);
       addToast({
         title: "Selection Confirmed!",
         description: `We've saved your package: ${selectedPackage} + ${selectedAddOns.length} add-on(s)`,
-        color: "success"
-      })
+        color: "success",
+      });
 
-      router.push(`/proposal/${uniqueCode}/checkout`)
+      router.push(`/proposal/${uniqueCode}/checkout`);
       // Reset saved state after 5s
-      setTimeout(() => setIsSaved(false), 5000)
-
+      setTimeout(() => setIsSaved(false), 5000);
     } catch (error) {
       addToast({
         title: "Save Failed",
         description: "Please try again or contact us.",
-        color: "danger"
-      })
+        color: "danger",
+      });
     } finally {
-      setIsSaving(false)
+      setIsSaving(false);
     }
-  }
+  };
 
   const toggleAddOn = (name: string) => {
-    setSelectedAddOns(prev =>
-      prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]
-    )
-    setIsSaved(false) // Unsave on change
-  }
+    setSelectedAddOns((prev) =>
+      prev.includes(name) ? prev.filter((n) => n !== name) : [...prev, name],
+    );
+    setIsSaved(false); // Unsave on change
+  };
 
   const handleCheckout = () => {
     // This function is currently empty, but the instruction implies adding a redirect
     // based on the context of the confirmSelection function
-  }
-
-
+  };
 
   return (
     <section className="py-16 bg-gray-900 relative">
       <div className="container mx-auto px-4">
         {/* Packages Grid */}
         <motion.h2
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
           className="text-4xl md:text-5xl font-bold text-white text-center mb-12"
+          initial={{ opacity: 0, y: 50 }}
+          viewport={{ once: true }}
+          whileInView={{ opacity: 1, y: 0 }}
         >
           Choose Your Perfect Package
         </motion.h2>
@@ -130,16 +136,16 @@ export default function Calculator({
             <motion.div
               key={pkg.name}
               initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
               transition={{ delay: i * 0.15 }}
+              viewport={{ once: true }}
+              whileInView={{ opacity: 1, y: 0 }}
             >
               <PackageCard
                 pkg={pkg}
                 selected={selectedPackage === pkg.name}
                 onSelect={() => {
-                  setSelectedPackage(pkg.name)
-                  setIsSaved(false)
+                  setSelectedPackage(pkg.name);
+                  setIsSaved(false);
                 }}
               />
             </motion.div>
@@ -148,15 +154,18 @@ export default function Calculator({
 
         {/* Sticky Confirm Bar */}
         <motion.div
-          initial={{ y: 100 }}
           animate={{ y: 0 }}
           className="fixed bottom-0 left-0 right-0 bg-gradient-to-r from-blue-800 to-indigo-900 p-6 shadow-2xl z-50 md:static md:bg-transparent md:p-0"
+          initial={{ y: 100 }}
         >
           <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-white text-center md:text-left">
               <p className="text-lg opacity-90">Your Total Investment</p>
               <p className="text-4xl md:text-5xl font-bold">
-                {new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(total)}
+                {new Intl.NumberFormat("en-IN", {
+                  style: "currency",
+                  currency: "INR",
+                }).format(total)}
               </p>
               {isSaved && (
                 <p className="text-green-400 text-sm mt-2 flex items-center justify-center md:justify-start">
@@ -166,12 +175,10 @@ export default function Calculator({
             </div>
 
             <PrimaryButton
-              size="md"
               className="bg-white text-blue-900 hover:bg-gray-100 font-bold text-lg px-10 py-7 rounded-xl shadow-xl"
-              onClick={confirmSelection}
               disabled={isSaving || !selectedPackage}
-
-
+              size="md"
+              onClick={confirmSelection}
             >
               {isSaving ? (
                 <>
@@ -186,5 +193,5 @@ export default function Calculator({
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

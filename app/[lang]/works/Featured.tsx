@@ -1,11 +1,19 @@
-"use client"
-import { Image } from "@heroui/react";
+"use client";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { AccentText, SectionHeading, Paragraph } from "@/components/ui/typography";
-import { ButtonVariants, imageVariants, textContainerVariants, textVariants } from "@/lib/motions";
-import { MyButton } from "@/components/custom/extendVariants";
 import NextImage from "next/image";
+
+import {
+  AccentText,
+  SectionHeading,
+  Paragraph,
+} from "@/components/ui/typography";
+import {
+  ButtonVariants,
+  imageVariants,
+  textContainerVariants,
+  textVariants,
+} from "@/lib/motions";
 import { PrimaryButton } from "@/components/atoms/button";
 
 export interface FeaturedCaseStudyProps {
@@ -74,7 +82,7 @@ export default function FeaturedCaseStudy({
           </motion.div>
           <motion.div className="pt-6" variants={ButtonVariants}>
             <Link href={`/case-study/${slug}`}>
-            <PrimaryButton> 📖 Read Case Study</PrimaryButton>
+              <PrimaryButton> 📖 Read Case Study</PrimaryButton>
             </Link>
           </motion.div>
         </motion.div>

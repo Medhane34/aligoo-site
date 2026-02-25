@@ -1,16 +1,22 @@
 // components/case-studies/CaseStudyImageGallery.tsx
 "use client";
-import React from 'react';
-import Image from 'next/image'; // Import Next.js Image component
+import React from "react";
+import Image from "next/image"; // Import Next.js Image component
+
 import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { CaseStudyImageGalleryData, GalleryImageItem } from '@/types/CaseStudyTypes'; // Import the types
+import {
+  CaseStudyImageGalleryData,
+  GalleryImageItem,
+} from "@/types/CaseStudyTypes"; // Import the types
 
 // Define the props interface for the component
 interface CaseStudyImageGalleryProps {
   imageGalleryData: CaseStudyImageGalleryData;
 }
 
-export default function CaseStudyImageGallery({ imageGalleryData }: CaseStudyImageGalleryProps) {
+export default function CaseStudyImageGallery({
+  imageGalleryData,
+}: CaseStudyImageGalleryProps) {
   // Destructure the data for easier access
   const {
     galleryHeading,
@@ -28,11 +34,12 @@ export default function CaseStudyImageGallery({ imageGalleryData }: CaseStudyIma
     galleryImage3,
   ].filter(Boolean); // Filters out any undefined or null values
 
-
-
   // Don't render the section if no gallery data or no images are available
   if (!galleryHeading || galleryImages.length === 0) {
-    console.warn("CaseStudyImageGallery: Skipping render due to missing heading or images.");
+    console.warn(
+      "CaseStudyImageGallery: Skipping render due to missing heading or images.",
+    );
+
     return null;
   }
 
@@ -42,7 +49,8 @@ export default function CaseStudyImageGallery({ imageGalleryData }: CaseStudyIma
         {/* Section Header */}
         <div
           className="lg:space-y-2 xs:space-y-6 sm:space-y-10 md:space-y-12 
-        mb-12 text-center">
+        mb-12 text-center"
+        >
           <SectionHeading className="text-heading font-bold tracking-tight uppercase">
             {galleryHeading}
           </SectionHeading>
@@ -60,20 +68,23 @@ export default function CaseStudyImageGallery({ imageGalleryData }: CaseStudyIma
           {galleryImages.map((imgItem, index) => {
             // Ensure imgItem is not undefined (though filter(Boolean) should handle this)
             if (!imgItem || !imgItem.imageUrl) {
-                console.warn(`Gallery image at index ${index} is missing crucial data (imageUrl). Skipping.`);
-                return null;
+              console.warn(
+                `Gallery image at index ${index} is missing crucial data (imageUrl). Skipping.`,
+              );
+
+              return null;
             }
 
             return (
               <div key={index} className="flex flex-col items-center">
                 <Image
-                  src={imgItem.imageUrl}
                   alt={imgItem.imageAlt || `Gallery image ${index + 1}`} // Fallback alt text
-                  width={600} // Recommended: Adjust based on your common gallery image sizes
-                  height={400} // Recommended: Adjust based on your common gallery image sizes
                   className="w-full h-64 object-cover rounded-lg shadow-md"
+                  height={400} // Recommended: Adjust based on your common gallery image sizes
                   priority={false} // Gallery images are typically not above-the-fold
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Optimize image loading
+                  src={imgItem.imageUrl}
+                  width={600} // Recommended: Adjust based on your common gallery image sizes
                 />
                 {imgItem.caption && ( // Only render caption if it exists
                   <p className="mt-3 text-sm text-gray-600 text-center">

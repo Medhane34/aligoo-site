@@ -1,5 +1,8 @@
-import { fetchCaseStudies, fetchTotalCaseStudiesCount } from "@/lib/CaseStudies";
-import WorkSection from "@/app/[lang]/works/WorkSection"
+import {
+  fetchCaseStudies,
+  fetchTotalCaseStudiesCount,
+} from "@/lib/CaseStudies";
+import WorkSection from "@/app/[lang]/works/WorkSection";
 
 type CaseStudy = {
   _id: string;
@@ -31,8 +34,8 @@ export default async function WorkSectionWrapper() {
   return (
     <WorkSection
       initialCaseStudies={initialCaseStudies}
-      totalPosts={totalPosts}
       postsPerPage={POSTS_PER_PAGE}
+      totalPosts={totalPosts}
     />
   );
 }

@@ -1,11 +1,13 @@
 // components/sections/BlogListSection.tsx
 "use client";
 import { useState, useEffect } from "react";
+
 // Using a simpler "Load more" pagination for dynamic behavior
 import { BlogPost } from "@/types/BlogPost";
 import BlogCard from "@/components/molecules/blog/BlogCard";
 import CategoryFilter from "@/components/molecules/blog/CategoryFilter";
 import { fetchBlogPosts, fetchTotalBlogPostsCount } from "@/lib/BlogPost"; // Import fetchBlogPosts and fetchTotalBlogPostsCount
+import ButtonAtom from "@/components/atoms/ButtonAtom";
 
 const POSTS_PER_PAGE = 6;
 
@@ -15,11 +17,17 @@ interface Props {
   lang: "en" | "am";
 }
 
-export default function BlogListSection({ initialPosts, initialTotalCount, lang }: Props) {
+export default function BlogListSection({
+  initialPosts,
+  initialTotalCount,
+  lang,
+}: Props) {
   const [posts, setPosts] = useState(initialPosts);
   const [currentPage, setCurrentPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | undefined>();
+  const [selectedCategory, setSelectedCategory] = useState<
+    string | undefined
+  >();
   const [totalPostsCount, setTotalPostsCount] = useState(initialTotalCount); // State for dynamic total count
 
   // totalPages no longer used with Load more pattern
@@ -32,6 +40,7 @@ export default function BlogListSection({ initialPosts, initialTotalCount, lang 
     const start = (page - 1) * POSTS_PER_PAGE;
     const end = start + POSTS_PER_PAGE;
     const newPosts = await fetchBlogPosts(start, end, lang, category);
+
     // replace or append depending on caller
     setPosts((prev) => (page === 1 ? newPosts : [...prev, ...newPosts]));
     setLoading(false);
@@ -41,7 +50,11 @@ export default function BlogListSection({ initialPosts, initialTotalCount, lang 
     const updatePostsAndCount = async () => {
       setLoading(true);
       // Fetch new total count for the selected category
-      const newTotalCount = await fetchTotalBlogPostsCount(lang, selectedCategory);
+      const newTotalCount = await fetchTotalBlogPostsCount(
+        lang,
+        selectedCategory,
+      );
+
       setTotalPostsCount(newTotalCount);
 
       // Load the first page of posts for the new category
@@ -61,7 +74,8 @@ export default function BlogListSection({ initialPosts, initialTotalCount, lang 
     <section className="py-12">
       <div className="grid lg:grid-cols-[260px_1fr] gap-8">
         <aside className="lg:sticky lg:top-24 h-fit">
-<CategoryFilter lang={lang} onFilter={setSelectedCategory} />        </aside>
+          <CategoryFilter lang={lang} onFilter={setSelectedCategory} />{" "}
+        </aside>
 
         <div className="flex flex-col">
           {loading ? (
@@ -81,24 +95,33 @@ export default function BlogListSection({ initialPosts, initialTotalCount, lang 
             <>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {posts.map((post) => (
-                  <BlogCard key={post._id} {...post} lang={lang} showCategory={!selectedCategory} />
+                  <BlogCard
+                    key={post._id}
+                    {...post}
+                    lang={lang}
+                    showCategory={!selectedCategory}
+                  />
                 ))}
               </div>
 
               {posts.length < totalPostsCount && (
                 <div className="mt-12 flex justify-center">
-                  <button
+                  <ButtonAtom
+                    shimmer
+                    className="px-6 py-3 bg-brand-primary text-white rounded-full hover:brightness-95 disabled:opacity-50"
+                    disabled={loading}
                     onClick={async () => {
                       const next = currentPage + 1;
+
                       setCurrentPage(next);
                       await loadPage(next, selectedCategory);
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    disabled={loading}
-                    className="px-6 py-3 bg-brand-primary text-white rounded-md hover:brightness-95 disabled:opacity-50"
                   >
-                    {loading ? "Loading..." : `Load more (${Math.max(0, totalPostsCount - posts.length)})`}
-                  </button>
+                    {loading
+                      ? "Loading..."
+                      : `Load more (${Math.max(0, totalPostsCount - posts.length)})`}
+                  </ButtonAtom>
                 </div>
               )}
             </>

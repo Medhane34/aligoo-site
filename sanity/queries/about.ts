@@ -1,6 +1,6 @@
 // src/sanity/queries/about.ts
 
-import { groq } from 'next-sanity';
+import { groq } from "next-sanity";
 
 export const ABOUT_PAGE_QUERY = groq`
   {

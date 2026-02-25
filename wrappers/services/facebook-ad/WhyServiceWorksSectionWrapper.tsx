@@ -1,4 +1,7 @@
-import { fetchWhyServiceWorksSection, WhyServiceWorksSectionData } from "@/lib/services/facebookad";
+import {
+  fetchWhyServiceWorksSection,
+  WhyServiceWorksSectionData,
+} from "@/lib/services/facebookad";
 import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
 
 export default async function WhyServiceWorksSectionWrapper({
@@ -7,7 +10,8 @@ export default async function WhyServiceWorksSectionWrapper({
   lang?: "en" | "am";
 }) {
   // Use the naming convention you set in Sanity Studio
-  const data: WhyServiceWorksSectionData | null = await fetchWhyServiceWorksSection("whyServiceWorksSection-Fb");
+  const data: WhyServiceWorksSectionData | null =
+    await fetchWhyServiceWorksSection("whyServiceWorksSection-Fb");
 
   if (!data) return null;
 

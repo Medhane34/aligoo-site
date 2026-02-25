@@ -3,7 +3,9 @@
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useMemo } from "react";
+
 import { contactFormSchema, ContactFormInputs } from "./contactFormSchema";
+
 import { useToast } from "@/components/providers/ToastProvider";
 
 export function useContactForm() {
@@ -25,13 +27,27 @@ export function useContactForm() {
     },
   });
 
-  const [submissionStatus, setSubmissionStatus] = useState<"idle" | "success" | "error">("idle");
+  const [submissionStatus, setSubmissionStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
 
   // Watchers for selects
-  const currentCountryCodeValue = useWatch({ control, name: "countryCode", defaultValue: "+251" });
-  const currentServiceEnquiryValue = useWatch({ control, name: "serviceEnquiry", defaultValue: "" });
-  const currentPreferredCommunicationValue = useWatch({ control, name: "preferredCommunication", defaultValue: "telegram" });
+  const currentCountryCodeValue = useWatch({
+    control,
+    name: "countryCode",
+    defaultValue: "+251",
+  });
+  const currentServiceEnquiryValue = useWatch({
+    control,
+    name: "serviceEnquiry",
+    defaultValue: "",
+  });
+  const currentPreferredCommunicationValue = useWatch({
+    control,
+    name: "preferredCommunication",
+    defaultValue: "telegram",
+  });
 
   // Memoized select keys
   const selectedPreferredCommunicationKey = useMemo(() => {
@@ -68,12 +84,15 @@ export function useContactForm() {
       });
 
       let errorData = null;
+
       try {
         const responseBody = await response.text();
+
         errorData = responseBody ? JSON.parse(responseBody) : null;
       } catch (jsonError) {
         setErrorMessage("Server returned an invalid response.");
         setSubmissionStatus("error");
+
         return;
       }
 
@@ -83,26 +102,31 @@ export function useContactForm() {
         addToast({
           type: "success",
           title: "Message Sent!",
-          message: "Sit tight — one of our team members will reach out within 5–10 minutes.",
+          message:
+            "Sit tight — one of our team members will reach out within 5–10 minutes.",
         });
         fireGAEvent();
 
         // Scroll to "What Happens Next" section so user sees the process
         setTimeout(() => {
           const nextSection = document.getElementById("what-happens-next");
+
           if (nextSection) {
             nextSection.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         }, 3000);
       } else {
-        setErrorMessage(errorData?.message || "Something went wrong. Please try again.");
+        setErrorMessage(
+          errorData?.message || "Something went wrong. Please try again.",
+        );
         setSubmissionStatus("error");
       }
     } catch (error) {
       addToast({
         type: "error",
         title: "Submission Failed",
-        message: "Looks like the form didn’t go through. Please try again or email us directly.",
+        message:
+          "Looks like the form didn’t go through. Please try again or email us directly.",
       });
       setErrorMessage("");
       setSubmissionStatus("error");

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+
 import { SectionHeading, AccentText } from "@/components/ui/typography";
 import IndustriesCarouselMobile from "@/components/work-section/IndustriesCarouselMobile";
 import IndustriesGridDesktop from "@/components/work-section/IndustriesGridDesktop";
@@ -33,7 +34,10 @@ const IndustriesWeWorkedWith = ({
           {sectionHeading}
         </SectionHeading>
       </motion.div>
-      <motion.div className="text-heading pb-2 xs:pb-1 sm:pb-4" variants={textVariants}>
+      <motion.div
+        className="text-heading pb-2 xs:pb-1 sm:pb-4"
+        variants={textVariants}
+      >
         <AccentText className="normal-case">{accentText}</AccentText>
       </motion.div>
     </motion.div>

@@ -1,5 +1,5 @@
 // sanity/queries/proposal.ts
-import { groq } from 'next-sanity'
+import { groq } from "next-sanity";
 
 export const PROPOSAL_BY_CODE_QUERY = groq`
   *[_type == "proposal" && uniqueCode == $code][0] {
@@ -233,4 +233,4 @@ export const PROPOSAL_BY_CODE_QUERY = groq`
     "signedContractPdf": signedContractPdf.asset->url,
     contractSignedAt
   }
-`
+`;

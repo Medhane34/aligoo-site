@@ -57,9 +57,9 @@ const WhyFacebookAdsWork = () => {
         <motion.h2
           className="text-heading font-bold"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
           variants={headingVariants}
+          viewport={{ once: true }}
+          whileInView="visible"
         >
           Why Facebook Ads Still Work (If You Do Them{" "}
           <span className="text-brand-primary">Right</span>)
@@ -70,9 +70,9 @@ const WhyFacebookAdsWork = () => {
       <motion.div
         className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-2 mb-12"
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
         variants={textContainerVariants}
+        viewport={{ once: true }}
+        whileInView="visible"
       >
         {/* First Column */}
         <motion.div className="md:w-2/5 text body" variants={textVariants}>
@@ -102,9 +102,9 @@ const WhyFacebookAdsWork = () => {
       <motion.div
         className="container mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-2 text-center"
         initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
         variants={statsContainerVariants}
+        viewport={{ once: true }}
+        whileInView="visible"
       >
         <motion.div variants={statVariants}>
           <div className="text-4xl font-bold">3.04B+</div>

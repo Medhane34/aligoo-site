@@ -1,7 +1,7 @@
 // app/case-studies/[slug]/page.tsx
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { client } from "@/src/sanity/client";
+
 import CaseStudyStrategy from "../CaseStudyStrategy";
 import CaseStudyStrategyContent from "../CaseStudyStrategyContent";
 import CaseStudyImageGallery from "../CaseStudyImageGallery";
@@ -13,6 +13,7 @@ import CaseStudyOverview from "../OverviewSection";
 import CaseStudyHero from "../CaseStudyHero";
 // import ProjectMetaSidebar from "../ProjectMetaSidebar"; // Removed Sidebar
 import CaseStudyCredits from "../CaseStudyCredits";
+
 import {
   fetchCaseStudyCoreDataBySlug,
   fetchCaseStudyOverviewBySlug,
@@ -24,7 +25,8 @@ import {
   fetchCaseStudyPaginationDataBySlug,
 } from "./CaseStudyData";
 import ScrollProgress from "./ScrollProgress";
-import Container from "@/components/ui/Container";
+
+import { client } from "@/src/sanity/client";
 
 // --- CHANGED: Await params in generateMetadata ---
 export async function generateMetadata({
@@ -69,13 +71,13 @@ export async function generateMetadata({
       type: "article",
       images: caseStudy.mainImage?.asset?.url
         ? [
-          {
-            url: caseStudy.mainImage.asset.url,
-            width: 1200,
-            height: 630,
-            alt: caseStudy.title,
-          },
-        ]
+            {
+              url: caseStudy.mainImage.asset.url,
+              width: 1200,
+              height: 630,
+              alt: caseStudy.title,
+            },
+          ]
         : [],
     },
     twitter: {
@@ -127,17 +129,16 @@ export default async function CaseStudyDetails({ params }: Props) {
   return (
     <>
       <CaseStudyHero
-        title={coreData.title}
-        subtitle={coreData.service?.name}
-        mainImageUrl={coreData.mainImage}
-        servicesList={coreData.servicesList}
-        projectDuration={coreData.projectDuration}
         liveSiteUrl={coreData.liveSiteUrl}
+        mainImageUrl={coreData.mainImage}
+        projectDuration={coreData.projectDuration}
+        servicesList={coreData.servicesList}
+        subtitle={coreData.service?.name}
+        title={coreData.title}
       />
       <ScrollProgress />
 
       <main className="relative max-w-7xl mx-auto px-4 py-12 lg:py-24 space-y-24">
-
         {/* Overview */}
         <div id="case-study-details">
           {overviewData && (
@@ -174,17 +175,16 @@ export default async function CaseStudyDetails({ params }: Props) {
         {/* Testimonial */}
         {testimonialData && (
           <CaseStudyTestimonial
-            testimonialData={testimonialData}
             rating={testimonialData.rating}
+            testimonialData={testimonialData}
           />
         )}
 
         {/* Credits & Tech Stack */}
         <CaseStudyCredits
-          techStack={coreData.techStack}
           teamMembers={coreData.teamMembers}
+          techStack={coreData.techStack}
         />
-
       </main>
 
       {fetchedPaginationData && (

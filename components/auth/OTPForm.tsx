@@ -1,153 +1,184 @@
 // components/auth/OTPForm.tsx — FINAL 100% WORKING IN PRODUCTION
-'use client'
+"use client";
 
-import { useState, useEffect } from 'react'
-import { Input } from '@heroui/input'
-import { PrimaryButton } from '../atoms/button'
-import { addToast } from '@heroui/toast'
-import { Loader2, Send, Shield } from 'lucide-react'
-import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth'
-import { auth } from '@/lib/firebase'
-import { verifyProposalPhone } from '@/app/actions/auth'
+import { useState, useEffect } from "react";
+import { Input } from "@heroui/input";
+import { addToast } from "@heroui/toast";
+import { Loader2, Send, Shield } from "lucide-react";
+import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+
+import { PrimaryButton } from "../atoms/button";
+
+import { auth } from "@/lib/firebase";
+import { verifyProposalPhone } from "@/app/actions/auth";
 
 declare global {
   interface Window {
-    recaptchaVerifier?: RecaptchaVerifier
-    confirmationResult?: any
+    recaptchaVerifier?: RecaptchaVerifier;
+    confirmationResult?: any;
   }
 }
 
 interface OTPFormProps {
-  proposalId: string
+  proposalId: string;
 }
 
 export default function OTPForm({ proposalId }: OTPFormProps) {
-  const [step, setStep] = useState<'phone' | 'otp'>('phone')
-  const [phone, setPhone] = useState('')
-  const [code, setCode] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
+  const [step, setStep] = useState<"phone" | "otp">("phone");
+  const [phone, setPhone] = useState("");
+  const [code, setCode] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // --------------------------------------------------------------
   // Initialise invisible reCAPTCHA once when the component mounts
   // --------------------------------------------------------------
   useEffect(() => {
-    if (typeof window !== 'undefined' && !window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
-        size: 'invisible',
-        callback: () => console.log('reCAPTCHA solved'),
-        'expired-callback': () => {
-          // If the token expires, re‑render so a fresh one can be obtained later
-          window.recaptchaVerifier?.render().catch(() => { })
-        }
-      })
+    if (typeof window !== "undefined" && !window.recaptchaVerifier) {
+      window.recaptchaVerifier = new RecaptchaVerifier(
+        auth,
+        "recaptcha-container",
+        {
+          size: "invisible",
+          callback: () => console.log("reCAPTCHA solved"),
+          "expired-callback": () => {
+            // If the token expires, re‑render so a fresh one can be obtained later
+            window.recaptchaVerifier?.render().catch(() => {});
+          },
+        },
+      );
 
       // Render the invisible widget – this MUST be called before verify()
-      window.recaptchaVerifier.render().catch(err => {
-        console.error('reCAPTCHA render failed:', err)
-      })
+      window.recaptchaVerifier.render().catch((err) => {
+        console.error("reCAPTCHA render failed:", err);
+      });
     }
 
     // Cleanup on unmount (important for hot‑reload scenarios)
     return () => {
-      window.recaptchaVerifier?.clear()
-    }
-  }, [])
+      window.recaptchaVerifier?.clear();
+    };
+  }, []);
 
   // --------------------------------------------------------------
   // Send OTP – this is where the reCAPTCHA token is verified
   // --------------------------------------------------------------
   const sendOTP = async () => {
-    const cleanPhone = phone.replace(/[\s\-()]/g, '')
+    const cleanPhone = phone.replace(/[\s\-()]/g, "");
 
-    if (!cleanPhone.startsWith('+251')) {
-      addToast({ title: 'Invalid Format', description: 'Must start with +251', color: 'danger' })
-      return
+    if (!cleanPhone.startsWith("+251")) {
+      addToast({
+        title: "Invalid Format",
+        description: "Must start with +251",
+        color: "danger",
+      });
+
+      return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
     try {
       // Server‑side validation of the proposal + phone
-      const verification = await verifyProposalPhone(proposalId, cleanPhone)
+      const verification = await verifyProposalPhone(proposalId, cleanPhone);
+
       if (!verification.success) {
-        addToast({ title: 'Access Denied', description: verification.error || 'Access Denied', color: 'danger' })
-        return
+        addToast({
+          title: "Access Denied",
+          description: verification.error || "Access Denied",
+          color: "danger",
+        });
+
+        return;
       }
 
       // ----------------------------------------------------------
       // Ensure we have a fresh reCAPTCHA token for the current domain
       // ----------------------------------------------------------
       if (!window.recaptchaVerifier) {
-        throw new Error('reCAPTCHA not initialized. Refresh the page.')
+        throw new Error("reCAPTCHA not initialized. Refresh the page.");
       }
 
       // [verify()](cci:1://file:///Users/daniel/Documents/Next.Js-Course%20/aligoo-digital-agency/components/auth/OTPForm.tsx:120:2-143:3) returns the token string; we don’t need the value,
       // we just need the promise to resolve (or reject) before proceeding.
-      await window.recaptchaVerifier.verify()
+      await window.recaptchaVerifier.verify();
 
       // Now the token is valid – call Firebase Auth
       const confirmationResult = await signInWithPhoneNumber(
         auth,
         cleanPhone,
-        window.recaptchaVerifier
-      )
+        window.recaptchaVerifier,
+      );
 
-      window.confirmationResult = confirmationResult
-      addToast({ title: 'OTP Sent!', description: 'Check your phone' })
-      setStep('otp')
+      window.confirmationResult = confirmationResult;
+      addToast({ title: "OTP Sent!", description: "Check your phone" });
+      setStep("otp");
     } catch (err: any) {
-      console.error('Send OTP failed:', err)
+      console.error("Send OTP failed:", err);
 
       // ----------------------------------------------------------
       // Friendly messages for the most common error codes
       // ----------------------------------------------------------
-      let message = 'Try again'
-      if (err.code === 'auth/too-many-requests') message = 'Too many attempts. Try later.'
-      else if (err.code === 'auth/invalid-phone-number') message = 'Invalid phone number format.'
-      else if (err.code === 'auth/quota-exceeded') message = 'SMS quota exceeded.'
-      else if (err.code === 'auth/billing-not-enabled') message = 'Project requires Blaze plan (Billing) to send SMS.'
-      else if (err.code === 'auth/invalid-app-credential') message = 'Domain not authorized. Add to Firebase Console.'
-      else if (err.code === 'auth/captcha-check-failed' || err.code === 'auth/error-code:-39')
-        message = 'reCAPTCHA verification failed. Refresh the page or try a different browser.'
-      else if (err.message) message = `${err.code || 'Error'}: ${err.message}`
+      let message = "Try again";
+
+      if (err.code === "auth/too-many-requests")
+        message = "Too many attempts. Try later.";
+      else if (err.code === "auth/invalid-phone-number")
+        message = "Invalid phone number format.";
+      else if (err.code === "auth/quota-exceeded")
+        message = "SMS quota exceeded.";
+      else if (err.code === "auth/billing-not-enabled")
+        message = "Project requires Blaze plan (Billing) to send SMS.";
+      else if (err.code === "auth/invalid-app-credential")
+        message = "Domain not authorized. Add to Firebase Console.";
+      else if (
+        err.code === "auth/captcha-check-failed" ||
+        err.code === "auth/error-code:-39"
+      )
+        message =
+          "reCAPTCHA verification failed. Refresh the page or try a different browser.";
+      else if (err.message) message = `${err.code || "Error"}: ${err.message}`;
 
       addToast({
-        title: 'Failed to Send OTP',
+        title: "Failed to Send OTP",
         description: message,
-        color: 'danger',
-        variant: 'solid'
-      })
+        color: "danger",
+        variant: "solid",
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   // --------------------------------------------------------------
   // Verify the OTP the user typed
   // --------------------------------------------------------------
   const verifyOTP = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!code || code.length !== 6) return
+    e.preventDefault();
+    if (!code || code.length !== 6) return;
 
-    setIsLoading(true)
+    setIsLoading(true);
     try {
-      await window.confirmationResult.confirm(code)
+      await window.confirmationResult.confirm(code);
 
-      const res = await fetch('/api/otp/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ proposalId })
-      })
+      const res = await fetch("/api/otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ proposalId }),
+      });
 
-      if (!res.ok) throw new Error('Session failed')
+      if (!res.ok) throw new Error("Session failed");
 
-      addToast({ title: 'Welcome!', description: 'Proposal unlocked!' })
-      setTimeout(() => window.location.reload(), 800)
+      addToast({ title: "Welcome!", description: "Proposal unlocked!" });
+      setTimeout(() => window.location.reload(), 800);
     } catch (err: any) {
-      addToast({ title: 'Invalid Code', description: 'Try again', color: 'danger' })
+      addToast({
+        title: "Invalid Code",
+        description: "Try again",
+        color: "danger",
+      });
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   // --------------------------------------------------------------
   // UI
@@ -161,35 +192,48 @@ export default function OTPForm({ proposalId }: OTPFormProps) {
           <p className="text-gray-300">Enter your phone to continue.</p>
         </div>
 
-        {step === 'phone' ? (
+        {step === "phone" ? (
           <>
             <Input
-              type="tel"
-              placeholder="+251983294228"
-              value={phone}
-              onChange={e => setPhone(e.target.value)}
               className="mb-6 bg-white/10 border-white/20 text-white placeholder-gray-400"
+              placeholder="+251983294228"
+              type="tel"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
             />
             <PrimaryButton
-              onClick={sendOTP}
-              disabled={isLoading || !phone.startsWith('+251')}
               className="w-full"
+              disabled={isLoading || !phone.startsWith("+251")}
+              onClick={sendOTP}
             >
-              {isLoading ? <Loader2 className="animate-spin" /> : <Send className="mr-2" />} Send OTP
+              {isLoading ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                <Send className="mr-2" />
+              )}{" "}
+              Send OTP
             </PrimaryButton>
           </>
         ) : (
           <form onSubmit={verifyOTP}>
             <Input
-              type="text"
+              className="text-center text-3xl tracking-widest mb-6"
               maxLength={6}
               placeholder="123456"
+              type="text"
               value={code}
-              onChange={e => setCode(e.target.value)}
-              className="text-center text-3xl tracking-widest mb-6"
+              onChange={(e) => setCode(e.target.value)}
             />
-            <PrimaryButton type="submit" disabled={isLoading} className="w-full">
-              {isLoading ? <Loader2 className="animate-spin" /> : 'Unlock Proposal'}
+            <PrimaryButton
+              className="w-full"
+              disabled={isLoading}
+              type="submit"
+            >
+              {isLoading ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Unlock Proposal"
+              )}
             </PrimaryButton>
           </form>
         )}
@@ -198,5 +242,5 @@ export default function OTPForm({ proposalId }: OTPFormProps) {
         <div id="recaptcha-container" />
       </div>
     </div>
-  )
+  );
 }

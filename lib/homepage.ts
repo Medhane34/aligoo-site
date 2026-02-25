@@ -1,5 +1,14 @@
 import { client } from "@/src/sanity/client";
-import { ABOUT_US_SECTION_QUERY, CTA_SECTION_QUERY, HERO_SECTION_QUERY_HOMEPAGE, PROCESS_SECTION_QUERY, SERVICE_SECTION_QUERY, STATS_SECTION_QUERY, TESTIMONIALS_SECTION_QUERY, WHY_US_SECTION_QUERY } from "@/sanity/queries/homepage";
+import {
+  ABOUT_US_SECTION_QUERY,
+  CTA_SECTION_QUERY,
+  HERO_SECTION_QUERY_HOMEPAGE,
+  PROCESS_SECTION_QUERY,
+  SERVICE_SECTION_QUERY,
+  STATS_SECTION_QUERY,
+  TESTIMONIALS_SECTION_QUERY,
+  WHY_US_SECTION_QUERY,
+} from "@/sanity/queries/homepage";
 
 export type HeroSectionData = {
   badgeText_en?: string;
@@ -20,7 +29,9 @@ export type HeroSectionData = {
   secondaryButtonUrl: string;
 };
 
-export async function fetchHeroSection(name:string): Promise<HeroSectionData | null> {
+export async function fetchHeroSection(
+  name: string,
+): Promise<HeroSectionData | null> {
   return await client.fetch(HERO_SECTION_QUERY_HOMEPAGE, { name });
 }
 
@@ -39,7 +50,7 @@ export async function fetchAboutUsSection(): Promise<AboutUsSectionData | null> 
   return await client.fetch(ABOUT_US_SECTION_QUERY);
 } */
 
-  export type AboutUsSectionData = {
+export type AboutUsSectionData = {
   sectionHeading_en: string;
   sectionHeading_am: string;
   accentText_en: string;
@@ -57,7 +68,7 @@ export async function fetchAboutUsSection(): Promise<AboutUsSectionData | null> 
   return await client.fetch(ABOUT_US_SECTION_QUERY);
 }
 
-// Stats Seciton 
+// Stats Seciton
 
 /* export type Stat = {
   label: string;
@@ -88,7 +99,9 @@ export type StatsSectionData = {
   footerText?: string;
 };
 
-export async function fetchStatsSection(lang: 'en' | 'am' = 'en'): Promise<StatsSectionData | null> {
+export async function fetchStatsSection(
+  lang: "en" | "am" = "en",
+): Promise<StatsSectionData | null> {
   const query = STATS_SECTION_QUERY(lang);
   const raw = await client.fetch<any>(query);
 
@@ -104,7 +117,7 @@ export async function fetchStatsSection(lang: 'en' | 'am' = 'en'): Promise<Stats
   return data;
 }
 
-// service section 
+// service section
 
 /* export type Service = {
   title: string;
@@ -129,7 +142,7 @@ export async function fetchServiceSection(): Promise<ServiceSectionData | null> 
   return await client.fetch(SERVICE_SECTION_QUERY);
 } */
 
-  // lib/homepage.ts (update this function only)
+// lib/homepage.ts (update this function only)
 export type Service = {
   title: string;
   description?: string;
@@ -149,7 +162,9 @@ export type ServiceSectionData = {
   columns: ServiceColumn[];
 };
 
-export async function fetchServiceSection(lang: 'en' | 'am' = 'en'): Promise<ServiceSectionData | null> {
+export async function fetchServiceSection(
+  lang: "en" | "am" = "en",
+): Promise<ServiceSectionData | null> {
   const query = SERVICE_SECTION_QUERY(lang);
   const raw = await client.fetch<any>(query);
 
@@ -162,6 +177,7 @@ export async function fetchServiceSection(lang: 'en' | 'am' = 'en'): Promise<Ser
 
   if (!raw) {
     console.warn("[fetchServiceSection] No data found");
+
     return null;
   }
 
@@ -172,10 +188,11 @@ export async function fetchServiceSection(lang: 'en' | 'am' = 'en'): Promise<Ser
   };
 
   console.log("Final Mapped Data:", JSON.stringify(data, null, 2));
+
   return data;
 }
 
-//our process 
+//our process
 export type ProcessStep = {
   icon: string;
   heading: string;
@@ -188,7 +205,9 @@ export type ProcessSectionData = {
   steps: ProcessStep[];
 };
 
-export async function fetchProcessSection(lang: 'en' | 'am' = 'en'): Promise<ProcessSectionData | null> {
+export async function fetchProcessSection(
+  lang: "en" | "am" = "en",
+): Promise<ProcessSectionData | null> {
   const query = PROCESS_SECTION_QUERY(lang);
   const raw = await client.fetch<any>(query);
 
@@ -203,6 +222,7 @@ export async function fetchProcessSection(lang: 'en' | 'am' = 'en'): Promise<Pro
   };
 
   console.log("Final Mapped Data:", JSON.stringify(data, null, 2));
+
   return data;
 }
 
@@ -224,7 +244,7 @@ export async function fetchWhyUsSection(): Promise<WhyUsSectionData | null> {
   return await client.fetch(WHY_US_SECTION_QUERY);
 } */
 
-  export type WhyUsReason = {
+export type WhyUsReason = {
   emoji: string;
   title: string;
   description: string;
@@ -238,12 +258,14 @@ export type WhyUsSectionData = {
   reasons: WhyUsReason[];
 };
 
-export async function fetchWhyUsSection(lang: 'en' | 'am' = 'en'): Promise<WhyUsSectionData | null> {
+export async function fetchWhyUsSection(
+  lang: "en" | "am" = "en",
+): Promise<WhyUsSectionData | null> {
   const query = WHY_US_SECTION_QUERY(lang); // Call function
   const raw = await client.fetch<any>(query);
 
-/*   console.log(`[fetchWhyUsSection] Raw data for lang '${lang}':`, raw);
- */
+  /*   console.log(`[fetchWhyUsSection] Raw data for lang '${lang}':`, raw);
+   */
   if (!raw) return null;
 
   return {
@@ -253,34 +275,34 @@ export async function fetchWhyUsSection(lang: 'en' | 'am' = 'en'): Promise<WhyUs
   };
 }
 
-//testimonial cta section 
+//testimonial cta section
 export type Testimonial = {
-  name: string
-  username: string
-  body: any[]
-  imageUrl?: string
-  imageAlt?: string
-}
+  name: string;
+  username: string;
+  body: any[];
+  imageUrl?: string;
+  imageAlt?: string;
+};
 
 export type TestimonialsSectionData = {
-  heading: string
-  subheading: string
-  testimonials: Testimonial[]
-}
+  heading: string;
+  subheading: string;
+  testimonials: Testimonial[];
+};
 
 export async function fetchTestimonialsSection(
-  lang: 'en' | 'am' = 'en'
+  lang: "en" | "am" = "en",
 ): Promise<TestimonialsSectionData | null> {
-  const query = TESTIMONIALS_SECTION_QUERY(lang)
-  const raw = await client.fetch<any>(query)
+  const query = TESTIMONIALS_SECTION_QUERY(lang);
+  const raw = await client.fetch<any>(query);
 
-  if (!raw) return null
+  if (!raw) return null;
 
   return {
-    heading: raw[`heading_${lang}`] || 'Client Love',
-    subheading: raw[`subheading_${lang}`] || 'Feedback That Fuels Us',
+    heading: raw[`heading_${lang}`] || "Client Love",
+    subheading: raw[`subheading_${lang}`] || "Feedback That Fuels Us",
     testimonials: raw.testimonials || [],
-  }
+  };
 }
 
 export type CTASectionData = {

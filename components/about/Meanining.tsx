@@ -1,48 +1,67 @@
 // app/[lang]/about/MeaningSection.tsx
-'use client'
+"use client";
 
-import React, { useRef, useState } from "react"
-import { SpeakerWaveIcon } from "@heroicons/react/24/outline"
-import { motion } from "framer-motion"
+import React, { useRef, useState } from "react";
+import { SpeakerWaveIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
 
 type Props = {
-  mainHeading: string        // e.g. "Aligoo /ˈæ.lɪ.guː/ (verb): To Create With Soul."
-  pronunciation: string      // e.g. "[ah-lee-goo]"
-  definitionLines: string[]  // 6 lines
-  tagline: string
-  audioUrl?: string
-  lang: 'en' | 'am'
-}
+  mainHeading: string; // e.g. "Aligoo /ˈæ.lɪ.guː/ (verb): To Create With Soul."
+  pronunciation: string; // e.g. "[ah-lee-goo]"
+  definitionLines: string[]; // 6 lines
+  tagline: string;
+  audioUrl?: string;
+  lang: "en" | "am";
+};
 
-const MeaningSection = ({ mainHeading, pronunciation, definitionLines, tagline, audioUrl, lang }: Props) => {
-  const [isPronunciationHovered, setIsPronunciationHovered] = useState(false)
-  const audioRef = useRef<HTMLAudioElement>(null)
+const MeaningSection = ({
+  mainHeading,
+  pronunciation,
+  definitionLines,
+  tagline,
+  audioUrl,
+  lang,
+}: Props) => {
+  const [isPronunciationHovered, setIsPronunciationHovered] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const headingVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeInOut" } },
-  }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
 
   const paragraphContainerVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
-  }
+  };
 
   const paragraphVariants = {
     hidden: { opacity: 0, x: -20 },
-    visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeInOut" } },
-  }
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: { duration: 0.5, ease: "easeInOut" },
+    },
+  };
 
   const taglineVariants = {
     hidden: { opacity: 0, scale: 0.98 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 1.9, ease: "easeInOut" } },
-  }
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 1.9, ease: "easeInOut" },
+    },
+  };
 
   const playAudio = () => {
-    audioRef.current?.play().catch(() => {})
-  }
+    audioRef.current?.play().catch(() => {});
+  };
 
-  const isAmharic = lang === 'am'
+  const isAmharic = lang === "am";
 
   return (
     <div className="relative py-24 bg-background-light dark:bg-background-dark p-12">
@@ -54,33 +73,33 @@ const MeaningSection = ({ mainHeading, pronunciation, definitionLines, tagline, 
       <div className="container mx-auto text-center">
         {/* Pronunciation Heading — EXACT same structure */}
         <motion.div
+          aria-label="Play pronunciation audio"
           className="relative inline-block cursor-pointer"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={headingVariants}
           role="button"
           tabIndex={0}
-          aria-label="Play pronunciation audio"
+          variants={headingVariants}
+          viewport={{ once: true }}
+          whileInView="visible"
           onClick={() => {
-            setIsPronunciationHovered(true)
-            playAudio()
+            setIsPronunciationHovered(true);
+            playAudio();
           }}
           onKeyDown={(e) => {
-            if (e.key === "Enter" || e.key === " ") playAudio()
+            if (e.key === "Enter" || e.key === " ") playAudio();
           }}
         >
           <motion.h2
+            dangerouslySetInnerHTML={{ __html: mainHeading }}
             className={`text-4xl md:text-6xl font-extrabold text-text-light dark:text-text-dark mb-2 ${
-              isAmharic ? 'font-amharicHeading leading-snug' : ''
+              isAmharic ? "font-amharicHeading leading-snug" : ""
             }`}
             variants={headingVariants}
-            dangerouslySetInnerHTML={{ __html: mainHeading }}
           />
 
           <motion.div
             className={`flex items-center justify-center space-x-1 text-text-light dark:text-text-dark ${
-              isAmharic ? 'font-amharicBody text-lg' : ''
+              isAmharic ? "font-amharicBody text-lg" : ""
             }`}
             variants={headingVariants}
           >
@@ -88,7 +107,11 @@ const MeaningSection = ({ mainHeading, pronunciation, definitionLines, tagline, 
             <span className="underline">{pronunciation}</span>
           </motion.div>
 
-          <audio ref={audioRef} src={audioUrl || "/aligoo-pro.mp4"} preload="auto">
+          <audio
+            ref={audioRef}
+            preload="auto"
+            src={audioUrl || "/aligoo-pro.mp4"}
+          >
             <track kind="captions" />
           </audio>
         </motion.div>
@@ -96,36 +119,36 @@ const MeaningSection = ({ mainHeading, pronunciation, definitionLines, tagline, 
         {/* Definition Paragraphs — 100% identical layout */}
         <motion.div
           className={`mt-8 text-lg md:text-xl text-text-light dark:text-text-dark leading-relaxed ${
-            isAmharic ? 'font-amharicBody text-2xl space-y-8' : ''
+            isAmharic ? "font-amharicBody text-2xl space-y-8" : ""
           }`}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
           variants={paragraphContainerVariants}
+          viewport={{ once: true }}
+          whileInView="visible"
         >
           {definitionLines.map((line, i) => (
             <motion.p
-              key={i}
-              variants={paragraphVariants}
-              className={i === 5 ? "mt-6" : i === 4 ? "mt-6" : ""}
               dangerouslySetInnerHTML={{ __html: line }}
+              key={i}
+              className={i === 5 ? "mt-6" : i === 4 ? "mt-6" : ""}
+              variants={paragraphVariants}
             />
           ))}
         </motion.div>
 
         {/* Tagline — identical */}
         <motion.p
-          className={`mt-12 text-sm text-gray-500 italic ${isAmharic ? 'font-amharicBody text-lg' : ''}`}
+          className={`mt-12 text-sm text-gray-500 italic ${isAmharic ? "font-amharicBody text-lg" : ""}`}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
           variants={taglineVariants}
+          viewport={{ once: true }}
+          whileInView="visible"
         >
           {tagline}
         </motion.p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default MeaningSection
+export default MeaningSection;

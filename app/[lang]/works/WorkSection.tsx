@@ -9,28 +9,19 @@ import React, {
   useCallback,
 } from "react";
 import { Card } from "@heroui/card";
-import { Image } from "@heroui/react";
 import { Button } from "@heroui/button";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { motion } from "framer-motion";
-
 import { Spinner } from "@heroui/spinner";
 import NextImage from "next/image";
 
 // IMPORTANT: Import the updated fetch functions from the correct path
-import {
-  fetchCaseStudies,
-  fetchTotalCaseStudiesCount,
-} from "@/lib/CaseStudies";
+import { Pagination } from "@heroui/react"; // Assuming this is the correct import path for HeroUI
 
+import { fetchCaseStudies } from "@/lib/CaseStudies";
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 // Import the HeroUI Pagination component
-import {
-  Pagination,
-  PaginationItem,
-  PaginationCursor,
-} from "@heroui/react"; // Assuming this is the correct import path for HeroUI
 
 // Define the CaseStudy type (ensure it matches your backend definition)
 type CaseStudy = {
@@ -101,6 +92,7 @@ export default function WorkSection({
           service: item.service,
           slug: item.slug ?? "",
         }));
+
         setCaseStudies(normalizedData);
       } catch (err: any) {
         console.error("Error fetching paginated case studies:", err);
@@ -137,6 +129,7 @@ export default function WorkSection({
     };
 
     document.addEventListener("mousedown", handleClickOutside);
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
@@ -237,17 +230,20 @@ export default function WorkSection({
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
         {filteredCaseStudies.length > 0 ? (
           filteredCaseStudies.map((study) => (
-            <Card key={study._id} className="relative overflow-hidden w-full  hover:drop-shadow-brand-hover transition-all duration-300">
+            <Card
+              key={study._id}
+              className="relative overflow-hidden w-full  hover:drop-shadow-brand-hover transition-all duration-300"
+            >
               <Link
                 className="block h-[280px] w-full relative"
                 href={`/case-study/${study.slug}`}
               >
                 <NextImage
-                  width={300}
-                  height={300}
                   alt={study.title}
                   className="z-0 w-full h-full object-cover transition-opacity duration-300 brightness-75 xs:brightness-100"
+                  height={300}
                   src={study.imageUrl}
+                  width={300}
                 />
                 <div className="absolute top-2 left-2 bg-brand-primary text-white text-tiny font-bold py-1 px-2 rounded-full z-10">
                   {study.service}
@@ -271,7 +267,6 @@ export default function WorkSection({
       {totalPages > 1 && (
         <div className="flex justify-center items-center mt-12 bg-background-light dark:bg-background-dark p-4 rounded-lg shadow-md">
           <Pagination
-            
             showControls
             color="success"
             initialPage={currentPage}

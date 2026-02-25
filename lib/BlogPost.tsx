@@ -1,6 +1,8 @@
 // lib/blog.ts
-import { groq } from "next-sanity";
 import type { SanityClient } from "next-sanity";
+
+import { groq } from "next-sanity";
+
 import { client } from "@/src/sanity/client";
 import {
   BlogPost,
@@ -29,6 +31,7 @@ export async function fetchLatestBlogs(
   `;
 
   const posts = await client.fetch<BlogPostListItem[]>(query);
+
   /*   console.log(`[fetchLatestBlogs] Fetched ${posts.length} latest posts for lang '${lang}'`); */
   return posts;
 }
@@ -108,7 +111,7 @@ export async function fetchTotalBlogPostsCount(
 // === 4. FETCH CATEGORIES ===
 export async function fetchCategories(lang: Lang): Promise<Category[]> {
   const query = groq`
-    *[_type == "category"] {
+    *[_type == "category" && slug.current != "exclusive"] {
       _id,
       "title": title_${lang},
       "slug": slug.current
@@ -173,16 +176,24 @@ export async function fetchBlogPostBySlug(
         description,
         buttonText,
         buttonLink
+      },
+      faqs[] {
+        question,
+        answer
       }
     }
   `;
 
-  const post = await (client as SanityClient).fetch<BlogPostDetail | null>(query, { slug });
+  const post = await (client as SanityClient).fetch<BlogPostDetail | null>(
+    query,
+    { slug },
+  );
 
   if (post && post.body) {
     // Calculate reading time: avg 200 words per minute
     const text = JSON.stringify(post.body);
     const wordCount = text.split(/\s+/).length;
+
     post.estimatedReadingTime = Math.ceil(wordCount / 200);
   }
 
@@ -222,8 +233,12 @@ export async function fetchRelatedPosts(
   const posts = await client.fetch<BlogPostListItem[]>(query, {
     currentSlug,
     categorySlug,
-    limit
+    limit,
   });
-  console.log(`[fetchRelatedPosts] Fetched ${posts.length} related posts for lang '${lang}'`);
+
+  console.log(
+    `[fetchRelatedPosts] Fetched ${posts.length} related posts for lang '${lang}'`,
+  );
+
   return posts;
 }

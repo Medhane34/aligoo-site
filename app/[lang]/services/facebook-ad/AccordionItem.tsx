@@ -26,8 +26,10 @@ export default function AccordionItem({
         className="flex justify-between items-center w-full p-6 text-left font-semibold text-white focus:outline-none"
         onClick={toggleAccordion}
       >
-        <span className="xl:text-heading lg:text-heading md:text-heading sm:text-heading xs:text-heading
-         text-text-light dark:text-text-dark">
+        <span
+          className="xl:text-heading lg:text-heading md:text-heading sm:text-heading xs:text-heading
+         text-text-light dark:text-text-dark"
+        >
           {question}
         </span>
         <ChevronDownIcon

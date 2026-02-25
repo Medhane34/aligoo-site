@@ -1,4 +1,4 @@
-export const HERO_SECTION_QUERY_WORKSPAGE= `
+export const HERO_SECTION_QUERY_WORKSPAGE = `
   *[_type == "heroSection" && name == $name][0]{
     badgeText_en,
     badgeText_am,

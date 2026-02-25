@@ -1,4 +1,7 @@
-import { fetchWhyServiceWorksSection, WhyServiceWorksSectionData } from "@/lib/services/tiktokad";
+import {
+  fetchWhyServiceWorksSection,
+  WhyServiceWorksSectionData,
+} from "@/lib/services/tiktokad";
 import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
 
 export default async function WhyTikTokWorksSectionWrapper({
@@ -8,8 +11,11 @@ export default async function WhyTikTokWorksSectionWrapper({
   lang?: "en" | "am";
   id: string;
 }) {
-  const data: WhyServiceWorksSectionData | null = await fetchWhyServiceWorksSection("whyServiceWorksSection-TikTok");
+  const data: WhyServiceWorksSectionData | null =
+    await fetchWhyServiceWorksSection("whyServiceWorksSection-TikTok");
+
   if (!data) return null;
+
   return (
     <WhyServiceWorks
       heading={lang === "am" ? data.heading_am : data.heading_en}

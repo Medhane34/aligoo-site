@@ -24,8 +24,8 @@ export default function ThemeSwitch() {
   return (
     <button
       aria-label="Toggle Theme"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
       className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 transition"
+      onClick={() => setTheme(isDark ? "light" : "dark")}
     >
       {isDark ? (
         <SunIcon className="h-5 w-5 text-yellow-400" />

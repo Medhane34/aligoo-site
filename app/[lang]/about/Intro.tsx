@@ -1,16 +1,16 @@
 // app/about/IntroSection.tsx
-'use client'
+"use client";
 
-import { motion } from "framer-motion"
+import { motion } from "framer-motion";
 
 export interface AboutIntroSectionProps {
-  mainHeading: string
-  introText: string
-  founded: string
-  focus: string
-  campaignsLaunched: string
-  momentsProudOf: string
-  lang: 'en' | 'am'
+  mainHeading: string;
+  introText: string;
+  founded: string;
+  focus: string;
+  campaignsLaunched: string;
+  momentsProudOf: string;
+  lang: "en" | "am";
 }
 
 export default function AboutIntroSection({
@@ -22,29 +22,29 @@ export default function AboutIntroSection({
   momentsProudOf,
   lang,
 }: AboutIntroSectionProps) {
-  const isAmharic = lang === 'am'
+  const isAmharic = lang === "am";
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
         {/* Left Column: Main Heading */}
         <motion.div
+          className={`text-text-light dark:text-text-dark ${isAmharic ? "font-amharicHeading text-5xl md:text-6xl" : "font-bold text-4xl md:text-5xl"} leading-tight`}
           initial={{ opacity: 0, x: -50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className={`text-text-light dark:text-text-dark ${isAmharic ? 'font-amharicHeading text-5xl md:text-6xl' : 'font-bold text-4xl md:text-5xl'} leading-tight`}
+          viewport={{ once: true }}
+          whileInView={{ opacity: 1, x: 0 }}
         >
           {mainHeading}
         </motion.div>
 
         {/* Right Column: Details */}
         <motion.div
+          className={`space-y-8 text-text-light dark:text-text-dark ${isAmharic ? "font-amharicBody text-lg" : "text-base"}`}
           initial={{ opacity: 0, x: 50 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className={`space-y-8 text-text-light dark:text-text-dark ${isAmharic ? 'font-amharicBody text-lg' : 'text-base'}`}
+          viewport={{ once: true }}
+          whileInView={{ opacity: 1, x: 0 }}
         >
           <p className="leading-relaxed">{introText}</p>
 
@@ -78,5 +78,5 @@ export default function AboutIntroSection({
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

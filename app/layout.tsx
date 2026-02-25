@@ -1,38 +1,23 @@
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
-import { Link } from "@heroui/link";
 import clsx from "clsx";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import { VisualEditing } from "next-sanity";
+import { draftMode } from "next/headers";
+import Script from "next/script";
+import { ClerkProvider } from "@clerk/nextjs";
 
 import { Providers } from "./providers";
-import { ToastProvider } from "@/components/providers/ToastProvider";
 
-import { siteConfig } from "@/config/site";
+import { ToastProvider } from "@/components/providers/ToastProvider";
 import { fontSans } from "@/config/fonts";
 /* import { Navbar } from "@/components/navbar"; */
 // import Footer from "@/components/Footer"; // Moved to LayoutUI
 import LayoutUI from "@/components/LayoutUI";
-
-import { VisualEditing } from "next-sanity";
-import { draftMode } from "next/headers";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
-
 import { SanityLive } from "@/src/sanity/live";
 
-import Script from "next/script";
-
-import { LanguageProvider } from "@/components/LanguageContext";
 // import { Navbar } from "@/components/ui/navbar-copy"; // Moved to LayoutUI
 // import MouseMoveEffect from "@/components/atoms/mouse-move-effect"; // Moved to LayoutUI
-import {
-  ClerkProvider,
-  SignInButton,
-  SignUpButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from '@clerk/nextjs'
-import ChatSupportWidget from "@/components/molecules/ChatSupport";
 
 export const metadata: Metadata = {
   icons: {
@@ -56,7 +41,7 @@ export default async function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html suppressHydrationWarning lang="en" className="root">
+      <html suppressHydrationWarning className="root" lang="en">
         <head>
           {/* Google Analytics */}
           <Script
@@ -79,7 +64,7 @@ export default async function RootLayout({
             fontSans.variable,
           )}
         >
-          <Providers >
+          <Providers>
             <ToastProvider>
               <LayoutUI>
                 <LanguagePrompt />

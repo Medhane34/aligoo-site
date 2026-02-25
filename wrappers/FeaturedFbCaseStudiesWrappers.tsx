@@ -29,10 +29,10 @@ export default async function FeaturedFbPostsWrapper({
       heading={
         lang === "am" ? headingBlock.heading_am : headingBlock.heading_en
       }
+      posts={posts}
       subheading={
         lang === "am" ? headingBlock.subheading_am : headingBlock.subheading_en
       }
-      posts={posts}
     />
   );
 }

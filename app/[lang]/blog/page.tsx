@@ -1,8 +1,7 @@
 // app/[lang]/blog/page.tsx
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import HeroSection from "@/components/HeroSection";
-import { CTABottomSection } from "@/components";
+
 import BlogListSectionWrapper from "@/wrappers/blog/BlogListSectionWrapper";
 import Container from "@/components/ui/Container";
 

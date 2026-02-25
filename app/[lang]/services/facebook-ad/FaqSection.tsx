@@ -102,13 +102,14 @@ export default function FaqSection() {
             className="xl:text-body sm:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
             variants={leftItemVariants}
           >
-            No fluff, no vague answers. Just honest responses to the most common questions we get about Facebook Ads and working with us.
+            No fluff, no vague answers. Just honest responses to the most common
+            questions we get about Facebook Ads and working with us.
           </motion.p>
           <motion.button
             className="w-[263px] h-10 px-[16px] py-[10px] text-small font-medium leading-5 bg-linear-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker rounded-full"
             variants={leftItemVariants}
           >
-            👉 GOT MORE QUESTIONS ASK 
+            👉 GOT MORE QUESTIONS ASK
           </motion.button>
         </motion.div>
 

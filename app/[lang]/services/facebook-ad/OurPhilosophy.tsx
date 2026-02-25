@@ -2,6 +2,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import { Divider } from "@heroui/divider";
+
 import { SectionHeading, AccentText } from "@/components/ui/typography";
 
 export type AdPhilosophyStep = {
@@ -96,7 +97,10 @@ export default function AdPhilosophySection({
   ];
 
   return (
-    <div ref={timelineRef} className="py-16 bg-background-light dark:bg-background-dark">
+    <div
+      ref={timelineRef}
+      className="py-16 bg-background-light dark:bg-background-dark"
+    >
       {/* Top Heading and Subheading */}
       <motion.div
         className="container mx-auto px-4 text-center mb-12"
@@ -105,30 +109,42 @@ export default function AdPhilosophySection({
         viewport={{ once: true }}
         whileInView="visible"
       >
-        <motion.div className="font-bold text-text-light dark:text-text-dark" variants={headingVariants}>
-          <SectionHeading className="text-heading uppercase">{heading}</SectionHeading>
+        <motion.div
+          className="font-bold text-text-light dark:text-text-dark"
+          variants={headingVariants}
+        >
+          <SectionHeading className="text-heading uppercase">
+            {heading}
+          </SectionHeading>
         </motion.div>
-        <motion.div className="mt-4 text-lg text-gray-700 dark:text-gray-300" variants={headingVariants}>
+        <motion.div
+          className="mt-4 text-lg text-gray-700 dark:text-gray-300"
+          variants={headingVariants}
+        >
           <AccentText className="normal-case">{accentText}</AccentText>
         </motion.div>
       </motion.div>
 
       {/* Timeline */}
       <div className="relative container mx-auto px-4">
-        <Divider className="absolute top-0 left-1/2 -ml-0.5 w-0.5 h-full bg-gray-300 dark:bg-gray-600 z-0" orientation="vertical" />
+        <Divider
+          className="absolute top-0 left-1/2 -ml-0.5 w-0.5 h-full bg-gray-300 dark:bg-gray-600 z-0"
+          orientation="vertical"
+        />
 
         {steps.map((step, idx) => {
           const isLeft = idx % 2 === 0;
+
           return (
             <div
               key={idx}
               className={`relative mb-12 md:flex md:items-center ${isLeft ? "md:justify-start" : "md:justify-end"}`}
             >
               <TimelineStepCircle
-                scrollYProgress={scrollYProgress}
-                range={stepRanges[idx] || [0, 1]}
                 color={step.color}
                 idx={idx}
+                range={stepRanges[idx] || [0, 1]}
+                scrollYProgress={scrollYProgress}
               />
               <motion.div
                 className={`mt-4 ${isLeft ? "md:mr-8 md:text-left md:w-1/2" : "md:ml-8 md:text-right md:w-1/2"}`}
@@ -140,7 +156,9 @@ export default function AdPhilosophySection({
                 <h3 className="text-heading font-semibold text-brand-primary-light dark:text-white mb-2">
                   {step.title}
                 </h3>
-                <p className="text-body text-gray-700 dark:text-gray-300">{step.description}</p>
+                <p className="text-body text-gray-700 dark:text-gray-300">
+                  {step.description}
+                </p>
               </motion.div>
             </div>
           );
@@ -155,10 +173,16 @@ export default function AdPhilosophySection({
         viewport={{ once: true }}
         whileInView="visible"
       >
-        <motion.h2 className="text-subheading font-bold text-gray-900 dark:text-white" variants={headingVariants}>
+        <motion.h2
+          className="text-subheading font-bold text-gray-900 dark:text-white"
+          variants={headingVariants}
+        >
           {bottomHeading}
         </motion.h2>
-        <motion.p className="mt-4 text-body text-gray-700 dark:text-gray-300" variants={headingVariants}>
+        <motion.p
+          className="mt-4 text-body text-gray-700 dark:text-gray-300"
+          variants={headingVariants}
+        >
           {bottomText}
         </motion.p>
       </motion.div>

@@ -14,7 +14,7 @@ export default function RelatedPosts({ posts, lang }: Props) {
     <section className="py-16 border-t border-gray-200 dark:border-gray-800">
       <h2 className="text-2xl font-bold mb-8">Related Posts</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {posts.map(post => (
+        {posts.map((post) => (
           <BlogCard key={post._id} {...post} lang={lang} />
         ))}
       </div>

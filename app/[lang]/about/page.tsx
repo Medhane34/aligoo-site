@@ -1,6 +1,7 @@
 // app/[lang]/about/page.tsx   (adjust path if different)
 
 import { Metadata } from "next";
+
 import Container from "@/components/ui/Container";
 import { HeroSection } from "@/components";
 import TeamWrapper from "@/wrappers/about/TeamWrapper";
@@ -12,7 +13,8 @@ import { fetchAboutPageData } from "@/lib/about";
 
 export const metadata: Metadata = {
   title: "About Us | Aligoo Digital Agency",
-  description: "Meet Aligoo: your growth-obsessed digital marketing partners in Addis Ababa...",
+  description:
+    "Meet Aligoo: your growth-obsessed digital marketing partners in Addis Ababa...",
 };
 
 export const revalidate = 3600;
@@ -20,10 +22,10 @@ export const revalidate = 3600;
 export default async function AboutPage({
   params,
 }: {
-  params: Promise<{ lang?: 'en' | 'am' }>;
+  params: Promise<{ lang?: "en" | "am" }>;
 }) {
   const { lang } = await params;
-  const locale = lang === 'am' ? 'am' : 'en';
+  const locale = lang === "am" ? "am" : "en";
 
   const data = await fetchAboutPageData(locale);
 
@@ -45,7 +47,7 @@ export default async function AboutPage({
         <div id="intro-section">
           <AboutIntroWrapper
             data={data.intro}
-            lang={locale}   // ← pass locale if Intro still needs it
+            lang={locale} // ← pass locale if Intro still needs it
           />
         </div>
       </Container>
@@ -55,7 +57,7 @@ export default async function AboutPage({
       <Container>
         <ValuesWrapper
           data={data.values}
-          lang={locale}     // ← pass locale if Values still needs it
+          lang={locale} // ← pass locale if Values still needs it
         />
       </Container>
       <Container>
@@ -68,7 +70,6 @@ export default async function AboutPage({
       {/* Temporarily comment out other sections while testing */}
       {/* <Container><MeaningWrapper data={data.meaning} lang={locale} /></Container> */}
       {/* ... */}
-
     </>
   );
 }

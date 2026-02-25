@@ -7,17 +7,18 @@
  */
 export function sanitizeString(str: string): string {
   // Handle null or undefined input
-  if (!str) return '';
+  if (!str) return "";
 
   return str.replace(/[\u{0080}-\u{FFFF}]/gu, (char) => {
     // Replace curly quotes with straight quotes
-    if (char === '\u201C' || char === '\u201D') return '"';
-    if (char === '\u2018' || char === '\u2019') return "'";
+    if (char === "\u201C" || char === "\u201D") return '"';
+    if (char === "\u2018" || char === "\u2019") return "'";
     // Replace dashes
-    if (char === '\u2013' || char === '\u2014') return '-';
+    if (char === "\u2013" || char === "\u2014") return "-";
     // Replace ellipsis
-    if (char === '\u2026') return '...';
+    if (char === "\u2026") return "...";
+
     // Remove other non-ASCII characters
-    return '';
+    return "";
   });
 }

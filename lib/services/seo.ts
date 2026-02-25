@@ -20,6 +20,8 @@ export type HeroSectionData = {
   secondaryButtonUrl: string;
 };
 
-export async function fetchHeroSection(name: string): Promise<HeroSectionData | null> {
+export async function fetchHeroSection(
+  name: string,
+): Promise<HeroSectionData | null> {
   return await client.fetch(HERO_SECTION_QUERY_SEO, { name });
 }

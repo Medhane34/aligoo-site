@@ -7,7 +7,6 @@ import { client } from "./client";
 
 export const token = process.env.SANITY_API_READ_TOKEN;
 
-
 export const { sanityFetch, SanityLive } = defineLive({
   client,
   browserToken: token,

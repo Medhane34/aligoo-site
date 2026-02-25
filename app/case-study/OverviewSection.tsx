@@ -4,11 +4,7 @@
 import React from "react";
 import { Image } from "@heroui/image";
 
-import {
-  AccentText,
-  SectionHeading,
-  Paragraph,
-} from "@/components/ui/typography"; // Ensure Paragraph is imported
+import { AccentText, SectionHeading } from "@/components/ui/typography"; // Ensure Paragraph is imported
 
 // Define the props type: overviewDescription is now a string
 interface CaseStudyOverviewProps {
@@ -26,13 +22,14 @@ export default function CaseStudyOverview({
 }: CaseStudyOverviewProps) {
   // Split the description into multiple paragraphs based on double newlines
   // This helps break up the text if the editor used newlines in Sanity.
- /*  const paragraphs = overviewDescription
+  /*  const paragraphs = overviewDescription
     .split("\n\n")
     .filter((p) => p.trim() !== "");
  */
   return (
     <section className="relative z-10 py-24 bg-background-primary-light dark:bg-background-primary-dark text-text-primary-light dark:text-text-primary-dark">
-      <div className="container mx-auto px-4 flex flex-col md:flex-row items-center
+      <div
+        className="container mx-auto px-4 flex flex-col md:flex-row items-center
       gap-4 xs:gap-5 sm:gap-6 md:gap-7 lg:gap-8 px-4 xs:px-5 sm:px-6 md:px-8
       "
       >
@@ -43,11 +40,12 @@ export default function CaseStudyOverview({
         
         "
         >
-        
           <SectionHeading className="text-heading font-bold tracking-tight uppercase">
             {overviewTitle} {/* Dynamic Heading */}
           </SectionHeading>
-          <AccentText className="xs:mb-[0] normal-case pb-2">Overview</AccentText>
+          <AccentText className="xs:mb-[0] normal-case pb-2">
+            Overview
+          </AccentText>
           {/* Render each paragraph */}
           {/* {paragraphs.map((p, index) => (
             <Paragraph key={index} className="text-body lg:text-body">{p}</Paragraph>

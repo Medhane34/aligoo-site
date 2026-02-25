@@ -1,16 +1,16 @@
-badgeText_am:"💥 7 ዶላር ሞክረን"
-badgeText_en:"Welcome to Our V2 Site!"
-headlineText1_am:"ክሊኮችን ደንበኛዎችን እና ሽያጮች"
-headlineText1_en:"Digital marketing that"
-headlineText2_am:"የሚያመጣ"
-headlineText2_en:"delivers"
-headlineText3_am:"የዲጅታል ማርኪቲንግ አገልግሎት"
-headlineText3_en:"clarity, clicks, and conversions"
-primaryButtonText_am:"ሰትራቲጅክ ምክር ቀጠሮ ያዝ"
-primaryButtonText_en:"🚀 Book a Consultation"
-primaryButtonUrl:"https://aligoo-digital.agency/strategy-session"
-secondaryButtonText_am:"አገልግሎት ለማየት"
-secondaryButtonText_en:"👇Explore our Service"
-secondaryButtonUrl: "https://aligoo-digital.agency/#service-section "
-subheading_am:"አልጊዮ በአዲስ አበባ ውስጥ የተመሠረተ ሙሉ አገልግሎት ዲጂታል የግብይት ኤጀንሲ ነው. ስማርት ድር ጣቢያዎችን እና በእውነቱ ሰዎች እንዲሠሩ የሚያደርጓቸውን የብሩሽ ድር ጣቢያዎች እና የእጅ ሙያ ይዘት ነው."
-subheading_en:"Aligoo is a full-service digital marketing agency based in Addis Ababa. We build smart websites, run killer ad campaigns, and craft content that actually gets people to act."
+badgeText_am: "💥 7 ዶላር ሞክረን";
+badgeText_en: "Welcome to Our V2 Site!";
+headlineText1_am: "ክሊኮችን ደንበኛዎችን እና ሽያጮች";
+headlineText1_en: "Digital marketing that";
+headlineText2_am: "የሚያመጣ";
+headlineText2_en: "delivers";
+headlineText3_am: "የዲጅታል ማርኪቲንግ አገልግሎት";
+headlineText3_en: "clarity, clicks, and conversions";
+primaryButtonText_am: "ሰትራቲጅክ ምክር ቀጠሮ ያዝ";
+primaryButtonText_en: "🚀 Book a Consultation";
+primaryButtonUrl: "https://aligoo-digital.agency/strategy-session";
+secondaryButtonText_am: "አገልግሎት ለማየት";
+secondaryButtonText_en: "👇Explore our Service";
+secondaryButtonUrl: "https://aligoo-digital.agency/#service-section ";
+subheading_am: "አልጊዮ በአዲስ አበባ ውስጥ የተመሠረተ ሙሉ አገልግሎት ዲጂታል የግብይት ኤጀንሲ ነው. ስማርት ድር ጣቢያዎችን እና በእውነቱ ሰዎች እንዲሠሩ የሚያደርጓቸውን የብሩሽ ድር ጣቢያዎች እና የእጅ ሙያ ይዘት ነው.";
+subheading_en: "Aligoo is a full-service digital marketing agency based in Addis Ababa. We build smart websites, run killer ad campaigns, and craft content that actually gets people to act.";

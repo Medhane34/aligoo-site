@@ -1,6 +1,7 @@
 // components/molecules/blog/CategoryFilter.tsx
 "use client";
 import { useState, useEffect } from "react";
+
 import { fetchCategories } from "@/lib/BlogPost";
 import { Category } from "@/types/BlogPost";
 
@@ -19,10 +20,11 @@ export default function CategoryFilter({ lang, onFilter }: Props) {
 
   const toggle = (slug?: string) => {
     const newSlug = selected === slug ? undefined : slug;
+
     setSelected(newSlug);
     // Debug: log the slug toggled so we can trace UI actions
     // eslint-disable-next-line no-console
-    console.log('[CategoryFilter] toggle ->', { clickedSlug: slug, newSlug });
+    console.log("[CategoryFilter] toggle ->", { clickedSlug: slug, newSlug });
     onFilter(newSlug);
   };
 
@@ -33,24 +35,27 @@ export default function CategoryFilter({ lang, onFilter }: Props) {
         {/* "All" option */}
         <label className="flex items-center gap-2 cursor-pointer">
           <input
-            type="radio"
-            name="category"
             checked={!selected}
-            onChange={() => toggle(undefined)}
             className="w-4 h-4 text-brand-primary rounded focus:ring-brand-primary"
+            name="category"
+            type="radio"
+            onChange={() => toggle(undefined)}
           />
           <span className="text-sm">All Services</span>
         </label>
 
         {/* Categories */}
-        {categories.map(cat => (
-          <label key={cat._id} className="flex items-center gap-2 cursor-pointer">
+        {categories.map((cat) => (
+          <label
+            key={cat._id}
+            className="flex items-center gap-2 cursor-pointer"
+          >
             <input
-              type="radio"
-              name="category"
               checked={selected === cat.slug}
-              onChange={() => toggle(cat.slug)}
               className="w-4 h-4 text-brand-primary rounded focus:ring-brand-primary"
+              name="category"
+              type="radio"
+              onChange={() => toggle(cat.slug)}
             />
             <span className="text-sm">{cat.title}</span>
           </label>

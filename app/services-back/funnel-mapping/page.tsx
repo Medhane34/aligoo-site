@@ -1,18 +1,11 @@
 /* eslint-disable prettier/prettier */
-import HeroSection from "@/components/HeroSection";
+import { MagnifyingGlassIcon, UserGroupIcon, DocumentTextIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 
-import CTABottomSection from "@/components/CTA";
-import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
+import HeroSection from "@/components/HeroSection";
 import FaqSection from "@/components/service-sections/FaqSection";
 import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
-import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
-import OurProcess from "@/components/service-sections/ourprocess";
-
 import ProcessSection, { ProcessStep } from "@/components/service-sections/ProcessSection";
-
 import Container from "@/components/ui/Container";
-import { MagnifyingGlassIcon, UserGroupIcon, DocumentTextIcon, RocketLaunchIcon, UserIcon, BoltIcon, Cog6ToothIcon } from "@heroicons/react/24/outline";
-
 import WhyFunnelMappingWorksSection from "@/components/service-sections/WhyServiceWorksSection";
 
 const webWhyContent = {
@@ -115,16 +108,16 @@ export default async function IndexPage() {
       />
       <Container>
         <WhyFunnelMappingWorksSection
+          features={features}
           heading="Why Funnel Mapping Works"
           subheading="We’ve designed a 4-step framework to map, design, and optimize funnels that convert. Here's how it works:"
-          features={features}
         />
 
       </Container>
       <ProcessSection
         heading="Our Process: The F.A.S.T. Funnel Method"
-        subheading="We’ve designed a 4-step framework to map, design, and optimize funnels that convert. Here's how it works:"
         steps={steps}
+        subheading="We’ve designed a 4-step framework to map, design, and optimize funnels that convert. Here's how it works:"
       />
 
       <Container>

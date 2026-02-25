@@ -1,5 +1,11 @@
 import { client } from "@/src/sanity/client";
-import { FAQ_SECTION_QUERY_DIGITAL, HERO_SECTION_QUERY_DIGITAL, OUR_PROCESS_SECTION_QUERY_DIGITAL, WHO_THIS_IS_FOR_SECTION_QUERY_DIGITAL, WHY_SERVICE_WORKS_SECTION_QUERY_DIGITAL } from "@/sanity/queries/services";
+import {
+  FAQ_SECTION_QUERY_DIGITAL,
+  HERO_SECTION_QUERY_DIGITAL,
+  OUR_PROCESS_SECTION_QUERY_DIGITAL,
+  WHO_THIS_IS_FOR_SECTION_QUERY_DIGITAL,
+  WHY_SERVICE_WORKS_SECTION_QUERY_DIGITAL,
+} from "@/sanity/queries/services";
 
 export type HeroSectionData = {
   badgeText_en?: string;
@@ -20,11 +26,13 @@ export type HeroSectionData = {
   secondaryButtonUrl: string;
 };
 
-export async function fetchHeroSection(name: string): Promise<HeroSectionData | null> {
+export async function fetchHeroSection(
+  name: string,
+): Promise<HeroSectionData | null> {
   return await client.fetch(HERO_SECTION_QUERY_DIGITAL, { name });
 }
 
-export type Stat = { value: string; label: string; };
+export type Stat = { value: string; label: string };
 
 export type WhyServiceWorksSectionData = {
   heading_en: string;
@@ -39,7 +47,9 @@ export type WhyServiceWorksSectionData = {
   stats_am: Stat[];
 };
 
-export async function fetchWhyServiceWorksSection(name: string): Promise<WhyServiceWorksSectionData | null> {
+export async function fetchWhyServiceWorksSection(
+  name: string,
+): Promise<WhyServiceWorksSectionData | null> {
   return await client.fetch(WHY_SERVICE_WORKS_SECTION_QUERY_DIGITAL, { name });
 }
 
@@ -62,7 +72,9 @@ export type OurProcessSectionData = {
   steps_am: ProcessStep[];
 };
 
-export async function fetchOurProcessSection(name: string): Promise<OurProcessSectionData | null> {
+export async function fetchOurProcessSection(
+  name: string,
+): Promise<OurProcessSectionData | null> {
   return await client.fetch(OUR_PROCESS_SECTION_QUERY_DIGITAL, { name });
 }
 
@@ -79,7 +91,9 @@ export type WhoThisIsForSectionData = {
   outroText_am?: string;
 };
 
-export async function fetchWhoThisIsForSection(name: string): Promise<WhoThisIsForSectionData | null> {
+export async function fetchWhoThisIsForSection(
+  name: string,
+): Promise<WhoThisIsForSectionData | null> {
   return await client.fetch(WHO_THIS_IS_FOR_SECTION_QUERY_DIGITAL, { name });
 }
 export type FaqItem = {
@@ -102,7 +116,8 @@ export type FaqSectionData = {
   faqs_am: FaqItem[];
 };
 
-export async function fetchFaqSection(name: string): Promise<FaqSectionData | null> {
+export async function fetchFaqSection(
+  name: string,
+): Promise<FaqSectionData | null> {
   return await client.fetch(FAQ_SECTION_QUERY_DIGITAL, { name });
 }
-

@@ -1,24 +1,30 @@
 // components/proposal/PackageCard.tsx
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import { CheckCircle2 } from 'lucide-react'
+import type { BasePackage } from "@/types/ProposalType";
 
-import type { BasePackage } from '@/types/ProposalType'
-import { cn } from '@/utils/cn'
+import { CheckCircle2 } from "lucide-react";
+
+import { cn } from "@/utils/cn";
 
 interface PackageCardProps {
-  pkg: BasePackage
-  selected: boolean
-  onSelect: () => void
+  pkg: BasePackage;
+  selected: boolean;
+  onSelect: () => void;
 }
 
-export default function PackageCard({ pkg, selected, onSelect }: PackageCardProps) {
+export default function PackageCard({
+  pkg,
+  selected,
+  onSelect,
+}: PackageCardProps) {
   return (
     <div
       className={cn(
         "bg-white/10 backdrop-blur-md p-6 rounded-xl cursor-pointer transition-all",
-        selected ? "border-4 border-blue-500 scale-105" : "border border-white/20 hover:scale-102"
+        selected
+          ? "border-4 border-blue-500 scale-105"
+          : "border border-white/20 hover:scale-102",
       )}
       onClick={onSelect}
     >
@@ -28,7 +34,9 @@ export default function PackageCard({ pkg, selected, onSelect }: PackageCardProp
         </span>
       )}
       <h4 className="text-2xl font-bold text-white mb-2">{pkg.name}</h4>
-      <p className="text-3xl text-blue-300 mb-6">₹{pkg.price.toLocaleString('en-IN')}</p>
+      <p className="text-3xl text-blue-300 mb-6">
+        ₹{pkg.price.toLocaleString("en-IN")}
+      </p>
       <ul className="space-y-2">
         {pkg.features.map((feature, i) => (
           <li key={i} className="text-gray-300 flex items-center">
@@ -37,5 +45,5 @@ export default function PackageCard({ pkg, selected, onSelect }: PackageCardProp
         ))}
       </ul>
     </div>
-  )
+  );
 }

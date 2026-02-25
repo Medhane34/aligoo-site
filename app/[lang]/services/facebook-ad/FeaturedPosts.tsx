@@ -2,12 +2,16 @@
 "use client";
 import { Card, CardHeader } from "@heroui/card";
 import { Image } from "@heroui/image";
-import { Button } from "@heroui/button";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { ButtonVariants, headerVariants, headerChildVariants, gridVariants, cardVariants } from "@/lib/motions";
 
+import { AccentText, SectionHeading } from "@/components/ui/typography";
+import {
+  headerVariants,
+  headerChildVariants,
+  gridVariants,
+  cardVariants,
+} from "@/lib/motions";
 
 type CaseStudy = {
   _id: string;
@@ -33,7 +37,9 @@ const placeholderCaseStudy: CaseStudy = {
   slug: "#",
 };
 
-export default function FeaturedFbWorkSection({ fbcasestudyPosts }: FetchFbCaseProps) {
+export default function FeaturedFbWorkSection({
+  fbcasestudyPosts,
+}: FetchFbCaseProps) {
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, {
     once: true,
@@ -57,7 +63,9 @@ export default function FeaturedFbWorkSection({ fbcasestudyPosts }: FetchFbCaseP
         variants={headerVariants}
       >
         <motion.div variants={headerChildVariants}>
-          <SectionHeading className="text-heading uppercase">Real Campaigns. Real Wins.</SectionHeading>
+          <SectionHeading className="text-heading uppercase">
+            Real Campaigns. Real Wins.
+          </SectionHeading>
         </motion.div>
         <motion.div variants={headerChildVariants}>
           <AccentText className="text-subheading normal-case">
@@ -67,17 +75,17 @@ export default function FeaturedFbWorkSection({ fbcasestudyPosts }: FetchFbCaseP
       </motion.div>
 
       <motion.div
+        animate={isInView ? "visible" : "hidden"}
         className="max-full gap-4 grid grid-cols-12 px-8"
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
         variants={gridVariants}
       >
         {paddedCaseStudyPosts.map((post, index) => (
           <motion.div
             key={post._id + index}
+            className="col-span-12 sm:col-span-4 h-[200px] xs:h-[250px] sm:h-[350px] md:h-[320px] lg:h-[350px]"
             variants={cardVariants}
             whileHover="hover"
-            className="col-span-12 sm:col-span-4 h-[200px] xs:h-[250px] sm:h-[350px] md:h-[320px] lg:h-[350px]"
           >
             <Card className="h-full outline-2 outline-offset-2 outline-blue-500">
               <CardHeader className="absolute z-10 top-1 flex-col items-start!">
@@ -92,7 +100,10 @@ export default function FeaturedFbWorkSection({ fbcasestudyPosts }: FetchFbCaseP
                 removeWrapper
                 alt={post.title || "Case study image"}
                 className="z-0 w-full h-full object-cover"
-                src={post.imageUrl || "https://heroui.com/images/card-example-4.jpeg"}
+                src={
+                  post.imageUrl ||
+                  "https://heroui.com/images/card-example-4.jpeg"
+                }
               />
             </Card>
           </motion.div>

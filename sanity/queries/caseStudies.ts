@@ -35,7 +35,7 @@ export const featuredCaseStudyQuery = `
   }
 `;
 
-// query to fetch fb case study heading for the service page 
+// query to fetch fb case study heading for the service page
 
 export const SECTION_HEADING_BLOCK_QUERY = `
   *[_type == "sectionHeadingBlock" && name == $name][0]{
@@ -46,7 +46,7 @@ export const SECTION_HEADING_BLOCK_QUERY = `
   }
 `;
 
-// query to fetch fb casestudy for the service page. 
+// query to fetch fb casestudy for the service page.
 export const fbCaseStudyQuery = `
 *[_type == "caseStudy" && service->title == "Facebook-Ad"]
 {

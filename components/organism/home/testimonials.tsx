@@ -1,28 +1,28 @@
 // app/home/TestimonialsSectionScroll.tsx
-'use client'
+"use client";
 
-import { Marquee } from "@/components/ui/marquee"
-import { AccentText, SectionHeading } from "@/components/ui/typography"
-import { GlowOutlineButton } from "@/components/atoms/button"
-import { Clock, Zap } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
-import BadgeAtom from "@/components/atoms/BadgeAtom"
-import HeadingAtom from "@/components/atoms/HeadingAtom"
+import { Clock, Zap } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+
+import { Marquee } from "@/components/ui/marquee";
+import { GlowOutlineButton } from "@/components/atoms/button";
+import BadgeAtom from "@/components/atoms/BadgeAtom";
+import HeadingAtom from "@/components/atoms/HeadingAtom";
 
 type Testimonial = {
-  name: string
-  username: string
-  body: any[]
-  imageUrl?: string
-  imageAlt?: string
-}
+  name: string;
+  username: string;
+  body: any[];
+  imageUrl?: string;
+  imageAlt?: string;
+};
 
 type Props = {
-  heading: string
-  subheading: string
-  testimonials: Testimonial[]
-}
+  heading: string;
+  subheading: string;
+  testimonials: Testimonial[];
+};
 
 const TestimonialCard = ({
   img,
@@ -30,19 +30,19 @@ const TestimonialCard = ({
   username,
   body,
 }: {
-  img?: string
-  name: string
-  username: string
-  body: any[]
+  img?: string;
+  name: string;
+  username: string;
+  body: any[];
 }) => {
   return (
     <div className="relative w-full max-w-xs overflow-hidden rounded-3xl border border-gray-200 bg-background-light/50 p-10 shadow-[0px_2px_0px_0px_rgba(0,0,0,0.05)_inset] dark:border-white/10 dark:bg-gradient-to-b dark:from-white/5 dark:to-white/[0.02] dark:shadow-[0px_2px_0px_0px_rgba(255,255,255,0.1)_inset]">
-      <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-[#FF595E]/10 to-transparent blur-md"></div>
+      <div className="absolute -top-5 -left-5 -z-10 h-40 w-40 rounded-full bg-gradient-to-b from-[#FF595E]/10 to-transparent blur-md" />
 
       <div className="text-foreground/90 leading-relaxed">
         {body?.map((block: any) => (
           <p key={block._key} className="mb-3 last:mb-0">
-            {block.children?.map((child: any) => child.text).join('')}
+            {block.children?.map((child: any) => child.text).join("")}
           </p>
         ))}
       </div>
@@ -50,54 +50,60 @@ const TestimonialCard = ({
       <div className="mt-5 flex items-center gap-2">
         {img ? (
           <Image
-            src={img}
             alt={name}
-            width={40}
-            height={40}
             className="h-10 w-10 rounded-full object-cover"
+            height={40}
+            src={img}
+            width={40}
           />
         ) : (
           <div className="h-10 w-10 rounded-full bg-gray-300 border-2 border-dashed" />
         )}
         <div className="flex flex-col">
-          <div className="leading-5 font-medium tracking-tight text-foreground">{name}</div>
-          <div className="leading-5 tracking-tight text-muted-foreground">{username}</div>
+          <div className="leading-5 font-medium tracking-tight text-foreground">
+            {name}
+          </div>
+          <div className="leading-5 tracking-tight text-muted-foreground">
+            {username}
+          </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default function TestimonialsSectionScroll({ heading, subheading, testimonials }: Props) {
-  if (!testimonials?.length) return null
+export default function TestimonialsSectionScroll({
+  heading,
+  subheading,
+  testimonials,
+}: Props) {
+  if (!testimonials?.length) return null;
 
-  const firstColumn = testimonials.slice(0, 3)
-  const secondColumn = testimonials.slice(3, 6)
-  const thirdColumn = testimonials.slice(6, 9)
+  const firstColumn = testimonials.slice(0, 3);
+  const secondColumn = testimonials.slice(3, 6);
+  const thirdColumn = testimonials.slice(6, 9);
 
   return (
-    <section id="testimonials" className="mb-24">
+    <section className="mb-24" id="testimonials">
       <div className="mx-auto max-w-7xl">
         <div className="mx-auto max-w-[540px] item-center">
           <BadgeAtom
-            variant="filled"
+            className="item-center"
             color="orange"
             icon={<Clock className="w-4 h-4" />}
-            className="item-center"
+            variant="filled"
           >
             Testimonials
           </BadgeAtom>
           <HeadingAtom
-            as="h2"
-            size="lg"
             align="center"
-            title={heading}
-            highlight={subheading}
-            variant="split"
+            as="h2"
             className="max-w-4xl mx-auto"
+            highlight={subheading}
+            size="lg"
+            title={heading}
+            variant="split"
           />
-
-
         </div>
 
         <div className="my-16 flex max-h-[738px] justify-center gap-6 overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_25%,black_75%,transparent)]">
@@ -106,24 +112,24 @@ export default function TestimonialsSectionScroll({ heading, subheading, testimo
               {firstColumn.map((t, i) => (
                 <TestimonialCard
                   key={i}
+                  body={t.body}
                   img={t.imageUrl}
                   name={t.name}
                   username={t.username}
-                  body={t.body}
                 />
               ))}
             </Marquee>
           </div>
 
           <div className="hidden md:block">
-            <Marquee reverse pauseOnHover vertical className="[--duration:25s]">
+            <Marquee pauseOnHover reverse vertical className="[--duration:25s]">
               {secondColumn.map((t, i) => (
                 <TestimonialCard
                   key={i}
+                  body={t.body}
                   img={t.imageUrl}
                   name={t.name}
                   username={t.username}
-                  body={t.body}
                 />
               ))}
             </Marquee>
@@ -134,10 +140,10 @@ export default function TestimonialsSectionScroll({ heading, subheading, testimo
               {thirdColumn.map((t, i) => (
                 <TestimonialCard
                   key={i}
+                  body={t.body}
                   img={t.imageUrl}
                   name={t.name}
                   username={t.username}
-                  body={t.body}
                 />
               ))}
             </Marquee>
@@ -146,7 +152,11 @@ export default function TestimonialsSectionScroll({ heading, subheading, testimo
 
         <div className="flex flex-col items-center gap-1 pb-1">
           <Link href="https://www.google.com/search?q=aligoo&sourceid=chrome&ie=UTF-8#mpd=~10252779069624549640/customers/reviews">
-            <GlowOutlineButton size="md" icon={<Zap className="h-5 w-5" />} className="p-2">
+            <GlowOutlineButton
+              className="p-2"
+              icon={<Zap className="h-5 w-5" />}
+              size="md"
+            >
               See all reviews
             </GlowOutlineButton>
           </Link>
@@ -154,5 +164,5 @@ export default function TestimonialsSectionScroll({ heading, subheading, testimo
         </div>
       </div>
     </section>
-  )
+  );
 }

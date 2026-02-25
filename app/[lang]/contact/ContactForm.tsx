@@ -1,12 +1,14 @@
 "use client";
+import { Controller } from "react-hook-form";
+import { motion } from "framer-motion";
+import { Send } from "lucide-react";
+
 import { useContactForm } from "./useContactForm";
+
 import InputAtom from "@/components/atoms/InputAtom";
 import SelectAtom from "@/components/atoms/SelectAtom";
 import TextareaAtom from "@/components/atoms/TextareaAtom"; // I need to create this!
 import ButtonAtom from "@/components/atoms/ButtonAtom";
-import { Controller } from "react-hook-form";
-import { motion } from "framer-motion";
-import { Send } from "lucide-react";
 
 const countriesData = [
   { code: "+251", name: "Ethiopia", flag: "🇪🇹", fullLabel: "Ethiopia (+251)" },
@@ -19,9 +21,14 @@ const countriesData = [
   { code: "+81", name: "Japan", flag: "🇯🇵", fullLabel: "Japan (+81)" },
 ].map((country, index) => ({
   value: `${country.code}-${index}`,
-  label: <span className="flex items-center gap-2 text-base"><span>{country.flag}</span> <span>{country.name}</span> <span className="text-white/50 text-xs">({country.code})</span></span>,
+  label: (
+    <span className="flex items-center gap-2 text-base">
+      <span>{country.flag}</span> <span>{country.name}</span>{" "}
+      <span className="text-white/50 text-xs">({country.code})</span>
+    </span>
+  ),
   displayLabel: country.code, // Show only code in the trigger
-  code: country.code
+  code: country.code,
 }));
 
 const serviceEnquiryOptions = [
@@ -48,25 +55,19 @@ const containerVariants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
-}
+      staggerChildren: 0.1,
+    },
+  },
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
-}
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 export default function ContactForm() {
-  const {
-    control,
-    handleSubmit,
-    errors,
-    isSubmitting,
-    register,
-    onSubmit,
-  } = useContactForm();
+  const { control, handleSubmit, errors, isSubmitting, register, onSubmit } =
+    useContactForm();
 
   // Helper code to map back the selected value to just the code (handled in onSubmit wrapper in component or hook)
   // The hook's onSubmit does: onSubmit({ ...data, countryCode }) where countryCode comes from getSelectedCountryCode
@@ -76,44 +77,46 @@ export default function ContactForm() {
 
   const getSelectedCountryCode = (displayKey: string | undefined) => {
     const found = countriesData.find((item) => item.value === displayKey);
+
     return found?.code || "";
   };
 
   return (
     <motion.form
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
       className="space-y-4 md:space-y-5"
+      initial="hidden"
+      variants={containerVariants}
+      viewport={{ once: true }}
+      whileInView="visible"
       onSubmit={handleSubmit((data) => {
         const countryCode = getSelectedCountryCode(data.countryCode);
+
         onSubmit({ ...data, countryCode });
       })}
     >
       <motion.div variants={itemVariants}>
         <InputAtom
           {...register("fullName")}
-          placeholder="Full Name"
           error={errors.fullName?.message}
+          placeholder="Full Name"
           size="lg"
         />
       </motion.div>
 
-      <motion.div variants={itemVariants} className="flex gap-3">
+      <motion.div className="flex gap-3" variants={itemVariants}>
         <div className="w-28 sm:w-36 flex-shrink-0">
           <Controller
             control={control}
             name="countryCode"
             render={({ field }) => (
               <SelectAtom
+                error={errors.countryCode?.message}
                 options={countriesData}
+                placeholder="+000"
                 value={field.value}
                 onChange={field.onChange}
-                placeholder="+000"
-                error={errors.countryCode?.message}
                 size="lg"
-              // Custom styling to merge with input
+                // Custom styling to merge with input
               />
             )}
           />
@@ -121,19 +124,22 @@ export default function ContactForm() {
         <div className="grow">
           <InputAtom
             {...register("phoneNumber")}
-            placeholder="Phone Number"
             error={errors.phoneNumber?.message}
-            type="tel"
+            placeholder="Phone Number"
             size="lg"
+            type="tel"
           />
         </div>
       </motion.div>
 
-      <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-2 gap-4"
+        variants={itemVariants}
+      >
         <InputAtom
           {...register("companyName")}
-          placeholder="Company Name (Optional)"
           error={errors.companyName?.message}
+          placeholder="Company Name (Optional)"
           size="lg"
         />
         <Controller
@@ -141,12 +147,12 @@ export default function ContactForm() {
           name="serviceEnquiry"
           render={({ field }) => (
             <SelectAtom
+              error={errors.serviceEnquiry?.message}
               options={serviceEnquiryOptions}
+              placeholder="Select a Service"
+              size="lg"
               value={field.value}
               onChange={field.onChange}
-              placeholder="Select a Service"
-              error={errors.serviceEnquiry?.message}
-              size="lg"
             />
           )}
         />
@@ -158,12 +164,12 @@ export default function ContactForm() {
           name="preferredCommunication"
           render={({ field }) => (
             <SelectAtom
+              error={errors.preferredCommunication?.message}
               options={communicationOptions}
+              placeholder="Preferred Communication"
+              size="lg"
               value={field.value}
               onChange={field.onChange}
-              placeholder="Preferred Communication"
-              error={errors.preferredCommunication?.message}
-              size="lg"
             />
           )}
         />
@@ -172,22 +178,22 @@ export default function ContactForm() {
       <motion.div variants={itemVariants}>
         <TextareaAtom
           {...register("message")}
-          placeholder="Tell us about your project..."
           error={errors.message?.message}
+          placeholder="Tell us about your project..."
           rows={5}
           size="lg"
         />
       </motion.div>
 
-      <motion.div variants={itemVariants} className="pt-2">
+      <motion.div className="pt-2" variants={itemVariants}>
         <ButtonAtom
-          variant="primary"
-          size="xl"
           fullWidth
-          isLoading={isSubmitting}
-          type="submit"
-          icon={<Send size={20} />}
           shimmer
+          icon={<Send size={20} />}
+          isLoading={isSubmitting}
+          size="xl"
+          type="submit"
+          variant="primary"
         >
           {isSubmitting ? "Sending..." : "Send Message"}
         </ButtonAtom>

@@ -2,15 +2,10 @@
 
 import AreWeMatch from "./AreWeMatch";
 
-import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
-import FaqSection from "@/components/service-sections/FaqSection";
-import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
-import OurProcess from "@/components/service-sections/ourprocess";
 import Container from "@/components/ui/Container";
 import HeroTikTokSectionWrapper from "@/wrappers/services/TikTok-ad/HeroTikTokWrappers";
 import WhyTikTokWorksSectionWrapper from "@/wrappers/services/TikTok-ad/WhyTikTokWrappers";
 import TikTokProcessSectionWrapper from "@/wrappers/services/TikTok-ad/ProcessTikTokWrappers";
-import WhoThisIsForSectionWrapper from "@/wrappers/services/facebook-ad/WhoThisIsForSectionWrapper";
 import FaqTikTokSectionWrapper from "@/wrappers/services/TikTok-ad/FaqTikTokWrappers";
 import CTATikTokSectionWrapper from "@/wrappers/services/TikTok-ad/CtaTikTokWrapper";
 import WhoThisIsForTikTokWrapper from "@/wrappers/services/TikTok-ad/WhothisforTikTokWrappers";
@@ -60,7 +55,7 @@ export default async function IndexPage({ params }: { params: Promise<{ lang: "e
     <>
       <HeroTikTokSectionWrapper lang={lang} />
       <Container>
-        <WhyTikTokWorksSectionWrapper lang={lang} id="why-tiktok-works" />
+        <WhyTikTokWorksSectionWrapper id="why-tiktok-works" lang={lang} />
       </Container>
 
       <Container>

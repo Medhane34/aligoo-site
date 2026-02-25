@@ -56,7 +56,8 @@ export const button = tv({
   base: "h-10 w-[163px] px-[16px] py-[10px] text-small font-medium leading-5",
   variants: {
     variant: {
-      primary: " text-violet-50 dark:bg-violet-700 dark:text-yellow rounded-full",
+      primary:
+        " text-violet-50 dark:bg-violet-700 dark:text-yellow rounded-full",
       secondary: "border border-default-100 dark:border-default-200 !important",
     },
   },
@@ -64,4 +65,3 @@ export const button = tv({
     variant: "primary",
   },
 });
-

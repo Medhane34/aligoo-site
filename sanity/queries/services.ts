@@ -1,4 +1,3 @@
-
 export const WHY_SERVICE_WORKS_SECTION_QUERY = `
   *[_type == "whyServiceWorksSection" && name == $name][0]{
     heading_en,
@@ -59,7 +58,7 @@ export const FAQ_SECTION_QUERY = `
     faqs_am
   }
 `;
-// Our Process Section - Web Design 
+// Our Process Section - Web Design
 export const HERO_SECTION_QUERY_WEB = `
   *[_type == "heroSection" && name == $name][0]{
     badgeText_en,
@@ -81,8 +80,6 @@ export const HERO_SECTION_QUERY_WEB = `
   }
 `;
 
-
-
 export const OUR_PROCESS_SECTION_QUERY = `
   *[_type == "ourProcessSection" && name == $name][0]{
     heading_en,
@@ -98,14 +95,14 @@ export const OUR_PROCESS_SECTION_QUERY = `
   }
 `;
 
-export const SECTION_HEADING_BLOCK_QUERY_WEB= `
+export const SECTION_HEADING_BLOCK_QUERY_WEB = `
     *[_type == "sectionHeadingBlock" && name == $name][0]{  
       heading_en,  
       heading_am,  
       subheading_en,  
       subheading_am  
     }  
-  `;  
+  `;
 
 export const CTA_SECTION_QUERY_WEB = `
   *[_type == "ctaSection" && name == $name][0]{
@@ -122,7 +119,7 @@ export const CTA_SECTION_QUERY_WEB = `
   }
 `;
 
-// TikTok Ad Service Queries 
+// TikTok Ad Service Queries
 
 export const HERO_SECTION_QUERY_TIKTOK = `
   *[_type == "heroSection" && name == $name][0]{
@@ -206,7 +203,7 @@ export const FAQ_SECTION_QUERY_TIKTOK = `
   }
 `;
 
-export const CTA_SECTION_QUERY_TIKTOK= `
+export const CTA_SECTION_QUERY_TIKTOK = `
   *[_type == "ctaSection" && name == $name][0]{
     heading_en,
     heading_am,
@@ -221,8 +218,8 @@ export const CTA_SECTION_QUERY_TIKTOK= `
   }
 `;
 
-// Digtal Marketing Quereis 
-export const HERO_SECTION_QUERY_DIGITAL= `
+// Digtal Marketing Quereis
+export const HERO_SECTION_QUERY_DIGITAL = `
   *[_type == "heroSection" && name == $name][0]{
     badgeText_en,
     badgeText_am,
@@ -243,7 +240,7 @@ export const HERO_SECTION_QUERY_DIGITAL= `
   }
 `;
 
-export const WHY_SERVICE_WORKS_SECTION_QUERY_DIGITAL= `
+export const WHY_SERVICE_WORKS_SECTION_QUERY_DIGITAL = `
   *[_type == "whyServiceWorksSection" && name == $name][0]{
     heading_en,
     heading_am,
@@ -273,7 +270,7 @@ export const OUR_PROCESS_SECTION_QUERY_DIGITAL = `
   }
 `;
 
-export const WHO_THIS_IS_FOR_SECTION_QUERY_DIGITAL= `
+export const WHO_THIS_IS_FOR_SECTION_QUERY_DIGITAL = `
   *[_type == "whoThisIsForSection" && name == $name][0]{
     heading_en,
     heading_am,
@@ -306,7 +303,7 @@ export const FAQ_SECTION_QUERY_DIGITAL = `
 `;
 
 // SEO SERVICE QUEREIS
-export const HERO_SECTION_QUERY_SEO= `
+export const HERO_SECTION_QUERY_SEO = `
   *[_type == "heroSection" && name == $name][0]{
     badgeText_en,
     badgeText_am,
@@ -326,15 +323,3 @@ export const HERO_SECTION_QUERY_SEO= `
     secondaryButtonUrl
   }
 `;
-
-
-
-
-
-
-
-
-
-
-
-

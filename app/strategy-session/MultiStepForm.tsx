@@ -3,7 +3,6 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import React, { useState } from "react";
 import { usePageLeave } from "react-use";
-
 import { Progress } from "@heroui/progress"; // HeroUI Progress component
 /* import { VisuallyHidden } from "@radix-ui/react-visually-hidden"; // Optional, for hiding the title */
 
@@ -178,6 +177,7 @@ export default function MultiStepForm() {
   // Personalized label for every step after the first
   const getLabel = () => {
     if (step === 0) return current.label;
+
     return current.label.replace(/{name}/g, data.name || "");
   };
 
@@ -185,6 +185,7 @@ export default function MultiStepForm() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
+
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
@@ -194,6 +195,7 @@ export default function MultiStepForm() {
 
   const validate = () => {
     if (!current.required) return true;
+
     return data[current.field as keyof FormData]?.toString().trim().length > 0;
   };
 

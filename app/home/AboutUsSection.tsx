@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
 import { motion } from "framer-motion";
-import { Image } from "@heroui/image";
 import Link from "next/link";
-import { SectionHeading, AccentText } from "@/components/ui/typography";
-import { textVariants, textContainerVariants, ButtonVariants, imageVariants } from "@/lib/motions";
-import { MyButton } from "@/components/custom/extendVariants";
-import { PrimaryButton } from "@/components/atoms/button";
+
+import {
+  textVariants,
+  textContainerVariants,
+  ButtonVariants,
+  imageVariants,
+} from "@/lib/motions";
 import ButtonAtom from "@/components/atoms/ButtonAtom";
-import { ArrowRight, Gift } from "lucide-react";
 import HeadingAtom from "@/components/atoms/HeadingAtom";
-import CardMolecule from "@/components/molecules/CardMolecule";
 import CreativeCore from "@/components/molecules/CreativeCore";
 
 export interface AboutUsSectionProps {
@@ -45,7 +45,8 @@ export default function AboutUsSection({
         >
           <CreativeCore />
           <p className="text-center text-sm font-medium tracking-wide text-muted-foreground/80 max-w-xs mx-auto italic">
-            &ldquo;Igniting the creative energy that makes your business glow globally.&rdquo;
+            &ldquo;Igniting the creative energy that makes your business glow
+            globally.&rdquo;
           </p>
         </motion.div>
 
@@ -57,18 +58,23 @@ export default function AboutUsSection({
           viewport={{ once: true }}
           whileInView="visible"
         >
-
           <motion.div variants={textVariants}>
             <HeadingAtom
+              className="uppercase text-heading"
+              highlight={sectionHeading}
+              title={""}
               variant="split"
-              highlight={sectionHeading} title={""} className="uppercase text-heading" />
+            />
           </motion.div>
-          <motion.div className="text-heading pb-2 xs:pb-1 sm:pb-4" variants={textVariants}>
+          <motion.div
+            className="text-heading pb-2 xs:pb-1 sm:pb-4"
+            variants={textVariants}
+          >
             <HeadingAtom
-              variant="gradient"
-              title={accentText}
-              size="sm"
               className=""
+              size="sm"
+              title={accentText}
+              variant="gradient"
             />
           </motion.div>
           {paragraphs.map((p, i) => (
@@ -78,13 +84,8 @@ export default function AboutUsSection({
             </motion.div>
           ))}
           <motion.div className="pt-6" variants={ButtonVariants}>
-            <Link href={buttonUrl}>
-            </Link>
-            <ButtonAtom
-              variant="primary"
-              size="md"
-              shimmer
-            >
+            <Link href={buttonUrl} />
+            <ButtonAtom shimmer size="md" variant="primary">
               {buttonText}
             </ButtonAtom>
           </motion.div>

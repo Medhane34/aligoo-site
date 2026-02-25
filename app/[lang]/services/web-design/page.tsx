@@ -1,15 +1,11 @@
 /* eslint-disable prettier/prettier */
-import HeroSection from "@/components/HeroSection";
 
-import CTABottomSection from "@/components/CTA";
 import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
 import FaqSection from "@/components/service-sections/FaqSection";
 import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
 import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
-import OurProcess from "@/components/service-sections/ourprocess";
 import Container from "@/components/ui/Container";
 import OurProcessSectionWrapper from "@/wrappers/services/web-design/OurProcessSectionWrapper";
-
 import CTAWEBSectionWrapper from "@/wrappers/services/web-design/CTAWebSectionWrapper";
 import HeroWebSectionWrapper from "@/wrappers/services/web-design/HeroHomeSectionWrapper";
 

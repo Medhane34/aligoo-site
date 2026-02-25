@@ -1,14 +1,13 @@
 // components/case-studies/CaseStudyTestimonial.tsx
 "use client";
 import React from "react";
-import {CaseStudyTestimonialData} from "@/types/CaseStudyTypes"
 
-
+import { CaseStudyTestimonialData } from "@/types/CaseStudyTypes";
 
 // Define the props interface for the component
 interface CaseStudyTestimonialProps {
   testimonialData: CaseStudyTestimonialData;
-    rating: number; // <-- Add this line
+  rating: number; // <-- Add this line
 }
 export default function CaseStudyTestimonial({
   testimonialData,
@@ -17,17 +16,15 @@ export default function CaseStudyTestimonial({
   // Step 1: Check if the entire testimonial object exists
   if (!testimonialData) {
     console.warn("CaseStudyTestimonial: No testimonial data provided.");
+
     return null; // Don't render anything if there's no testimonial object
   }
 
   // Step 2: Destructure the data for easier access
   // Provide default empty strings for optional fields if they are missing,
   // or a default rating of 0.
-  const {
-    testimonialQuote,
-    testimonialAuthorName,
-    testimonialAuthorPosition,
-  } = testimonialData;
+  const { testimonialQuote, testimonialAuthorName, testimonialAuthorPosition } =
+    testimonialData;
 
   // Step 3: Check if essential data is missing (even if the object exists)
   // We only need the quote and author name to consider it a valid testimonial for display.
@@ -35,13 +32,12 @@ export default function CaseStudyTestimonial({
     console.warn(
       "CaseStudyTestimonial: Skipping render due to missing essential quote or author name.",
     );
+
     return null; // Don't render the section if essential data is missing
   }
 
   return (
-    <section
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark text-white-light dark:text-dark-dark"
-    >
+    <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark text-white-light dark:text-dark-dark">
       <div className="max-w-3xl mx-auto text-center">
         <div className="mt-3 flex justify-center pb-2">
           {Array.from({ length: 5 }).map((_, i) => (
@@ -67,9 +63,7 @@ export default function CaseStudyTestimonial({
             {testimonialAuthorName}
           </p>
           {testimonialAuthorPosition && ( // Only render position if it exists
-            <p className=" text-gray-400">
-              {testimonialAuthorPosition}
-            </p>
+            <p className=" text-gray-400">{testimonialAuthorPosition}</p>
           )}
         </div>
       </div>

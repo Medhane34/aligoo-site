@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "@heroui/button"; // Assuming Button is imported if not already globally available
-import { Image } from "@heroui/react"; // Assuming Image component is available
+// Assuming Button is imported if not already globally available
+// Assuming Image component is available
 import { motion } from "framer-motion";
 import NextImage from "next/image";
 
@@ -21,8 +21,7 @@ const OurWayPoints = [
   {
     number: "03",
     heading: "Radical clarity & human communication",
-    description:
-      "Radical clarity & human communication",
+    description: "Radical clarity & human communication",
   },
   // Add more points as needed for "Our Way"
 ];
@@ -169,10 +168,10 @@ const AligooMarketingFix = () => {
                     &quot;The consumer isn’t a moron, she is your wife.”
                   </p>
                   <p className="mt-4 font-semibold text-subheading">
-David Ogilvy
+                    David Ogilvy
                     <br />
                     <span className="text-small opacity-75">
-                      Founder, Oglivy | Our Inspiration 
+                      Founder, Oglivy | Our Inspiration
                     </span>
                   </p>
                 </motion.div>
@@ -204,25 +203,25 @@ David Ogilvy
                     <h3 className="text-2xl font-semibold text-brand-primary">
                       📉 Big promises, small follow-through
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm" />
                   </motion.div>
                   <motion.div variants={problemRightVariants}>
                     <h3 className="text-2xl font-semibold text-brand-primary">
                       🥱 Copy-paste strategies
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm" />
                   </motion.div>
                   <motion.div variants={problemRightVariants}>
                     <h3 className="text-2xl font-semibold text-brand-primary">
                       💸 Agencies more obsessed with awards than impact
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm" />
                   </motion.div>
                   <motion.div variants={problemRightVariants}>
                     <h3 className="text-2xl font-semibold text-brand-primary">
-                     ⛔️ 0% B.S.
+                      ⛔️ 0% B.S.
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm"></p>
+                    <p className="text-gray-600 dark:text-gray-400 text-sm" />
                   </motion.div>
                 </motion.div>
               </motion.div>

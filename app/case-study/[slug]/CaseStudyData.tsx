@@ -1,22 +1,17 @@
 // src/sanity/queries.ts (Your existing file)
-import { client } from "@/src/sanity/client";
 import type { SanityDocument } from "next-sanity";
+
+import { client } from "@/src/sanity/client";
 import {
   CaseStudyCoreData,
   CaseStudyOverviewData,
   CaseStudyGoalData,
-  StrategyBlock,
   CaseStudyStrategyData,
-  GalleryImageItem,
   CaseStudyImageGalleryData,
-  ResultStatItem,
   CaseStudyResultsData,
   CaseStudyTestimonialData,
-  PaginationCaseStudy,
-  CaseStudyPaginationData
+  CaseStudyPaginationData,
 } from "@/types/CaseStudyTypes";
-
-
 
 // --- FETCH FUNCTIONS ---
 
@@ -183,27 +178,27 @@ export async function fetchCaseStudyStrategyDataBySlug(
       strategyIntroBody: data.strategyIntroBody || "", // Provide fallback for string, as it returned null
       strategyBlock1: data.strategyBlock1
         ? {
-          heading: data.strategyBlock1.heading,
-          body: data.strategyBlock1.body,
-          imageUrl: data.strategyBlock1.imageUrl,
-          imageAlt: data.strategyBlock1.imageAlt,
-        }
+            heading: data.strategyBlock1.heading,
+            body: data.strategyBlock1.body,
+            imageUrl: data.strategyBlock1.imageUrl,
+            imageAlt: data.strategyBlock1.imageAlt,
+          }
         : undefined,
       strategyBlock2: data.strategyBlock2
         ? {
-          heading: data.strategyBlock2.heading,
-          body: data.strategyBlock2.body,
-          imageUrl: data.strategyBlock2.imageUrl,
-          imageAlt: data.strategyBlock2.imageAlt,
-        }
+            heading: data.strategyBlock2.heading,
+            body: data.strategyBlock2.body,
+            imageUrl: data.strategyBlock2.imageUrl,
+            imageAlt: data.strategyBlock2.imageAlt,
+          }
         : undefined,
       strategyBlock3: data.strategyBlock3
         ? {
-          heading: data.strategyBlock3.heading,
-          body: data.strategyBlock3.body,
-          imageUrl: data.strategyBlock3.imageUrl,
-          imageAlt: data.strategyBlock3.imageAlt,
-        }
+            heading: data.strategyBlock3.heading,
+            body: data.strategyBlock3.body,
+            imageUrl: data.strategyBlock3.imageUrl,
+            imageAlt: data.strategyBlock3.imageAlt,
+          }
         : undefined,
     };
   } catch (error) {
@@ -248,24 +243,24 @@ export async function fetchCaseStudyImageGalleryDataBySlug(
       galleryDescription: data.galleryDescription || "", // Ensure it's a string
       galleryImage1: data.galleryImage1
         ? {
-          imageUrl: data.galleryImage1.imageUrl,
-          imageAlt: data.galleryImage1.imageAlt,
-          caption: data.galleryImage1.caption,
-        }
+            imageUrl: data.galleryImage1.imageUrl,
+            imageAlt: data.galleryImage1.imageAlt,
+            caption: data.galleryImage1.caption,
+          }
         : undefined,
       galleryImage2: data.galleryImage2
         ? {
-          imageUrl: data.galleryImage2.imageUrl,
-          imageAlt: data.galleryImage2.imageAlt,
-          caption: data.galleryImage2.caption,
-        }
+            imageUrl: data.galleryImage2.imageUrl,
+            imageAlt: data.galleryImage2.imageAlt,
+            caption: data.galleryImage2.caption,
+          }
         : undefined,
       galleryImage3: data.galleryImage3
         ? {
-          imageUrl: data.galleryImage3.imageUrl,
-          imageAlt: data.galleryImage3.imageAlt,
-          caption: data.galleryImage3.caption,
-        }
+            imageUrl: data.galleryImage3.imageUrl,
+            imageAlt: data.galleryImage3.imageAlt,
+            caption: data.galleryImage3.caption,
+          }
         : undefined,
     };
   } catch (error) {
@@ -313,24 +308,24 @@ export async function fetchCaseStudyResultsDataBySlug(
       resultsBody: data.resultsBody || "", // Provide fallback for string
       resultsStat1: data.resultsStat1
         ? {
-          value: data.resultsStat1.value,
-          label: data.resultsStat1.label,
-          description: data.resultsStat1.description || undefined, // Ensure undefined if null/empty
-        }
+            value: data.resultsStat1.value,
+            label: data.resultsStat1.label,
+            description: data.resultsStat1.description || undefined, // Ensure undefined if null/empty
+          }
         : undefined,
       resultsStat2: data.resultsStat2
         ? {
-          value: data.resultsStat2.value,
-          label: data.resultsStat2.label,
-          description: data.resultsStat2.description || undefined,
-        }
+            value: data.resultsStat2.value,
+            label: data.resultsStat2.label,
+            description: data.resultsStat2.description || undefined,
+          }
         : undefined,
       resultsStat3: data.resultsStat3
         ? {
-          value: data.resultsStat3.value,
-          label: data.resultsStat3.label,
-          description: data.resultsStat3.description || undefined,
-        }
+            value: data.resultsStat3.value,
+            label: data.resultsStat3.label,
+            description: data.resultsStat3.description || undefined,
+          }
         : undefined,
     };
   } catch (error) {
@@ -398,15 +393,15 @@ export async function fetchCaseStudyPaginationDataBySlug(
     return {
       previousCaseStudy: data.previousCaseStudy
         ? {
-          title: data.previousCaseStudy.title,
-          slug: data.previousCaseStudy.slug,
-        }
+            title: data.previousCaseStudy.title,
+            slug: data.previousCaseStudy.slug,
+          }
         : undefined,
       nextCaseStudy: data.nextCaseStudy
         ? {
-          title: data.nextCaseStudy.title,
-          slug: data.nextCaseStudy.slug,
-        }
+            title: data.nextCaseStudy.title,
+            slug: data.nextCaseStudy.slug,
+          }
         : undefined,
     };
   } catch (error) {

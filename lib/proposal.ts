@@ -1,48 +1,47 @@
 // lib/proposal.ts
-import { automationClient } from '@/src/sanity/client'
-import { PROPOSAL_BY_CODE_QUERY } from '@/sanity/queries/proposal'
-import { ContractReadyProposal, ProposalData } from '@/types/ProposalType'
+import { automationClient } from "@/src/sanity/client";
+import { PROPOSAL_BY_CODE_QUERY } from "@/sanity/queries/proposal";
+import { ContractReadyProposal, ProposalData } from "@/types/ProposalType";
 
-
-export async function getProposalByCode(code: string): Promise<ProposalData | null> {
+export async function getProposalByCode(
+  code: string,
+): Promise<ProposalData | null> {
   try {
     const proposal = await automationClient.fetch<ProposalData>(
       PROPOSAL_BY_CODE_QUERY,
       { code },
       /* { next: { revalidate: 60 } } */
-    )
-    console.log('Fresh proposal fetched:', proposal?.uniqueCode) // ← ADD THIS
-    return proposal || null
+    );
+
+    console.log("Fresh proposal fetched:", proposal?.uniqueCode); // ← ADD THIS
+
+    return proposal || null;
   } catch (error) {
-    console.error('Fetch error:', error)
-    return null
+    console.error("Fetch error:", error);
+
+    return null;
   }
 }
-
 
 // Client-side action to update selected package in Sanity (use in client components)
 export async function updateProposalSelection(
   proposalId: string,
   selectedPackage: string,
-  selectedAddOns?: string[] // Added optional param
+  selectedAddOns?: string[], // Added optional param
 ) {
   try {
     const patchData: any = {
-      'currentSelection.selectedPackage': selectedPackage,
+      "currentSelection.selectedPackage": selectedPackage,
     };
 
     if (selectedAddOns !== undefined) {
-      patchData['currentSelection.selectedAddOns'] = selectedAddOns;
+      patchData["currentSelection.selectedAddOns"] = selectedAddOns;
     }
 
-
-    await automationClient
-      .patch(proposalId)
-      .set(patchData)
-      .commit();
-    console.log('Selection saved:', { selectedPackage, selectedAddOns });
+    await automationClient.patch(proposalId).set(patchData).commit();
+    console.log("Selection saved:", { selectedPackage, selectedAddOns });
   } catch (error) {
-    console.error('Failed to save selection:', error);
+    console.error("Failed to save selection:", error);
   }
 }
 
@@ -52,54 +51,59 @@ export async function updateProposalWithTotal(
   selectedPackage: string,
   selectedAddOns: string[],
   totalPrice: number,
-  status: string = 'viewed'
+  status: string = "viewed",
 ) {
   try {
-    console.log('📊 Updating Sanity with:', {
+    console.log("📊 Updating Sanity with:", {
       selectedPackage,
       selectedAddOns,
       totalPrice,
-      status
+      status,
     });
 
     await automationClient
       .patch(proposalId)
       .set({
-        'currentSelection.selectedPackage': selectedPackage,
-        'currentSelection.selectedAddOns': selectedAddOns,
-        'currentSelection.totalPrice': totalPrice,
-        'status': status,
+        "currentSelection.selectedPackage": selectedPackage,
+        "currentSelection.selectedAddOns": selectedAddOns,
+        "currentSelection.totalPrice": totalPrice,
+        status: status,
       })
       .commit();
 
-    console.log('✅ Proposal updated successfully!');
+    console.log("✅ Proposal updated successfully!");
+
     return { success: true };
   } catch (error) {
-    console.error('❌ Failed to update proposal:', error);
+    console.error("❌ Failed to update proposal:", error);
+
     return { success: false, error };
   }
 }
 
-export async function getContractByCode(code: string): Promise<ContractReadyProposal | null> {
+export async function getContractByCode(
+  code: string,
+): Promise<ContractReadyProposal | null> {
   try {
     const proposal = await automationClient.fetch<ContractReadyProposal>(
       PROPOSAL_BY_CODE_QUERY,
       { code },
-      { next: { revalidate: 30 } }
-    )
+      { next: { revalidate: 30 } },
+    );
 
-    console.log('Contract Page Loaded:', {
+    console.log("Contract Page Loaded:", {
       code,
       clientName: proposal?.clientName,
       status: proposal?.status,
       hasContractTemplate: !!proposal?.contractTemplate,
       hasClientSignature: !!proposal?.clientSignature,
       hasSignedPdf: !!proposal?.signedContractPdf,
-    })
+    });
 
-    return proposal || null
+    return proposal || null;
   } catch (error) {
-    console.error('getContractByCode failed:', error)
-    return null
+    console.error("getContractByCode failed:", error);
+
+    return null;
   }
 }

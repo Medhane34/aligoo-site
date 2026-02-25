@@ -76,37 +76,37 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-brand-primary/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
-
         {/* Header */}
         <div className="flex flex-col md:flex-row items-end justify-between mb-16 gap-8">
           <div className="space-y-4 max-w-2xl">
             <BadgeAtom
-              variant="filled"
               color="orange"
               icon={<Briefcase className="w-3.5 h-3.5" />}
+              variant="filled"
             >
               Our Portfolio
             </BadgeAtom>
             <HeadingAtom
               as="h2"
+              highlight="Real Impact."
               size="xl"
               title="Real Projects."
-              highlight="Real Impact."
               variant="split"
             />
             <p className="text-muted-foreground text-lg max-w-xl">
-              Explore a selection of our recent work, showcasing our expertise in design, development, and digital strategy.
+              Explore a selection of our recent work, showcasing our expertise
+              in design, development, and digital strategy.
             </p>
           </div>
 
           <Link href="/works">
             <ButtonAtom
-              variant="primary"
               shimmer
-              size="lg"
+              className="hidden md:flex border-foreground/20 text-foreground hover:bg-foreground/5"
               icon={<ArrowUpRight className="w-5 h-5" />}
               iconPosition="right"
-              className="hidden md:flex border-foreground/20 text-foreground hover:bg-foreground/5"
+              size="lg"
+              variant="primary"
             >
               View All Projects
             </ButtonAtom>
@@ -115,11 +115,11 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
 
         {/* Bento Grid */}
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-6 gap-6"
+          initial="hidden"
+          variants={containerVariants}
+          viewport={{ once: true, margin: "-50px" }}
+          whileInView="visible"
         >
           {paddedCaseStudyPosts.map((study, index) => {
             // Layout Logic:
@@ -131,21 +131,27 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
             return (
               <motion.div
                 key={study._id + index}
-                variants={cardItemVariants}
                 className={`col-span-1 ${colSpanClass}`}
+                variants={cardItemVariants}
               >
-                <Link href={`/case-study/${study.slug}`} className="block h-full">
+                <Link
+                  className="block h-full"
+                  href={`/case-study/${study.slug}`}
+                >
                   <CardMolecule
-                    variant="spotlight"
-                    padding="none"
                     className={`relative ${heightClass} w-full group p-0 overflow-hidden border-0`}
+                    padding="none"
+                    variant="spotlight"
                   >
                     {/* Background Image */}
                     <Image
-                      src={study.imageUrl || "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"}
-                      alt={study.title}
                       fill
+                      alt={study.title}
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      src={
+                        study.imageUrl ||
+                        "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                      }
                     />
 
                     {/* Gradient Overlay */}
@@ -170,10 +176,13 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
                         <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
                           <div className="overflow-hidden">
                             <p className="text-gray-300 text-sm line-clamp-3 pt-2 border-t border-white/20 mt-2">
-                              {study.challengeSummary || study.goalsSummary || "Discover how we helped this client achieve their goals through innovative digital solutions."}
+                              {study.challengeSummary ||
+                                study.goalsSummary ||
+                                "Discover how we helped this client achieve their goals through innovative digital solutions."}
                             </p>
                             <div className="mt-4 flex items-center gap-2 text-brand-primary font-medium text-sm">
-                              Read Case Study <ArrowUpRight className="w-4 h-4" />
+                              Read Case Study{" "}
+                              <ArrowUpRight className="w-4 h-4" />
                             </div>
                           </div>
                         </div>
@@ -190,16 +199,15 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
         <div className="mt-12 flex justify-center md:hidden">
           <Link href="/works">
             <ButtonAtom
-              variant="primary"
-              size="lg"
               icon={<ArrowUpRight className="w-5 h-5" />}
               iconPosition="right"
+              size="lg"
+              variant="primary"
             >
               View All Projects
             </ButtonAtom>
           </Link>
         </div>
-
       </div>
     </section>
   );

@@ -1,11 +1,11 @@
 // components/Footer.tsx
 "use client";
 import React from "react";
-import { Button } from "@heroui/button";
 import { Facebook, Instagram, Twitter, Linkedin, Youtube } from "lucide-react";
+import { usePathname } from "next/navigation";
+
 import ButtonAtom from "./atoms/ButtonAtom";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { usePathname } from "next/navigation";
 
 const contacts = [
   {
@@ -58,14 +58,20 @@ const Footer: React.FC = () => {
   const lang = pathname?.startsWith("/am") ? "am" : "en";
 
   const services = [
-    { label: "Facebook & Instagram Ads", href: `/${lang}/services/facebook-ad` },
+    {
+      label: "Facebook & Instagram Ads",
+      href: `/${lang}/services/facebook-ad`,
+    },
     { label: "Web Design & Development", href: `/${lang}/services/web-design` },
     {
       label: "Digital Marketing (all-in-one)",
       href: `/${lang}/services/digital-marketing`,
     },
     { label: "Content Marketing", href: `/${lang}/services/content-marketing` },
-    { label: "Search Engine Optimization (SEO)", href: `/${lang}/services/seo` },
+    {
+      label: "Search Engine Optimization (SEO)",
+      href: `/${lang}/services/seo`,
+    },
     { label: "TikTok Ads", href: `/${lang}/services/tiktok-ad` },
     { label: "Graphic Design", href: `/${lang}/services/graphic-design` },
     { label: "Funnel Mapping", href: `/${lang}/services/funnel-mapping` },
@@ -98,8 +104,8 @@ const Footer: React.FC = () => {
             {services.map((service) => (
               <li key={service.label}>
                 <a
-                  href={service.href}
                   className="text-sm hover:text-red-400 transition-colors cursor-pointer"
+                  href={service.href}
                 >
                   {service.label}
                 </a>
@@ -116,8 +122,8 @@ const Footer: React.FC = () => {
               c.href ? (
                 <li key={c.label}>
                   <a
-                    href={c.href}
                     className="text-sm hover:text-red-400 transition-colors"
+                    href={c.href}
                   >
                     {c.value}
                   </a>
@@ -133,11 +139,11 @@ const Footer: React.FC = () => {
             {socialLinks.map((s) => (
               <a
                 key={s.label}
-                href={s.href}
                 aria-label={s.label}
                 className="hover:text-red-400 transition-colors"
-                target="_blank"
+                href={s.href}
                 rel="noopener noreferrer"
+                target="_blank"
               >
                 {s.icon}
               </a>
@@ -154,7 +160,11 @@ const Footer: React.FC = () => {
             Get the latest marketing tips and agency news. Join our Telegram
             bot!
           </p>
-          <a href="https://t.me/AligooClientBot?start=web" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://t.me/AligooClientBot?start=web"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             <ButtonAtom shimmer> Get Exclusive Insights </ButtonAtom>
           </a>
         </div>
@@ -164,10 +174,16 @@ const Footer: React.FC = () => {
         Copyright © {new Date().getFullYear()} Aligoo Digital Agency. All
         rights reserved.
         <div className="mt-4 flex flex-wrap justify-center gap-6">
-          <a href={`/${lang}/terms`} className="hover:text-red-400 transition-colors">
+          <a
+            className="hover:text-red-400 transition-colors"
+            href={`/${lang}/terms`}
+          >
             Terms of Service
           </a>
-          <a href={`/${lang}/privacy`} className="hover:text-red-400 transition-colors">
+          <a
+            className="hover:text-red-400 transition-colors"
+            href={`/${lang}/privacy`}
+          >
             Privacy Policy
           </a>
         </div>

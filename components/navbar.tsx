@@ -21,8 +21,8 @@ import {
 } from "@heroui/dropdown";
 import { Accordion, AccordionItem } from "@heroui/accordion";
 import { usePathname } from "next/navigation";
-import ThemeSwitch from "./theme-switch";
 
+import ThemeSwitch from "./theme-switch";
 
 const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
@@ -113,10 +113,16 @@ export const Navbar = () => {
               </DropdownTrigger>
             </NavbarItem>
             <DropdownMenu aria-label="Service Actions">
-              <DropdownItem key="Facebook Ad" href="/en/services-back/facebook-ad">
+              <DropdownItem
+                key="Facebook Ad"
+                href="/en/services-back/facebook-ad"
+              >
                 Facebook Ad
               </DropdownItem>
-              <DropdownItem key="Web Design" href="/en/services-back/web-design">
+              <DropdownItem
+                key="Web Design"
+                href="/en/services-back/web-design"
+              >
                 Web Design
               </DropdownItem>
               <DropdownItem key="TikTok Ads" href="/en/services-back/tiktok-ad">
@@ -179,7 +185,7 @@ export const Navbar = () => {
 
         <NavbarContent className="hidden sm:flex" justify="end">
           {/* #region CTA */}
-         {/*  <div className="flex gap-1">
+          {/*  <div className="flex gap-1">
             <Link
               className={`px-3 py-1 rounded-l ${pathname.startsWith("/en") ? "bg-brand-primary text-white" : "bg-gray-200"}`}
               href={`/en${pathWithoutLang === "" ? "/" : pathWithoutLang}`}

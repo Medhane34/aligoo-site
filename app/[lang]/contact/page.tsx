@@ -1,8 +1,9 @@
-import ContactForm from "./ContactForm";
+import { Metadata } from "next";
+
+import WhatHappensNextSection from "./WhatHappensNextSection";
+
 import HeroSection from "@/components/HeroSection";
 import ContactSectionWrapper from "@/wrappers/contact/ContactSectionWrapper";
-import WhatHappensNextSection from "./WhatHappensNextSection";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Contact Us | Aligoo Digital Agency",
@@ -24,21 +25,25 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600; // Rebuild every hour
 
-export default async function ContactPage({ params }: { params: Promise<{ lang: "en" | "am" }> }) {
+export default async function ContactPage({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "am" }>;
+}) {
   const { lang } = await params; // ✅
 
   return (
     <>
       <HeroSection
+        badgeText="Let’s Make Something Amazing Together 💬!" // Optional badge text
         headlineText1="Have a project in mind?  "
         headlineText2="We’d love"
         headlineText3="to hear from you."
-        subheading="Whether you're looking to grow your business, launch a new campaign, or just want to bounce around some ideas — we’re all ears. Drop us a line and let's explore how we can help you turn ambition into action."
         primaryButtonText="👉 Custom Strategy Session"
         primaryButtonUrl="/strategy-session"
         secondaryButtonText="💬 Quick Chat"
         secondaryButtonUrl="#quick-chat"
-        badgeText="Let’s Make Something Amazing Together 💬!" // Optional badge text
+        subheading="Whether you're looking to grow your business, launch a new campaign, or just want to bounce around some ideas — we’re all ears. Drop us a line and let's explore how we can help you turn ambition into action."
       />
       <div className="div" id="quick-chat">
         <ContactSectionWrapper lang={lang} />

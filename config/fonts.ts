@@ -1,11 +1,12 @@
 // config/fonts.ts
 import { DM_Sans } from "next/font/google"; // Import DM_Sans directly
 
-export const fontSans = DM_Sans({ // Call DM_Sans here
+export const fontSans = DM_Sans({
+  // Call DM_Sans here
   subsets: ["latin"],
-  weight: ['400', '500', '700'], // Make sure to include all weights you'll use
+  weight: ["400", "500", "700"], // Make sure to include all weights you'll use
   variable: "--font-sans",
-  display: 'swap',
+  display: "swap",
 });
 
 // If you have a font-mono (monospace font) setup, you'd do it similarly:

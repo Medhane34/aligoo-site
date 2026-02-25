@@ -1,8 +1,8 @@
 // components/CTABottomSection.jsx
 "use client";
 
-import React from 'react';
-import { Button } from '@heroui/button';
+import React from "react";
+import { Button } from "@heroui/button";
 import { motion } from "framer-motion";
 
 const sectionVariants = {
@@ -58,9 +58,9 @@ const CTABottomSection = () => {
     <motion.section
       className="bg-background-light dark:bg-background-dark py-12 md:py-16 lg:py-20"
       initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
       variants={sectionVariants}
+      viewport={{ once: true }}
+      whileInView="visible"
     >
       <div className="container mx-auto px-4">
         <div className="flex flex-col items-center text-center md:flex-row md:justify-between md:items-center md:text-left gap-8 md:gap-0 lg:gap-12">
@@ -90,18 +90,14 @@ const CTABottomSection = () => {
           >
             {/* Primary Button: Free trial */}
             <motion.div variants={buttonVariants}>
-              <Button
-                className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-linear-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker shadow-lg transition-all duration-300"
-              >
+              <Button className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-full text-white bg-linear-to-r from-brand-primary-light to-brand-primary-dark hover:from-brand-primary-dark hover:to-brand-primary-darker shadow-lg transition-all duration-300">
                 Free trial
               </Button>
             </motion.div>
 
             {/* Secondary Button: Request demo */}
             <motion.div variants={buttonVariants}>
-              <Button
-                className="text-brand-primary-light dark:text-brand-primary-dark rounded-full px-8 py-3 hover:text-brand-primary-dark dark:hover:text-white transition-colors duration-300 border border-brand-primary-light dark:border-brand-primary-dark hover:border-brand-primary-dark dark:hover:border-white w-full xs:w-auto md:w-auto bg-transparent"
-              >
+              <Button className="text-brand-primary-light dark:text-brand-primary-dark rounded-full px-8 py-3 hover:text-brand-primary-dark dark:hover:text-white transition-colors duration-300 border border-brand-primary-light dark:border-brand-primary-dark hover:border-brand-primary-dark dark:hover:border-white w-full xs:w-auto md:w-auto bg-transparent">
                 Request demo
               </Button>
             </motion.div>

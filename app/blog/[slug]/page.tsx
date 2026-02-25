@@ -1,14 +1,15 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
+import dynamic from "next/dynamic";
+
 import { fetchBlogPostBySlug, fetchRelatedPosts } from "@/lib/BlogPost";
 import { generateToc } from "@/lib/utilties/generateToc";
 import PortableTextRenderer from "@/components/PortableTextRenderer";
 import TableOfContents from "@/components/TableOfContents";
-import Image from "next/image";
 import ReadingProgress from "@/components/blog/ReadingProgress";
 import ShareButtons from "@/components/blog/ShareButtons";
 import RelatedPosts from "@/components/blog/RelatedPosts";
 import PromotionalCard from "@/components/blog/PromotionalCard";
-
 import { DEFAULT_PROMOTIONAL_CARD } from "@/lib/constants/blogDefaults";
 
 export const revalidate = 60;
@@ -52,10 +53,10 @@ export default async function PostPage({
                   {post.author.image && (
                     <div className="relative w-8 h-8 rounded-full overflow-hidden">
                       <Image
-                        src={post.author.image}
-                        alt={post.author.name}
                         fill
+                        alt={post.author.name}
                         className="object-cover"
+                        src={post.author.image}
                       />
                     </div>
                   )}
@@ -69,10 +70,10 @@ export default async function PostPage({
               <span>
                 {post.publishedAt
                   ? new Date(post.publishedAt).toLocaleDateString("en-GB", {
-                    day: "numeric",
-                    month: "long",
-                    year: "numeric"
-                  })
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })
                   : "—"}
               </span>
 
@@ -86,8 +87,8 @@ export default async function PostPage({
               {/* Share Button (Hover to reveal) */}
               <div className="ml-4 border-l pl-4 border-gray-300 dark:border-gray-700">
                 <ShareButtons
-                  url={`https://aligoo.ethio-tech.com/blog/${slug}`}
                   title={post.title}
+                  url={`https://aligoo.ethio-tech.com/blog/${slug}`}
                 />
               </div>
             </div>
@@ -102,12 +103,12 @@ export default async function PostPage({
           {post.imageUrl && (
             <div className="relative w-full aspect-video rounded-3xl overflow-hidden shadow-2xl mt-4">
               <Image
-                src={post.imageUrl}
-                alt={post.title}
                 fill
+                priority
+                alt={post.title}
                 className="object-cover"
                 sizes="(max-width: 1280px) 100vw, 1200px"
-                priority
+                src={post.imageUrl}
               />
             </div>
           )}
@@ -128,7 +129,9 @@ export default async function PostPage({
             </div>
 
             <article className="prose prose-lg dark:prose-invert max-w-none text-body text-text-light dark:text-gray-200">
-              {Array.isArray(post.body) && <PortableTextRenderer value={post.body} />}
+              {Array.isArray(post.body) && (
+                <PortableTextRenderer value={post.body} />
+              )}
             </article>
 
             {/* Author Bio Section */}
@@ -137,10 +140,10 @@ export default async function PostPage({
                 {post.author.image && (
                   <div className="relative w-24 h-24 flex-shrink-0 rounded-lg overflow-hidden">
                     <Image
-                      src={post.author.image}
-                      alt={post.author.name}
                       fill
+                      alt={post.author.name}
                       className="object-cover"
+                      src={post.author.image}
                     />
                   </div>
                 )}
@@ -163,10 +166,10 @@ export default async function PostPage({
           {/* Right: Promotional Card (Sticky) */}
           <div className="hidden lg:block lg:col-span-3 sticky top-32">
             <PromotionalCard
-              heading={promoCard.heading}
-              description={promoCard.description}
-              buttonText={promoCard.buttonText}
               buttonLink={promoCard.buttonLink}
+              buttonText={promoCard.buttonText}
+              description={promoCard.description}
+              heading={promoCard.heading}
             />
           </div>
         </div>
@@ -176,5 +179,4 @@ export default async function PostPage({
 }
 
 // Client-only TOC with scroll spy
-import dynamic from "next/dynamic";
 const ClientToc = dynamic(() => import("./ClientToc"), { ssr: true });

@@ -7,9 +7,8 @@ import { Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
 import { Divider } from "@heroui/divider";
 import { Calendar } from "lucide-react"; // Import calendar icon
 
-import { AccentText, SectionHeading } from "@/components/ui/typography";
+import { SectionHeading } from "@/components/ui/typography";
 import BadgeText from "@/components/atoms/BadgeText";
-import { PrimaryButton } from "@/components/atoms/button";
 import HeadingAtom from "@/components/atoms/HeadingAtom";
 import ButtonAtom from "@/components/atoms/ButtonAtom";
 
@@ -55,7 +54,10 @@ const BlogPost = ({
         {/* Category Badge - Top Right Corner */}
         {category && (
           <div className="absolute top-3 right-3 z-10">
-            <BadgeText size="sm" className="bg-white/90 dark:bg-gray-900/90 text-foreground backdrop-blur-sm">
+            <BadgeText
+              className="bg-white/90 dark:bg-gray-900/90 text-foreground backdrop-blur-sm"
+              size="sm"
+            >
               {lang === "en" ? category.title_en : category.title_am}
             </BadgeText>
           </div>
@@ -136,15 +138,13 @@ export default function BlogSectionClient({
             className="text-heading pb-2 xs:pb-3 sm:pb-4"
             variants={textVariants}
           >
-            <SectionHeading></SectionHeading>
+            <SectionHeading />
             <HeadingAtom
+              highlight="Ideas, Insights & Marketing Rants"
               size="md"
               title="BLOGS"
-              highlight="Ideas, Insights & Marketing Rants"
               variant="split"
-
-            ></HeadingAtom>
-
+            />
           </motion.div>
           {/* <div className="flex space-x-2">
             <button
@@ -165,7 +165,9 @@ export default function BlogSectionClient({
 
           <div className="flex flex-col items-center gap-1 pb-1">
             <Link href={`/${lang}/blog`}>
-              <ButtonAtom shimmer size="md">📝 See all Blogs</ButtonAtom>
+              <ButtonAtom shimmer size="md">
+                📝 See all Blogs
+              </ButtonAtom>
             </Link>
             {/* <div className="text-sm font-medium text-gray-500">4.9 out of 9</div> */}
           </div>
@@ -176,7 +178,7 @@ export default function BlogSectionClient({
         >
           <div className="flex flex-row gap-4 transition-transform duration-200">
             {blogs.map((post) => (
-              <BlogPost key={post._id} post={post} lang={"en"} />
+              <BlogPost key={post._id} lang={"en"} post={post} />
             ))}
           </div>
         </div>

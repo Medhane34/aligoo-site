@@ -23,8 +23,9 @@ export default async function WhyUsSectionWrapper() {
 import WhyUsSection from "@/app/home/WhyUsSection";
 import { fetchWhyUsSection } from "@/lib/homepage";
 
-export default async function WhyUsWrapper({ lang }: { lang: 'en' | 'am' }) {
+export default async function WhyUsWrapper({ lang }: { lang: "en" | "am" }) {
   const data = await fetchWhyUsSection(lang);
+
   if (!data) return null;
 
   return <WhyUsSection {...data} lang={lang} />;

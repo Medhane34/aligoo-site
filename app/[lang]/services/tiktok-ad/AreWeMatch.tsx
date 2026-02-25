@@ -9,9 +9,9 @@ export default function AreWeMatch() {
       <Image
         alt="Are We a Match?"
         className="w-full h-auto object-cover rounded-lg shadow-lg col-span-2 md:col-span-1"
+        height={200}
         src="/page-content-images/tik-tok-arewematch.png"
         width={200}
-        height={200}
       />
 
       {/* right column */}

@@ -11,7 +11,7 @@ export async function POST(request: Request) {
     } catch (error) {
       return NextResponse.json(
         { message: "Invalid request body: Expected JSON" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -48,7 +48,7 @@ export async function POST(request: Request) {
     ) {
       return NextResponse.json(
         { message: "Missing required fields" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -78,7 +78,7 @@ export async function POST(request: Request) {
     if (!botToken || !chatId) {
       return NextResponse.json(
         { message: "Telegram bot token or chat ID not configured" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -95,7 +95,7 @@ export async function POST(request: Request) {
           text: telegramMessage,
           parse_mode: "HTML",
         }),
-      }
+      },
     );
 
     if (!telegramResponse.ok) {
@@ -111,7 +111,7 @@ export async function POST(request: Request) {
 
       return NextResponse.json(
         { message: `Failed to send message to Telegram: ${errorDescription}` },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -121,7 +121,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json(
       { message: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

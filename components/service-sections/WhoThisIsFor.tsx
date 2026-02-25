@@ -1,9 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import React from "react";
-import { AccentText, SectionHeading } from "@/components/ui/typography";
+
 import HeadingAtom from "../atoms/HeadingAtom";
-import BadgeAtom from "../atoms/BadgeAtom";
 
 interface WhoThisIsForSectionProps {
   id?: string;
@@ -15,7 +14,12 @@ interface WhoThisIsForSectionProps {
 }
 
 const highlightColors = [
-  "#FF595E", "#1982C4", "#6A4C93", "#8AC926", "#FFCA3A", "#FF924C"
+  "#FF595E",
+  "#1982C4",
+  "#6A4C93",
+  "#8AC926",
+  "#FFCA3A",
+  "#FF924C",
 ];
 
 const WhoThisIsForSection: React.FC<WhoThisIsForSectionProps> = ({
@@ -27,44 +31,52 @@ const WhoThisIsForSection: React.FC<WhoThisIsForSectionProps> = ({
   outroText,
 }) => {
   return (
-    <div id={id} className="py-24 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+    <div
+      className="py-24 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark"
+      id={id}
+    >
       <motion.div
         className="container mx-auto px-4 text-center mb-8"
         initial="hidden"
-        whileInView="visible"
         viewport={{ once: true }}
+        whileInView="visible"
       >
         <motion.div
           variants={{
             hidden: { opacity: 0, x: 20 },
-            visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeInOut" } },
+            visible: {
+              opacity: 1,
+              x: 0,
+              transition: { duration: 0.7, ease: "easeInOut" },
+            },
           }}
         >
-  
-      
           <HeadingAtom
+            align="center"
             highlight={heading}
+            size="lg"
             title=""
             variant="split"
-            size="lg"
-            align="center"
-          ></HeadingAtom>
+          />
         </motion.div>
         {subheading && (
           <motion.div
             className="text-heading pb-2 xs:pb-1 sm:pb-4"
             variants={{
               hidden: { opacity: 0, x: 20 },
-              visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeInOut" } },
+              visible: {
+                opacity: 1,
+                x: 0,
+                transition: { duration: 0.7, ease: "easeInOut" },
+              },
             }}
           >
-
             <HeadingAtom
+              align="center"
+              size="sm"
               title={subheading}
               variant="split"
-              size="sm"
-              align="center"
-            ></HeadingAtom>
+            />
           </motion.div>
         )}
       </motion.div>
@@ -73,8 +85,6 @@ const WhoThisIsForSection: React.FC<WhoThisIsForSectionProps> = ({
         <motion.p
           className="text-body justify-center"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
           variants={{
             hidden: {},
             visible: {
@@ -83,6 +93,8 @@ const WhoThisIsForSection: React.FC<WhoThisIsForSectionProps> = ({
               },
             },
           }}
+          viewport={{ once: true }}
+          whileInView="visible"
         >
           {introText && <>{introText} </>}
           {highlightedPhrases.map((phrase, i) => (

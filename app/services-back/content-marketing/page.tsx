@@ -1,13 +1,9 @@
 /* eslint-disable prettier/prettier */
 import HeroSection from "@/components/HeroSection";
-
-import CTABottomSection from "@/components/CTA";
 import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
 import FaqSection from "@/components/service-sections/FaqSection";
 import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
-import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
 import OurProcess from "@/components/service-sections/ourprocess";
-
 import Container from "@/components/ui/Container";
 
 const webWhyContent = {
@@ -70,12 +66,12 @@ export default async function IndexPage() {
       <WhyServiceWorks {...webWhyContent} />
       </Container>
       <OurProcess
-        id="our-process-content"
         heading="Our Process – The CORE Framework 🧩"
-        subheading="Content without strategy is just noise. Our proven CORE Framework ensures every piece of content works toward a clear, measurable goal."
-        imageSrc="/page-content-images/seoservice-process.png" // Path to your image in the public folder
+        id="our-process-content"
         imageAlt="Beautiful building with balconies"
+        imageSrc="/page-content-images/seoservice-process.png" // Path to your image in the public folder
         steps={processSteps}
+        subheading="Content without strategy is just noise. Our proven CORE Framework ensures every piece of content works toward a clear, measurable goal."
       />
       <Container>
       <WhoThisIsForSection

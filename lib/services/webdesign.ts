@@ -1,5 +1,9 @@
 import { client } from "@/src/sanity/client";
-import { CTA_SECTION_QUERY_WEB, HERO_SECTION_QUERY_WEB, OUR_PROCESS_SECTION_QUERY } from "@/sanity/queries/services";
+import {
+  CTA_SECTION_QUERY_WEB,
+  HERO_SECTION_QUERY_WEB,
+  OUR_PROCESS_SECTION_QUERY,
+} from "@/sanity/queries/services";
 
 export type HeroSectionData = {
   badgeText_en?: string;
@@ -20,10 +24,11 @@ export type HeroSectionData = {
   secondaryButtonUrl: string;
 };
 
-export async function fetchHeroSection(name: string): Promise<HeroSectionData | null> {
+export async function fetchHeroSection(
+  name: string,
+): Promise<HeroSectionData | null> {
   return await client.fetch(HERO_SECTION_QUERY_WEB, { name });
 }
-
 
 export type ProcessStep = {
   id: number;
@@ -44,7 +49,9 @@ export type OurProcessSectionData = {
   steps_am: ProcessStep[];
 };
 
-export async function fetchOurProcessSection(name: string): Promise<OurProcessSectionData | null> {
+export async function fetchOurProcessSection(
+  name: string,
+): Promise<OurProcessSectionData | null> {
   return await client.fetch(OUR_PROCESS_SECTION_QUERY, { name });
 }
 
@@ -61,6 +68,8 @@ export type CTASectionData = {
   secondaryButtonUrl: string;
 };
 
-export async function fetchCTASection(name: string): Promise<CTASectionData | null> {
+export async function fetchCTASection(
+  name: string,
+): Promise<CTASectionData | null> {
   return await client.fetch(CTA_SECTION_QUERY_WEB, { name });
 }

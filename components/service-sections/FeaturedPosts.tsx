@@ -4,16 +4,15 @@ import { Card, CardHeader } from "@heroui/card";
 import { Image } from "@heroui/image";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { AccentText, SectionHeading } from "@/components/ui/typography";
 import Link from "next/link";
+
+import { AccentText, SectionHeading } from "@/components/ui/typography";
 import {
-  ButtonVariants,
   headerVariants,
   headerChildVariants,
   gridVariants,
   cardVariants,
 } from "@/lib/motions";
-
 import { CaseStudy } from "@/types/CaseStudyTypes";
 
 type FeaturedPostsSectionProps = {
@@ -28,7 +27,7 @@ const placeholderCaseStudy: CaseStudy = {
   goalsSummary: "",
   challengeSummary: "",
   industry: "",
-  excerpt:"",
+  excerpt: "",
   imageUrl: "https://heroui.com/images/card-example-4.jpeg",
   service: "Explore More",
   hasImage: true,
@@ -76,19 +75,19 @@ export default function FeaturedPostsSection({
       </motion.div>
 
       <motion.div
+        animate={isInView ? "visible" : "hidden"}
         className="max-full gap-4 grid grid-cols-12 px-8"
         initial="hidden"
-        animate={isInView ? "visible" : "hidden"}
         variants={gridVariants}
       >
         {paddedPosts.map((post, index) => (
           <motion.div
             key={post._id + index}
+            className="col-span-12 sm:col-span-4 h-[200px] xs:h-[250px] sm:h-[350px] md:h-[320px] lg:h-[350px]"
             variants={cardVariants}
             whileHover="hover"
-            className="col-span-12 sm:col-span-4 h-[200px] xs:h-[250px] sm:h-[350px] md:h-[320px] lg:h-[350px]"
           >
-            <Link href={`/case-study/${post.slug}`} className="block h-full">
+            <Link className="block h-full" href={`/case-study/${post.slug}`}>
               <Card className="h-full outline-2 outline-offset-2 outline-blue-500">
                 <CardHeader className="absolute z-10 top-1 flex-col items-start!">
                   <p className="text-small text-white/60 uppercase font-bold bg-brand-primary rounded-full p-1">

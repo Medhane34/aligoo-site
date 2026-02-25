@@ -1,11 +1,15 @@
 // wrappers/home/TestimonialsWrapper.tsx
-import TestimonialsSectionScroll from "@/components/organism/home/testimonials"
-import { fetchTestimonialsSection } from "@/lib/homepage"
+import TestimonialsSectionScroll from "@/components/organism/home/testimonials";
+import { fetchTestimonialsSection } from "@/lib/homepage";
 
-export default async function TestimonialsWrapper({ lang }: { lang: 'en' | 'am' }) {
-  const data = await fetchTestimonialsSection(lang)
+export default async function TestimonialsWrapper({
+  lang,
+}: {
+  lang: "en" | "am";
+}) {
+  const data = await fetchTestimonialsSection(lang);
 
-  if (!data || !data.testimonials.length) return null
+  if (!data || !data.testimonials.length) return null;
 
   return (
     <TestimonialsSectionScroll
@@ -13,5 +17,5 @@ export default async function TestimonialsWrapper({ lang }: { lang: 'en' | 'am' 
       subheading={data.subheading}
       testimonials={data.testimonials}
     />
-  )
+  );
 }

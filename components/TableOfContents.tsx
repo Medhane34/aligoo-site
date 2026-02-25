@@ -23,7 +23,7 @@ export default function TableOfContents({
   return (
     <nav className="hidden lg:block sticky top-28 self-start w-60 bg-background-light dark:bg-background-dark  pl-6 py-6 rounded-xl shadow-md mb-8">
       <h2 className="text-lg font-bold mb-4 text-brand-primary">
-        Table of Contents
+        Jump to Sections
       </h2>
       <ul className="space-y-2">
         {toc.map((item) => (

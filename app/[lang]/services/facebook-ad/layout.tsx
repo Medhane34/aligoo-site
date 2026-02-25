@@ -5,9 +5,7 @@ export default function facebookadlayout({
 }) {
   return (
     <section className="">
-      <div className="">
-        {children}
-      </div>
+      <div className="">{children}</div>
     </section>
   );
 }

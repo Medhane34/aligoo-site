@@ -10,6 +10,16 @@ const nextConfig = {
     ],
   },
   eslint: { dirs: ['pages', 'utils'], ignoreDuringBuilds: true },
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: '*' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
+        ],
+      },
+    ];
+  },
 };
-
 module.exports = nextConfig; // Use module.exports instead of export default

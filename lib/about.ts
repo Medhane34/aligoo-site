@@ -96,7 +96,7 @@ export type AboutPageData = {
 // ────────────────────────────────────────────────
 // The single fetch function
 export async function fetchAboutPageData(
-  lang: 'en' | 'am' = 'en'
+  lang: "en" | "am" = "en",
 ): Promise<AboutPageData> {
   try {
     const data = await client.fetch<AboutPageData>(ABOUT_PAGE_QUERY, { lang });
@@ -110,6 +110,13 @@ export async function fetchAboutPageData(
     };
   } catch (err) {
     console.error("About page fetch failed:", err);
-    return { intro: null, values: null, ourWay: null, meaning: null, team: null };
+
+    return {
+      intro: null,
+      values: null,
+      ourWay: null,
+      meaning: null,
+      team: null,
+    };
   }
 }

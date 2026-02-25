@@ -1,4 +1,4 @@
-import { groq } from 'next-sanity';
+import { groq } from "next-sanity";
 
 export const HERO_SECTION_QUERY_HOMEPAGE = `
   *[_type == "heroSection" && name == $name][0]{
@@ -43,7 +43,7 @@ export const ABOUT_US_SECTION_QUERY = `
     footerText
   }
 `; */
-export const STATS_SECTION_QUERY = (lang: 'en' | 'am') => groq`
+export const STATS_SECTION_QUERY = (lang: "en" | "am") => groq`
   *[_type == "statsSection"][0] {
     "stats": stats_${lang}[] {
       label,
@@ -72,7 +72,7 @@ export const STATS_SECTION_QUERY = (lang: 'en' | 'am') => groq`
     }
   }
 `; */
-export const SERVICE_SECTION_QUERY = (lang: 'en' | 'am') => groq`
+export const SERVICE_SECTION_QUERY = (lang: "en" | "am") => groq`
   *[_type == "serviceSection"][0] {
     sectionHeading_${lang},
     accentText_${lang},
@@ -89,8 +89,8 @@ export const SERVICE_SECTION_QUERY = (lang: 'en' | 'am') => groq`
   }
 `;
 
-//our process 
-export const PROCESS_SECTION_QUERY = (lang: 'en' | 'am') => groq`
+//our process
+export const PROCESS_SECTION_QUERY = (lang: "en" | "am") => groq`
   *[_type == "processSection"][0] {
     sectionHeading_${lang},
     accentText_${lang},
@@ -102,16 +102,15 @@ export const PROCESS_SECTION_QUERY = (lang: 'en' | 'am') => groq`
   }
 `;
 
-
-export const WHY_US_SECTION_QUERY = (lang: 'en' | 'am') => groq`
+export const WHY_US_SECTION_QUERY = (lang: "en" | "am") => groq`
   *[_type == "whyUsSection"][0] {
     sectionHeading_${lang},
     accentText_${lang},
     "reasons": reasons_${lang}[]
   }
 `;
-// testimonials 
-export const TESTIMONIALS_SECTION_QUERY = (lang: 'en' | 'am') => groq`
+// testimonials
+export const TESTIMONIALS_SECTION_QUERY = (lang: "en" | "am") => groq`
   *[_type == "testimonial"][0] {
     heading_${lang},
     subheading_${lang},
@@ -123,7 +122,7 @@ export const TESTIMONIALS_SECTION_QUERY = (lang: 'en' | 'am') => groq`
       "imageAlt": image.alt
     }
   }
-`
+`;
 
 export const CTA_SECTION_QUERY = `
   *[_type == "ctaSection"][0]{
@@ -135,4 +134,3 @@ export const CTA_SECTION_QUERY = `
     secondaryButtonUrl
   }
 `;
-

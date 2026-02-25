@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useState } from "react";
 import type { TocItem } from "@/components/TableOfContents";
+
+import { useEffect, useState } from "react";
 
 export function useActiveTocId(toc: TocItem[]) {
   const [activeId, setActiveId] = useState<string>("");
@@ -17,17 +18,19 @@ export function useActiveTocId(toc: TocItem[]) {
       {
         rootMargin: "-100px 0px -40% 0px",
         threshold: 1.0,
-      }
+      },
     );
 
     toc.forEach((item) => {
       const element = document.getElementById(item.id);
+
       if (element) observer.observe(element);
     });
 
     return () => {
       toc.forEach((item) => {
         const element = document.getElementById(item.id);
+
         if (element) observer.unobserve(element);
       });
     };

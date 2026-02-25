@@ -114,7 +114,7 @@ export interface PaginationCaseStudy {
 export interface CaseStudyPaginationData {
   previousCaseStudy?: PaginationCaseStudy; // Optional if there's no previous
   nextCaseStudy?: PaginationCaseStudy; // Optional if there's no next
-};
+}
 
 // Component prop types
 export type FetchCaseStudiesProps = {

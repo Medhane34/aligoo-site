@@ -1,13 +1,14 @@
 // components/case-studies/CaseStudyGoals.tsx
 "use client";
-import React from 'react';
+import React from "react";
+
 import { AccentText, SectionHeading } from "@/components/ui/typography";
-import { CaseStudyGoalData } from "@/types/CaseStudyTypes"; // Import the type
+// Import the type
 
 // This interface now directly matches the data fetched by fetchCaseStudyGoalDataBySlug
 interface CaseStudyGoalsProps {
   goalTitle: string; // Or simply string, but this is more explicit
-  goalBody: string;   // Or simply string
+  goalBody: string; // Or simply string
   // If you later add an accent text field for this section in Sanity, add it here too
   // goalAccentText?: string;
 }

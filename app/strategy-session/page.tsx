@@ -10,10 +10,10 @@ export default function StrategySessionPage() {
           Book Your Free Strategy Session
         </h1>
         <p className="text-body text-center mb-8">
-          Answer a few quick questions so we can tailor your session to your business.
+          Answer a few quick questions so we can tailor your session to your
+          business.
         </p>
         <MultiStepForm />
-
       </div>
     </main>
   );

@@ -1,7 +1,12 @@
 import { client } from "@/src/sanity/client";
-import { AD_PHILOSOPHY_SECTION_QUERY,  FAQ_SECTION_QUERY,  WHO_THIS_IS_FOR_SECTION_QUERY,  WHY_SERVICE_WORKS_SECTION_QUERY } from "@/sanity/queries/services";
+import {
+  AD_PHILOSOPHY_SECTION_QUERY,
+  FAQ_SECTION_QUERY,
+  WHO_THIS_IS_FOR_SECTION_QUERY,
+  WHY_SERVICE_WORKS_SECTION_QUERY,
+} from "@/sanity/queries/services";
 
-export type Stat = { value: string; label: string; };
+export type Stat = { value: string; label: string };
 
 export type WhyServiceWorksSectionData = {
   heading_en: string;
@@ -16,11 +21,13 @@ export type WhyServiceWorksSectionData = {
   stats_am: Stat[];
 };
 
-export async function fetchWhyServiceWorksSection(name: "whyServiceWorksSection-Fb"): Promise<WhyServiceWorksSectionData | null> {
+export async function fetchWhyServiceWorksSection(
+  name: "whyServiceWorksSection-Fb",
+): Promise<WhyServiceWorksSectionData | null> {
   return await client.fetch(WHY_SERVICE_WORKS_SECTION_QUERY, { name });
 }
 
-// Facebook Ad process Section 
+// Facebook Ad process Section
 
 export type AdPhilosophyStep = {
   title: string;
@@ -41,11 +48,13 @@ export type AdPhilosophySectionData = {
   bottomText_am: string;
 };
 
-export async function fetchAdPhilosophySection(name: string): Promise<AdPhilosophySectionData | null> {
+export async function fetchAdPhilosophySection(
+  name: string,
+): Promise<AdPhilosophySectionData | null> {
   return await client.fetch(AD_PHILOSOPHY_SECTION_QUERY, { name });
 }
 
-// who this for 
+// who this for
 
 export type WhoThisIsForSectionData = {
   heading_en: string;
@@ -60,11 +69,13 @@ export type WhoThisIsForSectionData = {
   outroText_am?: string;
 };
 
-export async function fetchWhoThisIsForSection(name: string): Promise<WhoThisIsForSectionData | null> {
+export async function fetchWhoThisIsForSection(
+  name: string,
+): Promise<WhoThisIsForSectionData | null> {
   return await client.fetch(WHO_THIS_IS_FOR_SECTION_QUERY, { name });
 }
 
-//FAQ SECTION 
+//FAQ SECTION
 
 export type FaqItem = {
   question: string;
@@ -86,6 +97,8 @@ export type FaqSectionData = {
   faqs_am: FaqItem[];
 };
 
-export async function fetchFaqSection(name: string): Promise<FaqSectionData | null> {
+export async function fetchFaqSection(
+  name: string,
+): Promise<FaqSectionData | null> {
   return await client.fetch(FAQ_SECTION_QUERY, { name });
 }

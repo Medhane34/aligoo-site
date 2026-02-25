@@ -4,7 +4,6 @@ import React from "react";
 import Image from "next/image";
 
 import { CaseStudyStrategyData, StrategyBlock } from "@/types/CaseStudyTypes";
-
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 
 // Define the props interface for the component
@@ -50,13 +49,13 @@ export default function CaseStudyStrategyContent({
       <div>
         {block.imageUrl && ( // Only render Image component if imageUrl is present
           <Image
-            src={block.imageUrl}
             alt={block.imageAlt || `Image for ${block.heading}`} // Fallback alt text
-            width={600} // Keep actual width/height for Next.js Image optimization
-            height={400} // Adjust these values based on your typical image dimensions
             className="w-full h-auto object-cover rounded-lg shadow-lg"
+            height={400} // Adjust these values based on your typical image dimensions
             priority={false} // Only use priority for above-the-fold images
             sizes="(max-width: 768px) 100vw, 50vw" // Add sizes for better optimization
+            src={block.imageUrl}
+            width={600} // Keep actual width/height for Next.js Image optimization
           />
         )}
       </div>
@@ -93,13 +92,16 @@ export default function CaseStudyStrategyContent({
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-background-light dark:bg-background-dark text-text-primary-light dark:text-text-primary-dark">
       <div className="max-w-(--breakpoint-xl) mx-auto">
         {/* Section Header (Strategy Introduction) */}
-        <div className="lg:space-y-2 xs:space-y-8 sm:space-y-10 md:space-y-12 
-      mb-12 text-center ">
-          
+        <div
+          className="lg:space-y-2 xs:space-y-8 sm:space-y-10 md:space-y-12 
+      mb-12 text-center "
+        >
           <SectionHeading className="text-heading font-bold tracking-tight uppercase">
             {strategyIntroHeading}
           </SectionHeading>
-          <AccentText className="normal-case">{defaultStrategyAccentText}</AccentText>
+          <AccentText className="normal-case">
+            {defaultStrategyAccentText}
+          </AccentText>
           {strategyIntroBody && ( // Only render if strategyIntroBody has content
             <p className="max-w-3xl mx-auto text-heading mt-4">
               {strategyIntroBody}

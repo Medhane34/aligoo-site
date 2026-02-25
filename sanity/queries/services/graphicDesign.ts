@@ -1,4 +1,3 @@
-
 export const HERO_SECTION_QUERY_GRAPHIC = `
   *[_type == "heroSection" && name == $name][0]{
     badgeText_en,

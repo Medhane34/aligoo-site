@@ -1,23 +1,25 @@
 // app/test-timeline/page.tsx
-import { getProposalByCode } from '@/lib/proposal'
+import { CheckCircle2, Calendar } from "lucide-react";
 
-import { CheckCircle2, Clock, Calendar } from 'lucide-react'
+import { getProposalByCode } from "@/lib/proposal";
 
 export default async function TestTimelinePage() {
-  const proposal = await getProposalByCode('nova-9xk2p')
+  const proposal = await getProposalByCode("nova-9xk2p");
 
   if (!proposal?.template.timeline?.enabled) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-purple-900 to-indigo-900 p-10">
         <div className="max-w-4xl mx-auto text-center text-white">
           <h1 className="text-5xl font-bold mb-8">Timeline Test</h1>
-          <p className="text-2xl">Timeline is disabled or not set in template</p>
+          <p className="text-2xl">
+            Timeline is disabled or not set in template
+          </p>
         </div>
       </div>
-    )
+    );
   }
 
-  const timeline = proposal.template.timeline
+  const timeline = proposal.template.timeline;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-8">
@@ -28,7 +30,7 @@ export default async function TestTimelinePage() {
 
         <div className="bg-white/10 backdrop-blur-xl border-white/20 p-10">
           <h2 className="text-4xl font-bold text-cyan-400 mb-8 text-center">
-            {timeline.sectionTitle || 'Project Timeline'}
+            {timeline.sectionTitle || "Project Timeline"}
           </h2>
 
           <div className="space-y-12">
@@ -43,7 +45,7 @@ export default async function TestTimelinePage() {
                     {i + 1}
                   </div>
                   {i < timeline.items.length - 1 && (
-                    <div className="w-1 h-32 bg-blue-500/30 mt-4"></div>
+                    <div className="w-1 h-32 bg-blue-500/30 mt-4" />
                   )}
                 </div>
 
@@ -51,11 +53,17 @@ export default async function TestTimelinePage() {
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <Calendar className="w-5 h-5 text-yellow-400" />
-                    <h3 className="text-2xl font-bold text-white">{item.week}</h3>
+                    <h3 className="text-2xl font-bold text-white">
+                      {item.week}
+                    </h3>
                   </div>
-                  <h4 className="text-xl font-semibold text-blue-300 mb-3">{item.title}</h4>
+                  <h4 className="text-xl font-semibold text-blue-300 mb-3">
+                    {item.title}
+                  </h4>
                   {item.description && (
-                    <p className="text-gray-300 leading-relaxed">{item.description}</p>
+                    <p className="text-gray-300 leading-relaxed">
+                      {item.description}
+                    </p>
                   )}
                 </div>
               </div>
@@ -77,5 +85,5 @@ export default async function TestTimelinePage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

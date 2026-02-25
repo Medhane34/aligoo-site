@@ -5,7 +5,7 @@ import { OurWaySectionData } from "@/lib/about";
 
 interface OurWayWrapperProps {
   data: OurWaySectionData | null;
-  lang: 'en' | 'am';
+  lang: "en" | "am";
 }
 
 export default function OurWayWrapper({ data, lang }: OurWayWrapperProps) {

@@ -1,8 +1,13 @@
 "use client";
 import React from "react";
+
 import { Industry } from "@/app/[lang]/works/IndustriesWeWorkedWith";
 
-export default function IndustriesGridDesktop({ industries = [] }: { industries?: Industry[] }) {
+export default function IndustriesGridDesktop({
+  industries = [],
+}: {
+  industries?: Industry[];
+}) {
   if (!Array.isArray(industries) || industries.length === 0) return null;
   const row1Industries = industries.slice(0, 6);
   const row2Industries = industries.slice(6, 11);

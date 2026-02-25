@@ -17,7 +17,11 @@ export const TestimonialCard = ({
 }: Testimonial) => (
   <div className="min-w-[300px] max-w-[300px] shrink-0 snap-start rounded-2xl bg-neutral-900 p-4 text-white shadow-md">
     <div className="flex items-center gap-4">
-      <img src={avatarUrl} alt={name} className="h-10 w-10 rounded-full object-cover" />
+      <img
+        alt={name}
+        className="h-10 w-10 rounded-full object-cover"
+        src={avatarUrl}
+      />
       <div>
         <p className="font-semibold">{name}</p>
         <p className="text-xs text-neutral-400">{date}</p>

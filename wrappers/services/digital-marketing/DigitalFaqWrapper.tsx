@@ -1,4 +1,7 @@
-import { fetchFaqSection, FaqSectionData } from "@/lib/services/digitalmarketing";
+import {
+  fetchFaqSection,
+  FaqSectionData,
+} from "@/lib/services/digitalmarketing";
 import FaqSection from "@/components/service-sections/FaqSection";
 
 export default async function DigitalFaqTikTokSectionWrapper({
@@ -7,9 +10,8 @@ export default async function DigitalFaqTikTokSectionWrapper({
   lang?: "en" | "am";
 }) {
   // Note: Changed "faqSection-Fb" to "faqSection-Digital" to match the service.
-  const data: FaqSectionData | null = await fetchFaqSection(
-    "faqSection-Digital",
-  );
+  const data: FaqSectionData | null =
+    await fetchFaqSection("faqSection-Digital");
 
   if (!data) return null;
 

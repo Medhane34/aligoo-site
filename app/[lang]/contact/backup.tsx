@@ -1,16 +1,16 @@
 // @app/[lang]/contact/ContactForm.tsx
 "use client";
 
-import { addToast, ToastProvider, useToast } from "@heroui/toast";
-import { register } from "module";
+import { addToast } from "@heroui/toast";
 import React, { useState } from "react";
 import { Button } from "@heroui/button";
 import { Textarea, Input } from "@heroui/input";
-import { Select, SelectSection, SelectItem } from "@heroui/select"; // Keep SelectSection if you use it elsewhere, otherwise not needed for this example
+import { Select, SelectItem } from "@heroui/select"; // Keep SelectSection if you use it elsewhere, otherwise not needed for this example
 import { useForm, useWatch } from "react-hook-form"; // Import useWatch
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import classNames from "classnames"; // Not used in the provided snippet, but keeping for completeness
+// Not used in the provided snippet, but keeping for completeness
+
 import { AccentText, SectionHeading } from "@/components/ui/typography";
 
 // At the top of your file
@@ -222,7 +222,8 @@ const ContactForm = () => {
 
         addToast({
           title: "✅ Form Received — We're On It!",
-          description: "Sit tight — one of our team members will reach out within 5–10 minutes.We’re already brewing ideas and can’t wait to chat about how we can grow your business.",
+          description:
+            "Sit tight — one of our team members will reach out within 5–10 minutes.We’re already brewing ideas and can’t wait to chat about how we can grow your business.",
           color: "success",
         });
         // Fire GA4 event for contact form submit
@@ -453,7 +454,7 @@ const ContactForm = () => {
               </Button>
 
               {submissionStatus === "success" && (
-                <p className="text-green-500 text-center mt-4"></p>
+                <p className="text-green-500 text-center mt-4" />
               )}
               {submissionStatus === "error" && (
                 <p className="text-red-500 text-center mt-4">{errorMessage}</p>
@@ -465,8 +466,9 @@ const ContactForm = () => {
           <div className="w-full sm:p-6 md:p-8 md:w-1/2 p-8 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md md:bg-transparent md:shadow-none">
             <h3 className="text-heading font-semibold mb-6">Contact Details</h3>
             <p className="text-gray-600 dark:text-gray-400 mb-8 text-body">
-              if you wish to reach out to us directly, you can use the contact details below or connect with us on social media.
-              </p>
+              if you wish to reach out to us directly, you can use the contact
+              details below or connect with us on social media.
+            </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 xs:gap-3 sm:gap-4 mt-3 xs:mt-4 sm:mt-5 md:mt-6">
               {/* Address */}
               <div className="flex items-center gap-4 p-4 bg-white dark:bg-gray-700 rounded-lg shadow-sm">
@@ -494,7 +496,7 @@ const ContactForm = () => {
                 <div>
                   <p className="font-semibold">Address</p>
                   <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Addis Ababa, Ethiopia 
+                    Addis Ababa, Ethiopia
                   </p>
                 </div>
               </div>

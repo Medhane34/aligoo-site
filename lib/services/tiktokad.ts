@@ -1,5 +1,12 @@
 import { client } from "@/src/sanity/client";
-import { CTA_SECTION_QUERY_TIKTOK, FAQ_SECTION_QUERY_TIKTOK, HERO_SECTION_QUERY_TIKTOK, OUR_PROCESS_SECTION_QUERY_TIKTOK, WHO_THIS_IS_FOR_SECTION_QUERY_TIKTOK, WHY_SERVICE_WORKS_SECTION_QUERY_TIKTOK} from "@/sanity/queries/services";
+import {
+  CTA_SECTION_QUERY_TIKTOK,
+  FAQ_SECTION_QUERY_TIKTOK,
+  HERO_SECTION_QUERY_TIKTOK,
+  OUR_PROCESS_SECTION_QUERY_TIKTOK,
+  WHO_THIS_IS_FOR_SECTION_QUERY_TIKTOK,
+  WHY_SERVICE_WORKS_SECTION_QUERY_TIKTOK,
+} from "@/sanity/queries/services";
 
 export type HeroSectionData = {
   badgeText_en?: string;
@@ -20,14 +27,15 @@ export type HeroSectionData = {
   secondaryButtonUrl: string;
 };
 
-export async function fetchHeroSection(name: string): Promise<HeroSectionData | null> {
+export async function fetchHeroSection(
+  name: string,
+): Promise<HeroSectionData | null> {
   return await client.fetch(HERO_SECTION_QUERY_TIKTOK, { name });
 }
 
+// why tiktok ad
 
-// why tiktok ad 
-
-export type Stat = { value: string; label: string; };
+export type Stat = { value: string; label: string };
 
 export type WhyServiceWorksSectionData = {
   heading_en: string;
@@ -41,7 +49,9 @@ export type WhyServiceWorksSectionData = {
   stats_en: Stat[];
   stats_am: Stat[];
 };
-export async function fetchWhyServiceWorksSection(name: string): Promise<WhyServiceWorksSectionData | null> {
+export async function fetchWhyServiceWorksSection(
+  name: string,
+): Promise<WhyServiceWorksSectionData | null> {
   return await client.fetch(WHY_SERVICE_WORKS_SECTION_QUERY_TIKTOK, { name });
 }
 
@@ -64,7 +74,9 @@ export type OurProcessSectionData = {
   steps_am: ProcessStep[];
 };
 
-export async function fetchOurProcessSection(name: string): Promise<OurProcessSectionData | null> {
+export async function fetchOurProcessSection(
+  name: string,
+): Promise<OurProcessSectionData | null> {
   return await client.fetch(OUR_PROCESS_SECTION_QUERY_TIKTOK, { name });
 }
 
@@ -81,10 +93,11 @@ export type WhoThisIsForSectionDataTikTok = {
   outroText_am?: string;
 };
 
-export async function fetchWhoThisIsForSectionTikTok(name: string): Promise<WhoThisIsForSectionDataTikTok | null> {
+export async function fetchWhoThisIsForSectionTikTok(
+  name: string,
+): Promise<WhoThisIsForSectionDataTikTok | null> {
   return await client.fetch(WHO_THIS_IS_FOR_SECTION_QUERY_TIKTOK, { name });
 }
-
 
 export type FaqItem = {
   question: string;
@@ -106,7 +119,9 @@ export type FaqSectionData = {
   faqs_am: FaqItem[];
 };
 
-export async function fetchFaqSection(name: string): Promise<FaqSectionData | null> {
+export async function fetchFaqSection(
+  name: string,
+): Promise<FaqSectionData | null> {
   return await client.fetch(FAQ_SECTION_QUERY_TIKTOK, { name });
 }
 
@@ -123,7 +138,8 @@ export type CTASectionData = {
   secondaryButtonUrl: string;
 };
 
-export async function fetchCTASection(name: string): Promise<CTASectionData | null> {
+export async function fetchCTASection(
+  name: string,
+): Promise<CTASectionData | null> {
   return await client.fetch(CTA_SECTION_QUERY_TIKTOK, { name });
 }
-

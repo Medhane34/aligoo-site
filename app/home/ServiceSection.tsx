@@ -5,9 +5,9 @@ import { Accordion, AccordionItem } from "@heroui/accordion";
 import Image from "next/image"; // Added for iconUrl
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { AccentText, SectionHeading } from "@/components/ui/typography";
+import { Clock } from "lucide-react";
+
 import BadgeAtom from "@/components/atoms/BadgeAtom";
-import { Clock, Sparkles, Star } from "lucide-react";
 import HeadingAtom from "@/components/atoms/HeadingAtom";
 
 export interface Service {
@@ -27,12 +27,16 @@ export interface ServiceSectionProps {
   sectionHeading: string;
   accentText: string;
   columns: ServiceColumn[];
-  lang: 'en' | 'am'; // Added
+  lang: "en" | "am"; // Added
 }
 
 const headingVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeInOut" } },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  },
 };
 
 const columnContainerVariants = {
@@ -42,12 +46,20 @@ const columnContainerVariants = {
 
 const columnVariants = {
   hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeInOut" } },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.6, ease: "easeInOut" },
+  },
 };
 
 const accordionVariants = {
   hidden: { opacity: 0, x: -20 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.5, ease: "easeInOut" } },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, ease: "easeInOut" },
+  },
 };
 
 export default function ServiceSection({
@@ -59,32 +71,39 @@ export default function ServiceSection({
   return (
     <div className="py-16 overflow-hidden text-text-light dark:text-text-dark bg-background-light dark:bg-background-dark">
       <div className="relative container mx-auto px-4">
-
-        <div className="bg-gradient-to-r from-[#FF595E] to-[#FF595E]/80 absolute -top-10 left-1/2 h-16 w-44 -translate-x-1/2 rounded-full opacity-40 blur-3xl select-none"></div>
-        <div className="via-primary/50 absolute top-0 left-1/2 h-px w-3/5 -translate-x-1/2 bg-gradient-to-r from-transparent to-transparent transition-all ease-in-out"></div>
-        <motion.div className="text-center mb-12 space-y-2 xs:space-y-4" variants={headingVariants}>
-
+        <div className="bg-gradient-to-r from-[#FF595E] to-[#FF595E]/80 absolute -top-10 left-1/2 h-16 w-44 -translate-x-1/2 rounded-full opacity-40 blur-3xl select-none" />
+        <div className="via-primary/50 absolute top-0 left-1/2 h-px w-3/5 -translate-x-1/2 bg-gradient-to-r from-transparent to-transparent transition-all ease-in-out" />
+        <motion.div
+          className="text-center mb-12 space-y-2 xs:space-y-4"
+          variants={headingVariants}
+        >
           <BadgeAtom
-            variant="filled"
             color="red"
             icon={<Clock className="w-4 h-4" />}
+            variant="filled"
           >
             our Services
           </BadgeAtom>
           <HeadingAtom
-            as="h2"
-            size="lg"
             align="center"
-            title={sectionHeading}
-            highlight={accentText}
-            variant="split"
+            as="h2"
             className="max-w-4xl mx-auto"
+            highlight={accentText}
+            size="lg"
+            title={sectionHeading}
+            variant="split"
           />
-
         </motion.div>
-        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-4 mb-12" variants={columnContainerVariants}>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 pb-4 mb-12"
+          variants={columnContainerVariants}
+        >
           {columns.map((col, i) => (
-            <motion.div key={i} className="w-full md:w-auto md:flex-1 p-4 md:p-0 outline-none" variants={columnVariants}>
+            <motion.div
+              key={i}
+              className="w-full md:w-auto md:flex-1 p-4 md:p-0 outline-none"
+              variants={columnVariants}
+            >
               <h2 className="text-subheading font-semibold mb-4 text-foreground">
                 {col.title}
               </h2>
@@ -110,11 +129,11 @@ export default function ServiceSection({
                     startContent={
                       service.iconUrl && (
                         <Image
-                          src={service.iconUrl}
                           alt={service.title}
-                          width={32}
-                          height={32}
                           className="rounded-lg"
+                          height={32}
+                          src={service.iconUrl}
+                          width={32}
                         />
                       )
                     }
@@ -123,7 +142,7 @@ export default function ServiceSection({
                         {service.title}
                       </span>
                     }
-                  /* variants={accordionVariants} */
+                    /* variants={accordionVariants} */
                   >
                     <div className="text-muted-foreground">
                       {service.description}

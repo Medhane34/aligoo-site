@@ -1,7 +1,8 @@
 "use client";
 
 import type { ThemeProviderProps } from "next-themes";
-import {ToastProvider} from "@heroui/toast";
+
+import { ToastProvider } from "@heroui/toast";
 import * as React from "react";
 import { HeroUIProvider } from "@heroui/system";
 import { useRouter } from "next/navigation";
@@ -26,13 +27,15 @@ export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <HeroUIProvider navigate={router.push}>
       <ToastProvider />
-      <NextThemesProvider attribute={['class','data-theme']} disableTransitionOnChange={true} defaultTheme="dark" {...themeProps}
-      enableSystem={false}   // IMPORTANT: avoids hydration mismatch
-      
- 
+      <NextThemesProvider
+        attribute={["class", "data-theme"]}
+        defaultTheme="dark"
+        disableTransitionOnChange={true}
+        {...themeProps}
+        enableSystem={false} // IMPORTANT: avoids hydration mismatch
       >
         {children}
-       </NextThemesProvider>
+      </NextThemesProvider>
     </HeroUIProvider>
   );
 }

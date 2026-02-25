@@ -1,15 +1,7 @@
 /* eslint-disable prettier/prettier */
-import HeroSection from "@/components/HeroSection";
-import WhyFacebookAdsWork from "./WhyFacebookAdsWork";
-import AdPhilosophy from "./OurPhilosophy";
 
-import CTABottomSection from "@/components/CTA";
-import FeaturedFbCaseStudiesWrappers from "@/wrappers/FeaturedFbCaseStudiesWrappers";
-import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
-import FaqSection from "@/components/service-sections/FaqSection";
+import HeroSection from "@/components/HeroSection";
 import FeaturedFbPostsWrapper from "@/wrappers/FeaturedFbCaseStudiesWrappers";
-import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";
-import FeaturedWebDesignPostsWrapper from "@/wrappers/FeaturedWebDesignPostsWrapper";
 import Container from "@/components/ui/Container";
 import WhyServiceWorksSectionWrapper from "@/wrappers/services/facebook-ad/WhyServiceWorksSectionWrapper";
 import AdPhilosophySectionWrapper from "@/wrappers/services/facebook-ad/AdPhilosophySectionWrapper";

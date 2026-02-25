@@ -12,8 +12,8 @@ export function DisableDraftMode() {
 
   return (
     <a
-      href="/api/draft-mode/disable"
       className="fixed bottom-4 right-4 bg-gray-50 px-4 py-2"
+      href="/api/draft-mode/disable"
     >
       Disable Draft Mode
     </a>

@@ -96,10 +96,7 @@ Preferred Communication: ${preferredCommunication}
       );
     }
 
-    return NextResponse.json(
-      { message: "" },
-      { status: 200 },
-    );
+    return NextResponse.json({ message: "" }, { status: 200 });
   } catch (error) {
     console.error("Error in /api/contact:", error);
 

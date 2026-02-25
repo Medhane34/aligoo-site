@@ -1,5 +1,4 @@
 /* eslint-disable prettier/prettier */
-import HeroSection from "@/components/HeroSection";
 import WhyServiceWorks from "@/components/service-sections/WhyServiceWork";
 import FaqSection from "@/components/service-sections/FaqSection";
 import WhoThisIsForSection from "@/components/service-sections/WhoThisIsFor";

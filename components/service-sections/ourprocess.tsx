@@ -6,7 +6,6 @@ import Image from "next/image"; // For optimized image loading
 import { CheckCircleIcon } from "@heroicons/react/24/solid"; // CheckCircleIcon from HeroIcons
 import { motion } from "framer-motion"; // For animation
 
-import { AccentText, SectionHeading } from "../ui/typography";
 import HeadingAtom from "../atoms/HeadingAtom";
 import BadgeAtom from "../atoms/BadgeAtom";
 
@@ -58,38 +57,41 @@ const OurProcess: React.FC<OurProcessProps> = ({
 
   return (
     <section
-      id={id} // <-- Apply id here
       className="py-16 sm:py-24 bg-background-light dark:bg-background-dark
 text-text-light dark:text-text-dark"
+      id={id} // <-- Apply id here
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <motion.div
-            initial={{ opacity: 0, y: -20 }} // Initial state (hidden, slightly above)
             animate={{ opacity: 1, y: 0 }} // Animate to visible, original position
+            initial={{ opacity: 0, y: -20 }} // Initial state (hidden, slightly above)
             transition={{ duration: 0.6 }} // Animation duration
           >
-            <BadgeAtom variant="filled" color="yellow"> PROCESS</BadgeAtom>
+            <BadgeAtom color="yellow" variant="filled">
+              {" "}
+              PROCESS
+            </BadgeAtom>
             <HeadingAtom
+              align="center"
               highlight={heading}
+              size="lg"
               title=""
               variant="split"
-              size="lg"
-              align="center"
-            ></HeadingAtom>
+            />
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.7, delay: 0.2 }} // Staggered delay for sub-heading
           >
             <HeadingAtom
+              align="center"
+              size="sm"
               title={subheading}
               variant="default"
-              size="sm"
-              align="center"
-            ></HeadingAtom>
+            />
           </motion.div>
         </div>
 
@@ -97,29 +99,29 @@ text-text-light dark:text-text-dark"
         <div className="md:grid md:grid-cols-2 md:gap-x-16 items-center">
           {/* Left Column: Image */}
           <motion.div
-            variants={imageVariants} // Apply image animation variants
-            initial="hidden"
-            whileInView="show" // Animate when element enters viewport
-            viewport={{ once: true, amount: 0.5 }} // Only animate once, when 50% of element is visible
             className="flex justify-center mb-12 md:mb-0"
+            initial="hidden"
+            variants={imageVariants} // Apply image animation variants
+            viewport={{ once: true, amount: 0.5 }} // Only animate once, when 50% of element is visible
+            whileInView="show" // Animate when element enters viewport
           >
             <Image
-              src={imageSrc}
               alt={imageAlt}
-              width={500} // Set appropriate width based on your design needs
-              height={400} // Set appropriate height to maintain aspect ratio, Next.js Image will optimize
               className="rounded-3xl shadow-xl w-full max-w-md h-auto" // Styling from image analysis
-              style={{ objectFit: "cover" }} // Ensures image covers the area without distortion
+              height={400} // Set appropriate height to maintain aspect ratio, Next.js Image will optimize
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" // Optimize for different screen sizes
+              src={imageSrc}
+              style={{ objectFit: "cover" }} // Ensures image covers the area without distortion
+              width={500} // Set appropriate width based on your design needs
             />
           </motion.div>
 
           {/* Right Column: Steps */}
           <motion.div
-            variants={containerVariants} // Apply container animation variants for staggered children
             initial="hidden"
-            whileInView="show" // Animate when container enters viewport
+            variants={containerVariants} // Apply container animation variants for staggered children
             viewport={{ once: true, amount: 0.2 }} // Animate once, when 20% of container is visible
+            whileInView="show" // Animate when container enters viewport
           >
             <ul className="space-y-10">
               {" "}
@@ -127,13 +129,13 @@ text-text-light dark:text-text-dark"
               {steps.map((step) => (
                 <motion.li
                   key={step.id}
-                  variants={itemVariants}
                   className="flex items-start"
+                  variants={itemVariants}
                 >
                   <div className="shrink-0">
                     <CheckCircleIcon
-                      className="h-8 w-8 text-brand-primary"
                       aria-hidden="true"
+                      className="h-8 w-8 text-brand-primary"
                     />
                   </div>
                   <div className="ml-4">

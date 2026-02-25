@@ -1,9 +1,11 @@
 import { client } from "@/src/sanity/client";
-import { FEATURED_CASE_STUDY_QUERY, INDUSTRIES_SECTION_QUERY } from "@/sanity/queries/works";
+import {
+  FEATURED_CASE_STUDY_QUERY,
+  INDUSTRIES_SECTION_QUERY,
+} from "@/sanity/queries/works";
 import { HERO_SECTION_QUERY_HOMEPAGE } from "@/sanity/queries/homepage";
 
-
-// Hero Section 
+// Hero Section
 
 export type HeroSectionData = {
   badgeText_en?: string;
@@ -24,9 +26,9 @@ export type HeroSectionData = {
   secondaryButtonUrl: string;
 };
 
-export async function fetchHeroSection(name: string): Promise<HeroSectionData | null> {
-   
-
+export async function fetchHeroSection(
+  name: string,
+): Promise<HeroSectionData | null> {
   return await client.fetch(HERO_SECTION_QUERY_HOMEPAGE, { name });
 }
 export type FeaturedCaseStudyData = {
@@ -42,7 +44,6 @@ export type FeaturedCaseStudyData = {
 export async function fetchFeaturedCaseStudy(): Promise<FeaturedCaseStudyData | null> {
   return await client.fetch(FEATURED_CASE_STUDY_QUERY);
 }
-
 
 export type Industry = {
   name: string;
@@ -60,7 +61,9 @@ export type IndustriesSectionData = {
 
 export async function fetchIndustriesSection(): Promise<IndustriesSectionData | null> {
   const data = await client.fetch(INDUSTRIES_SECTION_QUERY);
+
   if (!data) return null;
+
   return {
     ...data,
     industries_en: data.industries_en ?? [],
