@@ -1,0 +1,38 @@
+[
+  {
+    "_createdAt": "2025-12-02T12:45:49Z",
+    "_id": "jsWLaozHlp4866B7vgxQBI",
+    "_rev": "jsWLaozHlp4866B7vgxQ71",
+    "_type": "interaction",
+    "_updatedAt": "2025-12-02T12:45:49Z",
+    "action": "button_click",
+    "buttonText": "📖 Read More\"",
+    "campaign": {
+      "_ref": "f6711486-382b-4d6a-a472-5f72946d83c0",
+      "_type": "reference"
+    },
+    "subscriber": {
+      "_ref": "subscriber-360786041",
+      "_type": "reference"
+    },
+    "timestamp": "2025-12-02T12:45:49.197Z"
+  },
+  {
+    "_createdAt": "2025-12-02T13:43:03Z",
+    "_id": "jsWLaozHlp4866B7vhqiua",
+    "_rev": "jsWLaozHlp4866B7vhqiqJ",
+    "_type": "interaction",
+    "_updatedAt": "2025-12-02T13:43:03Z",
+    "action": "button_click",
+    "buttonText": "📖 Read More\"",
+    "campaign": {
+      "_ref": "f6711486-382b-4d6a-a472-5f72946d83c0",
+      "_type": "reference"
+    },
+    "subscriber": {
+      "_ref": "subscriber-438960027",
+      "_type": "reference"
+    },
+    "timestamp": "2025-12-02T13:43:03.670Z"
+  }
+]

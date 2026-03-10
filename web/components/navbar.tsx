@@ -1,0 +1,305 @@
+// components/Navbar.tsx
+"use client";
+import React, { useState } from "react";
+import {
+  Navbar as HeroUINavbar,
+  NavbarContent,
+  NavbarMenu,
+  NavbarMenuToggle,
+  NavbarBrand,
+  NavbarItem,
+  NavbarMenuItem,
+} from "@heroui/navbar";
+import { Button } from "@heroui/button";
+import { Link } from "@heroui/link";
+import NextLink from "next/link";
+import {
+  Dropdown,
+  DropdownMenu,
+  DropdownTrigger,
+  DropdownItem,
+} from "@heroui/dropdown";
+import { Accordion, AccordionItem } from "@heroui/accordion";
+import { usePathname } from "next/navigation";
+
+import ThemeSwitch from "./theme-switch";
+
+const ChevronDownIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    {...props}
+    aria-hidden="true"
+    className="inline-block ml-1 w-4 h-4"
+    fill="currentColor"
+    viewBox="0 0 20 20"
+  >
+    <path
+      clipRule="evenodd"
+      d="M5.23 7.21a.75.75 0 011.06.02L10 10.584l3.71-3.354a.75.75 0 111.02 1.1l-4.25 3.846a.75.75 0 01-1.02 0l-4.25-3.846a.75.75 0 01.02-1.06z"
+      fillRule="evenodd"
+    />
+  </svg>
+);
+
+export const Navbar = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const handleMenuClose = () => setMenuOpen(false);
+  // Language path handling
+  const pathname = usePathname();
+  const pathWithoutLang = pathname.replace(/^\/(en|am)/, "");
+
+  return (
+    <div className="relative">
+      <HeroUINavbar
+        className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-background-light dark:bg-background-dark shadow"
+        isMenuOpen={menuOpen}
+        maxWidth="xl"
+        style={{
+          WebkitBackdropFilter: "blur(12px)",
+          backdropFilter: "blur(12px)",
+        }}
+        onMenuOpenChange={setMenuOpen}
+      >
+        {/* Mobile Navbar Content */}
+        <NavbarContent className="sm:hidden relative w-full flex items-center justify-between px-2">
+          <div className="flex-1 flex items-center">
+            <NavbarMenuToggle
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              onClick={() => setMenuOpen((open) => !open)}
+            />
+          </div>
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center">
+            <NavbarBrand as="li" className="gap-3 max-w-fit">
+              <NextLink className="flex items-center gap-1" href="/">
+                <p className="font-bold text-inherit">Aligoo</p>
+              </NextLink>
+            </NavbarBrand>
+          </div>
+          <div className="flex-1 flex justify-end">
+            <ThemeSwitch />
+          </div>
+        </NavbarContent>
+
+        {/* Desktop Navbar Content */}
+        <NavbarContent className="hidden sm:flex" justify="start">
+          <NavbarBrand as="li" className="gap-3 max-w-fit">
+            <NextLink className="flex items-center gap-1" href="/">
+              <p className="font-bold text-inherit">Aligoo</p>
+            </NextLink>
+          </NavbarBrand>
+        </NavbarContent>
+
+        <NavbarContent
+          className="hidden sm:flex gap-4 text-red-500 dark:text-text-dark"
+          justify="center"
+        >
+          <NavbarItem>
+            <Link
+              className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
+              href="/en/"
+            >
+              Home
+            </Link>
+          </NavbarItem>
+          <Dropdown>
+            <NavbarItem>
+              <DropdownTrigger>
+                <Button
+                  disableRipple
+                  className="p-0 bg-transparent data-[hover=true]:bg-transparent text-red-500 text-base font-medium flex items-center"
+                  variant="light"
+                >
+                  Services <ChevronDownIcon />
+                </Button>
+              </DropdownTrigger>
+            </NavbarItem>
+            <DropdownMenu aria-label="Service Actions">
+              <DropdownItem
+                key="Facebook Ad"
+                href="/en/services-back/facebook-ad"
+              >
+                Facebook Ad
+              </DropdownItem>
+              <DropdownItem
+                key="Web Design"
+                href="/en/services-back/web-design"
+              >
+                Web Design
+              </DropdownItem>
+              <DropdownItem key="TikTok Ads" href="/en/services-back/tiktok-ad">
+                TikTok Ads
+              </DropdownItem>
+              <DropdownItem
+                key="Digital Marketing Strategy"
+                href="/en/services-back/digital-marketing"
+              >
+                Digital Marketing Strategy
+              </DropdownItem>
+              <DropdownItem key="SEO" href="/en/services-back/seo">
+                SEO
+              </DropdownItem>
+              <DropdownItem
+                key="Content Marketing"
+                href="/services/content-marketing"
+              >
+                Content Marketing
+              </DropdownItem>
+              <DropdownItem
+                key="Funnel Mapping"
+                href="/services/funnel-mapping"
+              >
+                Funnel Mapping
+              </DropdownItem>
+              <DropdownItem
+                key="Graphic Design"
+                href="/services/graphic-design"
+              >
+                Graphic Design
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          <NavbarItem>
+            <Link
+              className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
+              href="/en/works"
+            >
+              Our work
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link
+              className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
+              href="/about"
+            >
+              About Us
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link
+              className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium"
+              href="/en/contact"
+            >
+              Contact Us
+            </Link>
+          </NavbarItem>
+        </NavbarContent>
+
+        <NavbarContent className="hidden sm:flex" justify="end">
+          {/* #region CTA */}
+          {/*  <div className="flex gap-1">
+            <Link
+              className={`px-3 py-1 rounded-l ${pathname.startsWith("/en") ? "bg-brand-primary text-white" : "bg-gray-200"}`}
+              href={`/en${pathWithoutLang === "" ? "/" : pathWithoutLang}`}
+            >
+              EN
+            </Link>
+            <Link
+              className={`px-3 py-1 rounded-r ${pathname.startsWith("/am") ? "bg-brand-primary text-white" : "bg-gray-200"}`}
+              href={`/am${pathWithoutLang === "" ? "/" : pathWithoutLang}`}
+            >
+              አማ
+            </Link>
+          </div> */}
+          {/* #endregion */}
+
+          <ThemeSwitch />
+        </NavbarContent>
+        {/* #endregion */}
+        {/* Mobile Menu */}
+        <NavbarMenu>
+          <div className="mx-4 mt-2 flex flex-col gap-2">
+            <NavbarMenuItem className="p-0">
+              <Link
+                className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                href="/"
+                onClick={handleMenuClose}
+              >
+                Home
+              </Link>
+            </NavbarMenuItem>
+            <Accordion className="w-full" variant="light">
+              <AccordionItem
+                aria-label="Services"
+                classNames={{
+                  trigger: "py-2 px-0 w-full text-left",
+                  title: "text-left w-full block",
+                  content: "pl-0 pr-0",
+                }}
+                title={
+                  <span className="flex items-center text-xl font-medium text-red-500 dark:text-text-dark text-left w-full">
+                    Services <ChevronDownIcon className="ml-1" />
+                  </span>
+                }
+              >
+                <NavbarMenuItem className="p-0">
+                  <Link
+                    className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    href="/services/facebook-ad"
+                    onClick={handleMenuClose}
+                  >
+                    Facebook Ad
+                  </Link>
+                </NavbarMenuItem>
+                <NavbarMenuItem className="p-0">
+                  <Link
+                    className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    href="/services/web-design"
+                    onClick={handleMenuClose}
+                  >
+                    Web Design
+                  </Link>
+                </NavbarMenuItem>
+                <NavbarMenuItem className="p-0">
+                  <Link
+                    className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    href="/services/tiktok-ad"
+                    onClick={handleMenuClose}
+                  >
+                    TikTok Ads
+                  </Link>
+                </NavbarMenuItem>
+                <NavbarMenuItem className="p-0">
+                  <Link
+                    className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left pl-4 py-2"
+                    href="/services/seo"
+                    onClick={handleMenuClose}
+                  >
+                    SEO
+                  </Link>
+                </NavbarMenuItem>
+              </AccordionItem>
+            </Accordion>
+            <NavbarMenuItem className="p-0">
+              <Link
+                className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                href="/works"
+                onClick={handleMenuClose}
+              >
+                Our Work
+              </Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem className="p-0">
+              <Link
+                className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                href="/about"
+                onClick={handleMenuClose}
+              >
+                About Us
+              </Link>
+            </NavbarMenuItem>
+            <NavbarMenuItem className="p-0">
+              <Link
+                className="w-full text-xl font-medium text-red-500 dark:text-text-dark text-left py-2"
+                href="/contact"
+                onClick={handleMenuClose}
+              >
+                Contact Us
+              </Link>
+            </NavbarMenuItem>
+          </div>
+        </NavbarMenu>
+      </HeroUINavbar>
+    </div>
+  );
+};
+
+export default Navbar;

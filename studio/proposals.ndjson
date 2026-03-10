@@ -1,0 +1,1871 @@
+[
+  {
+    "_createdAt": "2025-11-25T13:54:41Z",
+    "_id": "09a5a4d3-c4bd-4398-8a0b-e3d076c98c35",
+    "_rev": "PfplluTzegnnsagS2bhuC8",
+    "_system": {
+      "base": {
+        "id": "09a5a4d3-c4bd-4398-8a0b-e3d076c98c35",
+        "rev": "6LcK6XE44frv3qesV819r4"
+      }
+    },
+    "_type": "proposal",
+    "_updatedAt": "2025-12-01T19:17:36Z",
+    "clientEmail": "daniaregawi3@gmail.com",
+    "clientName": "Nova Fitness Studio",
+    "clientPhone": "+251910584712",
+    "clientSignature": {
+      "_type": "image",
+      "asset": {
+        "_ref": "image-1520b16a434675267be1104679899df5090f8af2-712x352-png",
+        "_type": "reference"
+      }
+    },
+    "contractSignedAt": "2025-11-30T07:40:01.573Z",
+    "contractTemplate": {
+      "_ref": "15638e05-f8e2-4d2b-b829-29cfbc9ac150",
+      "_type": "reference"
+    },
+    "currentSelection": {
+      "depositPercentage": 50,
+      "paymentConfirmedByClientAt": "2025-11-30T13:37:42.175Z",
+      "paymentStatus": "pending",
+      "selectedAddOns": [
+        "Copywriting Package",
+        "3D Animations & Illustrations"
+      ],
+      "selectedPackage": "pro",
+      "totalPrice": 335000
+    },
+    "daysLeftText": "7",
+    "discount": {
+      "enabled": true,
+      "percentage": 15,
+      "reason": "Early Bird Special "
+    },
+    "expiresAt": "2025-11-29T18:00:00.000Z",
+    "mockupShowcase": {
+      "mockupLink": "https://aligoo-digital.agency/case-study/3x-roas--120-hot-leads-in-just-15-days-for-aberhot-interior-design",
+      "video": {
+        "_type": "file",
+        "asset": {
+          "_ref": "file-b5441bd3987b028f910020582a859a2aa67bad85-mp4",
+          "_type": "reference"
+        }
+      }
+    },
+    "paymentProof": {
+      "_type": "image",
+      "asset": {
+        "_ref": "image-484f828242b3f4bc39055ed032034e643b1d66c7-2474x1636-png",
+        "_type": "reference"
+      }
+    },
+    "recommendedPackage": "pro",
+    "salesperson": {
+      "_ref": "0f585e28-c67d-470a-9e05-3d00b5044638",
+      "_type": "reference"
+    },
+    "signedContractPdf": {
+      "_type": "file",
+      "asset": {
+        "_ref": "file-d58e7ad68bf913bc28277b7afd7185af26593dd0-pdf",
+        "_type": "reference"
+      }
+    },
+    "status": "payment_pending",
+    "template": {
+      "_ref": "44ceb818-4720-4161-bc0b-5527744c8176",
+      "_type": "reference"
+    },
+    "uniqueCode": "nova-9xk2p",
+    "videoGreeting": {
+      "enabled": true,
+      "thumbnail": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-4f2135e37925e43fd7da5325f82be7d4384fabe8-256x256-png",
+          "_type": "reference"
+        }
+      },
+      "video": {
+        "_type": "file",
+        "asset": {
+          "_ref": "file-0b6b1301a57303cfddfd3bb842beb98b9c787151-mp4",
+          "_type": "reference"
+        }
+      }
+    },
+    "viewLogs": [
+      {
+        "_key": "674623ee3d7d60f9129e43c26ffda788",
+        "event": "opened",
+        "timestamp": "2025-11-26T00:29:41.906Z"
+      },
+      {
+        "_key": "log-1764119205856-0.15269664316257225",
+        "event": "opened",
+        "ip": "::1",
+        "timestamp": "2025-11-26T01:06:45.856Z",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+      },
+      {
+        "_key": "log-1764119226844-0.3067792644994335",
+        "event": "opened",
+        "ip": "::1",
+        "timestamp": "2025-11-26T01:07:06.844Z",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+      },
+      {
+        "_key": "log-1764119371800-0.9308842084705079",
+        "event": "opened",
+        "ip": "::1",
+        "timestamp": "2025-11-26T01:09:31.800Z",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+      },
+      {
+        "_key": "log-1764119636193-0.09882193245030846",
+        "event": "opened",
+        "ip": "::1",
+        "timestamp": "2025-11-26T01:13:56.193Z",
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Safari/537.36"
+      }
+    ]
+  },
+  {
+    "_createdAt": "2025-11-25T13:58:58Z",
+    "_id": "0f585e28-c67d-470a-9e05-3d00b5044638",
+    "_rev": "9VPhhnugJeDadNDy1HBQc3",
+    "_type": "salesUser",
+    "_updatedAt": "2025-11-25T13:59:15Z",
+    "email": "daniaregawi3@gmail.com",
+    "name": "Daniel ",
+    "role": "sales",
+    "telegramChatId": "011000"
+  },
+  {
+    "_createdAt": "2025-11-29T07:01:15Z",
+    "_id": "15638e05-f8e2-4d2b-b829-29cfbc9ac150",
+    "_rev": "6QIxosawzS1faaOPPhFHpK",
+    "_system": {
+      "base": {
+        "id": "15638e05-f8e2-4d2b-b829-29cfbc9ac150",
+        "rev": "6QIxosawzS1faaOPPhFDMM"
+      }
+    },
+    "_type": "contractTemplate",
+    "_updatedAt": "2025-11-29T09:03:12Z",
+    "agencySignature": {
+      "companyName": "Aligoo Digital PLC",
+      "signatureImage": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-d0a463fd6441de638f4218139ea0f9c27ba4858a-272x246-png",
+          "_type": "reference"
+        }
+      },
+      "signerName": "Daniel Aregawi "
+    },
+    "header": {
+      "createdByText": "Created by:",
+      "mainHeading": "Web Design Agreement",
+      "preparedForText": "Prepared for:"
+    },
+    "linkedProposalTemplate": {
+      "_ref": "44ceb818-4720-4161-bc0b-5527744c8176",
+      "_type": "reference"
+    },
+    "priceSection": {
+      "autoGenerateTable": true,
+      "body": "2.1. Fees. {{clientName}) shall pay aligoo on an hourly basis at a rate of rate per hour.  Aligoo shall provide a retainer of retainer amount to  on or before the fifteenth (15th) day following receipt of each monthly invoice against which it will bill for the Services.\n\n2.2. Expenses.  {{clientName}) may incur costs (including but not limited to travel, lodging, and other costs incidental to the Services) for which it shall be reimbursed by {{clientName}).  will obtain approval from   prior to incurring such costs.\n\n2.3. Invoicing.  aligoo shall provide an invoice to {{clientName}) within the first five (5) business days of each month describing the hourly fees incurred the previous month and approved costs incurred.  will first account for such fees by applying amounts from the retainer held and request any additional amounts required in excess of such retainer. Invoices shall be due and payable within fifteen (15) days of receipt.\n2.4 Deposit Amount: {{clientName}) should pay an initial deposit amount of {{depositAmount}} to kick of the project of the total price {totalPrice}}. \n2.5 Add on list: The added add on list are {{addOnsList}} added on top of {{packagePrice}} from {packageName}}. \n\n{{addOnsList}}",
+      "heading": "3. FEES AND EXPENSES"
+    },
+    "sections": [
+      {
+        "_key": "a291c8cdeb39",
+        "_type": "contractSection",
+        "body": "This Web Design Agreement is entered into as of date by and between {{clientName}} having its principal place of business located at  (the “Designer”) and   having its principal place of business located at  (the “Client”), both of whom agree to be bound by this Agreement.\n\nWHEREAS,  {{clientName}} has conceptualized a website, as described on Exhibit A attached hereto (the \"Website\") and desires to hire , who is engaged in the business of website development, to design such Website.\n\nNOW, THEREFORE, {{clientName}} subject to the terms and conditions hereinafter set forth the Company and  hereto (each individually a “Party” and collectively the “Parties”) agree as follows:",
+        "heading": "INTRODUCTION"
+      },
+      {
+        "_key": "9670320dc516",
+        "_type": "contractSection",
+        "body": "Aligoo shall develop all deliverables required to implement the Website as described on Exhibit A attached hereto (the \"Services\").",
+        "bullets": [
+          "የኢንዱስትሪ ሪሰርች እና የተፉካካሪ ዌብሳይት ላይ ሪሰርች መስራት",
+          "የፕሮጀክት ስትራቲጂ ማውጣት",
+          "የዌብሳይት ዲዛይን እና ግንባታ መስራት",
+          "የዌብሳይት ስራው ከመለቀቁ በፊት ዘለአለም አና ዩናሰ የሕግ ቢሮ ስራውን ማጋራት እና ማስተካከያዎችን መስራት",
+          "የSEO ስራዎች ጎግል ሊስቲንግ ጨምሮ",
+          "ለአንድ አመት የሚቆይ የሆስቲንግ አገልግሎት",
+          "የሪፓርት ዳሽቦርድ ማዘጋጀት ",
+          "የሶሻል ሚዲያ ሊንኮችን ዌብሳይት ላይ ማካተት",
+          "የኮንተንት ፅሑፍ እና የተለያዩ ሚዲያዎችን ማዘጋጀት",
+          "{{addOnsList}}"
+        ],
+        "heading": "1. WEB DESIGN SERVICES."
+      },
+      {
+        "_key": "0f219cd1438f",
+        "_type": "contractSection",
+        "body": "የ{{clientName}} እንዲሆን የአሊጎ ድርጅት ለፕሮጀክቱ እንዲሟሉ የሚጠይቋቸው ዝርዝር መረጃዎች\n",
+        "bullets": [
+          "ለዌብሳይት ግንባታ እና የፊስቡክ ማስታወቂያ ፅሑፍ ግባአት የሚሆኑ ድርጅቱን በተመለከት አስፈላጊ መረጃዎችን መስጠት",
+          "አሊጎ የሚጠይቋቸውን ዝርዝር መረጃዎችን እና የመሳሰሉት "
+        ],
+        "heading": "2. የ{{clientName}} ድርጅት ማቅረብ ያለባቸው ዝርዝር"
+      },
+      {
+        "_key": "b8c95d6d787e",
+        "_type": "contractSection",
+        "body": "Payment Penalties Include ",
+        "bullets": [
+          "የአሊጎ ድርጅት የዌብሳይት ስራ ተጀምሮ በ 7-10 ቀን ውስጥ ሰርቶ ካላስረከቡ በየቀኑ 300 ብር ለመቀጣት ተስማምቶል",
+          "የዘለአለም አና ዩናሰ የሕግ ቢሮ   ድርጅት በተገቢው መንገድ ክፍያ በተጠቀሰው እለት የማይከፍል ከሆነ በቀን 300 ብር ቅጣት ሊኖረው እንዲሁም ከሳምንት በላይ ክፍያ የማይከፈል ከሆነ አሊጎ የድረ ግፆን የመዝጋት መብት የተጠበቀ ይሆናል"
+        ],
+        "heading": "3. Penalties "
+      },
+      {
+        "_key": "4793c6751697",
+        "_type": "contractSection",
+        "body": "የዌብሳይት ስራ ምንም አይነት እክል(ችግር) ቢገጥመው ይሄን ውል ከተስማማንበት ቀን ጀምሮ እስከ 6ወር ድረስ ያለክፍያ ችግሩን ለመፍታት የአሊጎ ድርጅት ተስማምቶል፡፡\n",
+        "heading": "4. ዋስትና"
+      },
+      {
+        "_key": "9f8590592d3b",
+        "_type": "contractSection",
+        "body": "ይህንን ውል ስንዋዋል 1ኛ ተስማሚም ሆነ 2ኛ ተስማሚ ውሉን ለማቋረጥ ስንፈልግ ሙሉ ክፍያ መፈጸም ማረጋገጥ እና በቅድሚያ የአንድ ወር ማስጠንቀቂያ ልንሰጥ ተስማምተናል፡፡  \n",
+        "heading": "5. የውል ጊዜ ገደብ "
+      },
+      {
+        "_key": "96466ff1e425",
+        "_type": "contractSection",
+        "body": "This Agreement shall last from the date of execution to the completion of the Services, as described herein.  {{clientName}) may terminate this Agreement for any reason with fifteen (15) days notice to . Upon such notice of termination, {{clientName}) will provide an invoice to  aligoo outlining all costs incurred to the point of such notice. Such costs shall be due and payable upon termination.  may withhold any deliverables pursuant to the Services until such payment is made in full.",
+        "bullets": [
+          "ክፍያ በወቅቱ ሳይፈፀም ሲቀር",
+          "ከተዋዋዮቹ መሃል አንዳቸው በሞት ቢለዩ",
+          "አሊጉ ድርጅት የዘረዘሯቸውን ስራ ካልተሰራ"
+        ],
+        "heading": "6. ውሉ የሚቋረጥበት ሁኔታ "
+      },
+      {
+        "_key": "814a1dabe547",
+        "_type": "contractSection",
+        "body": "{{clientName}) may request that changes be made to the specifications outlined on Exhibit A, or other aspects of the Agreement and tasks associated thereto. If  {{clientName}) requests such a change, aligoo will use its best efforts to implement the requested change at no additional expense to   and without delaying delivery of the Website. In the event that the proposed change will, in the sole discretion of the Designer,{{clientName}) require a delay in the delivery of the Website or would result in additional expense to  , then   and  shall confer and   shall, in its discretion, elect either to withdraw the proposed change or require  to deliver the Website with the proposed change and subject to the delay and/or additional expense. {{addOnsList}}",
+        "heading": "7. CHANGE IN SPECIFICATIONS."
+      },
+      {
+        "_key": "4b3e8697459e",
+        "_type": "contractSection",
+        "body": "{{clientName}) shall be the owner of all right, title, and interest in any intellectual property in the Website and the Services shall be deemed a Work Made For Hire in accordance with the Copyright Act, as amended from time to time.  acknowledges and agrees that the Website will contain valuable proprietary rights and disclaims all rights in such rights.  hereby assigns to   without further compensation all of its right, title, and interest in the Website and any and all related intellectual property rights thereto.",
+        "heading": "8. PROPRIETARY RIGHTS."
+      }
+    ],
+    "title": "Web Design Contract "
+  },
+  {
+    "_createdAt": "2025-11-25T13:29:20Z",
+    "_id": "3e511894-638d-4324-86e7-c6c2a5ef0c9d",
+    "_rev": "jwRJFHQMh5Tfs6PXqnQxgt",
+    "_system": {
+      "base": {
+        "id": "3e511894-638d-4324-86e7-c6c2a5ef0c9d",
+        "rev": "mUAt5nK2PIiSQlgtYrVO7g"
+      }
+    },
+    "_type": "proposalTemplate",
+    "_updatedAt": "2025-11-25T13:44:45Z",
+    "addOns": [
+      {
+        "_key": "b1",
+        "name": "Enterprise Link Building",
+        "price": 100000
+      },
+      {
+        "_key": "b2",
+        "name": "YouTube SEO Package",
+        "price": 80000
+      },
+      {
+        "_key": "b3",
+        "name": "International SEO (Multi-language)",
+        "price": 150000
+      }
+    ],
+    "basePackages": [
+      {
+        "_key": "starter",
+        "features": [
+          "10 keywords",
+          "On-page + technical SEO",
+          "Monthly content (4 blogs)",
+          "Backlink building (10/month)",
+          "Google Analytics + Search Console setup"
+        ],
+        "isDefault": true,
+        "name": "Starter",
+        "price": 75000
+      },
+      {
+        "_key": "growth",
+        "features": [
+          "25 keywords",
+          "Everything in Starter",
+          "Competitor analysis",
+          "Local SEO (GMB)",
+          "20 backlinks/month",
+          "Video SEO"
+        ],
+        "isDefault": false,
+        "name": "Growth",
+        "price": 125000
+      }
+    ],
+    "hero": {
+      "subtitle": "Data-driven SEO strategy to dominate Google in your niche — no fluff, just results.\n",
+      "title": "Monthly SEO That Actually Ranks You # "
+    },
+    "slug": {
+      "_type": "slug",
+      "current": "seo-retainer"
+    },
+    "title": "SEO Retainer"
+  },
+  {
+    "_createdAt": "2025-11-25T13:16:28Z",
+    "_id": "44ceb818-4720-4161-bc0b-5527744c8176",
+    "_rev": "OBx8fq2Ivqq0Ac0c7yCwR3",
+    "_system": {
+      "base": {
+        "id": "44ceb818-4720-4161-bc0b-5527744c8176",
+        "rev": "WibOQy2bUr7bZQESVDnvmT"
+      }
+    },
+    "_type": "proposalTemplate",
+    "_updatedAt": "2025-12-01T12:01:46Z",
+    "aboutUs": {
+      "badge": {
+        "icon": "Users",
+        "text": "Who We Are"
+      },
+      "card": {
+        "badges": [
+          "50+ Projects",
+          "100% Success"
+        ],
+        "companyName": "Aligoo ",
+        "establishedYear": "Est 2020",
+        "subtitle": "Digital Excellence ",
+        "yearsText": "3 Years "
+      },
+      "cta": {
+        "text": "More About Us ",
+        "url": "/about "
+      },
+      "enabled": true,
+      "expertiseTags": [
+        {
+          "_key": "a9f9094e7e9a",
+          "icon": "Globe ",
+          "label": "Web Design "
+        },
+        {
+          "_key": "6daafc4ae1dd",
+          "icon": "zap ",
+          "label": "Social Ads "
+        },
+        {
+          "_key": "f79c3df4d368",
+          "icon": "BarChart3",
+          "label": "SEO "
+        }
+      ],
+      "heading": "More Than An Agency. ",
+      "paragraphs": [
+        "Aligoo is a dynamic digital marketing agency with a proven\ntrack record of delivering exceptional results. With over 3\nyears of industry experience, we have honed our expertise in\ncrafting innovative digital strategies that drive growth.",
+        "Our mission is to be your trusted partner in achieving\nexponential business growth through result-driven digital\nmarketing campaigns and websites."
+      ],
+      "subheading": "Your Growth Partner."
+    },
+    "addOns": [
+      {
+        "_key": "a1",
+        "category": "Performance & UX",
+        "description": [
+          {
+            "_key": "65a0158071c8",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "f0624f788e3c",
+                "_type": "span",
+                "marks": [],
+                "text": "Turn your website into a native-like app. Works offline, installs on home screen, push notifications."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "7041a8c51692",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "23b283d55a83",
+                "_type": "span",
+                "marks": [],
+                "text": "\n"
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Progressive Web App (Offline, install)",
+        "preselected": true,
+        "price": 2500
+      },
+      {
+        "_key": "a2",
+        "category": "Client Experience",
+        "description": [
+          {
+            "_key": "6abb51f8b224",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "fd21dc4cd2a6",
+                "_type": "span",
+                "marks": [],
+                "text": "Private login area for your clients. View reports, invoices, project status, live analytics. Built with React + beautiful charts."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Client Portal / Dashboard (React widgets)",
+        "preselected": false,
+        "price": 4000
+      },
+      {
+        "_key": "a3",
+        "category": "Functionality",
+        "description": [
+          {
+            "_key": "8a0852cdf8c7",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "517fe9f45977",
+                "_type": "span",
+                "marks": [],
+                "text": "Lightning-fast search across thousands of pages/products. Autocomplete, filters, typo tolerance. Used by Telegram, Medium, Laravel. Perfect for "
+              },
+              {
+                "_key": "a861f2c127d5",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "blogs, e-commerce, or documentation sites."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Advanced Search (Algolia / Typesense)Advanced Search (Algolia / Typesense)",
+        "preselected": false,
+        "price": 60000
+      },
+      {
+        "_key": "a4",
+        "category": "Revenue",
+        "description": [
+          {
+            "_key": "fca8bac2f447",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "09023c7adeb0",
+                "_type": "span",
+                "marks": [],
+                "text": "Full membership system: paywall content, user roles, subscriptions via Chapa/Telegram, login with Google/Email. "
+              },
+              {
+                "_key": "a0ef94208f7d",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Start charging monthly for premium content."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Membership / SaaS Content (NextAuth)",
+        "preselected": false,
+        "price": 80000
+      },
+      {
+        "_key": "5af89767cc39",
+        "_type": "addon",
+        "category": "Optimization",
+        "description": [
+          {
+            "_key": "4d6c60e1d3fa",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "2df1d74d2e77",
+                "_type": "span",
+                "marks": [],
+                "text": "Connect Google Optimize or custom A/B tests. "
+              },
+              {
+                "_key": "eba1efd3affd",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Test headlines, buttons, layouts. Increase conversion by 30–200%."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "A/B Testing Integration",
+        "preselected": false,
+        "price": 8000
+      },
+      {
+        "_key": "27e1c33cdaa8",
+        "_type": "addon",
+        "category": "Multi-Language Integration (Custom)",
+        "description": [
+          {
+            "_key": "0e0e6c0ecc53",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "f01117050a22",
+                "_type": "span",
+                "marks": [],
+                "text": "Full Amharic + English (or any language) site. Automatic language switcher, RTL support, translated URLs."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Full Amharic + English (or any language) site. Automatic language switcher, RTL support, translated URLs.",
+        "preselected": false,
+        "price": 12200
+      }
+    ],
+    "bonusGift": {
+      "countdownHours": 1,
+      "ctaText": "Claim Your Exclusive Gifts Now",
+      "enabled": true,
+      "gifts": [
+        {
+          "_key": "0e353d378431",
+          "description": "Focus on keeping your website fresh and functioning smoothly after launch.",
+          "features": [
+            "Regular Security Checks",
+            "Performance Monitoring",
+            "Minor Bug Fixes",
+            "Peace of Mind"
+          ],
+          "icon": "🛡️",
+          "title": "Free Website Maintenance for 6 Months",
+          "value": 600
+        },
+        {
+          "_key": "3b7088a3f9c9",
+          "description": "Get your website up and running with confidence! Reliable hosting for a full year.",
+          "features": [
+            "Secure & Reliable Hosting",
+            "Technical Support",
+            "Easy Management",
+            "Cost Savings"
+          ],
+          "icon": "🌐",
+          "title": "Free Domain + 1-Year Hosting Service",
+          "value": 1200
+        }
+      ],
+      "headline": "Unlock Your VIP Perks",
+      "urgencyMessage": "Limited Time Only - These Bonuses Vanish Soon!"
+    },
+    "caseStudy": {
+      "badge": {
+        "icon": "Sparkles ",
+        "text": "Case Study "
+      },
+      "cta": {
+        "text": "More Case Study ",
+        "url": "/service/web-design "
+      },
+      "description": "We don't just build websites; we build business assets. Here are a few of our recent\nsuccess stories showcasing the impact we deliver.",
+      "enabled": true,
+      "heading": "Delivering Results:",
+      "projects": [
+        {
+          "_key": "bfe60789395a",
+          "color": "from-orange-500 to-yellow-500",
+          "icon": "Layout",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-44d6a395e1e4ada00067b645cacad7100a4a48ec-2854x9658-png",
+              "_type": "reference"
+            }
+          },
+          "industry": "Furniture ",
+          "name": "Muko ",
+          "result": "🚀 Launched in 2 Weeks",
+          "url": "https://aligoo-digital.agency/case-study/muko"
+        },
+        {
+          "_key": "45ebe60161c8",
+          "color": "from-orange-500 to-yellow-500",
+          "icon": "Layout",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-44d6a395e1e4ada00067b645cacad7100a4a48ec-2854x9658-png",
+              "_type": "reference"
+            }
+          },
+          "industry": "Law Firm ",
+          "name": "Zay Law Office ",
+          "result": "95 page speed Score",
+          "url": "https://aligoo-digital.agency/case-study/zaylawoffice"
+        }
+      ],
+      "subheading": "Digital Excellence Unveiled"
+    },
+    "comparisonTable": {
+      "groups": [
+        {
+          "_key": "7a3a7806e4a7",
+          "_type": "group",
+          "backgroundColor": "#1f2937",
+          "groupTitle": "Basic Details ",
+          "items": [
+            {
+              "_key": "885096e95206",
+              "_type": "featureRow",
+              "basic": "✔",
+              "enterprise": "✔",
+              "feature": "Project Strategy",
+              "pro": "✔"
+            },
+            {
+              "_key": "63d0ab90f61f",
+              "_type": "featureRow",
+              "basic": "7 pages ",
+              "enterprise": "Unlimited ",
+              "feature": "No of Pages ",
+              "pro": "15 pages "
+            },
+            {
+              "_key": "05561c02cd4e",
+              "_type": "featureRow",
+              "basic": "1 rounds ",
+              "enterprise": "* Unlimited revisions within reason ",
+              "feature": "Revision ",
+              "note": "This is the number of rounds that clients could give ",
+              "pro": "Standard number of revisions 2-3 rounds"
+            },
+            {
+              "_key": "be85b617cbfa",
+              "_type": "featureRow",
+              "basic": "< 500 ms, LH 85",
+              "enterprise": "<300 ms, LH 100",
+              "feature": "Core Web Vitals budget promise",
+              "pro": "< 400 ms, LH 90"
+            }
+          ]
+        },
+        {
+          "_key": "4983802a4737",
+          "_type": "group",
+          "backgroundColor": "#f59e0b",
+          "groupTitle": "SEO",
+          "items": [
+            {
+              "_key": "bc9f5c2afffd",
+              "_type": "featureRow",
+              "basic": "Top 5 pages",
+              "enterprise": "Full Site ",
+              "feature": "Keyword mapping ",
+              "pro": "Upto 10 pages"
+            },
+            {
+              "_key": "5af01a715025",
+              "_type": "featureRow",
+              "basic": "Meta and Title Only",
+              "enterprise": "✔",
+              "feature": "Meta titles, descriptions, OG, schema",
+              "pro": "✔"
+            },
+            {
+              "_key": "51db7132d472",
+              "_type": "featureRow",
+              "basic": "✗",
+              "enterprise": "Advanced ",
+              "feature": "XML sitemap + GSC submit",
+              "pro": "Advanced "
+            },
+            {
+              "_key": "1a292f11bf57",
+              "_type": "featureRow",
+              "basic": "GBP",
+              "enterprise": "✔",
+              "feature": "Listing Building ",
+              "pro": "✔"
+            },
+            {
+              "_key": "4d1b29ee2fac",
+              "_type": "featureRow",
+              "basic": "✗",
+              "enterprise": "✔",
+              "feature": "Search console (Monitoring)",
+              "pro": "✔"
+            }
+          ]
+        }
+      ],
+      "recommendedPackage": "enterprise"
+    },
+    "faq": {
+      "badgeText": "Common Questions",
+      "enabled": true,
+      "highlightedText": "We've Got Answers.",
+      "items": [
+        {
+          "_key": "9aeeb1993d89",
+          "answer": "Yes, absolutely. Once the final payment is made, you have 100% ownership of all source code, design assets, and intellectual property. We don't lock you in.",
+          "question": "Do I own the code and design after the project?"
+        },
+        {
+          "_key": "8c3f92c67b05",
+          "answer": "We include dedicated revision rounds in every package. We start with a mood board to align on style, and we don't move to development until you're thrilled with the design.",
+          "question": "What if I don't like the initial design concepts?"
+        },
+        {
+          "_key": "28ddbd3006a3",
+          "answer": "Typical timelines are 4-6 weeks for most projects. We provide a detailed week-by-week schedule during the kickoff meeting so you always know what to expect.",
+          "question": "How long will the project take to complete?"
+        },
+        {
+          "_key": "e7ee5f429f11",
+          "answer": "Yes! We include 30 days of complimentary post-launch support to fix any bugs and help you get settled. We also offer ongoing maintenance packages if you need long-term peace of mind.",
+          "question": "Is there support after the website goes live?"
+        },
+        {
+          "_key": "2a3cfa555e54",
+          "answer": "Definitely. We build with modern CMS (Content Management Systems) like Sanity.io, making it incredibly easy for you to edit text, images, and blog posts without touching a line of code.",
+          "question": "Can I update the website content myself?"
+        }
+      ],
+      "mainHeading": "Got Questions?"
+    },
+    "hero": {
+      "backgroundImage": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-2b9510a024491bc4c9f760599ec0c23c1b4b6686-1200x720-png",
+          "_type": "reference"
+        }
+      },
+      "subtitle": "A conversion-focused, mobile-first website with complete brand identity that makes you stand out in 2026.\n",
+      "title": "Custom Website "
+    },
+    "mockupShowcase": {
+      "description": "Building on the insights from the discovery and planning phase, we translate client needs into a high-converting landing page. This mockup demonstrates how we can transform your vision into a powerful lead generation tool.",
+      "enabled": true,
+      "title": "Putting Our Process into Action"
+    },
+    "nextSteps": {
+      "enabled": true,
+      "steps": [
+        {
+          "_key": "150a3d885d47",
+          "_type": "stepItem",
+          "color": "from-purple-500 to-pink-500",
+          "description": "Review our package options and select the one that fits your goals and budget. Customize with powerful add-ons.",
+          "details": [
+            "Compare all package features",
+            "See transparent pricing breakdown",
+            "Add optional features and add-ons",
+            "Calculate your total investment",
+            "Lock in exclusive bonuses"
+          ],
+          "faqs": [
+            {
+              "_key": "9eadce3ad176",
+              "_type": "faqItem",
+              "answer": "Yes! You can upgrade your package anytime before signing the contract.",
+              "question": "Can I change my package later?"
+            },
+            {
+              "_key": "f61eef720af7",
+              "_type": "faqItem",
+              "answer": "We offer custom add-ons and can tailor any package to your specific needs.",
+              "question": "What if I need custom features?"
+            }
+          ],
+          "number": 1,
+          "status": "current ",
+          "timeEstimate": "~10 minutes",
+          "title": "Choose Your Perfect Package"
+        },
+        {
+          "_key": "31983bf76e8a",
+          "_type": "stepItem",
+          "color": "from-[#FF595E] to-orange-500",
+          "description": "Review the terms, sign digitally, and lock in your exclusive bonuses. Takes less than 5 minutes.",
+          "details": [
+            "Review contract terms and conditions",
+            "Digital signature (no printing required)",
+            "Secure your exclusive bonus gifts",
+            "Instant confirmation email"
+          ],
+          "faqs": [
+            {
+              "_key": "d9dab734021a",
+              "_type": "faqItem",
+              "answer": "Yes! Contact us before signing if you need any modifications.",
+              "question": "Can I make changes to the contract?"
+            },
+            {
+              "_key": "89f7695e3cb1",
+              "_type": "faqItem",
+              "answer": "Yes, our digital signatures are legally valid and secure.",
+              "question": "Is the signature legally binding?"
+            }
+          ],
+          "number": 2,
+          "timeEstimate": "~5 minutes",
+          "title": "Review & Sign Your Agreement"
+        },
+        {
+          "_key": "9ead48273701",
+          "_type": "stepItem",
+          "color": "from-orange-500 to-yellow-500",
+          "description": "Secure your project slot with a 50% deposit. Multiple payment options available for your convenience.",
+          "details": [
+            "Pay 50% deposit to start",
+            "Multiple payment methods accepted",
+            "Secure payment processing",
+            "Instant receipt and confirmation"
+          ],
+          "faqs": [
+            {
+              "_key": "b66a1a986e02",
+              "_type": "faqItem",
+              "answer": "We accept bank transfers, mobile money, and major credit cards.",
+              "question": "What payment methods do you accept?"
+            },
+            {
+              "_key": "399537d09090",
+              "_type": "faqItem",
+              "answer": "The final payment is due upon project completion and approval.",
+              "question": "When is the remaining 50% due?"
+            }
+          ],
+          "number": 3,
+          "timeEstimate": "~5 minutes",
+          "title": "Make Your Deposit Payment"
+        },
+        {
+          "_key": "555c7950f670",
+          "_type": "stepItem",
+          "color": "from-cyan-500 to-blue-500",
+          "description": "We'll schedule a kickoff call to discuss your vision, goals, and timeline. Then we get to work bringing your website to life!",
+          "details": [
+            "Schedule your kickoff meeting",
+            "Discuss project goals and vision",
+            "Meet your dedicated team",
+            "Start building your website!"
+          ],
+          "faqs": [
+            {
+              "_key": "d89793da403a",
+              "_type": "faqItem",
+              "answer": "Typical projects are completed in 4-6 weeks, depending on complexity.",
+              "question": "How long until my website is live?"
+            },
+            {
+              "_key": "e79aceba7fea",
+              "_type": "faqItem",
+              "answer": "Absolutely! We include revision rounds to ensure you love the final result.",
+              "question": "Can I request changes during development?"
+            }
+          ],
+          "number": 4,
+          "timeEstimate": "~1 hour",
+          "title": "Project Kickoff Meeting"
+        }
+      ],
+      "subtitle": "We've made it simple. Here's exactly what happens after you choose your package.",
+      "title": "Your Path to Launch"
+    },
+    "packagePricing": {
+      "basic": 30000,
+      "enterprise": 120000,
+      "pro": 65000
+    },
+    "slug": {
+      "_type": "slug",
+      "current": "web-design-branding"
+    },
+    "testimonials": {
+      "badgeText": "Client Success Stories",
+      "enabled": true,
+      "highlightedText": "Industry Leaders",
+      "items": [
+        {
+          "_key": "32a94f5946d5",
+          "company": "zay law office ",
+          "content": "The web Developing company Aligoo and its founding partner Daniel has been very compassionate and timely in delivering their development. I also like to thank Daniel for his relentless effort of making time for this project and his unwavering commitment to his work. I had a pleasure working with them !!!",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-7db7b89df35d38680b8fc0800f126ff993e621c5-256x256-png",
+              "_type": "reference"
+            }
+          },
+          "name": "Zelalem Sima",
+          "rating": 5,
+          "role": "CEO, Zelalem Law Office"
+        },
+        {
+          "_key": "194d396f9c2d",
+          "company": "Charity Foundation",
+          "content": "Overall very pleased with Daniel and his friendliness with Me. He did everything I asked in a timely matter. I will definitely be recommending him to other companies. Thanks for such good work.",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-45b2be84eff3891b826b597de6b19eccbf5bd8c2-150x150-webp",
+              "_type": "reference"
+            }
+          },
+          "name": "Tenbit Ermiyas",
+          "rating": 5,
+          "role": "Marketing Manager, Charity Foundation"
+        },
+        {
+          "_key": "b91af039e487",
+          "company": "Hirtu Export ",
+          "content": "Well experienced web designer",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-167b4834d09654a261e69dd1b8cd163918a63116-564x423-jpg",
+              "_type": "reference"
+            }
+          },
+          "name": "Ephrem ",
+          "rating": 4,
+          "role": "CEO, Hirtu Export"
+        }
+      ],
+      "mainHeading": "Trusted by "
+    },
+    "timeline": {
+      "enabled": true,
+      "items": [
+        {
+          "_key": "fff2254a593b",
+          "description": "1. Initial consultation to discuss your business goals and target audience \n2. Competitive analysis to understand your industry landscape \n3. Development of a tailored Facebook Ads strategy aligned with your objectives.\n4. Audience research and creation of targeted personas.4\n",
+          "title": "Project Kick-Off & Strategy Development",
+          "week": "WEEK-1"
+        },
+        {
+          "_key": "6adb00e35b6e",
+          "description": "1. Account setup and campaign structure development.\n2. Keyword research and selection for ad targeting.\n3. Development of compelling ad copy and visuals (images/videos).\n4. Landing page review and optimization recommendations.",
+          "title": "Campaign Setup & Creative Development",
+          "week": "WEEK-2"
+        },
+        {
+          "_key": "cb7a90081189",
+          "description": "1. Launch of your Facebook Ads campaigns across chosen platforms.\n2. A/B testing of different ad variations to optimize performance.\n3. Close monitoring of initial campaign performance metrics.",
+          "title": "Campaign Launch & Initial Monitoring",
+          "week": "WEEK-3"
+        },
+        {
+          "_key": "4e63014e8711",
+          "description": "1.Analysis of campaign data and identification of areas for improvement.\n2.Optimization of ad copy, targeting, and budget allocation based on data insights.\n3.Creation of a comprehensive weekly performance report for your review.\n4. Client communication and discussion of ongoing strategy adjustments.",
+          "title": "Optimization & Reporting",
+          "week": "WEEK-4"
+        }
+      ],
+      "sectionTitle": "Your Roadmap to Web Design Success:  A Month-by-Month Breakdown"
+    },
+    "title": "Web Design & Branding"
+  },
+  {
+    "_createdAt": "2025-11-25T13:53:36Z",
+    "_id": "6f3bc4d1-db1f-4945-bdde-35385ed2acd2",
+    "_rev": "9VPhhnugJeDadNDy1HAo69",
+    "_type": "proposalTemplate",
+    "_updatedAt": "2025-11-25T13:53:36Z",
+    "addOns": [
+      {
+        "_key": "c1",
+        "name": "TikTok Ads Management",
+        "price": 70000
+      },
+      {
+        "_key": "c2",
+        "name": "Creative Team (Video Shoots)",
+        "price": 200000
+      },
+      {
+        "_key": "c3",
+        "name": "WhatsApp API Integration",
+        "price": 90000
+      }
+    ],
+    "basePackages": [
+      {
+        "_key": "launch",
+        "features": [
+          "₹2–3L ad spend management",
+          "Creative production (10 ads)",
+          "A/B testing",
+          "Pixel + conversion tracking",
+          "Weekly reporting"
+        ],
+        "isDefault": true,
+        "name": "Launch",
+        "price": 80000
+      },
+      {
+        "_key": "scale",
+        "features": [
+          "₹5L+ ad spend",
+          "Unlimited creatives",
+          "Advanced retargeting",
+          "Lookalike audiences",
+          "Daily optimization",
+          "Monthly strategy call"
+        ],
+        "isDefault": false,
+        "name": "Scale",
+        "price": 150000
+      }
+    ],
+    "heroSubtitle": "We manage your Meta & Google ads end-to-end so you focus on closing deals.",
+    "heroTitle": "Predictable Leads & Sales from Ads",
+    "slug": {
+      "_type": "slug",
+      "current": "social-ads"
+    },
+    "title": "Social Media Ads (Meta + Google)"
+  },
+  {
+    "_createdAt": "2025-11-25T13:30:11Z",
+    "_id": "a8f0a879-15a3-4952-acb1-e9c0e8253302",
+    "_rev": "mUAt5nK2PIiSQlgtYrYZJD",
+    "_system": {
+      "base": {
+        "id": "a8f0a879-15a3-4952-acb1-e9c0e8253302",
+        "rev": "9VPhhnugJeDadNDy1H4dz6"
+      }
+    },
+    "_type": "proposalTemplate",
+    "_updatedAt": "2025-11-25T13:43:47Z",
+    "addOns": [
+      {
+        "_key": "c1",
+        "name": "TikTok Ads Management",
+        "price": 70000
+      },
+      {
+        "_key": "c2",
+        "name": "Creative Team (Video Shoots)",
+        "price": 200000
+      },
+      {
+        "_key": "c3",
+        "name": "WhatsApp API Integration",
+        "price": 90000
+      }
+    ],
+    "basePackages": [
+      {
+        "_key": "launch",
+        "features": [
+          "₹2–3L ad spend management",
+          "Creative production (10 ads)",
+          "A/B testing",
+          "Pixel + conversion tracking",
+          "Weekly reporting"
+        ],
+        "isDefault": true,
+        "name": "Launch",
+        "price": 80000
+      },
+      {
+        "_key": "scale",
+        "features": [
+          "₹5L+ ad spend",
+          "Unlimited creatives",
+          "Advanced retargeting",
+          "Lookalike audiences",
+          "Daily optimization",
+          "Monthly strategy call"
+        ],
+        "isDefault": false,
+        "name": "Scale",
+        "price": 150000
+      }
+    ],
+    "hero": {
+      "subtitle": "\"We manage your Meta & Google ads end-to-end so you focus on closing deals.\"\n",
+      "title": "\"Predictable Leads & Sales from Ads\""
+    },
+    "slug": {
+      "_type": "slug",
+      "current": "social-ads"
+    },
+    "title": "Social Media Ads (Meta + Google)"
+  },
+  {
+    "_createdAt": "2025-11-25T13:16:28Z",
+    "_id": "drafts.44ceb818-4720-4161-bc0b-5527744c8176",
+    "_rev": "6d29a20e-ef7b-497e-b4cb-93e902fb1211",
+    "_system": {
+      "base": {
+        "id": "44ceb818-4720-4161-bc0b-5527744c8176",
+        "rev": "OBx8fq2Ivqq0Ac0c7yCwR3"
+      }
+    },
+    "_type": "proposalTemplate",
+    "_updatedAt": "2025-12-18T09:14:21Z",
+    "aboutUs": {
+      "badge": {
+        "icon": "Users",
+        "text": "Who We Are"
+      },
+      "card": {
+        "badges": [
+          "50+ Projects",
+          "100% Success"
+        ],
+        "companyName": "Aligoo ",
+        "establishedYear": "Est 2020",
+        "subtitle": "Digital Excellence ",
+        "yearsText": "3 Years "
+      },
+      "cta": {
+        "text": "More About Us ",
+        "url": "/about "
+      },
+      "enabled": true,
+      "expertiseTags": [
+        {
+          "_key": "a9f9094e7e9a",
+          "icon": "Globe ",
+          "label": "Web Design "
+        },
+        {
+          "_key": "6daafc4ae1dd",
+          "icon": "zap ",
+          "label": "Social Ads "
+        },
+        {
+          "_key": "f79c3df4d368",
+          "icon": "BarChart3",
+          "label": "SEO "
+        }
+      ],
+      "heading": "More Than An Agency. ",
+      "paragraphs": [
+        "Aligoo is a dynamic digital marketing agency with a proven\ntrack record of delivering exceptional results. With over 3\nyears of industry experience, we have honed our expertise in\ncrafting innovative digital strategies that drive growth.",
+        "Our mission is to be your trusted partner in achieving\nexponential business growth through result-driven digital\nmarketing campaigns and websites."
+      ],
+      "subheading": "Your Growth Partner."
+    },
+    "addOns": [
+      {
+        "_key": "a1",
+        "category": "Performance & UX",
+        "description": [
+          {
+            "_key": "65a0158071c8",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "f0624f788e3c",
+                "_type": "span",
+                "marks": [],
+                "text": "Turn your website into a native-like app. Works offline, installs on home screen, push notifications."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          },
+          {
+            "_key": "7041a8c51692",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "23b283d55a83",
+                "_type": "span",
+                "marks": [],
+                "text": "\n"
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Progressive Web App (Offline, install)",
+        "preselected": true,
+        "price": 2500
+      },
+      {
+        "_key": "a2",
+        "category": "Client Experience",
+        "description": [
+          {
+            "_key": "6abb51f8b224",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "fd21dc4cd2a6",
+                "_type": "span",
+                "marks": [],
+                "text": "Private login area for your clients. View reports, invoices, project status, live analytics. Built with React + beautiful charts."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Client Portal / Dashboard (React widgets)",
+        "preselected": false,
+        "price": 4000
+      },
+      {
+        "_key": "a3",
+        "category": "Functionality",
+        "description": [
+          {
+            "_key": "8a0852cdf8c7",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "517fe9f45977",
+                "_type": "span",
+                "marks": [],
+                "text": "Lightning-fast search across thousands of pages/products. Autocomplete, filters, typo tolerance. Used by Telegram, Medium, Laravel. Perfect for "
+              },
+              {
+                "_key": "a861f2c127d5",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "blogs, e-commerce, or documentation sites."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Advanced Search (Algolia / Typesense)Advanced Search (Algolia / Typesense)",
+        "preselected": false,
+        "price": 60000
+      },
+      {
+        "_key": "a4",
+        "category": "Revenue",
+        "description": [
+          {
+            "_key": "fca8bac2f447",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "09023c7adeb0",
+                "_type": "span",
+                "marks": [],
+                "text": "Full membership system: paywall content, user roles, subscriptions via Chapa/Telegram, login with Google/Email. "
+              },
+              {
+                "_key": "a0ef94208f7d",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Start charging monthly for premium content."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Membership / SaaS Content (NextAuth)",
+        "preselected": false,
+        "price": 80000
+      },
+      {
+        "_key": "5af89767cc39",
+        "_type": "addon",
+        "category": "Optimization",
+        "description": [
+          {
+            "_key": "4d6c60e1d3fa",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "2df1d74d2e77",
+                "_type": "span",
+                "marks": [],
+                "text": "Connect Google Optimize or custom A/B tests. "
+              },
+              {
+                "_key": "eba1efd3affd",
+                "_type": "span",
+                "marks": [
+                  "strong"
+                ],
+                "text": "Test headlines, buttons, layouts. Increase conversion by 30–200%."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "A/B Testing Integration",
+        "preselected": false,
+        "price": 8000
+      },
+      {
+        "_key": "27e1c33cdaa8",
+        "_type": "addon",
+        "category": "Multi-Language Integration (Custom)",
+        "description": [
+          {
+            "_key": "0e0e6c0ecc53",
+            "_type": "block",
+            "children": [
+              {
+                "_key": "f01117050a22",
+                "_type": "span",
+                "marks": [],
+                "text": "Full Amharic + English (or any language) site. Automatic language switcher, RTL support, translated URLs."
+              }
+            ],
+            "markDefs": [],
+            "style": "normal"
+          }
+        ],
+        "name": "Full Amharic + English (or any language) site. Automatic language switcher, RTL support, translated URLs.",
+        "preselected": false,
+        "price": 12200
+      }
+    ],
+    "bonusGift": {
+      "countdownHours": 1,
+      "ctaText": "Claim Your Exclusive Gifts Now",
+      "enabled": true,
+      "gifts": [
+        {
+          "_key": "0e353d378431",
+          "description": "Focus on keeping your website fresh and functioning smoothly after launch.",
+          "features": [
+            "Regular Security Checks",
+            "Performance Monitoring",
+            "Minor Bug Fixes",
+            "Peace of Mind"
+          ],
+          "icon": "🛡️",
+          "title": "Free Website Maintenance for 6 Months",
+          "value": 600
+        },
+        {
+          "_key": "3b7088a3f9c9",
+          "description": "Get your website up and running with confidence! Reliable hosting for a full year.",
+          "features": [
+            "Secure & Reliable Hosting",
+            "Technical Support",
+            "Easy Management",
+            "Cost Savings"
+          ],
+          "icon": "🌐",
+          "title": "Free Domain + 1-Year Hosting Service",
+          "value": 1200
+        }
+      ],
+      "headline": "Unlock Your VIP Perks",
+      "urgencyMessage": "Limited Time Only - These Bonuses Vanish Soon!"
+    },
+    "caseStudy": {
+      "badge": {
+        "icon": "Sparkles ",
+        "text": "Case Study "
+      },
+      "cta": {
+        "text": "More Case Study ",
+        "url": "/service/web-design "
+      },
+      "description": "We don't just build websites; we build business assets. Here are a few of our recent\nsuccess stories showcasing the impact we deliver.",
+      "enabled": true,
+      "heading": "Delivering Results:",
+      "projects": [
+        {
+          "_key": "bfe60789395a",
+          "color": "from-orange-500 to-yellow-500",
+          "icon": "Layout",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-44d6a395e1e4ada00067b645cacad7100a4a48ec-2854x9658-png",
+              "_type": "reference"
+            }
+          },
+          "industry": "Furniture ",
+          "name": "Muko ",
+          "result": "🚀 Launched in 2 Weeks",
+          "url": "https://aligoo-digital.agency/case-study/muko"
+        },
+        {
+          "_key": "45ebe60161c8",
+          "color": "from-orange-500 to-yellow-500",
+          "icon": "Layout",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-44d6a395e1e4ada00067b645cacad7100a4a48ec-2854x9658-png",
+              "_type": "reference"
+            }
+          },
+          "industry": "Law Firm ",
+          "name": "Zay Law Office ",
+          "result": "95 page speed Score",
+          "url": "https://aligoo-digital.agency/case-study/zaylawoffice"
+        }
+      ],
+      "subheading": "Digital Excellence Unveiled"
+    },
+    "comparisonTable": {
+      "groups": [
+        {
+          "_key": "7a3a7806e4a7",
+          "_type": "group",
+          "backgroundColor": "#1f2937",
+          "groupTitle": "Basic Details ",
+          "items": [
+            {
+              "_key": "885096e95206",
+              "_type": "featureRow",
+              "basic": "✔",
+              "enterprise": "✔",
+              "feature": "Project Strategy",
+              "pro": "✔"
+            },
+            {
+              "_key": "63d0ab90f61f",
+              "_type": "featureRow",
+              "basic": "7 pages ",
+              "enterprise": "Unlimited ",
+              "feature": "No of Pages ",
+              "pro": "15 pages "
+            },
+            {
+              "_key": "05561c02cd4e",
+              "_type": "featureRow",
+              "basic": "1 rounds ",
+              "enterprise": "* Unlimited revisions within reason ",
+              "feature": "Revision ",
+              "note": "This is the number of rounds that clients could give ",
+              "pro": "Standard number of revisions 2-3 rounds"
+            },
+            {
+              "_key": "be85b617cbfa",
+              "_type": "featureRow",
+              "basic": "< 500 ms, LH 85",
+              "enterprise": "<300 ms, LH 100",
+              "feature": "Core Web Vitals budget promise",
+              "pro": "< 400 ms, LH 90"
+            }
+          ]
+        },
+        {
+          "_key": "4983802a4737",
+          "_type": "group",
+          "backgroundColor": "#f59e0b",
+          "groupTitle": "SEO",
+          "items": [
+            {
+              "_key": "bc9f5c2afffd",
+              "_type": "featureRow",
+              "basic": "Top 5 pages",
+              "enterprise": "Full Site ",
+              "feature": "Keyword mapping ",
+              "pro": "Upto 10 pages"
+            },
+            {
+              "_key": "5af01a715025",
+              "_type": "featureRow",
+              "basic": "Meta and Title Only",
+              "enterprise": "✔",
+              "feature": "Meta titles, descriptions, OG, schema",
+              "pro": "✔"
+            },
+            {
+              "_key": "51db7132d472",
+              "_type": "featureRow",
+              "basic": "✗",
+              "enterprise": "Advanced ",
+              "feature": "XML sitemap + GSC submit",
+              "pro": "Advanced "
+            },
+            {
+              "_key": "1a292f11bf57",
+              "_type": "featureRow",
+              "basic": "GBP",
+              "enterprise": "✔",
+              "feature": "Listing Building ",
+              "pro": "✔"
+            },
+            {
+              "_key": "4d1b29ee2fac",
+              "_type": "featureRow",
+              "basic": "✗",
+              "enterprise": "✔",
+              "feature": "Search console (Monitoring)",
+              "pro": "✔"
+            }
+          ]
+        }
+      ],
+      "recommendedPackage": "enterprise"
+    },
+    "faq": {
+      "badgeText": "Common Questions",
+      "enabled": true,
+      "highlightedText": "We've Got Answers.",
+      "items": [
+        {
+          "_key": "9aeeb1993d89",
+          "answer": "Yes, absolutely. Once the final payment is made, you have 100% ownership of all source code, design assets, and intellectual property. We don't lock you in.",
+          "question": "Do I own the code and design after the project?"
+        },
+        {
+          "_key": "8c3f92c67b05",
+          "answer": "We include dedicated revision rounds in every package. We start with a mood board to align on style, and we don't move to development until you're thrilled with the design.",
+          "question": "What if I don't like the initial design concepts?"
+        },
+        {
+          "_key": "28ddbd3006a3",
+          "answer": "Typical timelines are 4-6 weeks for most projects. We provide a detailed week-by-week schedule during the kickoff meeting so you always know what to expect.",
+          "question": "How long will the project take to complete?"
+        },
+        {
+          "_key": "e7ee5f429f11",
+          "answer": "Yes! We include 30 days of complimentary post-launch support to fix any bugs and help you get settled. We also offer ongoing maintenance packages if you need long-term peace of mind.",
+          "question": "Is there support after the website goes live?"
+        },
+        {
+          "_key": "2a3cfa555e54",
+          "answer": "Definitely. We build with modern CMS (Content Management Systems) like Sanity.io, making it incredibly easy for you to edit text, images, and blog posts without touching a line of code.",
+          "question": "Can I update the website content myself?"
+        }
+      ],
+      "mainHeading": "Got Questions?"
+    },
+    "hero": {
+      "backgroundImage": {
+        "_type": "image",
+        "asset": {
+          "_ref": "image-2b9510a024491bc4c9f760599ec0c23c1b4b6686-1200x720-png",
+          "_type": "reference"
+        }
+      },
+      "subtitle": "A conversion-focused, mobile-first website with complete brand identity that makes you stand out in 2026.\n",
+      "title": "Custom Website "
+    },
+    "mockupShowcase": {
+      "description": "Building on the insights from the discovery and planning phase, we translate client needs into a high-converting landing page. This mockup demonstrates how we can transform your vision into a powerful lead generation tool.",
+      "enabled": true,
+      "title": "Putting Our Process into Action"
+    },
+    "nextSteps": {
+      "enabled": true,
+      "steps": [
+        {
+          "_key": "150a3d885d47",
+          "_type": "stepItem",
+          "color": "from-purple-500 to-pink-500",
+          "description": "Review our package options and select the one that fits your goals and budget. Customize with powerful add-ons.",
+          "details": [
+            "Compare all package features",
+            "See transparent pricing breakdown",
+            "Add optional features and add-ons",
+            "Calculate your total investment",
+            "Lock in exclusive bonuses"
+          ],
+          "faqs": [
+            {
+              "_key": "9eadce3ad176",
+              "_type": "faqItem",
+              "answer": "Yes! You can upgrade your package anytime before signing the contract.",
+              "question": "Can I change my package later?"
+            },
+            {
+              "_key": "f61eef720af7",
+              "_type": "faqItem",
+              "answer": "We offer custom add-ons and can tailor any package to your specific needs.",
+              "question": "What if I need custom features?"
+            }
+          ],
+          "number": 1,
+          "status": "current ",
+          "timeEstimate": "~10 minutes",
+          "title": "Choose Your Perfect Package"
+        },
+        {
+          "_key": "31983bf76e8a",
+          "_type": "stepItem",
+          "color": "from-[#FF595E] to-orange-500",
+          "description": "Review the terms, sign digitally, and lock in your exclusive bonuses. Takes less than 5 minutes.",
+          "details": [
+            "Review contract terms and conditions",
+            "Digital signature (no printing required)",
+            "Secure your exclusive bonus gifts",
+            "Instant confirmation email"
+          ],
+          "faqs": [
+            {
+              "_key": "d9dab734021a",
+              "_type": "faqItem",
+              "answer": "Yes! Contact us before signing if you need any modifications.",
+              "question": "Can I make changes to the contract?"
+            },
+            {
+              "_key": "89f7695e3cb1",
+              "_type": "faqItem",
+              "answer": "Yes, our digital signatures are legally valid and secure.",
+              "question": "Is the signature legally binding?"
+            }
+          ],
+          "number": 2,
+          "timeEstimate": "~5 minutes",
+          "title": "Review & Sign Your Agreement"
+        },
+        {
+          "_key": "9ead48273701",
+          "_type": "stepItem",
+          "color": "from-orange-500 to-yellow-500",
+          "description": "Secure your project slot with a 50% deposit. Multiple payment options available for your convenience.",
+          "details": [
+            "Pay 50% deposit to start",
+            "Multiple payment methods accepted",
+            "Secure payment processing",
+            "Instant receipt and confirmation"
+          ],
+          "faqs": [
+            {
+              "_key": "b66a1a986e02",
+              "_type": "faqItem",
+              "answer": "We accept bank transfers, mobile money, and major credit cards.",
+              "question": "What payment methods do you accept?"
+            },
+            {
+              "_key": "399537d09090",
+              "_type": "faqItem",
+              "answer": "The final payment is due upon project completion and approval.",
+              "question": "When is the remaining 50% due?"
+            }
+          ],
+          "number": 3,
+          "timeEstimate": "~5 minutes",
+          "title": "Make Your Deposit Payment"
+        },
+        {
+          "_key": "555c7950f670",
+          "_type": "stepItem",
+          "color": "from-cyan-500 to-blue-500",
+          "description": "We'll schedule a kickoff call to discuss your vision, goals, and timeline. Then we get to work bringing your website to life!",
+          "details": [
+            "Schedule your kickoff meeting",
+            "Discuss project goals and vision",
+            "Meet your dedicated team",
+            "Start building your website!"
+          ],
+          "faqs": [
+            {
+              "_key": "d89793da403a",
+              "_type": "faqItem",
+              "answer": "Typical projects are completed in 4-6 weeks, depending on complexity.",
+              "question": "How long until my website is live?"
+            },
+            {
+              "_key": "e79aceba7fea",
+              "_type": "faqItem",
+              "answer": "Absolutely! We include revision rounds to ensure you love the final result.",
+              "question": "Can I request changes during development?"
+            }
+          ],
+          "number": 4,
+          "timeEstimate": "~1 hour",
+          "title": "Project Kickoff Meeting"
+        }
+      ],
+      "subtitle": "We've made it simple. Here's exactly what happens after you choose your package.",
+      "title": "Your Path to Launch"
+    },
+    "packagePricing": {
+      "basic": 30000,
+      "enterprise": 120000,
+      "pro": 65000
+    },
+    "roadmap": {
+      "enabled": true,
+      "phases": [
+        {
+          "_key": "35758532d927",
+          "_type": "phaseItem",
+          "color": "green"
+        }
+      ]
+    },
+    "slug": {
+      "_type": "slug",
+      "current": "web-design-branding"
+    },
+    "testimonials": {
+      "badgeText": "Client Success Stories",
+      "enabled": true,
+      "highlightedText": "Industry Leaders",
+      "items": [
+        {
+          "_key": "32a94f5946d5",
+          "company": "zay law office ",
+          "content": "The web Developing company Aligoo and its founding partner Daniel has been very compassionate and timely in delivering their development. I also like to thank Daniel for his relentless effort of making time for this project and his unwavering commitment to his work. I had a pleasure working with them !!!",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-7db7b89df35d38680b8fc0800f126ff993e621c5-256x256-png",
+              "_type": "reference"
+            }
+          },
+          "name": "Zelalem Sima",
+          "rating": 5,
+          "role": "CEO, Zelalem Law Office"
+        },
+        {
+          "_key": "194d396f9c2d",
+          "company": "Charity Foundation",
+          "content": "Overall very pleased with Daniel and his friendliness with Me. He did everything I asked in a timely matter. I will definitely be recommending him to other companies. Thanks for such good work.",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-45b2be84eff3891b826b597de6b19eccbf5bd8c2-150x150-webp",
+              "_type": "reference"
+            }
+          },
+          "name": "Tenbit Ermiyas",
+          "rating": 5,
+          "role": "Marketing Manager, Charity Foundation"
+        },
+        {
+          "_key": "b91af039e487",
+          "company": "Hirtu Export ",
+          "content": "Well experienced web designer",
+          "image": {
+            "_type": "image",
+            "asset": {
+              "_ref": "image-167b4834d09654a261e69dd1b8cd163918a63116-564x423-jpg",
+              "_type": "reference"
+            }
+          },
+          "name": "Ephrem ",
+          "rating": 4,
+          "role": "CEO, Hirtu Export"
+        }
+      ],
+      "mainHeading": "Trusted by "
+    },
+    "timeline": {
+      "enabled": true,
+      "items": [
+        {
+          "_key": "fff2254a593b",
+          "description": "1. Initial consultation to discuss your business goals and target audience \n2. Competitive analysis to understand your industry landscape \n3. Development of a tailored Facebook Ads strategy aligned with your objectives.\n4. Audience research and creation of targeted personas.4\n",
+          "title": "Project Kick-Off & Strategy Development",
+          "week": "WEEK-1"
+        },
+        {
+          "_key": "6adb00e35b6e",
+          "description": "1. Account setup and campaign structure development.\n2. Keyword research and selection for ad targeting.\n3. Development of compelling ad copy and visuals (images/videos).\n4. Landing page review and optimization recommendations.",
+          "title": "Campaign Setup & Creative Development",
+          "week": "WEEK-2"
+        },
+        {
+          "_key": "cb7a90081189",
+          "description": "1. Launch of your Facebook Ads campaigns across chosen platforms.\n2. A/B testing of different ad variations to optimize performance.\n3. Close monitoring of initial campaign performance metrics.",
+          "title": "Campaign Launch & Initial Monitoring",
+          "week": "WEEK-3"
+        },
+        {
+          "_key": "4e63014e8711",
+          "description": "1.Analysis of campaign data and identification of areas for improvement.\n2.Optimization of ad copy, targeting, and budget allocation based on data insights.\n3.Creation of a comprehensive weekly performance report for your review.\n4. Client communication and discussion of ongoing strategy adjustments.",
+          "title": "Optimization & Reporting",
+          "week": "WEEK-4"
+        }
+      ],
+      "sectionTitle": "Your Roadmap to Web Design Success:  A Month-by-Month Breakdown"
+    },
+    "title": "Web Design & Branding"
+  },
+  {
+    "_createdAt": "2025-11-26T08:55:26Z",
+    "_id": "team-member-001",
+    "_rev": "jwRJFHQMh5Tfs6PXqqqrMt",
+    "_system": {
+      "base": {
+        "id": "team-member-001",
+        "rev": "jwRJFHQMh5Tfs6PXqqYTyR"
+      }
+    },
+    "_type": "teamMember",
+    "_updatedAt": "2025-11-26T11:52:09Z",
+    "email": "daniaregawi3@gmail.com",
+    "name": "Amanuel Tesfaye",
+    "phone": "+251911223344",
+    "role": "admin"
+  },
+  {
+    "_createdAt": "2025-11-26T08:55:26Z",
+    "_id": "team-member-002",
+    "_rev": "jwRJFHQMh5Tfs6PXqqYTyR",
+    "_type": "teamMember",
+    "_updatedAt": "2025-11-26T08:55:26Z",
+    "name": "Selamawit Kebede",
+    "phone": "+251912345678",
+    "role": "sales"
+  },
+  {
+    "_createdAt": "2025-11-26T08:55:26Z",
+    "_id": "team-member-003",
+    "_rev": "jwRJFHQMh5Tfs6PXqqYTyR",
+    "_type": "teamMember",
+    "_updatedAt": "2025-11-26T08:55:26Z",
+    "name": "Yonas Alemayehu",
+    "phone": "+251933445566",
+    "role": "manager"
+  }
+]

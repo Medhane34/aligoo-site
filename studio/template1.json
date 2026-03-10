@@ -1,0 +1,49 @@
+{
+  "_id": "a151d14c-3573-49a2-b9e3-cbcb546332eb",
+  "_type": "faqSection",
+  "ctaHref_am": "https://aligoo-digital.agency/strategy-session",
+  "ctaHref_en": "https://aligoo-digital.agency/strategy-session",
+  "ctaText_en": "GOT MORE QUESTIONS? ASK",
+  "ctaText_am": "ተጨማሪ ጥያቄ አለህ? ጠይቀን!",
+  "eyebrow_am": "ጥያቄ አለህ?",
+  "eyebrow_en": "You’ve Got Questions",
+  "faqs_am": [
+    {
+      "_key": "52cddda18f58",
+      "question": "ውጤት መቼ ይታያል?",
+      "answer": "በአቅርቦትህ፣ በታዳሚዎችህ፣ እና በበጀትህ ላይ የተመረኮዘ ነው — ነገር ግን አብዛኞቹ ዘመቻዎች በ1–2 ሳምንት ውስጥ ውጤት ይጀምራሉ። ብዙውን ጊዜ ለ2–4 ሳምንት እንሞክራለን ከዚያም እናሰፋለን።"
+    },
+    {
+      "_key": "5660e10c7c6f",
+      "question": "ማስታወቂያ ቪዥዋልና ኮፒ ትፈጥራላችሁ?",
+      "answer": "አዎ። ሁሉንም ኮፒ እንጽፋለን፣ ስታቲክ ክሬቲቭ እንዘረጋለን፣ ቪዲዮም እንቀንጅለን — ሁሉም ለሽያጭ የተመቻቹ።"
+    },
+    {
+      "_key": "404cf5ed3ded",
+      "question": "ማስታወቂያው ካልሰራ ምን ይሆን?",
+      "answer": "ምንም ኤጀንሲ ሽያጭ ማረጋገጥ አይችልም — ነገር ግን እኛ እርምጃ እናረጋግጣለን። ዘመቻው ካልተለወጠ ወደ ጥልቅ እንገባለን፣ አቅጣጫ እንቀይራለን፣ አዲስ አንግል እንሞክራለን። ትኩረታችን ቀጣይነት ያለው ማሻሻያ ነው፣ ኮፒ-ፔስት መፍትሄ አይደለም።"
+    }
+  ],
+  "faqs_en": [
+    {
+      "_key": "52cddda18f58",
+      "answer": "It depends on your offer, audience, and budget — but most campaigns see traction within 1–2 weeks. We usually test for 2–4 weeks before scaling.\n\n\n",
+      "question": "How soon can I expect results?"
+    },
+    {
+      "_key": "5660e10c7c6f",
+      "answer": "Yes. We write all the copy, design static creatives, and edit videos — all optimized for conversion.\n\n\n",
+      "question": "Do you create ad visuals and copy?"
+    },
+    {
+      "_key": "404cf5ed3ded",
+      "answer": "No agency can guarantee sales — but we guarantee action. If a campaign isn’t converting, we’ll dig in, pivot, and test new angles. Our focus is on continuous improvement, not cookie-cutter solutions.\n\n",
+      "question": "What if the ads don't work?"
+    }
+  ],
+  "heading_am": "ነገሮችን ግልጽ እናድርግ",
+  "heading_en": "Let’s Clear Things Up",
+  "name": "faqSection-Fb",
+  "subheading_am": "ምንም ተረት ተረት፣ ምንም ግልጽ ያልሆነ መልስ። ስለ አገልግሎታችን በብዛት ስለሚነሱ ጥያቄዎች ቀና መልሶች ብቻ።",
+  "subheading_en": "No fluff, no vague answers. Just honest responses to the most common questions we get about our services."
+}

@@ -1,0 +1,13 @@
+User-agent: *
+
+Allow: /
+
+# Optional: Block specific internal paths
+Disallow: /telegram/
+Disallow: /proposal/
+
+# Sitemap
+Sitemap: https://aligoo-digital.agency/sitemap.xml
+
+# Optional: Slow down crawlers if your site experiences high crawl rates (check in Search Console Crawl Stats)
+# Crawl-delay: 10

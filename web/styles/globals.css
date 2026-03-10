@@ -1,0 +1,160 @@
+/* ---------------------------------------------------
+   Tailwind v4 Base Import
+--------------------------------------------------- */
+@import "tailwindcss";
+
+
+/* ---------------------------------------------------
+   Global Light / Dark Variables
+--------------------------------------------------- */
+html.light {
+  --background: #F9FAFB;
+  --text: #1F2937;
+}
+
+html.dark {
+  --background: #080404;
+  --text: #F9FAFB;
+}
+
+/* ---------------------------------------------------
+   Global Base Styles
+--------------------------------------------------- */
+html,
+body {
+  max-width: 100%;
+  overflow-x: hidden;
+  background: var(--background);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Fix layout issues with containers using vw */
+.container,
+.max-w-full {
+  max-width: 100%;
+}
+
+/* ---------------------------------------------------
+   Custom Fonts
+--------------------------------------------------- */
+@font-face {
+  font-family: 'Chiret';
+  src: url('/fonts/Chiret-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Noto Sans Ethiopic';
+  src: url('/fonts/NotoSansEthiopic-VariableFont_wdth,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------
+   Custom Typographic Utilities (responsive)
+   MUST be at the bottom to override Tailwind
+--------------------------------------------------- */
+@layer utilities {
+  /* Heading */
+  .text-heading {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+  }
+
+  @media (min-width: 640px) {
+    .text-heading {
+      font-size: 2rem;
+      line-height: 2.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .text-heading {
+      font-size: 2.25rem;
+      line-height: 2.75rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .text-heading {
+      font-size: 2.5rem;
+      line-height: 3rem;
+    }
+  }
+
+  /* Subheading */
+  .text-subheading {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .text-subheading {
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .text-subheading {
+      font-size: 1.5rem;
+      line-height: 2rem;
+    }
+  }
+
+  /* Body */
+  .text-body {
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  /* Small text */
+  .text-small {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+}
+
+/* Added marquee animations for testimonials section */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+/* Added missing utility classes to apply the marquee animations */
+.animate-marquee {
+  animation: marquee var(--duration) linear infinite;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+/* ---------------------------------------------------
+   Performance & Layout Optimization
+--------------------------------------------------- */
+.section-deferred {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px; /* Placeholder size to prevent layout shift */
+}
