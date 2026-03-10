@@ -2,7 +2,9 @@ import {
   fetchHeroSection,
   HeroSectionData,
 } from "@/lib/services/contentMarketing";
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSectionStable";
+
+// import";
 
 export default async function HeroMarketingWrapper({
   lang = "en",

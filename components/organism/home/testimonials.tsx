@@ -86,12 +86,13 @@ export default function TestimonialsSectionScroll({
   return (
     <section className="mb-24" id="testimonials">
       <div className="mx-auto max-w-7xl">
-        <div className="mx-auto max-w-[540px] item-center">
+        <div className="mx-auto max-w-[540px] text-center">
           <BadgeAtom
-            className="item-center"
-            color="orange"
+
+            color="red"
             icon={<Clock className="w-4 h-4" />}
             variant="filled"
+            align="center"
           >
             Testimonials
           </BadgeAtom>

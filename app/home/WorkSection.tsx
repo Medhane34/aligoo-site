@@ -1,7 +1,7 @@
 // components/sections/WorkSection.tsx
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowUpRight, Briefcase } from "lucide-react";
@@ -114,86 +114,88 @@ export default function WorkSection({ casestudyPosts }: HomeCaseStudyWrapper) {
         </div>
 
         {/* Bento Grid */}
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-6 gap-6"
-          initial="hidden"
-          variants={containerVariants}
-          viewport={{ once: true, margin: "-50px" }}
-          whileInView="visible"
-        >
-          {paddedCaseStudyPosts.map((study, index) => {
-            // Layout Logic:
-            // First 3 items: 2 columns each (3 items * 2 = 6 total width)
-            // Next 2 items: 3 columns each (2 items * 3 = 6 total width)
-            const colSpanClass = index < 3 ? "md:col-span-2" : "md:col-span-3";
-            const heightClass = index < 3 ? "h-[400px]" : "h-[450px]";
+        <LazyMotion features={domAnimation}>
+          <m.div
+            className="grid grid-cols-1 md:grid-cols-6 gap-6"
+            initial="hidden"
+            variants={containerVariants}
+            viewport={{ once: true, margin: "-50px" }}
+            whileInView="visible"
+          >
+            {paddedCaseStudyPosts.map((study, index) => {
+              // Layout Logic:
+              // First 3 items: 2 columns each (3 items * 2 = 6 total width)
+              // Next 2 items: 3 columns each (2 items * 3 = 6 total width)
+              const colSpanClass = index < 3 ? "md:col-span-2" : "md:col-span-3";
+              const heightClass = index < 3 ? "h-[400px]" : "h-[450px]";
 
-            return (
-              <motion.div
-                key={study._id + index}
-                className={`col-span-1 ${colSpanClass}`}
-                variants={cardItemVariants}
-              >
-                <Link
-                  className="block h-full"
-                  href={`/case-study/${study.slug}`}
+              return (
+                <m.div
+                  key={study._id + index}
+                  className={`col-span-1 ${colSpanClass}`}
+                  variants={cardItemVariants}
                 >
-                  <CardMolecule
-                    className={`relative ${heightClass} w-full group p-0 overflow-hidden border-0`}
-                    padding="none"
-                    variant="spotlight"
+                  <Link
+                    className="block h-full"
+                    href={`/case-study/${study.slug}`}
                   >
-                    {/* Background Image */}
-                    <Image
-                      fill
-                      alt={study.title}
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
-                      src={
-                        study.imageUrl ||
-                        "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                      }
-                    />
+                    <CardMolecule
+                      className={`relative ${heightClass} w-full group p-0 overflow-hidden border-0`}
+                      padding="none"
+                      variant="spotlight"
+                    >
+                      {/* Background Image */}
+                      <Image
+                        fill
+                        alt={study.title}
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        src={
+                          study.imageUrl ||
+                          "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                        }
+                      />
 
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300" />
 
-                    {/* Content */}
-                    <div className="absolute inset-0 p-6 flex flex-col justify-between">
-                      {/* Top Badge */}
-                      <div className="self-start opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100">
-                        <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider border border-white/10">
-                          {study.service || "Case Study"}
-                        </span>
-                      </div>
+                      {/* Content */}
+                      <div className="absolute inset-0 p-6 flex flex-col justify-between">
+                        {/* Top Badge */}
+                        <div className="self-start opacity-0 -translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 delay-100">
+                          <span className="px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white text-xs font-bold uppercase tracking-wider border border-white/10">
+                            {study.service || "Case Study"}
+                          </span>
+                        </div>
 
-                      {/* Bottom Text */}
-                      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 className="text-2xl font-bold text-white mb-2 leading-tight">
-                          {study.title}
-                        </h3>
+                        {/* Bottom Text */}
+                        <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                          <h3 className="text-2xl font-bold text-white mb-2 leading-tight">
+                            {study.title}
+                          </h3>
 
-                        {/* Slide-up Details */}
-                        <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
-                          <div className="overflow-hidden">
-                            <p className="text-gray-300 text-sm line-clamp-3 pt-2 border-t border-white/20 mt-2">
-                              {study.challengeSummary ||
-                                study.goalsSummary ||
-                                "Discover how we helped this client achieve their goals through innovative digital solutions."}
-                            </p>
-                            <div className="mt-4 flex items-center gap-2 text-brand-primary font-medium text-sm">
-                              Read Case Study{" "}
-                              <ArrowUpRight className="w-4 h-4" />
+                          {/* Slide-up Details */}
+                          <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
+                            <div className="overflow-hidden">
+                              <p className="text-gray-300 text-sm line-clamp-3 pt-2 border-t border-white/20 mt-2">
+                                {study.challengeSummary ||
+                                  study.goalsSummary ||
+                                  "Discover how we helped this client achieve their goals through innovative digital solutions."}
+                              </p>
+                              <div className="mt-4 flex items-center gap-2 text-brand-primary font-medium text-sm">
+                                Read Case Study{" "}
+                                <ArrowUpRight className="w-4 h-4" />
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </CardMolecule>
-                </Link>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+                    </CardMolecule>
+                  </Link>
+                </m.div>
+              );
+            })}
+          </m.div>
+        </LazyMotion>
 
         {/* Mobile Button (visible only on small screens) */}
         <div className="mt-12 flex justify-center md:hidden">

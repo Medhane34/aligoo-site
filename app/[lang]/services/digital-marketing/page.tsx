@@ -1,12 +1,45 @@
 /* eslint-disable prettier/prettier */
 
+import { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
+import dynamic from "next/dynamic";
+
 import Container from "@/components/ui/Container";
 import HeroDigitalSectionWrapper from "@/wrappers/services/digital-marketing/HeroDigitalWrapper";
-import WhyDigitalWorksSectionWrapper from "@/wrappers/services/digital-marketing/WhyDigitalWorksWrappers";
-import DigitalProcessSectionWrapper from "@/wrappers/services/digital-marketing/OurProcessDigitalWrappers";
-import DigitalWhoThisIsForSectionWrapper from "@/wrappers/services/digital-marketing/DigitalWhoThisWrapper";
-import DigitalFaqTikTokSectionWrapper from "@/wrappers/services/digital-marketing/DigitalFaqWrapper";
-import CTATikTokSectionWrapper from "@/wrappers/services/TikTok-ad/CtaTikTokWrapper";
+
+const WhyDigitalWorksSectionWrapper = dynamic(() =>
+  import("@/wrappers/services/digital-marketing/WhyDigitalWorksWrappers"),
+);
+const DigitalProcessSectionWrapper = dynamic(() =>
+  import("@/wrappers/services/digital-marketing/OurProcessDigitalWrappers"),
+);
+const DigitalWhoThisIsForSectionWrapper = dynamic(() =>
+  import("@/wrappers/services/digital-marketing/DigitalWhoThisWrapper"),
+);
+const DigitalFaqTikTokSectionWrapper = dynamic(() =>
+  import("@/wrappers/services/digital-marketing/DigitalFaqWrapper"),
+);
+const CTATikTokSectionWrapper = dynamic(() =>
+  import("@/wrappers/services/TikTok-ad/CtaTikTokWrapper"),
+);
+const ServiceRecentBlogs = dynamic(() =>
+  import("@/components/organism/blog/ServiceRecentBlogs"),
+);
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "am" }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = lang === "am" ? "am" : "en";
+  return createPageMetadata({
+    pathnameWithoutLang: "/services/digital-marketing",
+    currentLang: locale,
+    title: locale === "am" ? "አሊጎ ዲጂታል ማርኬቲንግ ስትራቴጂ አግልግሎት| Aligoo" : "Digital Marketing Strategy | Aligoo Digital Agency",
+    description:
+      locale === "am"
+        ? "የሚያሸንፍ ዲጂታል ማርኪቲንግ ስትራቴጂ ይፈልጋሉ? አሊጎ ሁሉንም ዲጂታል ቻናሎችህን — ማስታወቂያ፣ SEO፣ ኮንተንት — ወደ አንድ ብቻ ግብ ያስተካክላል፡ እድገት። ከአሁን ጀምሮ ሁሉም ነገር በአንድ አቅጣጫ ይሰራል — እና ያ አቅጣጫ ቢዝነስህን ወደ ፊት የሚያራምድ ነው። 🚀"
+        : "Need a winning digital marketing strategy? Aligoo aligns all your digital channels — ads, SEO, content — toward one goal: growth.",
+  });
+}
+
 
 const webWhyContent = {
   heading: "Why Digital Marketing Strategy Still Works(When Done",
@@ -31,20 +64,31 @@ export default async function IndexPage({ params }: { params: Promise<{ lang: "e
     <>
       <HeroDigitalSectionWrapper lang={lang} />
       <Container>
-     <WhyDigitalWorksSectionWrapper id="whyServiceWorksSection-Digital" lang={lang} />
+        <WhyDigitalWorksSectionWrapper id="whyServiceWorksSection-Digital" lang={lang} />
       </Container>
-      <DigitalProcessSectionWrapper lang={lang} />
+      <div className="section-deferred">
+        <DigitalProcessSectionWrapper lang={lang} />
+      </div>
       <Container>
-      <DigitalWhoThisIsForSectionWrapper lang={lang} /> 
-   </Container>
+        <div className="section-deferred">
+          <DigitalWhoThisIsForSectionWrapper lang={lang} />
+        </div>
+      </Container>
 
-   
-  <Container>
-    <DigitalFaqTikTokSectionWrapper lang={lang}/>
-</Container>
-<Container>
-      <CTATikTokSectionWrapper lang={lang}/>
-  </Container> 
+
+      <Container>
+        <div className="section-deferred">
+          <DigitalFaqTikTokSectionWrapper lang={lang} />
+        </div>
+      </Container>
+      <Container>
+        <div className="section-deferred">
+          <CTATikTokSectionWrapper lang={lang} />
+        </div>
+      </Container>
+      <div className="section-deferred">
+        <ServiceRecentBlogs categorySlug="digital-marketing" serviceName="Digital Marketing" lang={lang} />
+      </div>
     </>
   );
 }

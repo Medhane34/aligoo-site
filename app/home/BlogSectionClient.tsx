@@ -1,7 +1,7 @@
 "use client";
 import React, { useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import NextImage from "next/image";
 import { Card, CardHeader, CardBody, CardFooter } from "@heroui/react";
 import { Divider } from "@heroui/divider";
@@ -34,7 +34,7 @@ const BlogPost = ({
 }) => (
   <Link
     className="block h-full w-96 flex-shrink-0 snap-center"
-    href={`/blog/${slug}`}
+    href={`/${lang}/blog/${slug}`}
   >
     <Card className="h-full flex flex-col overflow-hidden border-0 bg-card shadow-sm hover:shadow-brand transition-shadow duration-300">
       {/* Image Container with Category Badge */}
@@ -71,7 +71,7 @@ const BlogPost = ({
         {/* Date with Calendar Icon - Left Aligned */}
         <div className="flex items-start gap-2 text-sm text-gray-500 dark:text-gray-400">
           <Calendar className="flex-shrink-0" size={16} />
-          <span>
+          <span suppressHydrationWarning>
             {publishedAt &&
               new Date(publishedAt).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -131,22 +131,23 @@ export default function BlogSectionClient({
   };
 
   return (
-    <section className="w-full py-12 bg-background-light dark:bg-background-dark">
-      <div className="max-w-5xl mx-auto px-4">
-        <div className="flex justify-between items-center mb-8">
-          <motion.div
-            className="text-heading pb-2 xs:pb-3 sm:pb-4"
-            variants={textVariants}
-          >
-            <SectionHeading />
-            <HeadingAtom
-              highlight="Ideas, Insights & Marketing Rants"
-              size="md"
-              title="BLOGS"
-              variant="split"
-            />
-          </motion.div>
-          {/* <div className="flex space-x-2">
+    <LazyMotion features={domAnimation}>
+      <section className="w-full py-12 bg-background-light dark:bg-background-dark">
+        <div className="max-w-5xl mx-auto px-4">
+          <div className="flex justify-between items-center mb-8">
+            <m.div
+              className="text-heading pb-2 xs:pb-3 sm:pb-4"
+              variants={textVariants}
+            >
+              <SectionHeading />
+              <HeadingAtom
+                highlight="Ideas, Insights & Marketing Rants"
+                size="md"
+                title="BLOGS"
+                variant="split"
+              />
+            </m.div>
+            {/* <div className="flex space-x-2">
             <button
               aria-label="Scroll left"
               className="bg-brand-primary border rounded-md p-2 text-gray-600 hover:bg-gray-200"
@@ -163,26 +164,36 @@ export default function BlogSectionClient({
             </button>
           </div> */}
 
-          <div className="flex flex-col items-center gap-1 pb-1">
+            {/* Desktop-only: button in header row */}
+            <div className="hidden sm:flex flex-col items-center gap-1 pb-1">
+              <Link href={`/${lang}/blog`}>
+                <ButtonAtom shimmer size="md">
+                  📝 See all Blogs
+                </ButtonAtom>
+              </Link>
+            </div>
+          </div>
+          <div
+            ref={scrollRef}
+            className="overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
+          >
+            <div className="flex flex-row gap-4 transition-transform duration-200">
+              {blogs.map((post) => (
+                <BlogPost key={post._id} lang={"en"} post={post} />
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile-only: button below scroll cards, centered */}
+          <div className="flex sm:hidden justify-center mt-6">
             <Link href={`/${lang}/blog`}>
               <ButtonAtom shimmer size="md">
                 📝 See all Blogs
               </ButtonAtom>
             </Link>
-            {/* <div className="text-sm font-medium text-gray-500">4.9 out of 9</div> */}
           </div>
         </div>
-        <div
-          ref={scrollRef}
-          className="overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory"
-        >
-          <div className="flex flex-row gap-4 transition-transform duration-200">
-            {blogs.map((post) => (
-              <BlogPost key={post._id} lang={"en"} post={post} />
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </LazyMotion>
   );
 }

@@ -1,201 +1,106 @@
 // app/strategy-session/MultiStepForm.tsx
 "use client";
+
 import * as Dialog from "@radix-ui/react-dialog";
-import React, { useState } from "react";
-import { usePageLeave } from "react-use";
-import { Progress } from "@heroui/progress"; // HeroUI Progress component
-/* import { VisuallyHidden } from "@radix-ui/react-visually-hidden"; // Optional, for hiding the title */
+import React, { useEffect, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
+import ButtonAtom from "@/components/atoms/ButtonAtom";
+import HeadingAtom from "@/components/atoms/HeadingAtom";
 
-// At the top of your file
-declare global {
-  interface Window {
-    gtag?: (...args: any[]) => void;
-  }
-}
-
+// ─── Types ────────────────────────────────────────────────────────────────────
 type FormData = {
-  name: string;
-  position: string;
-  company: string;
-  product: string;
-  industry: string;
-  years: string;
-  employees: string;
-  strengths: string;
-  marketing: string;
-  online: string;
-  challenge: string;
-  pastSolutions: string;
-  timeline: string;
-  phone: string;
+  name: string; position: string; company: string; product: string;
+  industry: string; years: string; employees: string; strengths: string;
+  marketing: string; online: string; challenge: string; pastSolutions: string;
+  timeline: string; phone: string;
 };
 
 const initialData: FormData = {
-  name: "",
-  position: "",
-  company: "",
-  product: "",
-  industry: "",
-  years: "",
-  employees: "",
-  strengths: "",
-  marketing: "",
-  online: "",
-  challenge: "",
-  pastSolutions: "",
-  timeline: "",
-  phone: "",
+  name: "", position: "", company: "", product: "", industry: "",
+  years: "", employees: "", strengths: "", marketing: "", online: "",
+  challenge: "", pastSolutions: "", timeline: "", phone: "",
 };
 
+// ─── Step Definitions ─────────────────────────────────────────────────────────
 const positions = ["Business owner", "Manager", "Marketing Manager", "Other"];
-
 const employeeOptions = ["1-5", "5-10", "10-20", "20+", "Other"];
-
-const timelineOptions = [
-  "ASAP",
-  "This month",
-  "This quarter",
-  "Just exploring",
-];
+const timelineOptions = ["ASAP", "This month", "This quarter", "Just exploring"];
 
 const steps = [
-  {
-    label: "Let's start with your name! 😁",
-    field: "name",
-    type: "text",
-    required: true,
-  },
-  {
-    label: "What is your position, {name}?",
-    field: "position",
-    type: "radio",
-    options: positions,
-    required: true,
-  },
-  {
-    label: "What is the name of your company, {name}?",
-    field: "company",
-    type: "text",
-    required: true,
-  },
-  {
-    label:
-      "Can you list the product/service your company sells? Please give us a little detail what your business is about.",
-    field: "product",
-    type: "textarea",
-    required: true,
-  },
-  {
-    label:
-      "What industry does your business operate in, {name}? (e.g. Real Estate, E-commerce, Automobile...)",
-    field: "industry",
-    type: "text",
-    required: true,
-  },
-  {
-    label: "How long have you been in business, {name}?",
-    field: "years",
-    type: "text",
-    required: true,
-  },
-  {
-    label: "How many employees do you have, {name}?",
-    field: "employees",
-    type: "radio",
-    options: employeeOptions,
-    required: true,
-  },
-  {
-    label:
-      "What do you think is your company's strengths and weaknesses, {name}?",
-    field: "strengths",
-    type: "textarea",
-    required: false,
-  },
-  {
-    label:
-      "How do you promote to new customers/clients and your existing customer base, {name}? (Tell us about your team’s marketing efforts, if any!)",
-    field: "marketing",
-    type: "textarea",
-    required: false,
-  },
-  {
-    label: "Where can we find you online, {name}? (Website, socials, etc.)",
-    field: "online",
-    type: "text",
-    required: false,
-  },
-  {
-    label:
-      "What’s the biggest challenge you’re facing right now, {name}, and how is it impacting your business?",
-    field: "challenge",
-    type: "textarea",
-    required: true,
-  },
-  {
-    label:
-      "Have you made a purchase to try to solve this problem before, {name}? How did it work out for you?",
-    field: "pastSolutions",
-    type: "textarea",
-    required: false,
-  },
-  {
-    label:
-      "When do you hope to get started if we could offer a solution, {name}?",
-    field: "timeline",
-    type: "radio",
-    options: timelineOptions,
-    required: true,
-  },
-  {
-    label:
-      "Drop your phone number, {name} (we’ll only call if we have something awesome for you).",
-    field: "phone",
-    type: "text",
-    required: true,
-  },
+  { label: "Let's start with your name! 😁", field: "name", type: "text", required: true },
+  { label: "What is your position, {name}?", field: "position", type: "radio", required: true, options: positions },
+  { label: "What is the name of your company, {name}?", field: "company", type: "text", required: true },
+  { label: "Can you list the product/service your company sells? Give us a little detail.", field: "product", type: "textarea", required: true },
+  { label: "What industry does your business operate in, {name}? (e.g. Real Estate, E-commerce…)", field: "industry", type: "text", required: true },
+  { label: "How long have you been in business, {name}?", field: "years", type: "text", required: true },
+  { label: "How many employees do you have, {name}?", field: "employees", type: "radio", required: true, options: employeeOptions },
+  { label: "What are your company's strengths and weaknesses, {name}?", field: "strengths", type: "textarea", required: false },
+  { label: "How do you promote to new and existing customers, {name}? (Tell us about your marketing!)", field: "marketing", type: "textarea", required: false },
+  { label: "Where can we find you online, {name}? (Website, socials, etc.)", field: "online", type: "text", required: false },
+  { label: "What's your biggest challenge right now, {name}, and how is it impacting your business?", field: "challenge", type: "textarea", required: true },
+  { label: "Have you tried to solve this before, {name}? How did it work out?", field: "pastSolutions", type: "textarea", required: false },
+  { label: "When do you hope to get started if we could offer a solution, {name}?", field: "timeline", type: "radio", required: true, options: timelineOptions },
+  { label: "Drop your phone number, {name} (we'll only call if we have something awesome for you).", field: "phone", type: "text", required: true },
 ];
 
+// ─── Component ────────────────────────────────────────────────────────────────
 export default function MultiStepForm() {
-  // ...existing state
   const [showExitModal, setShowExitModal] = useState(false);
-
-  usePageLeave(() => setShowExitModal(true));
-
   const [data, setData] = useState<FormData>(initialData);
   const [step, setStep] = useState(0);
   const [touched, setTouched] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const exitIntentEnabled = useRef(false);
+  const exitIntentFired = useRef(false);
+
+  // ── Exit Intent – only trigger when mouse leaves toward the TOP of the viewport
+  // Adds a 2-second delay after mount before activating (gives the user time to
+  // read the form without immediately triggering on a natural scroll landing).
+  useEffect(() => {
+    const ACTIVATE_DELAY_MS = 2000;
+    const TOP_THRESHOLD_PX = 40; // pixels from top – must be moving toward browser chrome
+
+    const timer = setTimeout(() => {
+      exitIntentEnabled.current = true;
+    }, ACTIVATE_DELAY_MS);
+
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (
+        !exitIntentEnabled.current ||
+        exitIntentFired.current ||
+        e.clientY > TOP_THRESHOLD_PX // only trigger when exiting from the top
+      ) return;
+
+      exitIntentFired.current = true; // show once per session
+      setShowExitModal(true);
+    };
+
+    document.addEventListener("mouseleave", handleMouseLeave);
+    return () => {
+      clearTimeout(timer);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
 
   const current = steps[step];
   const isLast = step === steps.length - 1;
   const isFirst = step === 0;
-
-  // Progress calculation
   const progress = Math.round(((step + 1) / steps.length) * 100);
 
-  // Personalized label for every step after the first
-  const getLabel = () => {
-    if (step === 0) return current.label;
+  const getLabel = () => step === 0
+    ? current.label
+    : current.label.replace(/{name}/g, data.name || "");
 
-    return current.label.replace(/{name}/g, data.name || "");
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-
     setData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleRadio = (field: string, value: string) => {
+  const handleRadio = (field: string, value: string) =>
     setData((prev) => ({ ...prev, [field]: value }));
-  };
 
   const validate = () => {
     if (!current.required) return true;
-
     return data[current.field as keyof FormData]?.toString().trim().length > 0;
   };
 
@@ -211,136 +116,134 @@ export default function MultiStepForm() {
     setStep((s) => s - 1);
   };
 
-  //actions on sumbit
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !isLast) { e.preventDefault(); handleNext(); }
+  };
+
+  // GA: page view
+  useEffect(() => {
+    trackEvent("strategy_session_view", {
+      event_category: "lead_generation",
+      event_label: "strategy_session_booking",
+      source: "direct",
+    });
+  }, []);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setTouched(true);
     if (!validate()) return;
-
     setSubmitted(true);
 
-    // Send to Telegram API route
     try {
       const response = await fetch("/api/strategy-session-telegram", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-
-      if (!response.ok) {
-        // Optionally show an error toast/message
-        console.error("Failed to send to Telegram");
-      }
+      const success = response.ok;
+      trackEvent("strategy_session_submit", {
+        event_category: "lead_generation",
+        event_label: "strategy_session_booking",
+        status: success ? "success" : "error",
+        step_completed: step + 1,
+        has_phone: !!data.phone,
+      });
+      if (!success) console.error("Failed to send to Telegram");
     } catch (err) {
+      trackEvent("strategy_session_submit", {
+        event_category: "lead_generation",
+        event_label: "strategy_session_booking",
+        status: "error",
+        error_message: err instanceof Error ? err.message : "Network error",
+      });
       console.error("Network error sending to Telegram", err);
     }
-
-    function fireGAEvent() {
-      if (typeof window !== "undefined" && typeof window.gtag === "function") {
-        window.gtag("event", "strategy_session_submit", {
-          event_category: "lead",
-          event_label: "Strategy Session",
-        });
-      } else {
-        // Try again in 500ms (up to a few times)
-        setTimeout(fireGAEvent, 500);
-      }
-    }
-
-    // In your handleSubmit, after successful submit:
-    fireGAEvent();
-
-    // Optionally: show a thank you message, reset form, etc.
-    console.log("Form submitted:", data);
   };
 
-  // Prevent Enter from submitting unless on last step
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !isLast) {
-      e.preventDefault();
-      handleNext();
-    }
-  };
-
+  // ── Success Screen ────────────────────────────────────────────────────────
   if (submitted) {
     return (
-      <div className="text-center py-12">
-        <h2 className="text-heading text-2xl font-bold mb-2">Thank you!</h2>
-        <p className="text-body">
-          We’ve received your info and will be in touch in like 5-15 minutes.
+      <div className="text-center py-12 space-y-4">
+        <span className="text-5xl">🎉</span>
+        <HeadingAtom as="h2" size="md" title="You're all set!" variant="gradient" align="center" />
+        <p className="text-text-light dark:text-text-dark">
+          We've received your info and will be in touch within 5–15 minutes.
         </p>
       </div>
     );
   }
 
+  // ── Shared input classes ──────────────────────────────────────────────────
+  const inputBase =
+    "w-full border border-neutral-300 dark:border-neutral-600 rounded-lg px-4 py-3 " +
+    "bg-white dark:bg-neutral-800 " +
+    "text-text-light dark:text-text-dark placeholder:text-neutral-400 dark:placeholder:text-neutral-500 " +
+    "focus:outline-none focus:ring-2 focus:ring-brand-primary/50 transition";
+
   return (
     <>
-      {/* Exit Intent Meme Modal */}
+      {/* ── Exit Intent Dialog ─────────────────────────────────────────── */}
       <Dialog.Root open={showExitModal} onOpenChange={setShowExitModal}>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50" />
-          <Dialog.Content className="fixed top-12 left-1/2 -translate-x-1/2 bg-white dark:bg-background-dark p-8 rounded-xl shadow-lg text-center max-w-md w-full z-9999">
-            {/* Accessible title (can be visually hidden if you want) */}
-            <Dialog.Title>Wait! Don’t leave yet!</Dialog.Title>
-            {/* Or visually hidden: */}
-            {/* <Dialog.Title asChild>
-        <VisuallyHidden>Wait! Don’t leave yet!</VisuallyHidden>
-      </Dialog.Title> */}
-
+          <Dialog.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm z-50" />
+          <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white dark:bg-neutral-900 p-8 rounded-2xl shadow-2xl text-center max-w-md w-full z-[9999] border border-neutral-200 dark:border-neutral-700">
+            <Dialog.Title className="sr-only">Exit intent dialog</Dialog.Title>
             <img
               alt="Please stay!"
-              className="mx-auto mb-4 rounded-lg"
+              className="mx-auto mb-4 rounded-xl"
               height={180}
               src="https://media.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.gif"
               width={220}
             />
-            <h2 className="text-xl font-bold mb-2">Wait! Don’t leave yet!</h2>
-            <p className="mb-4 text-body">
-              {/* Personalize as needed */}
-              Finish your strategy session for a surprise!
+            <HeadingAtom as="h2" size="sm" title="Wait! Don't leave yet!" variant="default" align="center" />
+            <p className="mt-2 mb-6 text-text-light dark:text-text-dark">
+              Finish your strategy session and we'll have something special for you. 🎁
             </p>
-            <button
-              className="px-6 py-2 rounded-md bg-red-500 text-white font-semibold hover:bg-red-600"
-              onClick={() => setShowExitModal(false)}
-            >
-              I&apos;ll stay!
-            </button>
+            <ButtonAtom variant="primary" size="md" shimmer onClick={() => setShowExitModal(false)} className="justify-center">
+              I'll stay! 🙌
+            </ButtonAtom>
           </Dialog.Content>
         </Dialog.Portal>
       </Dialog.Root>
 
+      {/* ── Form ────────────────────────────────────────────────────────── */}
       <form className="space-y-8" onSubmit={handleSubmit}>
-        {/* Progress Bar */}
-        <div className="mb-4">
-          <Progress
-            className="h-2 rounded-full bg-red-100"
-            color="danger" // HeroUI's "danger" is red
-            showValueLabel={false}
-            value={progress}
-          />
-          <div className="text-xs text-gray-500 mt-1 text-right">
+
+        {/* Progress Bar – custom div so we can apply gradient fill */}
+        <div className="space-y-1">
+          <div className="w-full h-2 rounded-full bg-neutral-200 dark:bg-neutral-700 overflow-hidden">
+            <div
+              className="h-full rounded-full bg-gradient-to-r from-[#FF595E] to-orange-500 transition-all duration-500 ease-out"
+              style={{ width: `${progress}%` }}
+            />
+          </div>
+          <div className="text-xs text-text-light dark:text-text-dark text-right">
             Step {step + 1} of {steps.length}
           </div>
         </div>
-        <div>
-          <label className="block text-lg font-semibold mb-2 text-heading">
+
+        {/* Question */}
+        <div className="space-y-4">
+          <label className="block text-lg font-semibold text-text-light dark:text-text-dark leading-snug">
             {getLabel()}
           </label>
+
           {current.type === "text" && (
             <input
+              autoFocus
+              className={inputBase}
               name={current.field}
               type="text"
               value={data[current.field as keyof FormData]}
               onChange={handleChange}
               onKeyDown={handleKeyDown}
-              className="w-full border rounded-md px-4 py-2 text-body"
-              // eslint-disable-next-line jsx-a11y/no-autofocus
-              autoFocus
             />
           )}
+
           {current.type === "textarea" && (
             <textarea
-              className="w-full border rounded-md px-4 py-2 text-body"
+              className={inputBase}
               name={current.field}
               rows={4}
               value={data[current.field as keyof FormData]}
@@ -348,16 +251,21 @@ export default function MultiStepForm() {
               onKeyDown={handleKeyDown}
             />
           )}
+
           {current.type === "radio" && (
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3">
               {(current.options || []).map((option: string) => (
                 <label
                   key={option}
-                  className="flex items-center gap-2 cursor-pointer"
+                  className={`flex items-center gap-3 cursor-pointer rounded-lg px-4 py-3 border transition
+                    ${data[current.field as keyof FormData] === option
+                      ? "border-brand-primary bg-brand-primary/10 text-text-light dark:text-text-dark"
+                      : "border-neutral-300 dark:border-neutral-600 text-text-light dark:text-text-dark hover:border-brand-primary/50"
+                    }`}
                 >
                   <input
                     checked={data[current.field as keyof FormData] === option}
-                    className="accent-red-500"
+                    className="accent-brand-primary"
                     name={current.field}
                     type="radio"
                     value={option}
@@ -368,40 +276,34 @@ export default function MultiStepForm() {
               ))}
             </div>
           )}
+
           {touched && current.required && !validate() && (
-            <div className="text-red-500 text-sm mt-2">
-              This field is required.
-            </div>
+            <p className="text-red-500 text-sm">This field is required.</p>
           )}
         </div>
-        <div className="flex justify-between">
+
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center pt-2">
           <button
-            className={`px-4 py-2 rounded-md font-medium ${
-              isFirst
-                ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-            }`}
+            className={`px-4 py-2 rounded-lg font-medium transition ${isFirst
+              ? "bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed"
+              : "bg-neutral-100 dark:bg-neutral-800 text-text-light dark:text-text-dark hover:bg-neutral-200 dark:hover:bg-neutral-700"
+              }`}
             disabled={isFirst}
             type="button"
             onClick={handleBack}
           >
-            Back
+            ← Back
           </button>
+
           {!isLast ? (
-            <button
-              className="px-6 py-2 rounded-md bg-red-500 text-white font-semibold hover:bg-red-600"
-              type="button"
-              onClick={handleNext}
-            >
-              Next
-            </button>
+            <ButtonAtom variant="primary" size="md" shimmer type="button" onClick={handleNext}>
+              Next →
+            </ButtonAtom>
           ) : (
-            <button
-              className="px-6 py-2 rounded-md bg-red-500 text-white font-semibold hover:bg-red-600"
-              type="submit"
-            >
-              Submit
-            </button>
+            <ButtonAtom variant="primary" size="md" shimmer type="submit">
+              Submit 🚀
+            </ButtonAtom>
           )}
         </div>
       </form>

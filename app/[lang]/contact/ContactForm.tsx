@@ -83,7 +83,7 @@ export default function ContactForm() {
 
   return (
     <motion.form
-      className="space-y-4 md:space-y-5"
+      className="space-y-4 md:space-y-5 "
       initial="hidden"
       variants={containerVariants}
       viewport={{ once: true }}
@@ -100,6 +100,7 @@ export default function ContactForm() {
           error={errors.fullName?.message}
           placeholder="Full Name"
           size="lg"
+
         />
       </motion.div>
 
@@ -116,7 +117,7 @@ export default function ContactForm() {
                 value={field.value}
                 onChange={field.onChange}
                 size="lg"
-                // Custom styling to merge with input
+              // Custom styling to merge with input
               />
             )}
           />

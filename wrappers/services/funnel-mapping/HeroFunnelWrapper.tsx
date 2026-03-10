@@ -2,7 +2,7 @@ import {
   fetchHeroSection,
   HeroSectionData,
 } from "@/lib/services/funnelMapping";
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSectionStable";
 
 export default async function HeroFunnelWrapper({
   lang = "en",

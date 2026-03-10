@@ -2,7 +2,7 @@ import {
   fetchCTASection,
   CTASectionData,
 } from "@/lib/services/contentMarketing";
-import CTABottomSection from "@/components/CTA";
+import CTABottomSection from "@/components/CTAStable";
 
 export default async function CtaMarketingWrapper({
   lang = "en",

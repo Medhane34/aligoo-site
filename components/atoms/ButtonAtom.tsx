@@ -14,8 +14,9 @@ const button = tv({
       secondary:
         "bg-white text-neutral-900 hover:bg-neutral-100 border border-neutral-200 shadow-sm",
       outline:
-        "bg-transparent border-2 border-white/20 text-white hover:bg-white/10 hover:border-white/40",
-      ghost: "bg-transparent text-white hover:bg-white/10",
+        "bg-transparent border-2 border-neutral-800 dark:border-white/30 text-text-light dark:text-text-dark hover:bg-neutral-100 dark:hover:bg-white/10 hover:border-neutral-900 dark:hover:border-white/50",
+      ghost:
+        "bg-transparent text-neutral-900 dark:text-white hover:bg-neutral-100 dark:hover:bg-white/10",
       danger:
         "bg-red-500 text-white hover:bg-red-600 shadow-lg shadow-red-500/20",
     },
@@ -40,7 +41,7 @@ type ButtonVariants = VariantProps<typeof button>;
 
 interface ButtonAtomProps
   extends Omit<HTMLMotionProps<"button">, "className">,
-    ButtonVariants {
+  ButtonVariants {
   icon?: React.ReactNode;
   iconPosition?: "left" | "right";
   isLoading?: boolean;

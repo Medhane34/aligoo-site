@@ -4,8 +4,8 @@ import clsx from "clsx";
 import { VisualEditing } from "next-sanity";
 import { draftMode } from "next/headers";
 import Script from "next/script";
-import { ClerkProvider } from "@clerk/nextjs";
-
+/* import { ClerkProvider } from "@clerk/nextjs";
+ */
 import { Providers } from "./providers";
 
 import { ToastProvider } from "@/components/providers/ToastProvider";
@@ -15,6 +15,8 @@ import { fontSans } from "@/config/fonts";
 import LayoutUI from "@/components/LayoutUI";
 import { DisableDraftMode } from "@/components/DisableDraftMode";
 import { SanityLive } from "@/src/sanity/live";
+import ClientLanguagePrompt from "@/components/ClientLanguagePrompt";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 // import { Navbar } from "@/components/ui/navbar-copy"; // Moved to LayoutUI
 // import MouseMoveEffect from "@/components/atoms/mouse-move-effect"; // Moved to LayoutUI
@@ -32,55 +34,56 @@ export const viewport: Viewport = {
   ],
 };
 
-import LanguagePrompt from "@/components/LanguagePrompt";
+import { headers } from "next/headers";
 
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const headerList = await headers();
+  const lang = headerList.get("x-locale") || "en";
+
   return (
-    <ClerkProvider>
-      <html suppressHydrationWarning className="root" lang="en">
-        <head>
-          {/* Google Analytics */}
-          <Script
-            src="https://www.googletagmanager.com/gtag/js?id=G-RRB6DKZPQ9"
-            strategy="afterInteractive"
-          />
-          <Script id="gtag-init" strategy="afterInteractive">
-            {`
+    <html suppressHydrationWarning className="root" lang={lang}>
+      <head>
+        {/* Google Analytics - Deferred */}
+        {/*  <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-RRB6DKZPQ9"
+          strategy="lazyOnload"
+        />
+        <Script id="gtag-init" strategy="lazyOnload">
+          {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', 'G-RRB6DKZPQ9');
           `}
-          </Script>
-        </head>
+        </Script> */}
+      </head>
 
-        <body
-          className={clsx(
-            "min-h-screen bg-background font-sans antialiased m-0",
-            fontSans.variable,
-          )}
-        >
-          <Providers>
-            <ToastProvider>
-              <LayoutUI>
-                <LanguagePrompt />
-                {children}
-              </LayoutUI>
-              {(await draftMode()).isEnabled && (
-                <>
-                  <DisableDraftMode />
-                  <VisualEditing />
-                </>
-              )}
-              <SanityLive />
-            </ToastProvider>
-          </Providers>
-        </body>
-      </html>
-    </ClerkProvider>
+      <body
+        className={clsx(
+          "min-h-screen bg-background font-sans antialiased m-0",
+          fontSans.variable,
+        )}
+      >
+        <Providers>
+          <ToastProvider>
+            <LayoutUI>
+              <GoogleAnalytics />
+              {children}
+            </LayoutUI>
+            {(await draftMode()).isEnabled && (
+              <>
+                <DisableDraftMode />
+                <VisualEditing />
+              </>
+            )}
+            <SanityLive />
+          </ToastProvider>
+        </Providers>
+      </body>
+    </html>
   );
 }

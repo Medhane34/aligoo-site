@@ -36,7 +36,7 @@ export default function BlogCard({
       whileHover="hover"
       whileInView="visible"
     >
-      <Link className="block h-full" href={`/blog/${slug}`}>
+      <Link className="block h-full" href={`/${lang}/blog/${slug}`}>
         <Card className="h-full flex flex-col overflow-hidden rounded-lg bg-card shadow-sm hover:shadow-brand transition-shadow duration-300 bg-neutral-900/50 border border-white/10 backdrop-blur-sm">
           {/* Image Container with Category Badge */}
           <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-gray-800">

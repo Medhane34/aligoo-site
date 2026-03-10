@@ -1,15 +1,17 @@
 // components/contact/useContactForm.ts
 "use client";
+
 import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState, useMemo } from "react";
 
 import { contactFormSchema, ContactFormInputs } from "./contactFormSchema";
-
 import { useToast } from "@/components/providers/ToastProvider";
+import { trackEvent } from "@/lib/analytics";
 
 export function useContactForm() {
   const { addToast } = useToast();
+
   const {
     control,
     handleSubmit,
@@ -62,20 +64,11 @@ export function useContactForm() {
     return currentServiceEnquiryValue;
   }, [currentServiceEnquiryValue]);
 
-  function fireGAEvent() {
-    if (typeof window !== "undefined" && typeof window.gtag === "function") {
-      window.gtag("event", "contact_form_submit", {
-        event_category: "lead",
-        event_label: "Contact Form",
-      });
-    } else {
-      setTimeout(fireGAEvent, 500);
-    }
-  }
-
+  // ==================== FORM SUBMISSION WITH ANALYTICS ====================
   const onSubmit = async (data: ContactFormInputs) => {
     setSubmissionStatus("idle");
     setErrorMessage("");
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -87,16 +80,24 @@ export function useContactForm() {
 
       try {
         const responseBody = await response.text();
-
         errorData = responseBody ? JSON.parse(responseBody) : null;
       } catch (jsonError) {
         setErrorMessage("Server returned an invalid response.");
         setSubmissionStatus("error");
-
         return;
       }
 
       if (response.ok) {
+        // SUCCESS - Track the event
+        trackEvent("contact_form_submit", {
+          event_category: "lead_generation",
+          event_label: "contact_form",
+          form_name: "main_contact_form",
+          status: "success",
+          service_enquiry: data.serviceEnquiry,
+          preferred_communication: data.preferredCommunication,
+        });
+
         setSubmissionStatus("success");
         reset();
         addToast({
@@ -105,23 +106,37 @@ export function useContactForm() {
           message:
             "Sit tight — one of our team members will reach out within 5–10 minutes.",
         });
-        fireGAEvent();
 
-        // Scroll to "What Happens Next" section so user sees the process
+        // Scroll to "What Happens Next" section
         setTimeout(() => {
           const nextSection = document.getElementById("what-happens-next");
-
           if (nextSection) {
             nextSection.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         }, 3000);
       } else {
-        setErrorMessage(
-          errorData?.message || "Something went wrong. Please try again.",
-        );
+        // ERROR - Track the failed submission
+        trackEvent("contact_form_submit", {
+          event_category: "lead_generation",
+          event_label: "contact_form",
+          form_name: "main_contact_form",
+          status: "error",
+          error_message: errorData?.message || "Server error",
+        });
+
+        setErrorMessage(errorData?.message || "Something went wrong. Please try again.");
         setSubmissionStatus("error");
       }
     } catch (error) {
+      // Network / Unexpected error
+      trackEvent("contact_form_submit", {
+        event_category: "lead_generation",
+        event_label: "contact_form",
+        form_name: "main_contact_form",
+        status: "error",
+        error_message: error instanceof Error ? error.message : "Network error",
+      });
+
       addToast({
         type: "error",
         title: "Submission Failed",

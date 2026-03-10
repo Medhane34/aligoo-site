@@ -1,28 +1,54 @@
 import { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 
 import WorkSectionWrapper from "@/wrappers/WorkSectionWrapper";
 import Container from "@/components/ui/Container";
-import FeaturedCaseStudyWrapper from "@/wrappers/works/FeaturedCaseStudyWrapper";
-import IndustriesSectionWrapper from "@/wrappers/works/IndustriesSectionWrapper";
-import WorksHeroSectionWrapper from "@/wrappers/works/HeroWorksWrapper";
-export const metadata: Metadata = {
-  title: "Our Work | Aligoo Digital Agency Projects & Case Studies",
-  description:
-    "Explore real projects and case studies from Aligoo Digital Agency. See how we help brands grow with smart strategy, clean design, and powerful execution in Addis Ababa and beyond.",
-  keywords: [
-    "case studies",
-    "project portfolio",
-    "digital marketing results",
-    "web design examples",
-    "Aligoo projects",
-    "Addis Ababa",
-    "Ethiopia",
-    "marketing success stories",
-  ],
-  alternates: {
-    canonical: "https://aligoo-digital.agency/works",
-  },
-};
+import dynamic from "next/dynamic";
+
+const FeaturedCaseStudyWrapper = dynamic(() =>
+  import("@/wrappers/works/FeaturedCaseStudyWrapper"),
+);
+const IndustriesSectionWrapper = dynamic(() =>
+  import("@/wrappers/works/IndustriesSectionWrapper"),
+);
+const WorksHeroSectionWrapper = dynamic(() =>
+  import("@/wrappers/works/HeroWorksWrapper"),
+);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "am" }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = lang === "am" ? "am" : "en";
+
+  const title =
+    locale === "am"
+      ? "ስራዎቻችን | አሊጎ የዲጂታል ማርኪቲንግ ፕሮጀክቶች"
+      : "Our Work | Aligoo Digital Agency Projects & Case Studies";
+
+  const description =
+    locale === "am"
+      ? "ከ አሊጎ የዲጂታል ማርኪቲንግ ፕሮጀክቶችን ያግኝ። በአዲስ አበባ እና ከዚያ ባሻገር አሸናፊ ስትራቴጂ ፣ ንጹህ ዲዛይን እና ገራሚ ማስታውቂያ ብራንዶቻቸውን እንዴት እናሳድጋለን ይመልከቱ።"
+      : "Explore real projects and case studies from Aligoo Digital Agency. See how we help brands grow with smart strategy, clean design, and powerful execution in Addis Ababa and beyond.";
+
+  return createPageMetadata({
+    pathnameWithoutLang: "/works",
+    currentLang: locale,
+    title,
+    description,
+    keywords: [
+      "case studies",
+      "project portfolio",
+      "digital marketing results",
+      "web design examples",
+      "Aligoo projects",
+      "Addis Ababa",
+      "Ethiopia",
+      "marketing success stories",
+    ],
+  });
+}
 
 export async function generateStaticParams() {
   return [{ lang: "en" }, { lang: "am" }];
@@ -43,12 +69,14 @@ export default async function WorksPage({
       <Container>
         <FeaturedCaseStudyWrapper lang={lang} />
       </Container>
-      <div className="div" id="our-work-section">
+      <div className="section-deferred" id="our-work-section">
         <WorkSectionWrapper />
       </div>
 
       <Container>
-        <IndustriesSectionWrapper lang={lang} />
+        <div className="section-deferred">
+          <IndustriesSectionWrapper lang={lang} />
+        </div>
       </Container>
       {/* <Container>
         <CTABottomSection

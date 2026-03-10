@@ -231,7 +231,7 @@ export default function SubscribersTable({
     }
   };
 
-  const handleExport = (type: "excel" | "pdf") => {
+  const handleExport = async (type: "excel" | "pdf") => {
     const exportData = subscribers.map((sub) => ({
       Name: sub.firstName,
       Username: sub.username || "N/A",
@@ -248,7 +248,7 @@ export default function SubscribersTable({
     const fileName = `subscribers_export_${new Date().toISOString().split("T")[0]}`;
 
     if (type === "excel") {
-      exportToExcel(exportData, fileName);
+      await exportToExcel(exportData, fileName);
       addToast({
         title: "Success",
         description: "Exported to Excel",
@@ -267,7 +267,7 @@ export default function SubscribersTable({
       ];
       const rows = exportData.map((item) => Object.values(item));
 
-      exportToPDF(columns, rows, fileName);
+      await exportToPDF(columns, rows, fileName);
       addToast({
         title: "Success",
         description: "Exported to PDF",

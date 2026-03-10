@@ -1,14 +1,36 @@
 /* eslint-disable prettier/prettier */
 
+import { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import AreWeMatch from "./AreWeMatch";
 
 import Container from "@/components/ui/Container";
 import HeroTikTokSectionWrapper from "@/wrappers/services/TikTok-ad/HeroTikTokWrappers";
-import WhyTikTokWorksSectionWrapper from "@/wrappers/services/TikTok-ad/WhyTikTokWrappers";
-import TikTokProcessSectionWrapper from "@/wrappers/services/TikTok-ad/ProcessTikTokWrappers";
-import FaqTikTokSectionWrapper from "@/wrappers/services/TikTok-ad/FaqTikTokWrappers";
-import CTATikTokSectionWrapper from "@/wrappers/services/TikTok-ad/CtaTikTokWrapper";
-import WhoThisIsForTikTokWrapper from "@/wrappers/services/TikTok-ad/WhothisforTikTokWrappers";
+import dynamic from "next/dynamic";
+
+const ServiceRecentBlogs = dynamic(() => import("@/components/organism/blog/ServiceRecentBlogs"));
+const WhyTikTokWorksSectionWrapper = dynamic(() => import("@/wrappers/services/TikTok-ad/WhyTikTokWrappers"));
+const TikTokProcessSectionWrapper = dynamic(() => import("@/wrappers/services/TikTok-ad/ProcessTikTokWrappers"));
+const FaqTikTokSectionWrapper = dynamic(() => import("@/wrappers/services/TikTok-ad/FaqTikTokWrappers"));
+const CTATikTokSectionWrapper = dynamic(() => import("@/wrappers/services/TikTok-ad/CtaTikTokWrapper"));
+const WhoThisIsForTikTokWrapper = dynamic(() => import("@/wrappers/services/TikTok-ad/WhothisforTikTokWrappers"));
+
+
+
+export async function generateMetadata({ params }: { params: Promise<{ lang: "en" | "am" }> }): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = lang === "am" ? "am" : "en";
+  return createPageMetadata({
+    pathnameWithoutLang: "/services/tiktok-ad",
+    currentLang: locale,
+    title: locale === "am" ? "ቲክቶክ ማስታወቂያ | አሊጎ ዲጂታል ማርኪቲንግ" : "TikTok Ads | Aligoo Digital Marketing Agency",
+    description:
+      locale === "am"
+        ? "1.5 ቢሊዮን ወርሃዊ ተጠቃሚዎችን ይቅርቡ። አሊጎ ለ ቲክቶክ ተፈጥሯዊ ማስታወቂያዎችን እናዘጋጃለን"
+        : "Reach 1.5B monthly TikTok users with native-style ad creatives built for engagement, brand awareness, and conversion.",
+  });
+}
+
 const fbWhyContent = {
   heading: "Why TikTok Ad Works(if you know to",
   highlight: "use them)",
@@ -55,27 +77,39 @@ export default async function IndexPage({ params }: { params: Promise<{ lang: "e
     <>
       <HeroTikTokSectionWrapper lang={lang} />
       <Container>
-        <WhyTikTokWorksSectionWrapper id="why-tiktok-works" lang={lang} />
+        <div className="section-deferred" >
+          <WhyTikTokWorksSectionWrapper id="why-tiktok-works" lang={lang} />
+        </div>
       </Container>
 
       <Container>
-        <TikTokProcessSectionWrapper lang={lang} />
+        <div className="section-deferred" >
+          <TikTokProcessSectionWrapper lang={lang} />
+        </div>
       </Container>
       <Container>
-        <WhoThisIsForTikTokWrapper lang={lang} />
-   </Container>
-      <Container>
-        <AreWeMatch />
+        <div className="section-deferred" >
+          <WhoThisIsForTikTokWrapper lang={lang} />
+        </div>
       </Container>
       <Container>
-
-        <FaqTikTokSectionWrapper lang={lang} />
-
+        <div className="section-deferred" >
+          <AreWeMatch />
+        </div>
       </Container>
       <Container>
-
-        <CTATikTokSectionWrapper lang={lang} />
+        <div className="section-deferred" >
+          <FaqTikTokSectionWrapper lang={lang} />
+        </div>
       </Container>
+      <Container>
+        <div className="section-deferred" >
+          <CTATikTokSectionWrapper lang={lang} />
+        </div>
+      </Container>
+      <div className="section-deferred" >
+        <ServiceRecentBlogs categorySlug="tik-tok" serviceName="TikTok Ads" lang={lang} />
+      </div>
     </>
   );
 }

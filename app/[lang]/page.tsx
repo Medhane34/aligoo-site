@@ -1,39 +1,75 @@
 import { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 
-import BlogSection from "../home/blogSection";
+import dynamic from "next/dynamic";
 
-import HomeCaseStudyWrapper from "@/wrappers/HomeCaseStudyWrapper";
+const HomeCaseStudyWrapper = dynamic(() => import("@/wrappers/HomeCaseStudyWrapper"));
+const ProcessSectionWrapper = dynamic<{ lang: "en" | "am" }>(() =>
+  import("@/wrappers/homepage/ProcessSectionWrapper"),
+);
+const WhyUsSectionWrapper = dynamic<{ lang: "en" | "am" }>(() =>
+  import("@/wrappers/homepage/WhyUsSectionWrapper"),
+);
+const TestimonialsWrapper = dynamic<{ lang: "en" | "am" }>(() =>
+  import("@/wrappers/homepage/TestimonialsWrapper"),
+);
+const BlogSection = dynamic<{ lang: Lang }>(() => import("../home/blogSection"));
+const CTABottomSectionWrapper = dynamic(() =>
+  import("@/wrappers/homepage/CTABottomSectionWrapper"),
+);
+
 import Container from "@/components/ui/Container";
-import HeroSectionWrapper from "@/wrappers/homepage/HeroSectionWrapper";
-import AboutUsSectionWrapper from "@/wrappers/homepage/AboutUsSectionWrapper";
-import StatsSectionWrapper from "@/wrappers/homepage/StatsSectionWrapper";
-import ServiceSectionWrapper from "@/wrappers/homepage/ServiceSectionWrapper";
-import ProcessSectionWrapper from "@/wrappers/homepage/ProcessSectionWrapper";
-import WhyUsSectionWrapper from "@/wrappers/homepage/WhyUsSectionWrapper";
-import CTABottomSectionWrapper from "@/wrappers/homepage/CTABottomSectionWrapper";
+const HeroSectionWrapper = dynamic<{ lang: "en" | "am" }>(() =>
+  import("@/wrappers/homepage/HeroSectionWrapper"),
+);
+const AboutUsSectionWrapper = dynamic<{ lang: "en" | "am" }>(() =>
+  import("@/wrappers/homepage/AboutUsSectionWrapper"),
+);
+const StatsSectionWrapper = dynamic<{ lang: "en" | "am" }>(() =>
+  import("@/wrappers/homepage/StatsSectionWrapper"),
+);
+const ServiceSectionWrapper = dynamic<{ lang: "en" | "am" }>(() =>
+  import("@/wrappers/homepage/ServiceSectionWrapper"),
+);
 import { Lang } from "@/types/BlogPost";
-import TestimonialsWrapper from "@/wrappers/homepage/TestimonialsWrapper";
 
-export const metadata: Metadata = {
-  title: "Aligoo Digital Agency | Digital Marketing in Addis Ababa",
-  description:
-    "Aligoo is a full-service digital marketing agency in Addis Ababa. We build smart websites, run killer ad campaigns, and craft content that delivers clarity, clicks, and conversions.",
-  keywords: [
-    "digital marketing",
-    "Addis Ababa",
-    "marketing agency",
-    "web design",
-    "SEO",
-    "Facebook ads",
-    "Ethiopia",
-    "Aligoo",
-    "content marketing",
-    "lead generation",
-  ],
-  alternates: {
-    canonical: "https://aligoo-digital.agency/",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: "en" | "am" }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  const locale = lang === "am" ? "am" : "en";
+
+  const title =
+    locale === "am"
+      ? "አሊጎ ዲጂታል ማርኪቲንግ ኤጀንሲ | በአዲስ አበባ ዲጂታል ማርኬቲንግ"
+      : "Aligoo | Digital Marketing in Addis Ababa, Ethiopia";
+
+  const description =
+    locale === "am"
+      ? "አሊጎ ባለሙሉ አገልግሎት ዲጂታል ማርኪቲንግ ኤጀንሲ ነው። ብልጥ ድህረ ገጾችን እንገነባለን፣ ኃይለኛ የማስታወቂያ ዘመቻዎችን እናካሂዳለን፣ ለቢዝነስ ሽያጭን የሚያመስገኝ ማስታውቂያዎችን እናዘጋጃለን።"
+      : "Aligoo is a full-service digital marketing agency in Addis Ababa, Ethiopia. We build smart websites, run killer ad campaigns, and craft content that delivers clarity, clicks, and conversions.";
+
+  return createPageMetadata({
+    pathnameWithoutLang: "/",
+    currentLang: locale,
+    title,
+    description,
+    keywords: [
+      "digital marketing",
+      "Addis Ababa",
+      "marketing agency",
+      "web design",
+      "SEO",
+      "Facebook ads",
+      "Ethiopia",
+      "Aligoo",
+      "content marketing",
+      "lead generation",
+    ],
+  });
+}
 export const revalidate = 3600; // Rebuild every hour
 
 import { client } from "@/src/sanity/client";
@@ -117,36 +153,48 @@ export default async function Home({
         <Container>
           <AboutUsSectionWrapper lang={lang} />
         </Container>
-        <StatsSectionWrapper lang={lang} />
+        <div className="section-deferred">
+          <StatsSectionWrapper lang={lang} />
+        </div>
         <Container>
-          <div className="div" id="service-section">
+          <div className="div section-deferred" id="service-section">
             <ServiceSectionWrapper lang={lang} />
           </div>
         </Container>
         <Container>
-          <HomeCaseStudyWrapper />
+          <div className="section-deferred">
+            <HomeCaseStudyWrapper />
+          </div>
         </Container>
         <Container>
-          <ProcessSectionWrapper lang={lang} />
+          <div className="section-deferred">
+            <ProcessSectionWrapper lang={lang} />
+          </div>
         </Container>
 
         <Container>
-          <WhyUsSectionWrapper lang={lang} />
+          <div className="section-deferred">
+            <WhyUsSectionWrapper lang={lang} />
+          </div>
         </Container>
         <Container>
           {/* Testimonials Section */}
-          <div id="testimonials">
+          <div className="section-deferred" id="testimonials">
             <TestimonialsWrapper lang={lang} />{" "}
           </div>
 
           <a className="relative px-4 py-2 text-muted-foreground hover:text-foreground transition-colors cursor-pointer" />
         </Container>
         <Container>
-          <BlogSection lang={lang as Lang} />
+          <div className="section-deferred">
+            <BlogSection lang={lang as Lang} />
+          </div>
         </Container>
 
         <Container>
-          <CTABottomSectionWrapper />
+          <div className="section-deferred">
+            <CTABottomSectionWrapper />
+          </div>
         </Container>
       </section>
     </>

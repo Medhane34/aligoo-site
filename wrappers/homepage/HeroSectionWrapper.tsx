@@ -1,6 +1,6 @@
 // wrappers/homepage/HeroSectionWrapper.tsx
 import { fetchHeroSection, HeroSectionData } from "@/lib/homepage";
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSectionStable";
 
 export default async function HomeHeroSectionWrapper({
   lang = "en",

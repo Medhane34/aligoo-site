@@ -151,3 +151,10 @@ body {
 .animate-marquee-vertical {
   animation: marquee-vertical var(--duration) linear infinite;
 }
+/* ---------------------------------------------------
+   Performance & Layout Optimization
+--------------------------------------------------- */
+.section-deferred {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px; /* Placeholder size to prevent layout shift */
+}

@@ -1,4 +1,4 @@
-// components/CTABottomSection.jsx
+// components/CTAStable.tsx
 "use client";
 import { Button } from "@heroui/button";
 import { motion } from "framer-motion";

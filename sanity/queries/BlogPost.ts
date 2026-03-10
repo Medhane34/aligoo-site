@@ -56,3 +56,15 @@ export const LATEST_BLOGS_QUERY = (lang: "en" | "am") => groq`
     "slug": slug.current
   }
 `;
+
+// Telegram Promotion Section query — fetches the single promotion document.
+export const TG_PROMOTION_QUERY = (lang: "en" | "am") => groq`
+  *[_type == "tgPromotion"][0] {
+    _id,
+    "accentText": accentText_${lang},
+    "heading": heading_${lang},
+    "description": description_${lang},
+    "buttonText": buttonText_${lang},
+    buttonLink
+  }
+`;

@@ -3,11 +3,8 @@ import {
   Phone,
   Clock,
   Mail,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
 } from "lucide-react";
+import { FacebookIcon, TwitterIcon, LinkedinIcon, InstagramIcon } from "@/components/icons";
 
 import ContactForm from "./ContactForm";
 
@@ -57,7 +54,7 @@ const SocialLink = ({
 }) => (
   <a
     aria-label={label}
-    className="p-3 rounded-full bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-400 hover:bg-brand-primary hover:text-white transition-all duration-300 transform hover:scale-110"
+    className="p-3 rounded-full bg-gray-100 dark:bg-white/5 text-text-light dark:text-text-dark hover:bg-brand-primary hover:text-white transition-all duration-300 transform hover:scale-110"
     href={href}
     rel="noopener noreferrer"
     target="_blank"
@@ -128,16 +125,16 @@ export default function ContactSection({
               <div className="flex gap-3">
                 <SocialLink
                   href="https://et.linkedin.com/company/aligoo"
-                  icon={Linkedin}
+                  icon={LinkedinIcon}
                   label="LinkedIn"
                 />
-                <SocialLink href="#" icon={Twitter} label="Twitter" />
+                <SocialLink href="#" icon={TwitterIcon} label="Twitter" />
                 <SocialLink
                   href="https://www.facebook.com/aligoodigitalagency"
-                  icon={Facebook}
+                  icon={FacebookIcon}
                   label="Facebook"
                 />
-                <SocialLink href="#" icon={Instagram} label="Instagram" />
+                <SocialLink href="#" icon={InstagramIcon} label="Instagram" />
               </div>
             </div>
           </div>

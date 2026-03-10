@@ -59,3 +59,13 @@ export type BlogPostListItem = Pick<
   BlogPost,
   "_id" | "title" | "excerpt" | "slug" | "imageUrl" | "publishedAt"
 >;
+
+// NEW: For Telegram Promotion Section
+export interface TGPromotionData {
+  _id: string;
+  accentText: string;
+  heading: string;
+  description: string;
+  buttonText: string;
+  buttonLink: string;
+}

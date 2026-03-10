@@ -47,7 +47,7 @@ const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="flex items-center justify-center mt-6">
+    <div className="flex items-start justify-start mt-6">
       <div
         className="relative w-32 h-10 bg-gray-800 rounded-full cursor-pointer flex items-center p-1 shadow-inner border border-gray-700"
         onClick={toggleLanguage}
@@ -75,7 +75,7 @@ const LanguageSwitcher = () => {
             EN
           </span>
         </div>
-
+        |
         {/* Amharic Label */}
         <div className="flex-1 flex items-center justify-center z-10 text-xs font-semibold select-none gap-1">
           <span

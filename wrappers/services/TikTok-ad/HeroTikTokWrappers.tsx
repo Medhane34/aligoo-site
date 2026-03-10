@@ -1,5 +1,5 @@
 import { fetchHeroSection, HeroSectionData } from "@/lib/services/tiktokad";
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSectionStable";
 
 export default async function HeroTikTokSectionWrapper({
   lang = "en",

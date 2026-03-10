@@ -4,11 +4,11 @@ import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
 const heading = tv({
-  base: "font-black tracking-tight text-white leading-tight",
+  base: "font-black tracking-tight text-text-light dark:text-white leading-tight",
   variants: {
     variant: {
-      default: "text-white",
-      split: "text-white", // Base text is white, highlight is handled in component
+      default: "text-text-light dark:text-text-dark",
+      split: "text-text-light dark:text-text-dark", // Base text adapts to theme; highlight span uses gradient
       gradient:
         "bg-gradient-to-r from-brand-primary via-orange-500 to-yellow-500 bg-clip-text text-transparent",
     },

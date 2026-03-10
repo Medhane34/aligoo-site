@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import dynamic from "next/dynamic";
+import { Metadata } from "next";
 
 import { fetchBlogPostBySlug, fetchRelatedPosts } from "@/lib/BlogPost";
 import { generateToc } from "@/lib/utilties/generateToc";
@@ -12,24 +13,24 @@ import RelatedPosts from "@/components/blog/RelatedPosts";
 import PromotionalCard from "@/components/blog/PromotionalCard";
 import { Lang } from "@/types/BlogPost";
 import { DEFAULT_PROMOTIONAL_CARD } from "@/lib/constants/blogDefaults";
+import { createPageMetadata } from "@/lib/seo";
 
 // Client-only TOC with scroll spy
 const ClientToc = dynamic(() => import("./ClientToc"), { ssr: true });
 
 export const revalidate = 60;
 
-export async function generateMetadata({ params }: BlogPostPageProps) {
+export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug, lang } = await params;
+  const locale = lang === "am" ? "am" : "en";
+  const post = await fetchBlogPostBySlug(slug, locale);
 
-  return {
-    alternates: {
-      canonical: `https://aligoo-digital.agency/${lang}/blog/${slug}`,
-      languages: {
-        en: `https://aligoo-digital.agency/en/blog/${slug}`,
-        am: `https://aligoo-digital.agency/am/blog/${slug}`,
-      },
-    },
-  };
+  return createPageMetadata({
+    pathnameWithoutLang: `/blog/${slug}`,
+    currentLang: locale,
+    title: post?.title ?? (locale === "am" ? "ብሎግ | Aligoo" : "Blog | Aligoo"),
+    description: post?.excerpt ?? (locale === "am" ? "ዲጂታል ማርኬቲንግ ጽሑፎች" : "Digital marketing articles"),
+  });
 }
 
 interface BlogPostPageProps {
@@ -174,13 +175,13 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <span>
                 {post.publishedAt
                   ? new Date(post.publishedAt).toLocaleDateString(
-                      lang === "am" ? "en-ET" : "en-US",
-                      {
-                        day: "numeric",
-                        month: "long",
-                        year: "numeric",
-                      },
-                    )
+                    lang === "am" ? "en-ET" : "en-US",
+                    {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    },
+                  )
                   : "—"}
               </span>
 

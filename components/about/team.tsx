@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { Linkedin, Twitter, Github, Sparkles } from "lucide-react";
+import { LinkedinIcon, TwitterIcon, GithubIcon } from "../icons";
+import { Sparkles } from "lucide-react";
 
 import HeadingAtom from "../atoms/HeadingAtom";
 import BadgeAtom from "../atoms/BadgeAtom";
@@ -178,19 +179,19 @@ export default function TeamSection({
                     {person.socialLinks?.linkedin && (
                       <SocialIcon
                         href={person.socialLinks.linkedin}
-                        icon={Linkedin}
+                        icon={LinkedinIcon}
                       />
                     )}
                     {person.socialLinks?.twitter && (
                       <SocialIcon
                         href={person.socialLinks.twitter}
-                        icon={Twitter}
+                        icon={TwitterIcon}
                       />
                     )}
                     {person.socialLinks?.github && (
                       <SocialIcon
                         href={person.socialLinks.github}
-                        icon={Github}
+                        icon={GithubIcon}
                       />
                     )}
                   </div>

@@ -10,7 +10,9 @@ import {
   BlogPostDetail,
   Lang,
   Category,
+  TGPromotionData,
 } from "@/types/BlogPost";
+import { TG_PROMOTION_QUERY } from "@/sanity/queries/BlogPost";
 
 // === 1. FETCH LATEST BLOGS (Home Section) ===
 export async function fetchLatestBlogs(
@@ -241,4 +243,50 @@ export async function fetchRelatedPosts(
   );
 
   return posts;
+}
+
+// === 7. FETCH RECENT SERVICE BLOGS (Service Pages Section) ===
+// Optimized: fetches only 3 posts, only required fields, filtered by category.
+export async function fetchRecentServiceBlogs(
+  lang: Lang,
+  categorySlug: string,
+): Promise<BlogPost[]> {
+  const langField = (field: string) => `${field}_${lang}`;
+
+  const query = groq`
+    *[
+      _type == "post" 
+      && publishedAt < now() 
+      && isExclusive != true 
+      && category->slug.current == $categorySlug
+      && ${langField("title")} != null
+    ] | order(publishedAt desc)[0...3] {
+      _id,
+      "title": ${langField("title")},
+      "excerpt": ${langField("excerpt")},
+      "slug": slug.current,
+      publishedAt,
+      "imageUrl": mainImage.asset->url,
+      "category": category-> {
+        _id,
+        title_en,
+        title_am,
+        "slug": slug.current
+      }
+    }
+  `;
+
+  const posts = await client.fetch<BlogPost[]>(query, { categorySlug });
+
+  return posts;
+}
+
+// === 8. FETCH TELEGRAM PROMOTION SECTION ===
+// Fetches the single tgPromotion document for the blog page promotion section.
+export async function fetchTGPromotion(
+  lang: Lang,
+): Promise<TGPromotionData | null> {
+  const query = TG_PROMOTION_QUERY(lang);
+  const data = await client.fetch<TGPromotionData | null>(query);
+  return data ?? null;
 }

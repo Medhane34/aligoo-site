@@ -8,7 +8,9 @@ const config = {
     '/telegram', '/telegram/*', '/*/telegram/*',
     '/test', '/test/*', '/*/test/*',
     '/maintenance', '/maintenance/*', '/*/maintenance/*',
-    '/strategy-session', '/strategy-session/*', '/*/strategy-session/*'
+    '/strategy-session', '/strategy-session/*', '/*/strategy-session/*',
+    '/services-back', '/services-back/*', '/*/services-back/*',
+    '/'
   ],
   additionalPaths: async (config) => {
     const result = [];
@@ -20,7 +22,7 @@ const config = {
       'funnel-mapping',
       'content-marketing',
       'seo',
-      'tiktok-ads',
+      'tiktok-ad',
       'digital-marketing'
     ];
 
@@ -37,8 +39,8 @@ const config = {
       }
     }
 
-    // Root domain without lang
-    result.push(await config.transform(config, `/`));
+    // Root domain without lang - removed because it redirects to /en
+    // result.push(await config.transform(config, `/`));
 
     return result;
   },

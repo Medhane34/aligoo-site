@@ -168,16 +168,16 @@ export async function fetchServiceSection(
   const query = SERVICE_SECTION_QUERY(lang);
   const raw = await client.fetch<any>(query);
 
-  console.log(`\n[fetchServiceSection] LANG: '${lang}'`);
-  console.log("Raw GROQ Response:", JSON.stringify(raw, null, 2));
-  console.log("Columns Count:", raw?.columns?.length);
-  console.log("First Column Title:", raw?.columns?.[0]?.title);
-  console.log("First Service Sample:", raw?.columns?.[0]?.services?.[0]);
-  console.log("First Icon URL:", raw?.columns?.[0]?.services?.[0]?.iconUrl);
-
+  /*  console.log(`\n[fetchServiceSection] LANG: '${lang}'`);
+   console.log("Raw GROQ Response:", JSON.stringify(raw, null, 2));
+   console.log("Columns Count:", raw?.columns?.length);
+   console.log("First Column Title:", raw?.columns?.[0]?.title);
+   console.log("First Service Sample:", raw?.columns?.[0]?.services?.[0]);
+   console.log("First Icon URL:", raw?.columns?.[0]?.services?.[0]?.iconUrl);
+  */
   if (!raw) {
-    console.warn("[fetchServiceSection] No data found");
-
+    /*     console.warn("[fetchServiceSection] No data found");
+     */
     return null;
   }
 
@@ -187,8 +187,8 @@ export async function fetchServiceSection(
     columns: raw.columns || [],
   };
 
-  console.log("Final Mapped Data:", JSON.stringify(data, null, 2));
-
+  /*   console.log("Final Mapped Data:", JSON.stringify(data, null, 2));
+   */
   return data;
 }
 
@@ -221,8 +221,8 @@ export async function fetchProcessSection(
     steps: raw.steps || [],
   };
 
-  console.log("Final Mapped Data:", JSON.stringify(data, null, 2));
-
+  /*   console.log("Final Mapped Data:", JSON.stringify(data, null, 2));
+   */
   return data;
 }
 

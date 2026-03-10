@@ -1,5 +1,5 @@
 import { fetchCTASection, CTASectionData } from "@/lib/services/graphicDesign";
-import CTABottomSection from "@/components/CTA";
+import CTABottomSection from "@/components/CTAStable";
 
 export default async function CtaGraphicWrapper({
   lang = "en",

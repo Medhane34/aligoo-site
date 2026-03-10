@@ -2,7 +2,7 @@ import {
   fetchHeroSection,
   HeroSectionData,
 } from "@/lib/services/graphicDesign";
-import HeroSection from "@/components/HeroSection";
+import HeroSection from "@/components/HeroSectionStable";
 
 export default async function HeroGraphicWrapper({
   lang = "en",

@@ -3,8 +3,12 @@
 import React from "react";
 import { tv, type VariantProps } from "tailwind-variants";
 
+/**
+ * Badge styling using tailwind-variants
+ * Added 'align' variant to control text and flex alignment
+ */
 const badge = tv({
-  base: "inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider",
+  base: "inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium uppercase tracking-wider transition-all",
   variants: {
     variant: {
       outline: "bg-white/5 border border-white/10 backdrop-blur-sm text-white",
@@ -17,6 +21,11 @@ const badge = tv({
       green: "",
       blue: "",
       gradient: "",
+    },
+    align: {
+      left: "justify-start text-left",
+      center: "justify-center text-center",
+      right: "justify-end text-right",
     },
   },
   compoundVariants: [
@@ -56,6 +65,7 @@ const badge = tv({
   defaultVariants: {
     variant: "outline",
     color: "orange",
+    align: "left", // Default alignment set to left
   },
 });
 
@@ -67,17 +77,22 @@ interface BadgeAtomProps extends BadgeVariants {
   className?: string;
 }
 
+/**
+ * BadgeAtom Component
+ * Now supports 'align' prop with 'left', 'center', or 'right' values
+ */
 export default function BadgeAtom({
   variant,
   color,
+  align,
   icon,
   children,
   className,
 }: BadgeAtomProps) {
   return (
-    <div className={badge({ variant, color, className })}>
+    <div className={badge({ variant, color, align, className })}>
       {icon && <span className="flex-shrink-0">{icon}</span>}
-      <span>{children}</span>
+      <span className="truncate">{children}</span>
     </div>
   );
 }

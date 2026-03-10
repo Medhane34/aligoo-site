@@ -1,5 +1,5 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest, type NextFetchEvent } from "next/server";
 
 const isMaintenanceMode = process.env.MAINTENANCE_MODE === "true";
 
@@ -13,22 +13,49 @@ const isAllowedPath = createRouteMatcher([
   "/images(.*)",
 ]);
 
-export default clerkMiddleware((auth, req) => {
-  // 1. If Maintenance Mode is ON
+// Paths that REQUIRE Clerk authentication
+const isProtectedRoute = createRouteMatcher([
+  "/telegram(.*)",
+  "/proposal(.*)",
+  "/studio(.*)", // Keep studio protected if it was before (usually it is)
+]);
+
+export default function middleware(req: NextRequest, event: NextFetchEvent) {
+  const { pathname } = req.nextUrl;
+
+  // 1. Handle Maintenance Mode FIRST (Highest Priority)
   if (isMaintenanceMode) {
-    // If trying to access a restricted page, redirect to /maintenance
     if (!isAllowedPath(req)) {
       return NextResponse.redirect(new URL("/maintenance", req.url));
     }
-  }
-  // 2. If Maintenance Mode is OFF
-  else {
-    // If user is on /maintenance page but mode is off, redirect to home
-    if (req.nextUrl.pathname === "/maintenance") {
+  } else {
+    if (pathname === "/maintenance") {
       return NextResponse.redirect(new URL("/", req.url));
     }
   }
-});
+
+  // 2. If it's a protected route, delegate to clerkMiddleware
+  if (isProtectedRoute(req)) {
+    return clerkMiddleware()(req, event);
+  }
+
+  // 3. For public routes, explicitly return next() with BFCache-friendly headers
+  // This SURGICALLY BYPASSES Clerk for all public pages to prevent 'no-store' headers.
+  const response = NextResponse.next();
+
+  // BFCache Optimization: Ensure public pages are eligible for memory restoration.
+  response.headers.set(
+    "Cache-Control",
+    "public, max-age=0, must-revalidate, stale-while-revalidate=300"
+  );
+
+  // Set Locale Header for Layout
+  const localeMatch = pathname.match(/^\/(en|am)(\/|$)/);
+  const locale = localeMatch ? localeMatch[1] : "en";
+  response.headers.set("x-locale", locale);
+
+  return response;
+}
 
 export const config = {
   matcher: [

@@ -38,9 +38,8 @@ export function Navbar() {
     <>
       {/* Desktop Header */}
       <header
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-[9999] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-background/80 md:flex backdrop-blur-sm border border-border/50 shadow-lg transition-all duration-300 ${
-          isScrolled ? "max-w-3xl px-2" : "max-w-5xl px-4"
-        } py-2`}
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-[9999] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-background/80 md:flex backdrop-blur-sm border border-border/50 shadow-lg transition-all duration-300 ${isScrolled ? "max-w-3xl px-2" : "max-w-5xl px-4"
+          } py-2`}
         style={{
           willChange: "transform",
           transform: "translateZ(0)",
@@ -59,7 +58,7 @@ export function Navbar() {
           <NavbarContent className="hidden sm:flex gap-4" justify="center">
             <NavbarItem>
               <Link
-                className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium text-red-500 dark:text-text-dark"
+                className="bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base"
                 href={`/${lang}`}
               >
                 Home
@@ -71,7 +70,7 @@ export function Navbar() {
               onMouseEnter={() => setIsServicesMenuOpen(true)}
               onMouseLeave={() => setIsServicesMenuOpen(false)}
             >
-              <button className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium flex items-center gap-1 transition-colors text-red-500 dark:text-text-dark hover:text-primary">
+              <button className="flex items-center gap-1 transition-colors bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text  font-medium text-base">
                 Services
                 <ChevronDownIcon
                   className={`w-4 h-4 transition-transform duration-200 ${isServicesMenuOpen ? "rotate-180" : ""}`}
@@ -81,49 +80,49 @@ export function Navbar() {
                 <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-56 origin-top-right rounded-xl bg-gray-100 dark:bg-neutral-900 backdrop-blur-md border border-border/50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="py-2">
                     <Link
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
+                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
                       href={`/${lang}/services/facebook-ad`}
                     >
                       Facebook Ad
                     </Link>
                     <Link
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
+                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
                       href={`/${lang}/services/web-design`}
                     >
                       Web Design
                     </Link>
                     <Link
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
+                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
                       href={`/${lang}/services/tiktok-ad`}
                     >
                       TikTok Ads
                     </Link>
                     <Link
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
+                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
                       href={`/${lang}/services/digital-marketing`}
                     >
                       Digital Marketing Strategy
                     </Link>
                     <Link
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
+                      className="block px-4 py-2 text-sm text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
                       href={`/${lang}/services/seo`}
                     >
                       SEO
                     </Link>
                     <Link
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
+                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
                       href={`/${lang}/services/content-marketing`}
                     >
                       Content Marketing
                     </Link>
                     <Link
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
+                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
                       href={`/${lang}/services/funnel-mapping`}
                     >
                       Funnel Mapping
                     </Link>
                     <Link
-                      className="block px-4 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
+                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
                       href={`/${lang}/services/graphic-design`}
                     >
                       Graphic Design
@@ -134,7 +133,7 @@ export function Navbar() {
             </div>
             <NavbarItem>
               <Link
-                className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium text-red-500 dark:text-text-dark"
+                className="bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base"
                 href={`/${lang}/works`}
               >
                 Our work
@@ -142,7 +141,7 @@ export function Navbar() {
             </NavbarItem>
             <NavbarItem>
               <Link
-                className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium text-red-500 dark:text-text-dark"
+                className="bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base"
                 href={`/${lang}/about`}
               >
                 About Us
@@ -150,7 +149,7 @@ export function Navbar() {
             </NavbarItem>
             <NavbarItem>
               <Link
-                className="data-[active=true]:text-primary data-[active=true]:font-medium text-base font-medium text-red-500 dark:text-text-dark"
+                className="bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base"
                 href={`/${lang}/contact`}
               >
                 Contact Us
@@ -167,7 +166,7 @@ export function Navbar() {
       {/* Mobile Header */}
       <header className="fixed top-4 z-[9999] left-4 right-4 mx-auto flex w-auto flex-row items-center justify-between rounded-full bg-background/80 backdrop-blur-sm border border-border/50 shadow-lg md:hidden px-4 py-3">
         <ThemeSwitch />
-        <Link className="flex items-center justify-center gap-2" href="/">
+        <Link className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base" href="/">
           Aligoo
         </Link>
 
