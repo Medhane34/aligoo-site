@@ -106,11 +106,11 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
 
       return context.send(
         "✅ You've been unsubscribed successfully.\n\n" +
-          "You won't receive marketing messages anymore.\n\n" +
-          "Changed your mind? Use /resubscribe anytime to opt back in.\n\n" +
-          "Need help? Contact us:\n" +
-          "📱 +251910584712\n" +
-          "💬 @findusontelegram",
+        "You won't receive marketing messages anymore.\n\n" +
+        "Changed your mind? Use /resubscribe anytime to opt back in.\n\n" +
+        "Need help? Contact us:\n" +
+        "📱 +251910584712\n" +
+        "💬 @findusontelegram",
       );
     } catch (error) {
       console.error("Unsubscribe error:", error);
@@ -136,8 +136,8 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
 
       return context.send(
         "🎉 Welcome back!\n\n" +
-          "You're now resubscribed and will receive our updates again.\n\n" +
-          "Use /help to see all available commands.",
+        "You're now resubscribed and will receive our updates again.\n\n" +
+        "Use /help to see all available commands.",
       );
     } catch (error) {
       console.error("Resubscribe error:", error);
@@ -150,15 +150,15 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
   .command("help", async (context) => {
     return context.send(
       "🤖 *Aligoo Marketing Bot*\n\n" +
-        "*Available Commands:*\n" +
-        "/start - Subscribe to updates\n" +
-        "/unsubscribe - Stop receiving messages\n" +
-        "/resubscribe - Opt back in\n" +
-        "/help - Show this message\n\n" +
-        "*Contact Us:*\n" +
-        "📱 Phone: +251910584712\n" +
-        "💬 Telegram: @findusontelegram\n\n" +
-        "We're here to help! 🚀",
+      "*Available Commands:*\n" +
+      "/start - Subscribe to updates\n" +
+      "/unsubscribe - Stop receiving messages\n" +
+      "/resubscribe - Opt back in\n" +
+      "/help - Show this message\n\n" +
+      "*Contact Us:*\n" +
+      "📱 Phone: +251910584712\n" +
+      "💬 Telegram: @findusontelegram\n\n" +
+      "We're here to help! 🚀",
       { parse_mode: "Markdown" },
     );
   })
@@ -202,7 +202,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
         .append("tags", ["confirmed"])
         .commit();
 
-      await context.send("You're all set! 🎉\n\nHere is your free guide.");
+      await context.send("You're all set! 🎉\n\nWe will send you your free guide.");
 
       return;
     }

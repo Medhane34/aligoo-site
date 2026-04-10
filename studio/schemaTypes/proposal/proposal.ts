@@ -1,5 +1,5 @@
 // sanity/schemas/proposal/proposal.tsimport {defineField} from 'sanity'
-import { getInitialUniqueCode } from '../../../aligoo-digital-agency/utils/uniqueCodeGenerator'
+import { getInitialUniqueCode } from '../../../web/utils/uniqueCodeGenerator'
 
 export default {
   name: 'proposal',

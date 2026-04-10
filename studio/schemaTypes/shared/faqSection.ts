@@ -12,6 +12,29 @@ export default defineType({
       validation: (Rule) => Rule.required(),
       description: "e.g., faqSection-Fb, faqSection-WebDesign",
     }),
+    // Page Specefication 
+    defineField({
+      name: "page",
+      title: "Page ",
+      description: "Select the specific page this FAQ section belongs to.",
+      type: "string",
+      options: {
+        list: [
+          // Services page 
+          { title: 'Facebook Ads', value: 'facebook-ads' },
+          { title: 'Web Design', value: 'web-design' },
+          { title: 'Digital Marketing', value: 'digital-marketing' },
+          { title: 'Seo', value: 'seo' },
+          { title: 'Content Writing', value: 'content-writing' },
+          { title: 'Graphic Design', value: 'graphic-design' },
+          { title: 'TikTok Ads', value: 'tiktok-ads' },
+          { title: 'Funnel Mapping', value: 'funnel-mapping' },
+
+
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
     // English fields
     defineField({ name: "eyebrow_en", title: "Eyebrow (English)", type: "string" }),
     defineField({ name: "heading_en", title: "Heading (English)", type: "string", validation: (Rule) => Rule.required() }),

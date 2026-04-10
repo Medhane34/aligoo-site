@@ -30,7 +30,7 @@ export default (S: StructureBuilder) =>
       S.divider(),
 
       pages(S),
-      services(S),
+
       shared(S),
       S.divider(),
 

@@ -13,6 +13,31 @@ export default defineType({
       validation: (Rule) => Rule.required(),
       description: "e.g., heroSection-WebDesign, heroSection-FacebookAd",
     }),
+    defineField({
+      name: "page",
+      title: "Page",
+      type: "string",
+      options: {
+        list: [
+          { title: 'Home', value: 'home' },
+          { title: 'Contact', value: 'contact' },
+          { title: 'About', value: 'about' },
+          { title: 'Work', value: 'work' },
+          // Services page 
+          { title: 'Facebook Ads', value: 'facebook-ads' },
+          { title: 'Web Design', value: 'web-design' },
+          { title: 'Digital Marketing', value: 'digital-marketing' },
+          { title: 'Seo', value: 'seo' },
+          { title: 'Content Writing', value: 'content-writing' },
+          { title: 'Graphic Design', value: 'graphic-design' },
+          { title: 'TikTok Ads', value: 'tiktok-ads' },
+          { title: 'Funnel Mapping', value: 'funnel-mapping' },
+
+
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
 
     // English fields
     defineField({ name: "badgeText_en", title: "Badge Text (English)", type: "string", group: "en" }),

@@ -1,6 +1,7 @@
 import { StructureBuilder } from 'sanity/structure'
-import { AddCircleIcon, UserIcon } from '@sanity/icons'
+import { AddCircleIcon, StarIcon, UserIcon } from '@sanity/icons'
 import TelegramPreview from '../components/TelegramPreview'
+import { services } from './ services'
 
 export const pages = (S: StructureBuilder) =>
   S.listItem()
@@ -22,15 +23,20 @@ export const pages = (S: StructureBuilder) =>
                       S.documentList()
                         .title('Home Page Sections')
                         .filter(
-                          `_type in [
-                            "home_heroSection",
-                            "aboutUsSection",
-                            "statsSection",
-                            "serviceSection",
-                            "processSection",
-                            "whyUsSection",
-                            "testimonial"
-                          ]`
+                          `(
+                  // Shared schemas - filter by page field
+                  (_type == "heroSection" && page == "home") ||
+
+                  // Page-specific schemas - no need for page filter
+                  _type in [
+                    "aboutUsSection",
+                    "statsSection",
+                    "serviceSection",
+                    "processSection",
+                    "whyUsSection",
+                    "testimonial"
+                  ]
+                )`
                         )
                     ),
                   S.divider(),
@@ -47,14 +53,21 @@ export const pages = (S: StructureBuilder) =>
               S.documentList()
                 .title('About Page Sections')
                 .filter(
-                  `_type in [
-                    "aboutIntroSection",
+                  `(
+                  // Shared schemas - filter by page field
+                  (_type == "heroSection" && page == "about") ||
+
+                  // Page-specific schemas - no need for page filter
+                  _type in [
+                   "aboutIntroSection",
                     "aboutOurWaySection",
                     "valuesSection",
                     "teamSection", 
                     "meaningSection", 
                     "ourWaySection"
-                  ]`
+                  ]
+                )`
+
                 )
             ),
 
@@ -78,6 +91,12 @@ export const pages = (S: StructureBuilder) =>
                 .title('Contact Page Sections')
                 .filter(`_type in ["contactSection"]`)
             ),
+          S.divider(),
+
+
+
+          services(S),
+
 
           S.listItem()
             .title('Proposal Page')
