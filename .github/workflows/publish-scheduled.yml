@@ -1,0 +1,18 @@
+name: Publish Scheduled Sanity Documents
+
+on:
+  schedule:
+    # Run every 5 minutes (GitHub Actions highest frequency)
+    - cron: '*/5 * * * *'
+  # Allow manual triggering from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping publish endpoint
+        run: |
+          curl -s -X POST ${{ secrets.API_PUBLISH_URL }} \
+          -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+          -H "Content-Type: application/json"
