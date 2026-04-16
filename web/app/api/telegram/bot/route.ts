@@ -202,7 +202,7 @@ const bot = new Bot(process.env.TELEGRAM_CLIENT_BOT_TOKEN as string)
         .append("tags", ["confirmed"])
         .commit();
 
-      await context.send("You're all set! 🎉\n\nWe will send you your free guide.");
+      await context.send("You're all set! 🎉\n\n To Never Miss Updates pin our bot or Move to Personal Folder.");
 
       return;
     }
