@@ -1,11 +1,13 @@
 // sanity.config.ts
 import { defineConfig } from 'sanity'
-import { visionTool } from '@sanity/vision'
 import { schemaTypes } from './schemaTypes'
 import { presentationTool, defineLocations } from 'sanity/presentation'
 import deskStructure from './structure/deskStructure'
 import { structureTool } from 'sanity/structure'
 import seofields from 'sanity-plugin-seofields'
+// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+import { workflowManager } from '@multidots/sanity-plugin-workflow-manager'
 export default defineConfig([
   {
     name: 'production',
@@ -50,7 +52,39 @@ export default defineConfig([
           },
         },
       }),
-      visionTool(),
+      workflowManager({
+        // Define your workflow states
+        states: [
+          {
+            id: 'draft',
+            title: 'Draft',
+            color: 'primary',
+            transitions: ['review']
+          },
+          {
+            id: 'review',
+            title: 'In Review',
+            color: 'warning',
+            transitions: ['approved', 'changes-requested'],
+            requireAssignment: true
+          },
+          {
+            id: 'approved',
+            title: 'Approved',
+            color: 'success',
+            requireAssignment: true,
+            requireValidation: true
+          }
+        ],
+        // Apply workflow ONLY to these two document types
+        schemaTypes: ['post', 'caseStudy'],
+
+        // Optional: Enable user assignment (if you have users in Sanity)
+        enableAssignment: true,
+
+        // Optional: Show publishing calendar
+        showCalendar: true,
+      }),
     ],
     schema: {
       types: schemaTypes as any,
@@ -158,7 +192,7 @@ export default defineConfig([
                 ),
             ]),
       }),
-      visionTool(),
+
     ],
     schema: {
       types: schemaTypes as any,
