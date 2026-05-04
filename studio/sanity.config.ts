@@ -1,5 +1,5 @@
 // sanity.config.ts
-import { defineConfig } from 'sanity'
+import { defineConfig, buildLegacyTheme } from 'sanity'
 import { schemaTypes } from './schemaTypes'
 import { presentationTool, defineLocations } from 'sanity/presentation'
 import deskStructure from './structure/deskStructure'
@@ -8,6 +8,27 @@ import seofields from 'sanity-plugin-seofields'
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 import { workflowManager } from '@multidots/sanity-plugin-workflow-manager'
+import { AligooLogo } from './components/Logo'
+import { CustomNavbar } from './components/CustomNavbar'
+import { EarthAmericasIcon } from '@sanity/icons'
+
+
+const aligooTheme = buildLegacyTheme({
+  /* Brand colors */
+  '--brand-primary': '#E63939',
+  '--focus-color': '#E63939',
+
+  /* Typography settings */
+  '--main-navigation-color': '#1f2937',
+  '--main-navigation-color--inverted': '#ffffff',
+
+  /* Button and State colors */
+  '--state-info-color': '#E63939',
+  '--state-success-color': '#10B981',
+  '--state-warning-color': '#F59E0B',
+  '--state-danger-color': '#EF4444',
+} as any)
+
 export default defineConfig([
   {
     name: 'production',
@@ -15,6 +36,9 @@ export default defineConfig([
     projectId: 'mcpko9lw',
     dataset: 'production',
     basePath: '/studio',
+
+    icon: AligooLogo,
+    logo: AligooLogo,
     plugins: [
       seofields(),
       structureTool({
@@ -86,15 +110,55 @@ export default defineConfig([
         showCalendar: true,
       }),
     ],
-    schema: {
-      types: schemaTypes as any,
+
+    schema: { types: schemaTypes as any, },
+    theme: aligooTheme,
+    studio: {
+      components: {
+        logo: AligooLogo,
+        navbar: CustomNavbar,        // This replaces the default navbar
+      },
+    },
+
+    // Custom Publish action: syncs title from title_en before publishing
+    // so the Workflow Manager calendar displays the correct title.
+    document: {
+      actions: (prev, context) => {
+        if (context.schemaType !== 'post') return prev
+        return prev.map((action: any) => {
+          if (action.action !== 'publish') return action
+          const originalAction = action
+          return (props: any) => {
+            const originalResult = originalAction(props)
+            if (!originalResult) return originalResult
+            return {
+              ...originalResult,
+              onHandle: async () => {
+                // Sync title before publishing
+                const doc = props.draft ?? props.published
+                if (doc && (doc as Record<string, unknown>).title_en) {
+                  await props.client
+                    .patch(doc._id)
+                    .set({ title: (doc as Record<string, unknown>).title_en })
+                    .commit()
+                }
+                if (originalResult.onHandle) {
+                  await originalResult.onHandle()
+                }
+              },
+            }
+          }
+        })
+      },
     },
   },
+
   {
     name: 'automation',
     title: 'Automation',
     projectId: 'mcpko9lw',
     dataset: 'automation',
+    icon: EarthAmericasIcon,
     basePath: '/automation',
     plugins: [
       seofields(),
@@ -196,6 +260,12 @@ export default defineConfig([
     ],
     schema: {
       types: schemaTypes as any,
+    },
+    theme: aligooTheme,
+    studio: {
+      components: {
+        navbar: CustomNavbar,
+      },
     },
   },
 ])

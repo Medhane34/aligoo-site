@@ -160,6 +160,15 @@ export const postType = defineType({
       type: 'seoFields', // Provided by sanity-plugin-seofields
       group: 'seo',
     }),
+    // Hidden title field — mirrors title_en so the Workflow Manager calendar
+    // can display the document title (its GROQ query fetches .title hardcoded).
+    defineField({
+      name: "title",
+      title: "Title (internal — do not edit)",
+      type: "string",
+      hidden: true,
+      readOnly: true,
+    }),
   ],
 
   // Optional preview (helps in the list view)
