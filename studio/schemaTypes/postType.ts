@@ -50,7 +50,10 @@ export const postType = defineType({
       name: 'mainImage',
       title: 'Main / Featured Image',
       type: 'image',
-      options: { hotspot: true },
+      options: {
+        hotspot: true,
+        metadata: ['location', 'palette'],
+      },
       validation: (rule) => rule.required(),
       fields: [
         // Alt-text per language – still inside the image object

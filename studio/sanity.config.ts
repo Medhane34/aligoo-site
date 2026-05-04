@@ -39,6 +39,10 @@ export default defineConfig([
 
     icon: AligooLogo,
     logo: AligooLogo,
+    mediaLibrary: {
+      enabled: true,
+    },
+
     plugins: [
       seofields(),
       structureTool({
