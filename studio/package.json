@@ -16,10 +16,16 @@
     "sanity"
   ],
   "dependencies": {
+    "@hello-pangea/dnd": "^18.0.1",
+    "@multidots/sanity-plugin-workflow-manager": "^1.0.5",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^2.0.3",
     "@sanity/ui": "^3.1.11",
     "@sanity/vision": "^5.9.0",
+    "@tanstack/react-virtual": "^3.13.23",
+    "framer-motion": "^12.38.0",
+    "groq": "^5.20.0",
+    "lexorank": "^1.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sanity": "^5.9.0",

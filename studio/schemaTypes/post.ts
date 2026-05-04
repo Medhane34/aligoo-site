@@ -35,5 +35,27 @@ export default defineType({
         defineField({ name: "buttonLink", type: "url", title: "Button Link" }),
       ],
     }),
+    // Hidden title field — mirrors title_en so the Workflow Manager calendar
+    // can display the document title (its GROQ query fetches .title hardcoded).
+    // This field is not visible in the editor UI.
+    defineField({
+      name: "title",
+      title: "Title (internal — do not edit)",
+      type: "string",
+      hidden: true,
+      readOnly: true,
+    }),
   ],
+  preview: {
+    select: {
+      title: "title_en",
+      media: "mainImage",
+    },
+    prepare({ title, media }: { title?: string; media?: any }) {
+      return {
+        title: title || "Untitled Post",
+        media: media as any,
+      };
+    },
+  },
 });
