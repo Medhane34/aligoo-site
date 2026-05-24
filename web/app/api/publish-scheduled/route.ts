@@ -32,10 +32,9 @@ export async function POST(req: Request) {
 async function handlePublish(req: Request) {
   const authHeader = req.headers.get('authorization')
 
-  // You should store CRON_SECRET and SANITY_API_TOKEN in your environment variables.
-  const expectedToken = process.env.CRON_SECRET || process.env.SANITY_API_READ_WRITE_TOKEN
-
-  if (expectedToken && authHeader !== `Bearer ${expectedToken}`) {
+  // CRON_SECRET is set in Vercel env vars and used by both Vercel Cron and GitHub Actions
+  const cronSecret = process.env.CRON_SECRET
+  if (cronSecret && authHeader !== `Bearer ${cronSecret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
@@ -71,6 +70,16 @@ async function handlePublish(req: Request) {
         publishSchedule
       }
     `, { now })
+
+    // Early exit — nothing to publish, don't waste time or log noise
+    if (scheduledDocs.length === 0) {
+      return NextResponse.json({
+        timestamp: now,
+        checked: 0,
+        published: 0,
+        message: 'No documents scheduled for publishing at this time.',
+      }, { status: 200 })
+    }
 
     const results: PublishResult[] = []
 

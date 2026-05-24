@@ -1,18 +1,52 @@
 name: Publish Scheduled Sanity Documents
 
+# ┌──────────────────────────────────────────────────────────┐
+# │ HOW IT WORKS                                            │
+# │                                                         │
+# │ Runs every 5 minutes (GitHub Actions = free).           │
+# │ Each run calls the publish API which does ONE cheap      │
+# │ Sanity CDN read to check for scheduled docs.            │
+# │                                                         │
+# │ If nothing is scheduled → returns instantly, no writes.  │
+# │ If docs are due → publishes them (1 read + N writes).   │
+# │                                                         │
+# │ COST: ~8,640 CDN reads/month = 1.7% of Sanity free tier │
+# │ (500K CDN reads/month allowed). Zero writes when idle.  │
+# │                                                         │
+# │ Vercel daily cron (vercel.json) is a safety backup.     │
+# └──────────────────────────────────────────────────────────┘
+
 on:
   schedule:
-    # Run every 5 minutes (GitHub Actions highest frequency)
     - cron: '*/5 * * * *'
-  # Allow manual triggering from the Actions tab
   workflow_dispatch:
 
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Ping publish endpoint
+      - name: Publish scheduled documents
         run: |
-          curl -s -X POST ${{ secrets.API_PUBLISH_URL }} \
-          -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-          -H "Content-Type: application/json"
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "${{ secrets.API_PUBLISH_URL }}" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -n1)
+          BODY=$(echo "$RESPONSE" | head -n-1)
+
+          if [ "$HTTP_CODE" != "200" ]; then
+            echo "❌ HTTP $HTTP_CODE — $BODY"
+            exit 1
+          fi
+
+          # Parse result
+          PUBLISHED=$(echo "$BODY" | python3 -c "import sys,json; print(json.load(sys.stdin).get('published', 0))" 2>/dev/null || echo "0")
+          CHECKED=$(echo "$BODY" | python3 -c "import sys,json; print(json.load(sys.stdin).get('checked', 0))" 2>/dev/null || echo "0")
+
+          if [ "$CHECKED" = "0" ]; then
+            echo "✅ No scheduled documents."
+          elif [ "$PUBLISHED" != "0" ]; then
+            echo "🚀 Published $PUBLISHED document(s)!"
+          else
+            echo "📋 Checked $CHECKED doc(s), none due yet."
+          fi

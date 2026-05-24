@@ -1,5 +1,5 @@
 // sanity.config.ts
-import { defineConfig, buildLegacyTheme } from 'sanity'
+import { defineConfig, buildLegacyTheme, useClient } from 'sanity'
 import { schemaTypes } from './schemaTypes'
 import { presentationTool, defineLocations } from 'sanity/presentation'
 import deskStructure from './structure/deskStructure'
@@ -124,27 +124,31 @@ export default defineConfig([
       },
     },
 
-    // Custom Publish action: syncs title from title_en before publishing
-    // so the Workflow Manager calendar displays the correct title.
     document: {
       actions: (prev, context) => {
         if (context.schemaType !== 'post') return prev
         return prev.map((action: any) => {
           if (action.action !== 'publish') return action
-          const originalAction = action
-          return (props: any) => {
-            const originalResult = originalAction(props)
+          const OriginalAction = action
+          // Wrap in a component so we can use hooks (useClient)
+          const WrappedAction = (props: any) => {
+            const client = useClient({ apiVersion: '2025-01-01' })
+            const originalResult = OriginalAction(props)
             if (!originalResult) return originalResult
             return {
               ...originalResult,
               onHandle: async () => {
-                // Sync title before publishing
+                // Sync title_en → title before publishing
                 const doc = props.draft ?? props.published
                 if (doc && (doc as Record<string, unknown>).title_en) {
-                  await props.client
-                    .patch(doc._id)
-                    .set({ title: (doc as Record<string, unknown>).title_en })
-                    .commit()
+                  try {
+                    await client
+                      .patch(doc._id)
+                      .set({ title: (doc as Record<string, unknown>).title_en })
+                      .commit()
+                  } catch (err) {
+                    console.warn('Title sync failed:', err)
+                  }
                 }
                 if (originalResult.onHandle) {
                   await originalResult.onHandle()
@@ -152,6 +156,9 @@ export default defineConfig([
               },
             }
           }
+          WrappedAction.action = action.action
+          WrappedAction.displayName = 'WrappedPublishAction'
+          return WrappedAction
         })
       },
     },
