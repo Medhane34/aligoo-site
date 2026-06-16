@@ -34,12 +34,12 @@ jobs:
 
       - name: Verify export created
         run: |
-          ls -lh backup-mockup-production.tar.gz
+          ls -lh backup-backup-production.tar.gz
 
       - name: Upload backup artifact
         uses: actions/upload-artifact@v4
         with:
-          name: sanity-backup-mockup-${{ github.run_id }}
-          path: backup-mockup-production.tar.gz
+          name: sanity-backup-backup-${{ github.run_id }}
+          path: backup-backup-production.tar.gz
           retention-days: 7
           if-no-files-found: error
