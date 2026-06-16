@@ -1,0 +1,45 @@
+name: Sanity Dataset Backup
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # 3:00 AM Ethiopia
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    name: Backup Mockup Project
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - name: Export Sanity dataset
+        env:
+          SANITY_AUTH_TOKEN: ${{ secrets.SANITY_TOKEN_PROJECT_BACKUP }}
+        run: |
+          npx -y @sanity/cli@latest datasets export \
+            production \
+            backup-backup-production.tar.gz \
+            --project-id ${{ secrets.SANITY_PROJECT_ID }} \
+            --no-drafts
+
+      - name: Verify export created
+        run: |
+          ls -lh backup-mockup-production.tar.gz
+
+      - name: Upload backup artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sanity-backup-mockup-${{ github.run_id }}
+          path: backup-mockup-production.tar.gz
+          retention-days: 7
+          if-no-files-found: error
