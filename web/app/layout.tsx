@@ -25,6 +25,10 @@ export const metadata: Metadata = {
   icons: {
     icon: "/favicon.ico",
   },
+  alternates: {
+    canonical: "https://aligoo-digital.agency/",
+  }
+
 };
 
 export const viewport: Viewport = {
