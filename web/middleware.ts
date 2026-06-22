@@ -54,8 +54,17 @@ export default function middleware(req: NextRequest, event: NextFetchEvent) {
   const locale = localeMatch ? localeMatch[1] : "en";
   response.headers.set("x-locale", locale);
 
+  // =========================================================================
+  // BULLETPROOF SEO GUARDRAIL: Inject noindex on Vercel Domains
+  // =========================================================================
+  const host = req.headers.get("host");
+  if (host && host.includes("vercel.app") && response) {
+    response.headers.set("X-Robots-Tag", "noindex, nofollow, noarchive");
+  }
+
   return response;
 }
+
 
 export const config = {
   matcher: [
