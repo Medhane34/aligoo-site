@@ -18,6 +18,7 @@
   "dependencies": {
     "@hello-pangea/dnd": "^18.0.1",
     "@multidots/sanity-plugin-workflow-manager": "^1.0.5",
+    "@portabletext/plugin-table": "^1.3.10",
     "@sanity/icons": "^3.7.4",
     "@sanity/image-url": "^2.0.3",
     "@sanity/ui": "^3.1.11",
@@ -28,7 +29,7 @@
     "lexorank": "^1.0.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "sanity": "^5.9.0",
+    "sanity": "^6.9.1",
     "sanity-plugin-seo-pane": "^2.0.1",
     "sanity-plugin-seofields": "^1.0.10",
     "styled-components": "^6.1.15"

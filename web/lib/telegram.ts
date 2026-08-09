@@ -88,14 +88,14 @@ function buildSanityImageURL(ref: string) {
   // ref example: image-abc123-800x600-png
   const [_, id, dimension, ext] = ref.split("-");
 
-  return `https://cdn.sanity.io/images/${PROJECT_ID}/production/${id}-${dimension}.${ext}`;
+  return `https://cdn.sanity.io/images/${PROJECT_ID}/automation/${id}-${dimension}.${ext}`;
 }
 
 function buildSanityFileURL(ref: string) {
   // ref example: file-abc123-pdf
   const [_, id, ext] = ref.split("-");
 
-  return `https://cdn.sanity.io/files/${PROJECT_ID}/production/${id}.${ext}`;
+  return `https://cdn.sanity.io/files/${PROJECT_ID}/automation/${id}.${ext}`;
 }
 
 // ----------------------------------------------------------------
@@ -177,8 +177,8 @@ export async function sendTelegramMessage(
         reply_markup:
           inlineKeyboard.length > 0
             ? {
-                inline_keyboard: inlineKeyboard,
-              }
+              inline_keyboard: inlineKeyboard,
+            }
             : undefined,
       });
     }
@@ -197,8 +197,8 @@ export async function sendTelegramMessage(
         reply_markup:
           inlineKeyboard.length > 0
             ? {
-                inline_keyboard: inlineKeyboard,
-              }
+              inline_keyboard: inlineKeyboard,
+            }
             : undefined,
       });
     }
@@ -214,8 +214,8 @@ export async function sendTelegramMessage(
       reply_markup:
         inlineKeyboard.length > 0
           ? {
-              inline_keyboard: inlineKeyboard,
-            }
+            inline_keyboard: inlineKeyboard,
+          }
           : undefined,
     });
   } catch (err: any) {

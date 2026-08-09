@@ -44,6 +44,8 @@ export default defineConfig([
     },
 
     plugins: [
+      
+
       seofields(),
       structureTool({
         structure: deskStructure,
