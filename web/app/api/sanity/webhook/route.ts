@@ -31,21 +31,26 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ skipped: "already sent or sending" });
       }
 
-      // OPTIMIZATION: Pass full campaign data to avoid redundant fetch in broadcast
+      // Ensure siteUrl has no trailing slash and await the trigger fetch so serverless runtime does not abort it
       const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 
       if (siteUrl) {
-        fetch(`${siteUrl}/api/broadcast/trigger`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            campaignId,
-            campaignData: body, // Pass the document from webhook payload
-          }),
-        }).catch((e) => console.error("Async trigger failed", e));
+        const baseUrl = siteUrl.replace(/\/$/, "");
+        try {
+          const triggerRes = await fetch(`${baseUrl}/api/broadcast/trigger`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              campaignId,
+              campaignData: body, // Pass the document from webhook payload
+            }),
+          });
+          const triggerResult = await triggerRes.json();
+          console.log(`✅ Webhook triggered broadcast for campaign ${campaignId}:`, triggerResult);
+        } catch (e) {
+          console.error("Async trigger failed", e);
+        }
       }
-
-      console.log(`✅ Webhook triggered broadcast for campaign: ${campaignId}`);
     }
 
     return NextResponse.json({ status: "success" });
