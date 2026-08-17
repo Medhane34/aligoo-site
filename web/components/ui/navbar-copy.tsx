@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { ComponentType } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -10,19 +11,109 @@ import {
   NavbarItem,
 } from "@heroui/navbar";
 import NextLink from "next/link";
-import { ChevronDownIcon } from "lucide-react";
+import { AnimatePresence, motion, useReducedMotion, type Variants } from "framer-motion";
+import {
+  ArrowRight,
+  ChevronDownIcon,
+  FileText,
+  Filter,
+  Monitor,
+  Paintbrush,
+  PenTool,
+  Search,
+} from "lucide-react";
 import { Bars4Icon, XMarkIcon } from "@heroicons/react/24/solid";
 
 import ThemeSwitch from "../theme-switch";
+import { FacebookIcon, TikTokIcon } from "../icons";
+
+type ServiceItem = {
+  label: string;
+  href: string;
+  Icon: ComponentType<{ className?: string }>;
+};
+
+type ServiceGroup = {
+  title: string;
+  description: string;
+  items: ServiceItem[];
+};
+
+const serviceGroups: ServiceGroup[] = [
+  {
+    title: "Strategy",
+    description:
+      "We dive deep into your brand, audience, and market — so every move we make is backed by insight, not guesswork.",
+    items: [
+      {
+        label: "Digital Marketing Strategy",
+        href: "/services/digital-marketing",
+        Icon: Monitor,
+      },
+      {
+        label: "Content Strategy",
+        href: "/services/content-marketing",
+        Icon: FileText,
+      },
+      {
+        label: "Funnel Mapping",
+        href: "/services/funnel-mapping",
+        Icon: Filter,
+      },
+    ],
+  },
+  {
+    title: "Design",
+    description:
+      "We don't just make things look good — we design with purpose, personality, and performance in mind.",
+    items: [
+      {
+        label: "Web Design",
+        href: "/services/web-design",
+        Icon: Paintbrush,
+      },
+      {
+        label: "Graphic Design",
+        href: "/services/graphic-design",
+        Icon: PenTool,
+      },
+    ],
+  },
+  {
+    title: "Execution",
+    description:
+      "This is where the magic happens. From ads to analytics, we bring your strategy to life — and keep optimizing for results.",
+    items: [
+      {
+        label: "Facebook & Instagram Ads",
+        href: "/services/facebook-ad",
+        Icon: FacebookIcon,
+      },
+      {
+        label: "TikTok Ads",
+        href: "/services/tiktok-ad",
+        Icon: TikTokIcon,
+      },
+      {
+        label: "SEO",
+        href: "/services/seo",
+        Icon: Search,
+      },
+    ],
+  },
+];
 
 export function Navbar() {
   const pathname = usePathname();
   const lang = pathname?.startsWith("/am") ? "am" : "en";
+  const reduceMotion = useReducedMotion();
 
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isServicesMenuOpen, setIsServicesMenuOpen] = useState(false);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const servicesButtonRef = useRef<HTMLButtonElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,14 +122,44 @@ export function Navbar() {
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    };
   }, []);
+
+  // The mega menu is centered on the navbar pill, so it is not a DOM descendant
+  // of the trigger. Keep it open while the pointer is over either element, and
+  // bridge the gap between them with a short close delay.
+  const openServicesMenu = () => {
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current);
+    setIsServicesMenuOpen(true);
+  };
+  const scheduleCloseServicesMenu = () => {
+    closeTimerRef.current = setTimeout(() => setIsServicesMenuOpen(false), 150);
+  };
+
+  // Stagger the three columns in on open; disabled for reduced-motion users.
+  const staggerContainer: Variants = {
+    hidden: {},
+    show: {
+      transition: { staggerChildren: reduceMotion ? 0 : 0.06 },
+    },
+  };
+  const staggerColumn: Variants = {
+    hidden: { opacity: 0, y: reduceMotion ? 0 : -8 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.22, ease: "easeOut" },
+    },
+  };
 
   return (
     <>
       {/* Desktop Header */}
       <header
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-[9999] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-background/80 md:flex backdrop-blur-sm border border-border/50 shadow-lg transition-all duration-300 ${isScrolled ? "max-w-3xl px-2" : "max-w-5xl px-4"
+        className={`fixed top-4 left-1/2 -translate-x-1/2 z-[9999] mx-auto hidden w-full flex-row items-center justify-between self-start rounded-full bg-white/80 md:flex backdrop-blur-sm border border-black/10 shadow-lg transition-all duration-300 dark:bg-[#0b0b10]/80 dark:border-white/10 ${isScrolled ? "max-w-3xl px-2" : "max-w-5xl px-4"
           } py-2`}
         style={{
           willChange: "transform",
@@ -51,7 +172,7 @@ export function Navbar() {
           <NavbarContent className="hidden sm:flex" justify="start">
             <NavbarBrand as="li" className="gap-3 max-w-fit">
               <NextLink className="flex items-center gap-1" href={`/${lang}`}>
-                <p className="font-bold text-inherit">Aligoo</p>
+                <p className="font-bold text-neutral-900 dark:text-white">Aligoo</p>
               </NextLink>
             </NavbarBrand>
           </NavbarContent>
@@ -64,72 +185,24 @@ export function Navbar() {
                 Home
               </Link>
             </NavbarItem>
-            {/* Services Dropdown */}
+            {/* Services Trigger */}
             <div
               className="relative pt-4 pb-4 -mt-4 -mb-4" // Add padding to bridge the gap
-              onMouseEnter={() => setIsServicesMenuOpen(true)}
-              onMouseLeave={() => setIsServicesMenuOpen(false)}
+              onMouseEnter={openServicesMenu}
+              onMouseLeave={scheduleCloseServicesMenu}
             >
-              <button className="flex items-center gap-1 transition-colors bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text  font-medium text-base">
+              <button
+                ref={servicesButtonRef}
+                aria-haspopup="true"
+                aria-expanded={isServicesMenuOpen}
+                onClick={() => setIsServicesMenuOpen((v) => !v)}
+                className="flex items-center gap-1 transition-colors bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base"
+              >
                 Services
                 <ChevronDownIcon
                   className={`w-4 h-4 transition-transform duration-200 ${isServicesMenuOpen ? "rotate-180" : ""}`}
                 />
               </button>
-              {isServicesMenuOpen && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-56 origin-top-right rounded-xl bg-gray-100 dark:bg-neutral-900 backdrop-blur-md border border-border/50 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <div className="py-2">
-                    <Link
-                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
-                      href={`/${lang}/services/facebook-ad`}
-                    >
-                      Facebook Ad
-                    </Link>
-                    <Link
-                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
-                      href={`/${lang}/services/web-design`}
-                    >
-                      Web Design
-                    </Link>
-                    <Link
-                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
-                      href={`/${lang}/services/tiktok-ad`}
-                    >
-                      TikTok Ads
-                    </Link>
-                    <Link
-                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
-                      href={`/${lang}/services/digital-marketing`}
-                    >
-                      Digital Marketing Strategy
-                    </Link>
-                    <Link
-                      className="block px-4 py-2 text-sm text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
-                      href={`/${lang}/services/seo`}
-                    >
-                      SEO
-                    </Link>
-                    <Link
-                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
-                      href={`/${lang}/services/content-marketing`}
-                    >
-                      Content Marketing
-                    </Link>
-                    <Link
-                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
-                      href={`/${lang}/services/funnel-mapping`}
-                    >
-                      Funnel Mapping
-                    </Link>
-                    <Link
-                      className="block px-4 py-2 text-sm bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base hover:text-foreground hover:bg-muted transition-colors rounded-md mx-2"
-                      href={`/${lang}/services/graphic-design`}
-                    >
-                      Graphic Design
-                    </Link>
-                  </div>
-                </div>
-              )}
             </div>
             <NavbarItem>
               <Link
@@ -161,10 +234,80 @@ export function Navbar() {
             <ThemeSwitch />
           </NavbarContent>
         </HeroUINavbar>
+
+        {/* Services Mega Menu — centered on the navbar pill */}
+        <AnimatePresence>
+          {isServicesMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: reduceMotion ? 0 : -12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: reduceMotion ? 0 : -6, transition: { duration: 0.12 } }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="absolute left-1/2 top-full mt-3 w-[min(1152px,calc(100vw-2rem))] -translate-x-1/2"
+              onMouseEnter={openServicesMenu}
+              onMouseLeave={scheduleCloseServicesMenu}
+              onBlur={(e) => {
+                if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                  setIsServicesMenuOpen(false);
+                }
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Escape") {
+                  setIsServicesMenuOpen(false);
+                  servicesButtonRef.current?.focus();
+                }
+              }}
+            >
+              <div className="overflow-hidden rounded-2xl border border-black/10 bg-white shadow-2xl ring-1 ring-black/5 dark:border-white/10 dark:bg-[#0b0b10]">
+                {/* Brand gradient hairline */}
+                <div className="mx-auto h-px w-[calc(100%-4rem)] bg-gradient-to-r from-transparent via-[#FF595E] to-transparent" />
+                <motion.div
+                  variants={staggerContainer}
+                  initial="hidden"
+                  animate="show"
+                  className="grid grid-cols-3 gap-10 px-10 py-8"
+                >
+                  {serviceGroups.map((group, groupIndex) => (
+                    <motion.div
+                      key={group.title}
+                      variants={staggerColumn}
+                      className={groupIndex > 0 ? "border-l border-black/10 pl-10 dark:border-white/10" : ""}
+                    >
+                      <h3 className="text-lg font-bold text-neutral-900 dark:text-white">
+                        {group.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+                        {group.description}
+                      </p>
+                      <ul className="mt-5 space-y-1">
+                        {group.items.map((item) => (
+                          <li key={item.href}>
+                            <Link
+                              className="group flex items-center gap-3 rounded-xl px-3 py-2.5 transition-colors duration-200 hover:bg-neutral-100 dark:hover:bg-white/5"
+                              href={`/${lang}${item.href}`}
+                            >
+                              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-white text-neutral-700 shadow-sm ring-1 ring-black/5 transition-all duration-200 group-hover:bg-gradient-to-r group-hover:from-[#FF595E] group-hover:to-orange-500 group-hover:text-white group-hover:ring-0 dark:ring-white/10">
+                                <item.Icon className="h-5 w-5" />
+                              </span>
+                              <span className="flex-1 text-sm font-medium text-neutral-900 dark:text-white">
+                                {item.label}
+                              </span>
+                              <ArrowRight className="h-4 w-4 shrink-0 text-[#FF595E] opacity-60 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" />
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Mobile Header */}
-      <header className="fixed top-4 z-[9999] left-4 right-4 mx-auto flex w-auto flex-row items-center justify-between rounded-full bg-background/80 backdrop-blur-sm border border-border/50 shadow-lg md:hidden px-4 py-3">
+      <header className="fixed top-4 z-[9999] left-4 right-4 mx-auto flex w-auto flex-row items-center justify-between rounded-full bg-white/80 backdrop-blur-sm border border-black/10 shadow-lg md:hidden px-4 py-3 dark:bg-[#0b0b10]/80 dark:border-white/10">
         <ThemeSwitch />
         <Link className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#FF595E] to-orange-500 bg-clip-text text-transparent font-medium text-base" href="/">
           Aligoo
@@ -172,7 +315,7 @@ export function Navbar() {
 
         <button
           aria-label="Toggle menu"
-          className="flex items-center justify-center w-10 h-10 rounded-full bg-background/50 border border-border/50 transition-colors hover:bg-background/80"
+          className="flex items-center justify-center w-10 h-10 rounded-full bg-white/50 border border-black/10 transition-colors hover:bg-white/80 dark:bg-white/10 dark:border-white/10 dark:hover:bg-white/20"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? (
@@ -186,21 +329,21 @@ export function Navbar() {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-[9998] bg-black/50 backdrop-blur-sm md:hidden">
-          <div className="absolute top-20 left-4 right-4 bg-background/95 backdrop-blur-md border border-border/50 rounded-2xl shadow-2xl p-6">
+          <div className="absolute top-20 left-4 right-4 bg-white border border-black/10 rounded-2xl shadow-2xl p-6 dark:bg-[#0b0b10] dark:border-white/10">
             <nav className="flex flex-col gap-2 text-red-500">
               <Link
-                className="text-lg font-medium hover:text-primary transition-colors py-2"
+                className="text-lg font-medium hover:text-[#FF595E] transition-colors py-2 text-neutral-900 dark:text-white"
                 href={`/${lang}`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
               </Link>
-              <div className="h-px bg-border/50" />
+              <div className="h-px bg-black/10 dark:bg-white/10" />
 
               {/* Mobile Services Accordion */}
               <div>
                 <button
-                  className="w-full flex justify-between items-center text-lg font-medium hover:text-primary transition-colors py-2"
+                  className="w-full flex justify-between items-center text-lg font-medium hover:text-[#FF595E] transition-colors py-2 text-neutral-900 dark:text-white"
                   onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
                 >
                   <span>Services</span>
@@ -209,86 +352,49 @@ export function Navbar() {
                   />
                 </button>
                 {isMobileServicesOpen && (
-                  <div className="flex flex-col pl-4 mt-2 gap-2 border-l border-border">
-                    <Link
-                      className="text-base text-muted-foreground hover:text-primary transition-colors py-1"
-                      href={`/${lang}/services/facebook-ad`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Facebook Ad
-                    </Link>
-                    <Link
-                      className="text-base text-muted-foreground hover:text-primary transition-colors py-1"
-                      href={`/${lang}/services/web-design`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Web Design
-                    </Link>
-                    <Link
-                      className="text-base text-muted-foreground hover:text-primary transition-colors py-1"
-                      href={`/${lang}/services/tiktok-ad`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      TikTok Ads
-                    </Link>
-                    <Link
-                      className="text-base text-muted-foreground hover:text-primary transition-colors py-1"
-                      href={`/${lang}/services/digital-marketing`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Digital Marketing Strategy
-                    </Link>
-                    <Link
-                      className="text-base text-muted-foreground hover:text-primary transition-colors py-1"
-                      href={`/${lang}/services/seo`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      SEO
-                    </Link>
-                    <Link
-                      className="text-base text-muted-foreground hover:text-primary transition-colors py-1"
-                      href={`/${lang}/services/content-marketing`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Content Marketing
-                    </Link>
-                    <Link
-                      className="text-base text-muted-foreground hover:text-primary transition-colors py-1"
-                      href={`/${lang}/services/funnel-mapping`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Funnel Mapping
-                    </Link>
-                    <Link
-                      className="text-base text-muted-foreground hover:text-primary transition-colors py-1"
-                      href={`/${lang}/services/graphic-design`}
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      Graphic Design
-                    </Link>
+                  <div className="flex flex-col gap-4 pl-4 mt-2 border-l border-black/10 dark:border-white/10">
+                    {serviceGroups.map((group) => (
+                      <div key={group.title}>
+                        <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500 dark:text-neutral-400 mb-1">
+                          {group.title}
+                        </p>
+                        <div className="flex flex-col">
+                          {group.items.map((item) => (
+                            <Link
+                              key={item.href}
+                              className="text-base text-neutral-600 hover:text-[#FF595E] transition-colors py-1 dark:text-neutral-300"
+                              href={`/${lang}${item.href}`}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                            >
+                              {item.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 )}
               </div>
-              <div className="h-px bg-border/50" />
+              <div className="h-px bg-black/10 dark:bg-white/10" />
 
               <Link
-                className="text-lg font-medium hover:text-primary transition-colors py-2"
+                className="text-lg font-medium hover:text-[#FF595E] transition-colors py-2 text-neutral-900 dark:text-white"
                 href={`/${lang}/works`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Our work
               </Link>
-              <div className="h-px bg-border/50" />
+              <div className="h-px bg-black/10 dark:bg-white/10" />
               <Link
-                className="text-lg font-medium hover:text-primary transition-colors py-2"
+                className="text-lg font-medium hover:text-[#FF595E] transition-colors py-2 text-neutral-900 dark:text-white"
                 href={`/${lang}/about`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 About Us
               </Link>
-              <div className="h-px bg-border/50" />
+              <div className="h-px bg-black/10 dark:bg-white/10" />
               <Link
-                className="text-lg font-medium hover:text-primary transition-colors py-2"
+                className="text-lg font-medium hover:text-[#FF595E] transition-colors py-2 text-neutral-900 dark:text-white"
                 href={`/${lang}/contact`}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
