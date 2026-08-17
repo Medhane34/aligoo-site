@@ -196,8 +196,8 @@ export function Navbar() {
                     exit={{ opacity: 0, y: reduceMotion ? 0 : -6, transition: { duration: 0.12 } }}
                     transition={{ duration: 0.2, ease: "easeOut" }}
                     className="absolute left-1/2 top-full mt-2 w-[min(1152px,calc(100vw-2rem))] -translate-x-1/2"
-                    onBlur={(e: { currentTarget: { contains: (arg0: Node) => any; }; relatedTarget: Node; }) => {
-                      if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                    onBlur={(e) => {
+                      if (!e.currentTarget.contains(e.relatedTarget)) {
                         setIsServicesMenuOpen(false);
                       }
                     }}

@@ -104,6 +104,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.0.1
         version: 5.9.0(@sinclair/typebox@0.25.24)(@standard-schema/spec@1.1.0)(react-hook-form@7.85.0(react@18.3.1))(valibot@1.4.2(typescript@5.6.3))(zod@3.25.76)
+      '@portabletext/react':
+        specifier: ^3.2.4
+        version: 3.2.4(react@18.3.1)
       '@radix-ui/react-dialog':
         specifier: ^1.1.14
         version: 1.1.23(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -119,6 +122,9 @@ importers:
       '@react-pdf/renderer':
         specifier: ^4.3.1
         version: 4.6.1(react@18.3.1)
+      '@react-stately/utils':
+        specifier: ^3.11.0
+        version: 3.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@sanity/block-content-to-react':
         specifier: ^3.0.0
         version: 3.0.0(react@18.3.1)
@@ -13226,7 +13232,7 @@ snapshots:
       '@react-aria/i18n': 3.12.16(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/interactions': 3.27.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/visually-hidden': 3.8.31(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@react-stately/calendar': 3.9.3(react@18.3.1)
+      '@react-stately/calendar': 3.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-stately/utils': 3.11.0(react@18.3.1)
       '@react-types/button': 3.15.1(react@18.3.1)
       '@react-types/calendar': 3.8.3(react@18.3.1)
@@ -15328,7 +15334,7 @@ snapshots:
       '@react-aria/interactions': 3.27.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/live-announcer': 3.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/utils': 3.34.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@react-stately/calendar': 3.9.3(react@18.3.1)
+      '@react-stately/calendar': 3.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-types/button': 3.15.1(react@18.3.1)
       '@react-types/calendar': 3.8.3(react@18.3.1)
       '@react-types/shared': 3.33.1(react@18.3.1)
@@ -15494,7 +15500,7 @@ snapshots:
 
   '@react-aria/i18n@3.12.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.12.3
       '@internationalized/message': 3.1.10
       '@internationalized/number': 3.6.7
       '@internationalized/string': 3.2.10
@@ -15892,7 +15898,7 @@ snapshots:
       '@react-aria/label': 3.8.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/utils': 3.28.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-stately/form': 3.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@react-stately/utils': 3.10.6(react@18.3.1)
+      '@react-stately/utils': 3.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-types/shared': 3.29.0(react@18.3.1)
       '@react-types/textfield': 3.12.1(react@18.3.1)
       '@swc/helpers': 0.5.23
@@ -15906,7 +15912,7 @@ snapshots:
       '@react-aria/label': 3.8.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/utils': 3.34.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-stately/form': 3.3.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@react-stately/utils': 3.11.0(react@18.3.1)
+      '@react-stately/utils': 3.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-types/shared': 3.33.1(react@18.3.1)
       '@react-types/textfield': 3.12.8(react@18.3.1)
       '@swc/helpers': 0.5.23
@@ -15957,7 +15963,7 @@ snapshots:
       '@react-aria/focus': 3.21.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/i18n': 3.13.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-aria/utils': 3.34.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@react-types/shared': 3.33.1(react@18.3.1)
+      '@react-types/shared': 3.36.1(react@18.3.1)
       '@swc/helpers': 0.5.23
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -16236,14 +16242,16 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       react-stately: 3.49.0(react@18.3.1)
 
-  '@react-stately/calendar@3.9.3(react@18.3.1)':
+  '@react-stately/calendar@3.9.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
       '@internationalized/date': 3.12.0
-      '@react-stately/utils': 3.11.0(react@18.3.1)
+      '@react-stately/utils': 3.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-types/calendar': 3.8.3(react@18.3.1)
       '@react-types/shared': 3.33.1(react@18.3.1)
       '@swc/helpers': 0.5.23
       react: 18.3.1
+    transitivePeerDependencies:
+      - react-dom
 
   '@react-stately/checkbox@3.7.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -16506,7 +16514,7 @@ snapshots:
 
   '@react-stately/toggle@3.8.3(@react-spectrum/provider@3.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@react-stately/utils': 3.10.6(react@18.3.1)
+      '@react-stately/utils': 3.12.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-types/checkbox': 3.11.0(@react-spectrum/provider@3.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-types/shared': 3.29.0(react@18.3.1)
       '@swc/helpers': 0.5.23
@@ -16655,7 +16663,7 @@ snapshots:
 
   '@react-types/datepicker@3.12.0(@react-spectrum/provider@3.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@internationalized/date': 3.8.0
+      '@internationalized/date': 3.12.3
       '@react-types/calendar': 3.9.0(@react-spectrum/provider@3.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-types/overlays': 3.10.0(@react-spectrum/provider@3.11.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@react-types/shared': 3.29.0(react@18.3.1)
